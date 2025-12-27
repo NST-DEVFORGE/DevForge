@@ -8,7 +8,6 @@ import { About } from "@/components/about";
 import { Events } from "@/components/events";
 import { Projects } from "@/components/projects";
 import { Team } from "@/components/team";
-import { Join } from "@/components/join";
 import { Footer } from "@/components/footer";
 
 export default function Home() {
@@ -26,7 +25,6 @@ export default function Home() {
                 <Events />
                 <Projects />
                 <Team />
-                <Join />
                 <Footer />
             </div>
         </>

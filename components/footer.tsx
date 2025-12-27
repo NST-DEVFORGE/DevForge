@@ -27,14 +27,7 @@ export function Footer() {
                         >
                             <Github size={20} className="text-neutral-400 group-hover:text-orange-400 transition-colors" />
                         </a>
-                        <a
-                            href="https://twitter.com/devclub"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-10 h-10 rounded-lg bg-white/5 hover:bg-orange-500/20 flex items-center justify-center transition-colors group"
-                        >
-                            <Twitter size={20} className="text-neutral-400 group-hover:text-orange-400 transition-colors" />
-                        </a>
+
                         <a
                             href="https://linkedin.com/company/nstdevforge"
                             target="_blank"

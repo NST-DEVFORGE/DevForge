@@ -9,21 +9,14 @@ export function Projects() {
             title: "DevForge Hackathon",
             description: "Our flagship 12-hour hackathon platform with live judging and real-time updates",
             tech: ["Next.js", "Firebase", "TailwindCSS"],
-            link: "#",
+            link: "https://hackathon.code4o4.xyz",
             github: "#"
         },
         {
             title: "Club Dashboard",
             description: "Member management and event tracking system for the dev club",
             tech: ["React", "Node.js", "MongoDB"],
-            link: "#",
-            github: "#"
-        },
-        {
-            title: "Code Collaborate",
-            description: "Real-time collaborative coding platform for pair programming sessions",
-            tech: ["TypeScript", "WebRTC", "Socket.io"],
-            link: "#",
+            link: "https://code4o4.xyz",
             github: "#"
         }
     ];

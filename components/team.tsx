@@ -158,15 +158,15 @@ export function Team() {
                                 {/* Profile Image */}
                                 <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-orange-500/20 group-hover:border-orange-500/50 transition-all duration-300">
                                     <img
-                                        src="/vikas.jpg"
-                                        alt="Vikas Sharma"
+                                        src="/luvya.jpg"
+                                        alt="Luvya Rana"
                                         className="w-full h-full object-cover"
                                     />
                                 </div>
 
                                 {/* Name */}
                                 <h3 className="text-2xl font-bold text-white text-center mb-2">
-                                    Vikas Sharma
+                                    Luvya Rana
                                 </h3>
 
                                 {/* Role */}
@@ -177,7 +177,7 @@ export function Team() {
                                 {/* Social Links */}
                                 <div className="flex justify-center gap-4">
                                     <a
-                                        href="https://github.com/sharmavikas18"
+                                        href="https://github.com/luvyarana"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-neutral-400 hover:text-orange-500 transition-colors duration-200"
@@ -187,7 +187,7 @@ export function Team() {
                                         </svg>
                                     </a>
                                     <a
-                                        href="https://www.linkedin.com/in/vikassharma2007/"
+                                        href="https://www.linkedin.com/in/luvyarana/"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-neutral-400 hover:text-orange-500 transition-colors duration-200"

@@ -62,13 +62,10 @@ export function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.5 }}
                 >
-                    <a
-                        href="#join"
-                        className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-red-600 text-white font-bold text-lg rounded-xl overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(249,115,22,0.5)]"
-                    >
-                        <span className="relative z-10">Join the Club</span>
+                    <div className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-red-600 text-white font-bold text-lg rounded-xl overflow-hidden cursor-default">
+                        <span className="relative z-10">Club recruitment will start soon. Stay updated!</span>
                         <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </a>
+                    </div>
                     <a
                         href="#events"
                         className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-medium text-lg rounded-xl border border-white/10 transition-colors backdrop-blur-sm"
