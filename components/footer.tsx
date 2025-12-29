@@ -1,6 +1,6 @@
 "use client";
 
-import { Github, Twitter, Linkedin, Instagram } from "lucide-react";
+import { Github, Linkedin, Instagram } from "lucide-react";
 
 export function Footer() {
     return (

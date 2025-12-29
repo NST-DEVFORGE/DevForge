@@ -142,7 +142,7 @@ export function Team() {
                         </div>
                     </motion.div>
 
-                    {/* Team Member 3 - Vikas Sharma */}
+                    {/* Team Member 3 - Luvya Rana */}
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
