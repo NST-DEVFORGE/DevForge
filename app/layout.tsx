@@ -11,20 +11,18 @@ export const metadata: Metadata = {
     authors: [{ name: "DevForge Team" }],
     creator: "DevForge",
     publisher: "DevForge",
-    metadataBase: new URL("https://devforge.nst.college"),
+    metadataBase: new URL("https://www.devforge.club"),
     alternates: {
         canonical: "/",
     },
     openGraph: {
         title: "DevForge - NST x SVYASA",
         description: "Join the premier developer community at Newton School of Technology. Learn, build, and forge amazing projects together.",
-        url: "https://devforge.nst.college",
+        url: "https://www.devforge.club",
         siteName: "DevForge",
         images: [
             {
-                url: "/og-image.png", // Assuming this exists or will be created, otherwise falls back to defaults if not found, but good to have
-                width: 1200,
-                height: 630,
+                url: "/logo.png",
                 alt: "DevForge Community",
             },
         ],
@@ -36,7 +34,7 @@ export const metadata: Metadata = {
         title: "DevForge - NST x SVYASA",
         description: "Where ideas are forged into reality. Join the revolution.",
         creator: "@devforge_nst", // Placeholder handle
-        images: ["/og-image.png"],
+        images: ["/logo.png"],
     },
     icons: {
         icon: "/logo.png",
@@ -64,8 +62,8 @@ export default function RootLayout({
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "DevForge",
-        "url": "https://devforge.nst.college",
-        "logo": "https://devforge.nst.college/logo.png",
+        "url": "https://www.devforge.club",
+        "logo": "https://www.devforge.club/logo.png",
         "sameAs": [
             "https://twitter.com/devforge_nst",
             "https://github.com/devforge-nst",

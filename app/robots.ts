@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: '/private/',
         },
-        sitemap: 'https://devforge.nst.college/sitemap.xml',
+        sitemap: 'https://www.devforge.club/sitemap.xml',
     }
 }
