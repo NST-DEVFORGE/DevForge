@@ -282,7 +282,7 @@ export function PRStats() {
                                 <div className="flex items-center justify-between p-3 bg-gradient-to-r from-red-500/20 to-orange-500/20 rounded-lg border border-red-500/50 ring-2 ring-red-500/30">
                                     <div className="flex items-center gap-2">
                                         <span className="text-white font-semibold">🚀 Master</span>
-                                        <span className="text-red-400 text-sm">🎁 Premium Prize!</span>
+                                        <span className="text-red-400 text-sm">🎁 Mystery Prize!</span>
                                     </div>
                                     <span className="text-red-400 font-bold">200 PRs</span>
                                 </div>
@@ -319,7 +319,7 @@ export function PRStats() {
                                 <div className="flex items-center justify-between p-3 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-lg border border-cyan-500/50">
                                     <div className="flex items-center gap-2">
                                         <span className="text-white font-semibold">💎 Platinum</span>
-                                        <span className="text-cyan-400 text-sm">🎉 Team Outing!</span>
+                                        <span className="text-cyan-400 text-sm">🎉 Club Outing!</span>
                                     </div>
                                     <span className="text-purple-500 font-semibold">500 PRs</span>
                                 </div>
