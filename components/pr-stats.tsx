@@ -289,10 +289,10 @@ export function PRStats() {
                             </div>
                         </div>
 
-                        {/* Team Rewards */}
+                        {/* Club Rewards */}
                         <div className="bg-gradient-to-br from-purple-500/10 to-orange-500/10 backdrop-blur-md border border-purple-500/30 rounded-2xl p-6">
                             <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                                <span className="text-2xl">🏆</span> Team Milestones
+                                <span className="text-2xl">🏆</span> Club Milestones
                             </h3>
                             <div className="space-y-3">
                                 <div className="flex items-center justify-between p-3 bg-gradient-to-r from-amber-700/20 to-orange-700/20 rounded-lg border border-amber-700/50">
@@ -333,7 +333,7 @@ export function PRStats() {
                             </div>
                             <div className="mt-4 p-3 bg-purple-500/10 rounded-lg border border-purple-500/30">
                                 <p className="text-sm text-neutral-400 text-center">
-                                    Team rewards bring us together! 🎉
+                                    Club rewards bring us together! 🎉
                                 </p>
                             </div>
                         </div>
