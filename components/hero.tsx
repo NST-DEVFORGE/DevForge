@@ -62,10 +62,21 @@ export function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.5 }}
                 >
-                    <div className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-red-600 text-white font-bold text-lg rounded-xl overflow-hidden cursor-default">
-                        <span className="relative z-10">Club recruitment will start soon. Stay updated!</span>
+                    <a
+                        href="https://forms.gle/M8rDS4wG1jyuGiSC6"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-red-600 text-white font-bold text-lg rounded-xl overflow-hidden transition-transform hover:scale-105"
+                    >
+                        <span className="relative z-10">🚀 Apply Now to Join DevForge!</span>
                         <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </div>
+                    </a>
+                    <a
+                        href="/pr-stats"
+                        className="px-8 py-4 bg-orange-500/10 hover:bg-orange-500/20 text-orange-500 font-medium text-lg rounded-xl border border-orange-500/30 hover:border-orange-500/50 transition-colors backdrop-blur-sm"
+                    >
+                        📊 PR Stats
+                    </a>
                     <a
                         href="#events"
                         className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-medium text-lg rounded-xl border border-white/10 transition-colors backdrop-blur-sm"

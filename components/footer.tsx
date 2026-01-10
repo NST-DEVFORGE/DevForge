@@ -17,6 +17,22 @@ export function Footer() {
                         </p>
                     </div>
 
+                    {/* Quick Links */}
+                    <div className="flex items-center gap-6 text-sm">
+                        <a href="#about" className="text-neutral-400 hover:text-orange-500 transition-colors">
+                            About
+                        </a>
+                        <a href="#events" className="text-neutral-400 hover:text-orange-500 transition-colors">
+                            Events
+                        </a>
+                        <a href="/pr-stats" className="text-neutral-400 hover:text-orange-500 transition-colors">
+                            PR Stats
+                        </a>
+                        <a href="#team" className="text-neutral-400 hover:text-orange-500 transition-colors">
+                            Team
+                        </a>
+                    </div>
+
                     {/* Social links */}
                     <div className="flex items-center gap-4">
                         <a
