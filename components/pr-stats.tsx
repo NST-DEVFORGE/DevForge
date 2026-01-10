@@ -275,14 +275,14 @@ export function PRStats() {
                                 <div className="flex items-center justify-between p-3 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg border border-purple-500/50 ring-2 ring-purple-500/30">
                                     <div className="flex items-center gap-2">
                                         <span className="text-white font-semibold">👑 Legend</span>
-                                        <span className="text-purple-400 text-sm">🎁 Tech Gadget!</span>
+                                        <span className="text-purple-400 text-sm">🎁 Mystery Prize!</span>
                                     </div>
                                     <span className="text-purple-400 font-bold">100 PRs</span>
                                 </div>
                                 <div className="flex items-center justify-between p-3 bg-gradient-to-r from-red-500/20 to-orange-500/20 rounded-lg border border-red-500/50 ring-2 ring-red-500/30">
                                     <div className="flex items-center gap-2">
                                         <span className="text-white font-semibold">🚀 Master</span>
-                                        <span className="text-red-400 text-sm">🎁 Mystery Prize!</span>
+                                        <span className="text-red-400 text-sm">🎁 Premium Prize!</span>
                                     </div>
                                     <span className="text-red-400 font-bold">200 PRs</span>
                                 </div>
