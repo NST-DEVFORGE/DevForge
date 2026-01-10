@@ -30,25 +30,19 @@ const TEAM_MEMBERS = [
         name: 'Aryan Patel',
         github: 'AryanPatel-ui',
         role: 'Member',
-        avatar: 'https://github.com/AryanPatel-ui.png'
+        avatar: '/aryan.png'
     },
     {
         name: 'Nithyaraj',
         github: 'nithyarajmudhaliyar',
         role: 'Member',
-        avatar: 'https://github.com/nithyarajmudhaliyar.png'
+        avatar: '/nithyaraj.png'
     },
     {
         name: 'Prateek',
         github: 'prateek6789-ai',
         role: 'Member',
         avatar: '/prateek.jpg'
-    },
-    {
-        name: 'Rithull Kallat',
-        github: 'rithullkallat-ctrl',
-        role: 'Member',
-        avatar: 'https://github.com/rithullkallat-ctrl.png'
     },
     {
         name: 'Sahitya Singh',
@@ -66,13 +60,25 @@ const TEAM_MEMBERS = [
         name: 'Sidharth',
         github: 'SidharthxNST',
         role: 'Member',
-        avatar: 'https://github.com/SidharthxNST.png'
+        avatar: '/sidharth.png'
     },
     {
         name: 'Bhavesh Sharma',
         github: 'bhavesh-210',
         role: 'Member',
-        avatar: 'https://github.com/bhavesh-210.png'
+        avatar: '/bhavesh.jpg'
+    },
+    {
+        name: 'Unnati Jaiswal',
+        github: 'unnati-jaiswal24',
+        role: 'Member',
+        avatar: '/unnati.png'
+    },
+    {
+        name: 'Shristi Kumari',
+        github: 'Shristibot',
+        role: 'Member',
+        avatar: 'https://github.com/Shristibot.png'
     }
 ];
 
