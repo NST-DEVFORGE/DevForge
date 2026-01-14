@@ -120,10 +120,6 @@ interface TeamStats {
 
 async function fetchUserPRs(username: string): Promise<number> {
     try {
-        // GitHub API endpoint for searching PRs
-        const query = `author:${username} is:pr is:merged`;
-        const url = `https://api.github.com/search/issues?q=${encodeURIComponent(query)}&per_page=1`;
-
         const headers: HeadersInit = {
             'Accept': 'application/vnd.github.v3+json',
             'User-Agent': 'DevForge-PR-Stats'
@@ -134,23 +130,71 @@ async function fetchUserPRs(username: string): Promise<number> {
             headers['Authorization'] = `token ${process.env.GITHUB_TOKEN}`;
         }
 
-        const response = await fetch(url, {
+        // Fetch all merged PRs (up to 100 per page, can be paginated if needed)
+        const query = `author:${username} is:pr is:merged`;
+        const searchUrl = `https://api.github.com/search/issues?q=${encodeURIComponent(query)}&per_page=100`;
+
+        const searchResponse = await fetch(searchUrl, {
             headers,
             next: { revalidate: 300 } // Cache for 5 minutes
         });
 
-        if (!response.ok) {
-            if (response.status === 403) {
+        if (!searchResponse.ok) {
+            if (searchResponse.status === 403) {
                 console.error(`GitHub API rate limit exceeded for ${username}`);
-                // Return 0 instead of throwing to prevent complete failure
                 return 0;
             }
-            console.error(`Failed to fetch PRs for ${username}: ${response.status}`);
+            console.error(`Failed to fetch PRs for ${username}: ${searchResponse.status}`);
             return 0;
         }
 
-        const data = await response.json();
-        return data.total_count || 0;
+        const searchData = await searchResponse.json();
+        const prs = searchData.items || [];
+
+        // Quality filter: Only count PRs to repos with ≥100 stars OR ≥300 forks
+        let qualityPRCount = 0;
+        const repoCache = new Map<string, boolean>(); // Cache repo quality checks
+
+        for (const pr of prs) {
+            // Extract repo URL from PR
+            const repoUrl = pr.repository_url;
+
+            // Check cache first
+            if (repoCache.has(repoUrl)) {
+                if (repoCache.get(repoUrl)) {
+                    qualityPRCount++;
+                }
+                continue;
+            }
+
+            // Fetch repository details
+            try {
+                const repoResponse = await fetch(repoUrl, {
+                    headers,
+                    next: { revalidate: 3600 } // Cache repo data for 1 hour
+                });
+
+                if (repoResponse.ok) {
+                    const repoData = await repoResponse.json();
+                    const stars = repoData.stargazers_count || 0;
+                    const forks = repoData.forks_count || 0;
+
+                    // Quality criteria: ≥100 stars OR ≥300 forks
+                    const isQualityRepo = stars >= 100 || forks >= 300;
+                    repoCache.set(repoUrl, isQualityRepo);
+
+                    if (isQualityRepo) {
+                        qualityPRCount++;
+                    }
+                }
+            } catch (error) {
+                console.error(`Error fetching repo data for ${repoUrl}:`, error);
+                // Skip this PR if we can't verify repo quality
+            }
+        }
+
+        console.log(`${username}: ${qualityPRCount} quality PRs out of ${prs.length} total merged PRs`);
+        return qualityPRCount;
     } catch (error) {
         console.error(`Error fetching PRs for ${username}:`, error);
         return 0;
