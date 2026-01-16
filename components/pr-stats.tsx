@@ -19,13 +19,15 @@ interface MemberStats {
     github: string;
     role: string;
     avatar: string;
-    prCount: number;
+    prCount: number; // Quality PRs
+    totalPRs: number; // All merged PRs
     milestones: Milestone[];
     nextMilestone: NextMilestone | null;
 }
 
 interface TeamStats {
-    totalPRs: number;
+    totalPRs: number; // Quality PRs
+    totalAllPRs: number; // All merged PRs
     members: MemberStats[];
     teamMilestones: Milestone[];
     nextTeamMilestone: NextMilestone | null;
@@ -129,11 +131,25 @@ export function PRStats() {
                                 <h2 className="text-4xl font-bold text-white">Club PRs</h2>
                             </div>
 
-                            <div className="text-center mb-8">
-                                <div className="text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-purple-500 mb-2">
-                                    {stats.totalPRs}
+                            {/* Dual Stats Display */}
+                            <div className="grid md:grid-cols-2 gap-6 mb-8">
+                                {/* Total All PRs */}
+                                <div className="text-center p-6 bg-neutral-900/50 rounded-2xl border border-neutral-700">
+                                    <div className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-500 mb-2">
+                                        {stats.totalAllPRs}
+                                    </div>
+                                    <p className="text-xl text-neutral-300 mb-1">Total Merged PRs</p>
+                                    <p className="text-sm text-neutral-500">All contributions</p>
                                 </div>
-                                <p className="text-2xl text-neutral-300">Total Merged PRs</p>
+
+                                {/* Quality PRs */}
+                                <div className="text-center p-6 bg-gradient-to-br from-orange-500/10 to-purple-500/10 rounded-2xl border border-orange-500/50">
+                                    <div className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-purple-500 mb-2">
+                                        {stats.totalPRs}
+                                    </div>
+                                    <p className="text-xl text-neutral-300 mb-1">Quality PRs</p>
+                                    <p className="text-sm text-orange-400">≥100 ⭐ or ≥100 forks</p>
+                                </div>
                             </div>
 
                             {/* Team Milestones */}
@@ -218,8 +234,18 @@ export function PRStats() {
                                             </div>
                                             <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
                                             <p className="text-orange-500 text-sm mb-3">{member.role}</p>
-                                            <div className="text-4xl font-bold text-white">{member.prCount}</div>
-                                            <p className="text-neutral-400 text-sm">PRs Merged</p>
+
+                                            {/* Quality PRs - Primary */}
+                                            <div className="mb-2">
+                                                <div className="text-4xl font-bold text-white">{member.prCount}</div>
+                                                <p className="text-neutral-400 text-sm">Quality PRs</p>
+                                            </div>
+
+                                            {/* Total PRs - Secondary */}
+                                            <div className="pt-2 border-t border-neutral-700/50">
+                                                <div className="text-2xl font-semibold text-blue-400">{member.totalPRs}</div>
+                                                <p className="text-neutral-500 text-xs">Total Merged</p>
+                                            </div>
                                         </div>
                                     </motion.div>
                                 );
@@ -378,9 +404,17 @@ export function PRStats() {
                                         </div>
 
                                         {/* PR Count */}
-                                        <div className="text-center mb-6 py-4 bg-neutral-800/50 rounded-xl">
-                                            <div className="text-5xl font-bold text-orange-500 mb-1">{member.prCount}</div>
-                                            <p className="text-neutral-400">Merged PRs</p>
+                                        <div className="space-y-3 mb-6">
+                                            {/* Quality PRs - Primary */}
+                                            <div className="text-center py-4 bg-gradient-to-br from-orange-500/10 to-purple-500/10 rounded-xl border border-orange-500/50">
+                                                <div className="text-4xl font-bold text-orange-500 mb-1">{member.prCount}</div>
+                                                <p className="text-neutral-400 text-sm">Quality PRs</p>
+                                            </div>
+                                            {/* Total PRs - Secondary */}
+                                            <div className="text-center py-3 bg-neutral-800/30 rounded-xl border border-neutral-700">
+                                                <div className="text-2xl font-semibold text-blue-400 mb-1">{member.totalPRs}</div>
+                                                <p className="text-neutral-500 text-xs">Total Merged</p>
+                                            </div>
                                         </div>
 
                                         {/* Milestones */}

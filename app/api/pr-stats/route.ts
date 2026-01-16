@@ -105,20 +105,22 @@ interface PRStats {
     github: string;
     role: string;
     avatar: string;
-    prCount: number;
+    prCount: number; // Quality PRs only
+    totalPRs: number; // All merged PRs
     milestones: Array<{ name: string; count: number; emoji: string }>;
     nextMilestone: { name: string; count: number; emoji: string; progress: number } | null;
 }
 
 interface TeamStats {
-    totalPRs: number;
+    totalPRs: number; // Total quality PRs across team
+    totalAllPRs: number; // All merged PRs across team
     members: PRStats[];
     teamMilestones: Array<{ name: string; count: number; emoji: string }>;
     nextTeamMilestone: { name: string; count: number; emoji: string; progress: number } | null;
     lastUpdated: string;
 }
 
-async function fetchUserPRs(username: string): Promise<number> {
+async function fetchUserPRs(username: string): Promise<{ total: number; quality: number }> {
     try {
         const headers: HeadersInit = {
             'Accept': 'application/vnd.github.v3+json',
@@ -142,16 +144,17 @@ async function fetchUserPRs(username: string): Promise<number> {
         if (!searchResponse.ok) {
             if (searchResponse.status === 403) {
                 console.error(`GitHub API rate limit exceeded for ${username}`);
-                return 0;
+                return { total: 0, quality: 0 };
             }
             console.error(`Failed to fetch PRs for ${username}: ${searchResponse.status}`);
-            return 0;
+            return { total: 0, quality: 0 };
         }
 
         const searchData = await searchResponse.json();
         const prs = searchData.items || [];
+        const totalPRs = prs.length;
 
-        // Quality filter: Only count PRs to repos with ≥100 stars OR ≥300 forks
+        // Quality filter: Only count PRs to repos with ≥100 stars OR ≥150 forks
         let qualityPRCount = 0;
         const repoCache = new Map<string, boolean>(); // Cache repo quality checks
 
@@ -179,7 +182,7 @@ async function fetchUserPRs(username: string): Promise<number> {
                     const stars = repoData.stargazers_count || 0;
                     const forks = repoData.forks_count || 0;
 
-                    // Quality criteria: ≥100 stars OR ≥300 forks
+                    // Quality criteria: ≥100 stars OR ≥100 forks
                     const isQualityRepo = stars >= 100 || forks >= 100;
                     repoCache.set(repoUrl, isQualityRepo);
 
@@ -193,11 +196,11 @@ async function fetchUserPRs(username: string): Promise<number> {
             }
         }
 
-        console.log(`${username}: ${qualityPRCount} quality PRs out of ${prs.length} total merged PRs`);
-        return qualityPRCount;
+        console.log(`${username}: ${qualityPRCount} quality PRs out of ${totalPRs} total merged PRs`);
+        return { total: totalPRs, quality: qualityPRCount };
     } catch (error) {
         console.error(`Error fetching PRs for ${username}:`, error);
-        return 0;
+        return { total: 0, quality: 0 };
     }
 }
 
@@ -221,30 +224,33 @@ export async function GET() {
         // Fetch PR counts for all team members
         const memberStats = await Promise.all(
             TEAM_MEMBERS.map(async (member) => {
-                const prCount = await fetchUserPRs(member.github);
-                const { achieved, nextMilestone } = calculateMilestones(prCount, INDIVIDUAL_MILESTONES);
+                const { total, quality } = await fetchUserPRs(member.github);
+                const { achieved, nextMilestone } = calculateMilestones(quality, INDIVIDUAL_MILESTONES);
 
                 return {
                     name: member.name,
                     github: member.github,
                     role: member.role,
                     avatar: member.avatar,
-                    prCount,
+                    prCount: quality, // Quality PRs for milestones
+                    totalPRs: total,  // All merged PRs
                     milestones: achieved,
                     nextMilestone
                 };
             })
         );
 
-        // Calculate total PRs
-        const totalPRs = memberStats.reduce((sum, member) => sum + member.prCount, 0);
+        // Calculate totals
+        const totalQualityPRs = memberStats.reduce((sum, member) => sum + member.prCount, 0);
+        const totalAllPRs = memberStats.reduce((sum, member) => sum + member.totalPRs, 0);
 
-        // Calculate team milestones
+        // Calculate team milestones based on quality PRs
         const { achieved: teamMilestonesAchieved, nextMilestone: nextTeamMilestone } =
-            calculateMilestones(totalPRs, TEAM_MILESTONES);
+            calculateMilestones(totalQualityPRs, TEAM_MILESTONES);
 
         const stats: TeamStats = {
-            totalPRs,
+            totalPRs: totalQualityPRs,
+            totalAllPRs,
             members: memberStats,
             teamMilestones: teamMilestonesAchieved,
             nextTeamMilestone,
