@@ -14,6 +14,15 @@ interface PR {
     isGsoc: boolean;
 }
 
+interface OrgStats {
+    org: string;
+    merged: number;
+    open: number;
+    closed: number;
+    total: number;
+    prs: PR[];
+}
+
 interface MemberData {
     name: string;
     github: string;
@@ -24,6 +33,7 @@ interface MemberData {
     gsocOpen: number;
     gsocClosed: number;
     gsocPRs: PR[];
+    orgBreakdown: OrgStats[];
 }
 
 interface BreakdownData {
@@ -263,8 +273,8 @@ export function GsocStats() {
                                             {pr.state === 'open' && <GitPullRequest className="w-5 h-5 text-yellow-500" />}
                                             {pr.state === 'closed' && <XCircle className="w-5 h-5 text-red-500" />}
                                             <span className={`text-xs px-2 py-1 rounded ${pr.state === 'merged' ? 'bg-green-500/20 text-green-400' :
-                                                    pr.state === 'open' ? 'bg-yellow-500/20 text-yellow-400' :
-                                                        'bg-red-500/20 text-red-400'
+                                                pr.state === 'open' ? 'bg-yellow-500/20 text-yellow-400' :
+                                                    'bg-red-500/20 text-red-400'
                                                 }`}>
                                                 {pr.state.toUpperCase()}
                                             </span>
