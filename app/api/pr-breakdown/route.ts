@@ -180,17 +180,38 @@ export async function GET() {
 
         return NextResponse.json({
             summary,
-            members: membersData.map(m => ({
-                name: m.name,
-                github: m.github,
-                merged: m.merged.length,
-                open: m.open.length,
-                closed: m.closed.length,
-                gsocMerged: m.gsocPRs.filter(p => p.state === 'merged').length,
-                gsocOpen: m.gsocPRs.filter(p => p.state === 'open').length,
-                gsocClosed: m.gsocPRs.filter(p => p.state === 'closed').length,
-                gsocPRs: m.gsocPRs
-            })),
+            members: membersData.map(m => {
+                // Group PRs by organization
+                const orgStats: Record<string, { merged: number; open: number; closed: number; prs: PR[] }> = {};
+                for (const pr of m.gsocPRs) {
+                    const org = pr.repo.split('/')[0];
+                    if (!orgStats[org]) {
+                        orgStats[org] = { merged: 0, open: 0, closed: 0, prs: [] };
+                    }
+                    orgStats[org][pr.state]++;
+                    orgStats[org].prs.push(pr);
+                }
+
+                return {
+                    name: m.name,
+                    github: m.github,
+                    merged: m.merged.length,
+                    open: m.open.length,
+                    closed: m.closed.length,
+                    gsocMerged: m.gsocPRs.filter(p => p.state === 'merged').length,
+                    gsocOpen: m.gsocPRs.filter(p => p.state === 'open').length,
+                    gsocClosed: m.gsocPRs.filter(p => p.state === 'closed').length,
+                    gsocPRs: m.gsocPRs,
+                    orgBreakdown: Object.entries(orgStats).map(([org, stats]) => ({
+                        org,
+                        merged: stats.merged,
+                        open: stats.open,
+                        closed: stats.closed,
+                        total: stats.merged + stats.open + stats.closed,
+                        prs: stats.prs
+                    })).sort((a, b) => b.total - a.total)
+                };
+            }).filter(m => m.gsocPRs.length > 0), // Only show members with GSoC PRs
             lastUpdated: new Date().toISOString()
         });
     } catch (error) {
