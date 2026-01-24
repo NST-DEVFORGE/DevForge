@@ -25,56 +25,67 @@ const GSOC_ORGS = [
     'cncf', 'hashicorp', 'grafana', 'prometheus', 'jenkins', 'gitlab',
     // Cloud Native & DevOps
     'kubeflow', 'kubevirt', 'ceph', 'libvirt', 'asyncapi', 'metacall',
-    'prometheus-operator', 'elastic', 'influxdata', 'envoyproxy',
+    'prometheus-operator', 'elastic', 'influxdata', 'envoyproxy', 'istio',
+    'linkerd', 'fluxcd', 'argoproj', 'crossplane', 'dapr', 'containerd',
     // Linux & OS
-    'debian', 'freebsd', 'openbsd', 'haiku', 'nixos', 'unikraft',
+    'debian', 'freebsd', 'openbsd', 'haiku', 'nixos', 'unikraft', 'gentoo',
+    'archlinux', 'linuxfoundation', 'kernel', 'ubuntu', 'centos', 'alpine',
     // Programming Languages & Compilers
     'llvm', 'gcc', 'rust-lang', 'golang', 'scala', 'kotlin', 'haskell',
-    'julia', 'r-project', 'ruby', 'perl', 'lua',
+    'julia', 'r-project', 'ruby', 'perl', 'lua', 'swift', 'dart', 'nim',
     // Web & Frontend
-    'webpack', 'electron', 'vuejs', 'angular', 'nodejs', 'react',
-    'neutralinojs', 'postman', 'graphql',
+    'webpack', 'electron', 'vuejs', 'angular', 'nodejs', 'react', 'svelte',
+    'neutralinojs', 'postman', 'graphql', 'apollographql', 'prisma', 'nestjs',
+    // Standards & Specs
+    'json-schema', 'openapi', 'asyncapi', 'w3c', 'whatwg', 'tc39', 'ecma',
+    'ietf', 'oasis-open', 'schema-org', 'jsonld', 'rdf',
     // Multimedia & Creative
     'blender', 'gimp', 'inkscape', 'videolan', 'vlc', 'ffmpeg', 'krita',
-    'audacity', 'mixxx', 'musescore', 'ardour', 'godot',
+    'audacity', 'mixxx', 'musescore', 'ardour', 'godot', 'obs-studio',
     // Science & Research
     'scipy', 'pandas', 'matplotlib', 'jupyter', 'opencv', 'openvino',
-    'openchemistry', 'bioconductor', 'biopython', 'rdkit',
+    'openchemistry', 'bioconductor', 'biopython', 'rdkit', 'astropy',
+    'sunpy', 'scikit-learn', 'scikit-image', 'sympy', 'numfocus',
     // Communications
     'matrix', 'rocket.chat', 'mattermost', 'xmpp', 'jitsi', 'signal',
-    'element', 'deltaChat', 'conversations',
+    'element', 'deltachat', 'conversations', 'wire', 'briar',
     // Education & Learning
     'oppia', 'sugarlabs', 'mit-app-inventor', 'learningequality', 'anki',
-    'ankidroid', 'moodle', 'ilias', 'openstax',
+    'ankidroid', 'moodle', 'ilias', 'openstax', 'openedx', 'kolibri',
     // Productivity & Office
     'libreoffice', 'onlyoffice', 'collabora', 'nextcloud', 'owncloud',
-    'cryptpad', 'etherpad', 'joplin',
+    'cryptpad', 'etherpad', 'joplin', 'logseq', 'obsidian', 'zotero',
     // GIS & Maps
-    'openstreetmap', 'osgeo', 'qgis', 'organicmaps', 'osmand',
+    'openstreetmap', 'osgeo', 'qgis', 'organicmaps', 'osmand', 'maplibre',
     // Healthcare
-    'openmrs', 'openemr', 'openhealthcare', 'gnu-health',
+    'openmrs', 'openemr', 'openhealthcare', 'gnu-health', 'bahmni',
     // Finance & Business
-    'mifos', 'openmf', 'erpnext', 'odoo', 'gnucash',
+    'mifos', 'openmf', 'erpnext', 'odoo', 'gnucash', 'ledger', 'beancount',
     // Security
-    'owasp', 'tor', 'privacytools', 'eff', 'fsf', 'aboutcode',
+    'owasp', 'tor', 'privacytools', 'eff', 'fsf', 'aboutcode', 'snort',
     // Robotics & Hardware
     'ardupilot', 'beagleboard', 'freecad', 'kicad', 'opencad', 'brlcad',
-    'openrobotics', 'ros', 'fossi', 'chips-alliance',
+    'openrobotics', 'ros', 'fossi', 'chips-alliance', 'lowrisc', 'openhw',
     // Gaming & Simulation
-    'scummvm', 'godotengine', 'openra', 'wesnoth', 'flightgear',
+    'scummvm', 'godotengine', 'openra', 'wesnoth', 'flightgear', 'minetest',
     // Documentation & Wiki
     'wikimedia', 'mediawiki', 'bookbrainz', 'musicbrainz', 'metabrainz',
     // CMS & Web Platforms
-    'wordpress', 'drupal', 'joomla', 'plone', 'wagtail',
+    'wordpress', 'drupal', 'joomla', 'plone', 'wagtail', 'strapi', 'ghost',
     // Data & AI
-    'sktime', 'mlpack', 'shogun', 'rapids', 'dmlc', 'onnx',
+    'sktime', 'mlpack', 'shogun', 'rapids', 'dmlc', 'onnx', 'huggingface',
+    'langchain', 'llamaindex', 'keras', 'pytorch', 'jax', 'flax',
     // Testing & Quality
-    'checkstyle', 'submitty', 'robolectric', 'selenium',
+    'checkstyle', 'submitty', 'robolectric', 'selenium', 'cypress', 'jest',
+    // Databases
+    'postgresql', 'mysql', 'mariadb', 'mongodb', 'redis', 'cockroachdb',
+    'timescaledb', 'questdb', 'duckdb', 'sqlite', 'vitess', 'tidb',
     // Other Major GSoC Orgs
-    'circuitverse', 'fossasia', 'aossie', 'ccextractor', 'kiwix',
+    'circuitverse', 'fossasia', 'aossie', 'ccextractor', 'kiwix', '52north',
     'jderobot', 'redhenlab', 'catrobat', 'openwisp', 'openfoodfacts',
-    'internetarchive', 'creativecommons', 'publiclab', 'chaoss',
-    'phpmyadmin', 'phpbb', 'humanhub', 'discourse', 'flarum'
+    'internetarchive', 'creativecommons', 'publiclab', 'chaoss', 'airbyte',
+    'phpmyadmin', 'phpbb', 'humanhub', 'discourse', 'flarum', 'antlr',
+    'shubham-cyber-prog', 'mozilla-campus-club'
 ];
 
 interface PR {
