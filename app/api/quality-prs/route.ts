@@ -14,7 +14,8 @@ const TEAM_MEMBERS = [
     { name: 'Sidharth', github: 'SidharthxNST', role: 'Member', avatar: '/sidharth.png' },
     { name: 'Bhavesh Sharma', github: 'bhavesh-210', role: 'Member', avatar: '/bhavesh.jpg' },
     { name: 'Unnati Jaiswal', github: 'unnati-jaiswal24', role: 'Member', avatar: '/unnati.png' },
-    { name: 'Shristi Kumari', github: 'Shristibot', role: 'Member', avatar: 'https://github.com/Shristibot.png' }
+    { name: 'Shristi Kumari', github: 'Shristibot', role: 'Member', avatar: 'https://github.com/Shristibot.png' },
+    { name: 'Dhiraj Rathod', github: 'dhiraj-143r', role: 'Member', avatar: 'https://github.com/dhiraj-143r.png' }
 ];
 
 interface QualityPR {

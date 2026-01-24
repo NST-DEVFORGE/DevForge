@@ -79,6 +79,12 @@ const TEAM_MEMBERS = [
         github: 'Shristibot',
         role: 'Member',
         avatar: 'https://github.com/Shristibot.png'
+    },
+    {
+        name: 'Dhiraj Rathod',
+        github: 'dhiraj-143r',
+        role: 'Member',
+        avatar: 'https://github.com/dhiraj-143r.png'
     }
 ];
 
