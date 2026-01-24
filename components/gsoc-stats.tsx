@@ -184,54 +184,125 @@ export function GsocStats() {
                     </div>
                 </motion.div>
 
-                {/* Per-Member Table */}
+                {/* GSoC Member Breakdown - Only members with GSoC PRs */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
                     className="mb-12"
                 >
-                    <h2 className="text-3xl font-bold text-white mb-6 text-center">Member Breakdown</h2>
-                    <div className="overflow-x-auto">
-                        <table className="w-full text-left">
-                            <thead>
-                                <tr className="border-b border-neutral-700">
-                                    <th className="py-4 px-4 text-neutral-400 font-medium">Member</th>
-                                    <th className="py-4 px-2 text-center text-green-500">Merged</th>
-                                    <th className="py-4 px-2 text-center text-yellow-500">Open</th>
-                                    <th className="py-4 px-2 text-center text-red-500">Closed</th>
-                                    <th className="py-4 px-2 text-center text-orange-500">GSoC M</th>
-                                    <th className="py-4 px-2 text-center text-orange-400">GSoC O</th>
-                                    <th className="py-4 px-2 text-center text-orange-300">GSoC C</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {data.members.filter(m => m.merged + m.open + m.closed > 0).map((member, i) => (
-                                    <motion.tr
-                                        key={member.github}
-                                        initial={{ opacity: 0, x: -20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: 0.3 + i * 0.05 }}
-                                        className="border-b border-neutral-800 hover:bg-neutral-900/50"
-                                    >
-                                        <td className="py-4 px-4">
-                                            <div className="flex items-center gap-3">
-                                                <a href={`https://github.com/${member.github}`} target="_blank" className="text-white hover:text-orange-500 font-medium">
-                                                    {member.name}
+                    <h2 className="text-3xl font-bold text-white mb-8 text-center">
+                        🌟 GSoC Contributors
+                    </h2>
+
+                    <div className="space-y-8">
+                        {data.members.map((member, i) => (
+                            <motion.div
+                                key={member.github}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.3 + i * 0.1 }}
+                                className="bg-gradient-to-br from-orange-500/10 to-purple-500/10 border border-orange-500/30 rounded-2xl p-6"
+                            >
+                                {/* Member Header */}
+                                <div className="flex items-center justify-between mb-6">
+                                    <div className="flex items-center gap-4">
+                                        <img
+                                            src={`https://github.com/${member.github}.png`}
+                                            alt={member.name}
+                                            className="w-16 h-16 rounded-full border-2 border-orange-500"
+                                        />
+                                        <div>
+                                            <h3 className="text-2xl font-bold text-white">{member.name}</h3>
+                                            <a
+                                                href={`https://github.com/${member.github}`}
+                                                target="_blank"
+                                                className="text-orange-400 hover:text-orange-300 flex items-center gap-1"
+                                            >
+                                                <Github className="w-4 h-4" />
+                                                @{member.github}
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div className="text-right">
+                                        <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-purple-500">
+                                            {member.gsocMerged + member.gsocOpen + member.gsocClosed}
+                                        </div>
+                                        <div className="text-neutral-400 text-sm">GSoC PRs</div>
+                                    </div>
+                                </div>
+
+                                {/* Quick Stats */}
+                                <div className="grid grid-cols-3 gap-4 mb-6">
+                                    <div className="text-center p-3 bg-green-500/10 rounded-lg">
+                                        <div className="text-2xl font-bold text-green-500">{member.gsocMerged}</div>
+                                        <div className="text-xs text-neutral-400">Merged</div>
+                                    </div>
+                                    <div className="text-center p-3 bg-yellow-500/10 rounded-lg">
+                                        <div className="text-2xl font-bold text-yellow-500">{member.gsocOpen}</div>
+                                        <div className="text-xs text-neutral-400">Open</div>
+                                    </div>
+                                    <div className="text-center p-3 bg-red-500/10 rounded-lg">
+                                        <div className="text-2xl font-bold text-red-500">{member.gsocClosed}</div>
+                                        <div className="text-xs text-neutral-400">Closed</div>
+                                    </div>
+                                </div>
+
+                                {/* Organization Breakdown */}
+                                <div className="space-y-3">
+                                    <h4 className="text-lg font-semibold text-white flex items-center gap-2">
+                                        <Star className="w-5 h-5 text-orange-500" />
+                                        Organizations Contributed To
+                                    </h4>
+                                    {member.orgBreakdown && member.orgBreakdown.map((org) => (
+                                        <div
+                                            key={org.org}
+                                            className="bg-neutral-900/50 rounded-xl p-4 border border-neutral-700"
+                                        >
+                                            <div className="flex items-center justify-between mb-3">
+                                                <a
+                                                    href={`https://github.com/${org.org}`}
+                                                    target="_blank"
+                                                    className="text-xl font-semibold text-white hover:text-orange-500 flex items-center gap-2"
+                                                >
+                                                    <img
+                                                        src={`https://github.com/${org.org}.png`}
+                                                        alt={org.org}
+                                                        className="w-8 h-8 rounded-lg"
+                                                    />
+                                                    {org.org}
                                                 </a>
-                                                <span className="text-neutral-500 text-sm">@{member.github}</span>
+                                                <div className="flex items-center gap-4 text-sm">
+                                                    <span className="text-green-500">✓ {org.merged}</span>
+                                                    <span className="text-yellow-500">○ {org.open}</span>
+                                                    <span className="text-red-500">✗ {org.closed}</span>
+                                                    <span className="text-orange-500 font-bold">Total: {org.total}</span>
+                                                </div>
                                             </div>
-                                        </td>
-                                        <td className="py-4 px-2 text-center text-green-500 font-semibold">{member.merged}</td>
-                                        <td className="py-4 px-2 text-center text-yellow-500 font-semibold">{member.open}</td>
-                                        <td className="py-4 px-2 text-center text-red-500 font-semibold">{member.closed}</td>
-                                        <td className="py-4 px-2 text-center text-orange-500 font-bold">{member.gsocMerged}</td>
-                                        <td className="py-4 px-2 text-center text-orange-400 font-bold">{member.gsocOpen}</td>
-                                        <td className="py-4 px-2 text-center text-orange-300 font-bold">{member.gsocClosed}</td>
-                                    </motion.tr>
-                                ))}
-                            </tbody>
-                        </table>
+
+                                            {/* PR List for this org */}
+                                            <div className="space-y-2">
+                                                {org.prs.map((pr) => (
+                                                    <a
+                                                        key={pr.url}
+                                                        href={pr.url}
+                                                        target="_blank"
+                                                        className="flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors"
+                                                    >
+                                                        {pr.state === 'merged' && <GitMerge className="w-4 h-4 text-green-500 flex-shrink-0" />}
+                                                        {pr.state === 'open' && <GitPullRequest className="w-4 h-4 text-yellow-500 flex-shrink-0" />}
+                                                        {pr.state === 'closed' && <XCircle className="w-4 h-4 text-red-500 flex-shrink-0" />}
+                                                        <span className="truncate">{pr.title}</span>
+                                                        <span className="text-neutral-600 flex-shrink-0">#{pr.number}</span>
+                                                        <ExternalLink className="w-3 h-3 flex-shrink-0" />
+                                                    </a>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </motion.div>
+                        ))}
                     </div>
                 </motion.div>
 
@@ -242,7 +313,7 @@ export function GsocStats() {
                     transition={{ delay: 0.3 }}
                 >
                     <div className="flex justify-between items-center mb-6">
-                        <h2 className="text-3xl font-bold text-white">GSoC PRs Detail</h2>
+                        <h2 className="text-3xl font-bold text-white">All GSoC PRs</h2>
                         <select
                             value={selectedMember}
                             onChange={(e) => setSelectedMember(e.target.value)}
