@@ -118,68 +118,43 @@ export function GsocStats() {
                     </p>
                 </motion.div>
 
-                {/* Overall Summary Cards */}
+                {/* GSoC PRs Summary - Single Featured Card */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
-                    className="grid md:grid-cols-2 gap-6 mb-12"
+                    className="mb-12"
                 >
-                    {/* All PRs Summary */}
-                    <div className="bg-neutral-900/50 border border-neutral-700 rounded-2xl p-6">
-                        <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                            <GitPullRequest className="w-6 h-6 text-blue-400" />
-                            All PRs
-                        </h3>
-                        <div className="grid grid-cols-3 gap-4">
-                            <div className="text-center p-4 bg-green-500/10 rounded-xl border border-green-500/30">
-                                <GitMerge className="w-6 h-6 text-green-500 mx-auto mb-2" />
-                                <div className="text-3xl font-bold text-green-500">{data.summary.merged}</div>
-                                <p className="text-neutral-400 text-sm">Merged</p>
+                    <div className="bg-gradient-to-br from-orange-500/20 to-purple-500/20 border-2 border-orange-500 rounded-3xl p-8 shadow-[0_0_50px_rgba(249,115,22,0.3)]">
+                        <div className="text-center mb-8">
+                            <div className="flex items-center justify-center gap-3 mb-4">
+                                <Star className="w-10 h-10 text-orange-500" />
+                                <h2 className="text-3xl font-bold text-white">GSoC Organization PRs</h2>
                             </div>
-                            <div className="text-center p-4 bg-yellow-500/10 rounded-xl border border-yellow-500/30">
-                                <GitPullRequest className="w-6 h-6 text-yellow-500 mx-auto mb-2" />
-                                <div className="text-3xl font-bold text-yellow-500">{data.summary.open}</div>
-                                <p className="text-neutral-400 text-sm">Open</p>
-                            </div>
-                            <div className="text-center p-4 bg-red-500/10 rounded-xl border border-red-500/30">
-                                <XCircle className="w-6 h-6 text-red-500 mx-auto mb-2" />
-                                <div className="text-3xl font-bold text-red-500">{data.summary.closed}</div>
-                                <p className="text-neutral-400 text-sm">Closed</p>
-                            </div>
+                            <p className="text-neutral-400">Contributions to Google Summer of Code eligible organizations</p>
                         </div>
-                        <div className="mt-4 text-center">
-                            <span className="text-4xl font-bold text-white">{data.summary.total}</span>
-                            <span className="text-neutral-400 ml-2">Total PRs</span>
-                        </div>
-                    </div>
 
-                    {/* GSoC PRs Summary */}
-                    <div className="bg-gradient-to-br from-orange-500/10 to-purple-500/10 border border-orange-500/30 rounded-2xl p-6">
-                        <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                            <Star className="w-6 h-6 text-orange-500" />
-                            GSoC Org PRs
-                        </h3>
-                        <div className="grid grid-cols-3 gap-4">
-                            <div className="text-center p-4 bg-green-500/10 rounded-xl border border-green-500/30">
-                                <GitMerge className="w-6 h-6 text-green-500 mx-auto mb-2" />
-                                <div className="text-3xl font-bold text-green-500">{data.summary.gsocMerged}</div>
-                                <p className="text-neutral-400 text-sm">Merged</p>
+                        <div className="grid grid-cols-4 gap-6">
+                            <div className="text-center p-6 bg-green-500/10 rounded-2xl border border-green-500/30">
+                                <GitMerge className="w-10 h-10 text-green-500 mx-auto mb-3" />
+                                <div className="text-5xl font-bold text-green-500 mb-1">{data.summary.gsocMerged}</div>
+                                <p className="text-neutral-400 text-lg">Merged</p>
                             </div>
-                            <div className="text-center p-4 bg-yellow-500/10 rounded-xl border border-yellow-500/30">
-                                <GitPullRequest className="w-6 h-6 text-yellow-500 mx-auto mb-2" />
-                                <div className="text-3xl font-bold text-yellow-500">{data.summary.gsocOpen}</div>
-                                <p className="text-neutral-400 text-sm">Open</p>
+                            <div className="text-center p-6 bg-yellow-500/10 rounded-2xl border border-yellow-500/30">
+                                <GitPullRequest className="w-10 h-10 text-yellow-500 mx-auto mb-3" />
+                                <div className="text-5xl font-bold text-yellow-500 mb-1">{data.summary.gsocOpen}</div>
+                                <p className="text-neutral-400 text-lg">Open</p>
                             </div>
-                            <div className="text-center p-4 bg-red-500/10 rounded-xl border border-red-500/30">
-                                <XCircle className="w-6 h-6 text-red-500 mx-auto mb-2" />
-                                <div className="text-3xl font-bold text-red-500">{data.summary.gsocClosed}</div>
-                                <p className="text-neutral-400 text-sm">Closed</p>
+                            <div className="text-center p-6 bg-red-500/10 rounded-2xl border border-red-500/30">
+                                <XCircle className="w-10 h-10 text-red-500 mx-auto mb-3" />
+                                <div className="text-5xl font-bold text-red-500 mb-1">{data.summary.gsocClosed}</div>
+                                <p className="text-neutral-400 text-lg">Closed</p>
                             </div>
-                        </div>
-                        <div className="mt-4 text-center">
-                            <span className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-purple-500">{data.summary.gsocTotal}</span>
-                            <span className="text-neutral-400 ml-2">GSoC PRs</span>
+                            <div className="text-center p-6 bg-gradient-to-br from-orange-500/20 to-purple-500/20 rounded-2xl border border-orange-500/50">
+                                <Star className="w-10 h-10 text-orange-500 mx-auto mb-3" />
+                                <div className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-purple-500 mb-1">{data.summary.gsocTotal}</div>
+                                <p className="text-orange-400 text-lg font-semibold">Total GSoC</p>
+                            </div>
                         </div>
                     </div>
                 </motion.div>
