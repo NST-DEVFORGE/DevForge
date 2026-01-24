@@ -80,12 +80,16 @@ const GSOC_ORGS = [
     // Databases
     'postgresql', 'mysql', 'mariadb', 'mongodb', 'redis', 'cockroachdb',
     'timescaledb', 'questdb', 'duckdb', 'sqlite', 'vitess', 'tidb',
-    // Other Major GSoC Orgs
+    // Official GSoC Orgs (from gsocorganizations.dev)
     'circuitverse', 'fossasia', 'aossie', 'ccextractor', 'kiwix', '52north',
     'jderobot', 'redhenlab', 'catrobat', 'openwisp', 'openfoodfacts',
     'internetarchive', 'creativecommons', 'publiclab', 'chaoss', 'airbyte',
     'phpmyadmin', 'phpbb', 'humanhub', 'discourse', 'flarum', 'antlr',
-    'shubham-cyber-prog', 'mozilla-campus-club'
+    // More GSoC 2025 orgs
+    'aflplusplus', '3dtk', 'fortran-lang', 'freetype', 'gnss-sdr', 'meshery',
+    'metabrainz', 'mixxx', 'matrix', 'fossology', 'ml4sci', 'accord-project',
+    'ankidroid-app', 'api-dash', 'aboutcode-org', 'gnu-octave', 'gnu-mailman',
+    'merl', 'datafusion', 'alaska', 'apertium', 'openchemistry', 'mantis'
 ];
 
 interface PR {
