@@ -223,7 +223,7 @@ export function GsocStats() {
                                 <BarChart3 className="w-5 h-5 text-orange-500" />
                                 <h3 className="text-xl font-bold text-white">GSoC PRs per Member</h3>
                             </div>
-                            <div className="h-64">
+                            <div className="h-80">
                                 <ResponsiveContainer width="100%" height="100%">
                                     <BarChart
                                         data={data.members.map(m => ({
@@ -233,10 +233,16 @@ export function GsocStats() {
                                             closed: m.gsocClosed
                                         }))}
                                         layout="vertical"
-                                        margin={{ left: 10 }}
+                                        margin={{ top: 10, right: 20, left: 20, bottom: 5 }}
                                     >
-                                        <XAxis type="number" stroke="#666" />
-                                        <YAxis type="category" dataKey="name" stroke="#888" width={100} tick={{ fontSize: 11, fill: '#ccc' }} />
+                                        <XAxis type="number" stroke="#888" tick={{ fill: '#ccc' }} />
+                                        <YAxis
+                                            type="category"
+                                            dataKey="name"
+                                            stroke="#888"
+                                            width={110}
+                                            tick={{ fontSize: 13, fill: '#fff', fontWeight: 500 }}
+                                        />
                                         <Tooltip
                                             contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #333', borderRadius: '8px' }}
                                         />
