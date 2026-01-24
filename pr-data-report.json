@@ -1,0 +1,382 @@
+{
+  "generatedAt": "2026-01-24T17:01:04.591Z",
+  "summary": {
+    "allPRs": {
+      "merged": 60,
+      "open": 39,
+      "closed": 16
+    },
+    "gsocPRs": {
+      "merged": 3,
+      "open": 11,
+      "closed": 5
+    }
+  },
+  "members": [
+    {
+      "name": "Geetansh Goyal",
+      "github": "geetxnshgoyal",
+      "allPRs": {
+        "merged": 47,
+        "open": 7,
+        "closed": 11
+      },
+      "gsocPRs": {
+        "merged": 3,
+        "open": 5,
+        "closed": 5
+      },
+      "gsocPRList": [
+        {
+          "title": "Fix migration bs request enum 19070",
+          "url": "https://github.com/openSUSE/open-build-service/pull/19126",
+          "repo": "openSUSE/open-build-service",
+          "number": 19126,
+          "date": "2026-01-20T11:48:14Z",
+          "state": "merged"
+        },
+        {
+          "title": "Fix: Update obs appliance leap 16",
+          "url": "https://github.com/openSUSE/open-build-service/pull/19122",
+          "repo": "openSUSE/open-build-service",
+          "number": 19122,
+          "date": "2026-01-16T12:43:45Z",
+          "state": "merged"
+        },
+        {
+          "title": "Fix autocomplete filters showing empty values",
+          "url": "https://github.com/openSUSE/open-build-service/pull/18926",
+          "repo": "openSUSE/open-build-service",
+          "number": 18926,
+          "date": "2026-01-15T17:31:46Z",
+          "state": "merged"
+        },
+        {
+          "title": "Fix manual service error 18932",
+          "url": "https://github.com/openSUSE/open-build-service/pull/19134",
+          "repo": "openSUSE/open-build-service",
+          "number": 19134,
+          "date": "2026-01-18T07:01:42Z",
+          "state": "open"
+        },
+        {
+          "title": "Fix bundle install failing during obs-server package build on Leap 16",
+          "url": "https://github.com/openSUSE/open-build-service/pull/19119",
+          "repo": "openSUSE/open-build-service",
+          "number": 19119,
+          "date": "2026-01-15T17:59:31Z",
+          "state": "open"
+        },
+        {
+          "title": "buddy_list: Use ::before/::after for status circle.",
+          "url": "https://github.com/zulip/zulip/pull/37058",
+          "repo": "zulip/zulip",
+          "number": 37058,
+          "date": "2025-12-13T16:24:19Z",
+          "state": "open"
+        },
+        {
+          "title": "Add token circuit breaker notification (issue #18886)",
+          "url": "https://github.com/openSUSE/open-build-service/pull/18954",
+          "repo": "openSUSE/open-build-service",
+          "number": 18954,
+          "date": "2025-12-07T09:56:49Z",
+          "state": "open"
+        },
+        {
+          "title": "Notifications API: use show_maximum param for count",
+          "url": "https://github.com/openSUSE/open-build-service/pull/18912",
+          "repo": "openSUSE/open-build-service",
+          "number": 18912,
+          "date": "2025-11-28T02:58:59Z",
+          "state": "open"
+        },
+        {
+          "title": "Fix: Add timeout and exception handling to upstream package fetch job",
+          "url": "https://github.com/openSUSE/open-build-service/pull/19121",
+          "repo": "openSUSE/open-build-service",
+          "number": 19121,
+          "date": "2026-01-16T11:26:51Z",
+          "state": "closed"
+        },
+        {
+          "title": "Fix: Prevent layout shift in message feed when opening modals",
+          "url": "https://github.com/zulip/zulip/pull/37007",
+          "repo": "zulip/zulip",
+          "number": 37007,
+          "date": "2025-12-11T18:32:17Z",
+          "state": "closed"
+        },
+        {
+          "title": "Add pagination to binaries list",
+          "url": "https://github.com/openSUSE/open-build-service/pull/18928",
+          "repo": "openSUSE/open-build-service",
+          "number": 18928,
+          "date": "2025-12-06T15:26:01Z",
+          "state": "closed"
+        },
+        {
+          "title": "Add default enabled subscriptions for workflow run fail events",
+          "url": "https://github.com/openSUSE/open-build-service/pull/18923",
+          "repo": "openSUSE/open-build-service",
+          "number": 18923,
+          "date": "2025-12-05T10:16:45Z",
+          "state": "closed"
+        },
+        {
+          "title": "Fix request index filter adding empty checkboxes after autocomplete",
+          "url": "https://github.com/openSUSE/open-build-service/pull/18851",
+          "repo": "openSUSE/open-build-service",
+          "number": 18851,
+          "date": "2025-11-28T02:47:16Z",
+          "state": "closed"
+        }
+      ]
+    },
+    {
+      "name": "Lay Shah",
+      "github": "Layyzyy",
+      "allPRs": {
+        "merged": 7,
+        "open": 2,
+        "closed": 1
+      },
+      "gsocPRs": {
+        "merged": 0,
+        "open": 0,
+        "closed": 0
+      },
+      "gsocPRList": []
+    },
+    {
+      "name": "Luvya Rana",
+      "github": "luvyarana",
+      "allPRs": {
+        "merged": 2,
+        "open": 0,
+        "closed": 2
+      },
+      "gsocPRs": {
+        "merged": 0,
+        "open": 0,
+        "closed": 0
+      },
+      "gsocPRList": []
+    },
+    {
+      "name": "Vikas Sharma",
+      "github": "sharmavikas18",
+      "allPRs": {
+        "merged": 4,
+        "open": 0,
+        "closed": 2
+      },
+      "gsocPRs": {
+        "merged": 0,
+        "open": 0,
+        "closed": 0
+      },
+      "gsocPRList": []
+    },
+    {
+      "name": "Aryan Patel",
+      "github": "AryanPatel-ui",
+      "allPRs": {
+        "merged": 0,
+        "open": 2,
+        "closed": 0
+      },
+      "gsocPRs": {
+        "merged": 0,
+        "open": 0,
+        "closed": 0
+      },
+      "gsocPRList": []
+    },
+    {
+      "name": "Nithyaraj",
+      "github": "nithyarajmudhaliyar",
+      "allPRs": {
+        "merged": 0,
+        "open": 5,
+        "closed": 0
+      },
+      "gsocPRs": {
+        "merged": 0,
+        "open": 5,
+        "closed": 0
+      },
+      "gsocPRList": [
+        {
+          "title": "markdown: Remove support for file:// links.",
+          "url": "https://github.com/zulip/zulip/pull/37549",
+          "repo": "zulip/zulip",
+          "number": 37549,
+          "date": "2026-01-17T06:29:12Z",
+          "state": "open"
+        },
+        {
+          "title": "search: Rename dm-including filter to dm-with.",
+          "url": "https://github.com/zulip/zulip/pull/37401",
+          "repo": "zulip/zulip",
+          "number": 37401,
+          "date": "2026-01-08T12:52:20Z",
+          "state": "open"
+        },
+        {
+          "title": "css: Fix distortion of wide organization logos.",
+          "url": "https://github.com/zulip/zulip/pull/37310",
+          "repo": "zulip/zulip",
+          "number": 37310,
+          "date": "2026-01-03T17:51:12Z",
+          "state": "open"
+        },
+        {
+          "title": "topic_list: Add is:followed filter to left sidebar.",
+          "url": "https://github.com/zulip/zulip/pull/36937",
+          "repo": "zulip/zulip",
+          "number": 36937,
+          "date": "2025-12-06T17:21:25Z",
+          "state": "open"
+        },
+        {
+          "title": "bug: Disallow spaces and reserved keywords in custom languages in Code Playground settings",
+          "url": "https://github.com/zulip/zulip/pull/36748",
+          "repo": "zulip/zulip",
+          "number": 36748,
+          "date": "2025-11-22T07:01:37Z",
+          "state": "open"
+        }
+      ]
+    },
+    {
+      "name": "Prateek",
+      "github": "prateek6789-ai",
+      "allPRs": {
+        "merged": 0,
+        "open": 0,
+        "closed": 0
+      },
+      "gsocPRs": {
+        "merged": 0,
+        "open": 0,
+        "closed": 0
+      },
+      "gsocPRList": []
+    },
+    {
+      "name": "Sahitya Singh",
+      "github": "Sahitya0805",
+      "allPRs": {
+        "merged": 0,
+        "open": 10,
+        "closed": 0
+      },
+      "gsocPRs": {
+        "merged": 0,
+        "open": 1,
+        "closed": 0
+      },
+      "gsocPRList": [
+        {
+          "title": "Refine README.md for user profile page: enhance feature descriptions,…",
+          "url": "https://github.com/Mozilla-Campus-Club-Cummins/Design_HacktoberFest2025/pull/20",
+          "repo": "Mozilla-Campus-Club-Cummins/Design_HacktoberFest2025",
+          "number": 20,
+          "date": "2025-10-09T06:22:12Z",
+          "state": "open"
+        }
+      ]
+    },
+    {
+      "name": "Saurabh",
+      "github": "saurabhyuvi14-ai",
+      "allPRs": {
+        "merged": 0,
+        "open": 0,
+        "closed": 0
+      },
+      "gsocPRs": {
+        "merged": 0,
+        "open": 0,
+        "closed": 0
+      },
+      "gsocPRList": []
+    },
+    {
+      "name": "Sidharth",
+      "github": "SidharthxNST",
+      "allPRs": {
+        "merged": 0,
+        "open": 4,
+        "closed": 0
+      },
+      "gsocPRs": {
+        "merged": 0,
+        "open": 0,
+        "closed": 0
+      },
+      "gsocPRList": []
+    },
+    {
+      "name": "Bhavesh Sharma",
+      "github": "bhavesh-210",
+      "allPRs": {
+        "merged": 0,
+        "open": 3,
+        "closed": 0
+      },
+      "gsocPRs": {
+        "merged": 0,
+        "open": 0,
+        "closed": 0
+      },
+      "gsocPRList": []
+    },
+    {
+      "name": "Unnati Jaiswal",
+      "github": "unnati-jaiswal24",
+      "allPRs": {
+        "merged": 0,
+        "open": 3,
+        "closed": 0
+      },
+      "gsocPRs": {
+        "merged": 0,
+        "open": 0,
+        "closed": 0
+      },
+      "gsocPRList": []
+    },
+    {
+      "name": "Shristi Kumari",
+      "github": "Shristibot",
+      "allPRs": {
+        "merged": 0,
+        "open": 3,
+        "closed": 0
+      },
+      "gsocPRs": {
+        "merged": 0,
+        "open": 0,
+        "closed": 0
+      },
+      "gsocPRList": []
+    },
+    {
+      "name": "Dhiraj Rathod",
+      "github": "dhiraj-143r",
+      "allPRs": {
+        "merged": 0,
+        "open": 0,
+        "closed": 0
+      },
+      "gsocPRs": {
+        "merged": 0,
+        "open": 0,
+        "closed": 0
+      },
+      "gsocPRList": []
+    }
+  ]
+}
