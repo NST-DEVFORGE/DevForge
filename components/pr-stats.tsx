@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Trophy, TrendingUp, Users, Award, Github, ExternalLink } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 interface Milestone {
@@ -148,7 +149,14 @@ export function PRStats() {
                                         {stats.totalPRs}
                                     </div>
                                     <p className="text-xl text-neutral-300 mb-1">Quality PRs</p>
-                                    <p className="text-sm text-orange-400">≥100 ⭐ or ≥100 forks</p>
+                                    <p className="text-sm text-orange-400 mb-3">≥100 ⭐ and ≥100 forks</p>
+                                    <Link
+                                        href="/quality-prs"
+                                        className="inline-flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors text-sm font-semibold"
+                                    >
+                                        <ExternalLink className="w-4 h-4" />
+                                        View All Quality PRs
+                                    </Link>
                                 </div>
                             </div>
 

@@ -182,8 +182,8 @@ async function fetchUserPRs(username: string): Promise<{ total: number; quality:
                     const stars = repoData.stargazers_count || 0;
                     const forks = repoData.forks_count || 0;
 
-                    // Quality criteria: ≥100 stars OR ≥100 forks
-                    const isQualityRepo = stars >= 100 || forks >= 100;
+                    // Quality criteria: ≥100 stars AND ≥100 forks
+                    const isQualityRepo = stars >= 100 && forks >= 100;
                     repoCache.set(repoUrl, isQualityRepo);
 
                     if (isQualityRepo) {
