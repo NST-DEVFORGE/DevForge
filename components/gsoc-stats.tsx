@@ -233,9 +233,10 @@ export function GsocStats() {
                                             closed: m.gsocClosed
                                         }))}
                                         layout="vertical"
+                                        margin={{ left: 10 }}
                                     >
                                         <XAxis type="number" stroke="#666" />
-                                        <YAxis type="category" dataKey="name" stroke="#666" width={80} tick={{ fontSize: 12 }} />
+                                        <YAxis type="category" dataKey="name" stroke="#888" width={100} tick={{ fontSize: 11, fill: '#ccc' }} />
                                         <Tooltip
                                             contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #333', borderRadius: '8px' }}
                                         />
