@@ -20,19 +20,64 @@ const TEAM_MEMBERS = [
     { name: 'Dhiraj Rathod', github: 'dhiraj-143r' }
 ];
 
-// Common GSoC organizations
+// Comprehensive GSoC Organizations List (GSoC 2024/2025)
 const GSOC_ORGS = [
-    'openSUSE', 'mozilla', 'kubernetes', 'apache', 'google', 'tensorflow',
-    'gnome', 'kde', 'fedora', 'debian', 'ubuntu', 'python', 'numpy',
-    'scipy', 'pandas', 'matplotlib', 'jupyter', 'django', 'rails',
-    'react', 'angular', 'vuejs', 'nodejs', 'golang', 'rust-lang',
-    'llvm', 'gcc', 'linux', 'freebsd', 'openbsd', 'jenkins', 'gitlab',
-    'gitea', 'forgejo', 'zulip', 'mattermost', 'rocket.chat', 'element',
-    'matrix-org', 'signal', 'tor', 'privacytools', 'eff', 'fsf',
-    'wikimedia', 'wordpress', 'drupal', 'joomla', 'magento', 'prestashop',
-    'opencart', 'woocommerce', 'shopify', 'stripe', 'paypal', 'square',
-    'plaid', 'braintree', 'adyen', 'mollie', 'klarna', 'affirm',
-    'cncf', 'hashicorp', 'elastic', 'grafana', 'prometheus', 'influxdata'
+    // Major Organizations
+    'opensuse', 'mozilla', 'kubernetes', 'apache', 'google', 'tensorflow',
+    'gnome', 'kde', 'fedora', 'python', 'numpy', 'django', 'zulip',
+    'cncf', 'hashicorp', 'grafana', 'prometheus', 'jenkins', 'gitlab',
+    // Cloud Native & DevOps
+    'kubeflow', 'kubevirt', 'ceph', 'libvirt', 'asyncapi', 'metacall',
+    'prometheus-operator', 'elastic', 'influxdata', 'envoyproxy',
+    // Linux & OS
+    'debian', 'freebsd', 'openbsd', 'haiku', 'nixos', 'unikraft',
+    // Programming Languages & Compilers
+    'llvm', 'gcc', 'rust-lang', 'golang', 'scala', 'kotlin', 'haskell',
+    'julia', 'r-project', 'ruby', 'perl', 'lua',
+    // Web & Frontend
+    'webpack', 'electron', 'vuejs', 'angular', 'nodejs', 'react',
+    'neutralinojs', 'postman', 'graphql',
+    // Multimedia & Creative
+    'blender', 'gimp', 'inkscape', 'videolan', 'vlc', 'ffmpeg', 'krita',
+    'audacity', 'mixxx', 'musescore', 'ardour', 'godot',
+    // Science & Research
+    'scipy', 'pandas', 'matplotlib', 'jupyter', 'opencv', 'openvino',
+    'openchemistry', 'bioconductor', 'biopython', 'rdkit',
+    // Communications
+    'matrix', 'rocket.chat', 'mattermost', 'xmpp', 'jitsi', 'signal',
+    'element', 'deltaChat', 'conversations',
+    // Education & Learning
+    'oppia', 'sugarlabs', 'mit-app-inventor', 'learningequality', 'anki',
+    'ankidroid', 'moodle', 'ilias', 'openstax',
+    // Productivity & Office
+    'libreoffice', 'onlyoffice', 'collabora', 'nextcloud', 'owncloud',
+    'cryptpad', 'etherpad', 'joplin',
+    // GIS & Maps
+    'openstreetmap', 'osgeo', 'qgis', 'organicmaps', 'osmand',
+    // Healthcare
+    'openmrs', 'openemr', 'openhealthcare', 'gnu-health',
+    // Finance & Business
+    'mifos', 'openmf', 'erpnext', 'odoo', 'gnucash',
+    // Security
+    'owasp', 'tor', 'privacytools', 'eff', 'fsf', 'aboutcode',
+    // Robotics & Hardware
+    'ardupilot', 'beagleboard', 'freecad', 'kicad', 'opencad', 'brlcad',
+    'openrobotics', 'ros', 'fossi', 'chips-alliance',
+    // Gaming & Simulation
+    'scummvm', 'godotengine', 'openra', 'wesnoth', 'flightgear',
+    // Documentation & Wiki
+    'wikimedia', 'mediawiki', 'bookbrainz', 'musicbrainz', 'metabrainz',
+    // CMS & Web Platforms
+    'wordpress', 'drupal', 'joomla', 'plone', 'wagtail',
+    // Data & AI
+    'sktime', 'mlpack', 'shogun', 'rapids', 'dmlc', 'onnx',
+    // Testing & Quality
+    'checkstyle', 'submitty', 'robolectric', 'selenium',
+    // Other Major GSoC Orgs
+    'circuitverse', 'fossasia', 'aossie', 'ccextractor', 'kiwix',
+    'jderobot', 'redhenlab', 'catrobat', 'openwisp', 'openfoodfacts',
+    'internetarchive', 'creativecommons', 'publiclab', 'chaoss',
+    'phpmyadmin', 'phpbb', 'humanhub', 'discourse', 'flarum'
 ];
 
 async function fetchPRsForUser(username) {
