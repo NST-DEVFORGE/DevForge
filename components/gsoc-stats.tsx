@@ -172,14 +172,14 @@ export function GsocStats() {
                         <h2 className="text-3xl font-bold text-white">Contribution Trends</h2>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         {/* Organization Distribution Pie Chart */}
-                        <div className="bg-neutral-900/50 border border-neutral-700 rounded-2xl p-6">
+                        <div className="bg-neutral-900/50 border border-neutral-700 rounded-2xl p-4 md:p-6">
                             <div className="flex items-center gap-2 mb-4">
                                 <PieChartIcon className="w-5 h-5 text-orange-500" />
-                                <h3 className="text-xl font-bold text-white">Organization Distribution</h3>
+                                <h3 className="text-lg md:text-xl font-bold text-white">Organization Distribution</h3>
                             </div>
-                            <div className="h-64">
+                            <div className="h-72 md:h-80">
                                 <ResponsiveContainer width="100%" height="100%">
                                     <PieChart>
                                         <Pie
@@ -196,11 +196,11 @@ export function GsocStats() {
                                                     .slice(0, 6);
                                             })()}
                                             cx="50%"
-                                            cy="50%"
-                                            outerRadius={80}
+                                            cy="40%"
+                                            innerRadius={40}
+                                            outerRadius={70}
                                             dataKey="value"
-                                            label={({ name, percent }) => `${name} (${((percent || 0) * 100).toFixed(0)}%)`}
-                                            labelLine={false}
+                                            paddingAngle={2}
                                         >
                                             {[
                                                 '#f97316', '#a855f7', '#22c55e', '#3b82f6', '#ef4444', '#eab308'
@@ -210,7 +210,14 @@ export function GsocStats() {
                                         </Pie>
                                         <Tooltip
                                             contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #333', borderRadius: '8px' }}
-                                            labelStyle={{ color: '#fff' }}
+                                            formatter={(value) => [`${value} PRs`, 'Count']}
+                                        />
+                                        <Legend
+                                            layout="horizontal"
+                                            verticalAlign="bottom"
+                                            align="center"
+                                            wrapperStyle={{ paddingTop: '20px' }}
+                                            formatter={(value) => <span style={{ color: '#ccc', fontSize: '12px' }}>{value}</span>}
                                         />
                                     </PieChart>
                                 </ResponsiveContainer>
