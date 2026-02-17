@@ -55,55 +55,55 @@ export default function QrPage() {
                                     DevForge QR Lab
                                 </div>
                                 <h1 className="text-4xl font-black tracking-tight text-transparent md:text-6xl bg-gradient-to-b from-white via-white to-neutral-400 bg-clip-text">
-                                    Forge sleek QR codes for every DevForge drop.
+                                    Forge sleek QR codes for every DevForge launch.
                                 </h1>
                                 <p className="max-w-2xl text-lg text-neutral-300">
                                     Build branded QR codes with control over color, size, and error correction. Share
-                                    event links, repository drops, or onboarding portals in seconds.
+                                    event links, repo drops, or onboarding portals in seconds.
                                 </p>
                                 <div className="flex flex-wrap gap-4 text-sm text-neutral-300">
                                     <div className="flex items-center gap-2 rounded-full bg-white/5 px-4 py-2">
                                         <Sliders size={16} className="text-orange-400" />
-                                        Advanced tuning
+                                        Deep controls
                                     </div>
                                     <div className="flex items-center gap-2 rounded-full bg-white/5 px-4 py-2">
                                         <Shield size={16} className="text-orange-400" />
-                                        Error correction
+                                        ECC safety
                                     </div>
                                     <div className="flex items-center gap-2 rounded-full bg-white/5 px-4 py-2">
                                         <Link2 size={16} className="text-orange-400" />
-                                        Live preview
+                                        Instant preview
                                     </div>
                                 </div>
                             </div>
-                            <div className="glass-panel p-6 md:p-8">
-                                <div className="space-y-4">
-                                    <h2 className="text-xl font-semibold">Quick presets</h2>
-                                    <div className="grid gap-3 sm:grid-cols-3">
+                            <div className="glass-panel p-7 md:p-9">
+                                <div className="space-y-6">
+                                    <h2 className="text-2xl font-semibold text-white">Quick presets</h2>
+                                    <div className="grid gap-4 sm:grid-cols-3">
                                         <button
                                             type="button"
                                             onClick={() => setText(PRESETS.website)}
-                                            className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-white transition hover:border-orange-500/50 hover:bg-orange-500/10"
+                                            className="rounded-2xl border border-white/20 bg-gradient-to-b from-white/10 to-white/0 px-5 py-4 text-base font-semibold text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] transition hover:border-orange-500/60 hover:bg-orange-500/15 hover:text-white"
                                         >
                                             DevForge site
                                         </button>
                                         <button
                                             type="button"
                                             onClick={() => setText(PRESETS.rsvp)}
-                                            className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-white transition hover:border-orange-500/50 hover:bg-orange-500/10"
+                                            className="rounded-2xl border border-white/20 bg-gradient-to-b from-white/10 to-white/0 px-5 py-4 text-base font-semibold text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] transition hover:border-orange-500/60 hover:bg-orange-500/15 hover:text-white"
                                         >
                                             Join form
                                         </button>
                                         <button
                                             type="button"
                                             onClick={() => setText(PRESETS.github)}
-                                            className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-white transition hover:border-orange-500/50 hover:bg-orange-500/10"
+                                            className="rounded-2xl border border-white/20 bg-gradient-to-b from-white/10 to-white/0 px-5 py-4 text-base font-semibold text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] transition hover:border-orange-500/60 hover:bg-orange-500/15 hover:text-white"
                                         >
                                             GitHub org
                                         </button>
                                     </div>
-                                    <p className="text-xs text-neutral-500">
-                                        Tip: Drop any URL or message below to generate a fresh code instantly.
+                                    <p className="text-xs text-neutral-400">
+                                        Tip: Paste any URL or message below to generate a fresh code instantly.
                                     </p>
                                 </div>
                             </div>
@@ -120,7 +120,7 @@ export default function QrPage() {
                             Generator controls
                         </div>
                         <label className="space-y-2 text-sm text-neutral-300">
-                            QR payload
+                            QR content
                             <textarea
                                 value={text}
                                 onChange={(event) => setText(event.target.value)}
@@ -143,7 +143,7 @@ export default function QrPage() {
                                 />
                             </label>
                             <label className="space-y-2 text-sm text-neutral-300">
-                                Margin
+                                Quiet zone
                                 <input
                                     type="number"
                                     min={0}
@@ -154,7 +154,7 @@ export default function QrPage() {
                                 />
                             </label>
                             <label className="space-y-2 text-sm text-neutral-300">
-                                Error correction
+                                Error correction (ECC)
                                 <select
                                     value={ecc}
                                     onChange={(event) => setEcc(event.target.value as (typeof ECC_OPTIONS)[number])}
@@ -202,7 +202,7 @@ export default function QrPage() {
                         </div>
 
                         <div className="rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-sm text-neutral-400">
-                            Generated via QRServer API. Avoid sensitive payloads for private data.
+                            Generated via QRServer API. Avoid sensitive data for private payloads.
                         </div>
                     </div>
                 </div>
@@ -222,13 +222,13 @@ export default function QrPage() {
                                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 px-6 py-3 text-sm font-semibold text-white transition hover:scale-[1.02]"
                             >
                                 <Download size={16} />
-                                Download QR
+                                Download file
                             </a>
                         </div>
                     </div>
 
                     <div className="glass-panel p-6">
-                        <h3 className="text-lg font-semibold">Best-fit features</h3>
+                        <h3 className="text-lg font-semibold">Built for DevForge</h3>
                         <div className="mt-4 space-y-3 text-sm text-neutral-300">
                             <div className="flex items-start gap-3">
                                 <span className="mt-1 h-2 w-2 rounded-full bg-orange-400" />
@@ -236,7 +236,7 @@ export default function QrPage() {
                             </div>
                             <div className="flex items-start gap-3">
                                 <span className="mt-1 h-2 w-2 rounded-full bg-orange-400" />
-                                Error correction ready for stickers, badges, and merch.
+                                ECC ready for stickers, badges, and merch.
                             </div>
                             <div className="flex items-start gap-3">
                                 <span className="mt-1 h-2 w-2 rounded-full bg-orange-400" />
@@ -244,7 +244,7 @@ export default function QrPage() {
                             </div>
                             <div className="flex items-start gap-3">
                                 <span className="mt-1 h-2 w-2 rounded-full bg-orange-400" />
-                                Built for DevForge branding, tuned to the club palette.
+                                Tuned for DevForge branding and palette control.
                             </div>
                         </div>
                     </div>
