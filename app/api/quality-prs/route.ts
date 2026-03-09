@@ -5,6 +5,7 @@ const TEAM_MEMBERS = [
     { name: 'Geetansh Goyal', github: 'geetxnshgoyal', role: 'Club President', avatar: '/geetansh.jpg' },
     { name: 'Lay Shah', github: 'Layyzyy', role: 'Event Coordinator', avatar: '/lay.png' },
     { name: 'Luvya Rana', github: 'luvyarana', role: 'Tech Lead', avatar: '/luvya.jpg' },
+    { name: 'Ravi Sharma', github: 'ravisharma-09', role: 'member', avatar: '/ravi.jpg' },
     { name: 'Vikas Sharma', github: 'sharmavikas18', role: 'Member', avatar: '/vikas.png' },
     { name: 'Aryan Patel', github: 'AryanPatel-ui', role: 'Member', avatar: '/aryan.png' },
     { name: 'Nithyaraj', github: 'nithyarajmudhaliyar', role: 'Member', avatar: '/nithyaraj.png' },
