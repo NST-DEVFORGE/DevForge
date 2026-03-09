@@ -5,6 +5,7 @@ const TEAM_MEMBERS = [
     { name: 'Lay Shah', github: 'Layyzyy' },
     { name: 'Luvya Rana', github: 'luvyarana' },
     { name: 'Vikas Sharma', github: 'sharmavikas18' },
+    { name: 'Ravi Sharma', github: 'ravisharma-09' },
     { name: 'Aryan Patel', github: 'AryanPatel-ui' },
     { name: 'Nithyaraj', github: 'nithyarajmudhaliyar' },
     { name: 'Prateek', github: 'prateek6789-ai' },
