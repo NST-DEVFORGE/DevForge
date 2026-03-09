@@ -9,6 +9,12 @@ const TEAM_MEMBERS = [
         avatar: '/geetansh.jpg'
     },
     {
+        name: 'Ravi Sharma',
+        github: 'ravisharma-09',
+        role: 'Member',
+        avatar: '/ravi.jpg'
+    },
+    {
         name: 'Lay Shah',
         github: 'Layyzyy',
         role: 'Event Coordinator',
