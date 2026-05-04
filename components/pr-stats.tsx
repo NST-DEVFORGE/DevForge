@@ -463,6 +463,19 @@ export function PRStats() {
                                                         {milestone.count === 25 && <span className="ml-1 text-orange-400">🎁</span>}
                                                     </div>
                                                 ))}
+                                                {member.github === 'geetxnshgoyal' && (
+                                                    <a
+                                                        href="https://summerofcode.withgoogle.com/programs/2026/projects/yJH1saNZ"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="bg-gradient-to-r from-orange-500/20 to-orange-600/20 border border-orange-500/50 ring-2 ring-orange-500/30 rounded-lg px-3 py-1 text-xs inline-flex items-center gap-1.5 hover:from-orange-500/30 hover:to-orange-600/30 transition-all duration-200"
+                                                        title="Google Summer of Code 2026"
+                                                    >
+                                                        <span>☀️</span>
+                                                        <span className="text-orange-400 font-semibold">GSoC&apos;26</span>
+                                                        <ExternalLink className="w-3 h-3 text-orange-400" />
+                                                    </a>
+                                                )}
                                             </div>
                                         </div>
 
