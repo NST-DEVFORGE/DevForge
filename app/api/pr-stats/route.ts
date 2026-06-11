@@ -132,89 +132,23 @@ interface TeamStats {
     lastUpdated: string;
 }
 
-async function fetchUserPRs(username: string): Promise<{ total: number; quality: number }> {
-    try {
-        const headers: HeadersInit = {
-            'Accept': 'application/vnd.github.v3+json',
-            'User-Agent': 'DevForge-PR-Stats'
-        };
-
-        // Add GitHub token if available (for higher rate limits)
-        if (process.env.GITHUB_TOKEN) {
-            headers['Authorization'] = `token ${process.env.GITHUB_TOKEN}`;
-        }
-
-        // Fetch all merged PRs (up to 100 per page, can be paginated if needed)
-        const query = `author:${username} is:pr is:merged`;
-        const searchUrl = `https://api.github.com/search/issues?q=${encodeURIComponent(query)}&per_page=100`;
-
-        const searchResponse = await fetch(searchUrl, {
-            headers,
-            next: { revalidate: 300 } // Cache for 5 minutes
-        });
-
-        if (!searchResponse.ok) {
-            if (searchResponse.status === 403) {
-                console.error(`GitHub API rate limit exceeded for ${username}`);
-                return { total: 0, quality: 0 };
-            }
-            console.error(`Failed to fetch PRs for ${username}: ${searchResponse.status}`);
-            return { total: 0, quality: 0 };
-        }
-
-        const searchData = await searchResponse.json();
-        const prs = searchData.items || [];
-        const totalPRs = prs.length;
-
-        // Quality filter: Only count PRs to repos with ≥100 stars OR ≥150 forks
-        let qualityPRCount = 0;
-        const repoCache = new Map<string, boolean>(); // Cache repo quality checks
-
-        for (const pr of prs) {
-            // Extract repo URL from PR
-            const repoUrl = pr.repository_url;
-
-            // Check cache first
-            if (repoCache.has(repoUrl)) {
-                if (repoCache.get(repoUrl)) {
-                    qualityPRCount++;
-                }
-                continue;
-            }
-
-            // Fetch repository details
-            try {
-                const repoResponse = await fetch(repoUrl, {
-                    headers,
-                    next: { revalidate: 3600 } // Cache repo data for 1 hour
-                });
-
-                if (repoResponse.ok) {
-                    const repoData = await repoResponse.json();
-                    const stars = repoData.stargazers_count || 0;
-                    const forks = repoData.forks_count || 0;
-
-                    // Quality criteria: ≥100 stars AND ≥100 forks
-                    const isQualityRepo = stars >= 100 && forks >= 100;
-                    repoCache.set(repoUrl, isQualityRepo);
-
-                    if (isQualityRepo) {
-                        qualityPRCount++;
-                    }
-                }
-            } catch (error) {
-                console.error(`Error fetching repo data for ${repoUrl}:`, error);
-                // Skip this PR if we can't verify repo quality
-            }
-        }
-
-        console.log(`${username}: ${qualityPRCount} quality PRs out of ${totalPRs} total merged PRs`);
-        return { total: totalPRs, quality: qualityPRCount };
-    } catch (error) {
-        console.error(`Error fetching PRs for ${username}:`, error);
-        return { total: 0, quality: 0 };
-    }
-}
+const MEMBER_DATA = [
+    { name: 'Geetansh Goyal', github: 'geetxnshgoyal', role: 'Club President', avatar: '/geetansh.jpg', merged: 40, quality: 7 },
+    { name: 'Ravi Sharma', github: 'ravisharma-09', role: 'Member', avatar: '/ravi.jpg', merged: 8, quality: 3 },
+    { name: 'Lay Shah', github: 'Layyzyy', role: 'Event Coordinator', avatar: '/lay.png', merged: 8, quality: 1 },
+    { name: 'Luvya Rana', github: 'luvyarana', role: 'Tech Lead', avatar: '/luvya.jpg', merged: 10, quality: 5 },
+    { name: 'Vikas Sharma', github: 'sharmavikas18', role: 'Member', avatar: '/vikas.png', merged: 5, quality: 0 },
+    { name: 'Aryan Patel', github: 'AryanPatel-ui', role: 'Member', avatar: '/aryan.png', merged: 8, quality: 1 },
+    { name: 'Nithyaraj', github: 'nithyarajmudhaliyar', role: 'Member', avatar: '/nithyaraj.png', merged: 10, quality: 8 },
+    { name: 'Prateek', github: 'prateek6789-ai', role: 'Member', avatar: '/prateek.jpg', merged: 5, quality: 0 },
+    { name: 'Sahitya Singh', github: 'Sahitya0805', role: 'Designer', avatar: '/sahitya.png', merged: 27, quality: 8 },
+    { name: 'Saurabh', github: 'saurabhyuvi14-ai', role: 'Member', avatar: '/saurabh.jpg', merged: 6, quality: 1 },
+    { name: 'Sidharth', github: 'SidharthxNST', role: 'Member', avatar: '/sidharth.png', merged: 4, quality: 2 },
+    { name: 'Bhavesh Sharma', github: 'bhavesh-210', role: 'Member', avatar: '/bhavesh.jpg', merged: 13, quality: 0 },
+    { name: 'Unnati Jaiswal', github: 'unnati-jaiswal24', role: 'Member', avatar: '/unnati.png', merged: 8, quality: 3 },
+    { name: 'Shristi Kumari', github: 'Shristibot', role: 'Member', avatar: 'https://github.com/Shristibot.png', merged: 8, quality: 3 },
+    { name: 'Dhiraj Rathod', github: 'dhiraj-143r', role: 'Member', avatar: 'https://github.com/dhiraj-143r.png', merged: 28, quality: 18 }
+];
 
 function calculateMilestones(count: number, milestones: typeof INDIVIDUAL_MILESTONES) {
     const achieved = milestones.filter(m => count >= m.count);
@@ -233,28 +167,24 @@ function calculateMilestones(count: number, milestones: typeof INDIVIDUAL_MILEST
 
 export async function GET() {
     try {
-        // Fetch PR counts for all team members
-        const memberStats = await Promise.all(
-            TEAM_MEMBERS.map(async (member) => {
-                const { total, quality } = await fetchUserPRs(member.github);
-                const { achieved, nextMilestone } = calculateMilestones(quality, INDIVIDUAL_MILESTONES);
+        const memberStats = MEMBER_DATA.map((member) => {
+            const { achieved, nextMilestone } = calculateMilestones(member.quality, INDIVIDUAL_MILESTONES);
 
-                return {
-                    name: member.name,
-                    github: member.github,
-                    role: member.role,
-                    avatar: member.avatar,
-                    prCount: quality, // Quality PRs for milestones
-                    totalPRs: total,  // All merged PRs
-                    milestones: achieved,
-                    nextMilestone
-                };
-            })
-        );
+            return {
+                name: member.name,
+                github: member.github,
+                role: member.role,
+                avatar: member.avatar,
+                prCount: member.quality, // Quality PRs for milestones
+                totalPRs: member.merged,  // All merged PRs
+                milestones: achieved,
+                nextMilestone
+            };
+        });
 
-        // Calculate totals
-        const totalQualityPRs = memberStats.reduce((sum, member) => sum + member.prCount, 0);
-        const totalAllPRs = memberStats.reduce((sum, member) => sum + member.totalPRs, 0);
+        // Use the exact hardcoded totals requested by the user
+        const totalQualityPRs = 60;
+        const totalAllPRs = 188;
 
         // Calculate team milestones based on quality PRs
         const { achieved: teamMilestonesAchieved, nextMilestone: nextTeamMilestone } =
