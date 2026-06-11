@@ -42,7 +42,7 @@ export default function QrPage() {
     }, [text, size, ecc, margin, fg, bg, format]);
 
     return (
-        <main className="min-h-screen bg-black text-white selection:bg-orange-500 selection:text-black">
+        <main className="min-h-screen bg-transparent text-white selection:bg-orange-500 selection:text-black">
             <section className="relative overflow-hidden px-4 pt-24 pb-16">
                 <div className="absolute inset-0 matrix-grid opacity-60" />
                 <div className="absolute -top-24 right-0 h-64 w-64 rounded-full bg-orange-500/20 blur-[120px]" />
