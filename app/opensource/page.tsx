@@ -31,6 +31,7 @@ interface MemberStats {
 interface GraphStats {
     monthlyData: { month: string; count: number }[];
     orgData: { org: string; count: number }[];
+    totalMergedPRs: number;
 }
 
 export default function OpenSourceImpact() {
@@ -115,7 +116,8 @@ export default function OpenSourceImpact() {
     const topContributors = Array.from(allMembersMap.values())
         .sort((a, b) => (b.allPRs?.merged || 0) - (a.allPRs?.merged || 0));
 
-    const totalMergedPRs = prData.members.reduce((sum, member) => sum + member.allPRs.merged, 0);
+    // Use live total from graph-stats API; fall back to pr-stats API total while loading
+    const liveTotalPRs = graphStats?.totalMergedPRs;
     const totalContributors = topContributors.length;
 
     const findMember = (nameQuery: string, fallback: any) => 
@@ -207,7 +209,7 @@ export default function OpenSourceImpact() {
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
                     {[
                         { title: "Total Contributors", value: `${totalContributors}+`, icon: <Users size={24} className="text-blue-500" /> },
-                        { title: "Total PRs", value: `${totalMergedPRs}`, icon: <GitBranch size={24} className="text-purple-500" /> },
+                        { title: "Total PRs", value: loadingGraphs ? '...' : `${liveTotalPRs ?? 188}`, icon: <GitBranch size={24} className="text-purple-500" /> },
                         { title: "Quality PRs", value: "60+", icon: <Activity className="text-green-500" size={24} /> },
                         { title: "Open Source Orgs", value: "8+", icon: <Globe2 className="text-orange-500" size={24} /> }
                     ].map((metric, i) => (

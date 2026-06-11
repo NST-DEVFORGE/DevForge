@@ -20,23 +20,23 @@ const GITHUB_HANDLES = [
     'nishtha-agarwal-211',
 ];
 
-// The 5 target orgs — GitHub org slug → display name
+// The 5 target orgs — GitHub org slug (lowercase) → display label
 const TARGET_ORGS: Record<string, string> = {
-    'openSUSE':         'openSUSE',
+    'opensuse':         'openSUSE',
     'openfoodfacts':    'OpenFoodFacts',
     'json-schema-org':  'JSONSchema',
     'zulip':            'Zulip',
     'mit-cml':          'MIT App',
 };
 
-// Jan 2026 – Jun 2026
+// Jan 2026 – Jun 2026 monthly buckets
 const MONTHS = [
-    { label: 'Jan', start: '2026-01-01', end: '2026-01-31' },
-    { label: 'Feb', start: '2026-02-01', end: '2026-02-28' },
-    { label: 'Mar', start: '2026-03-01', end: '2026-03-31' },
-    { label: 'Apr', start: '2026-04-01', end: '2026-04-30' },
-    { label: 'May', start: '2026-05-01', end: '2026-05-31' },
-    { label: 'Jun', start: '2026-06-01', end: '2026-06-30' },
+    { label: 'Jan', key: '2026-01' },
+    { label: 'Feb', key: '2026-02' },
+    { label: 'Mar', key: '2026-03' },
+    { label: 'Apr', key: '2026-04' },
+    { label: 'May', key: '2026-05' },
+    { label: 'Jun', key: '2026-06' },
 ];
 
 function buildHeaders(): HeadersInit {
@@ -50,73 +50,95 @@ function buildHeaders(): HeadersInit {
     return headers;
 }
 
-async function searchMergedPRs(
-    username: string,
-    extraFilters: string = ''
-): Promise<{ total_count: number; items: Array<{ repository_url: string; closed_at: string }> }> {
-    try {
-        const query = `author:${username} type:pr is:merged ${extraFilters}`.trim();
-        const url = `https://api.github.com/search/issues?q=${encodeURIComponent(query)}&per_page=100`;
-        const res = await fetch(url, {
-            headers: buildHeaders(),
-            next: { revalidate: 600 }, // cache 10 min
-        });
-        if (!res.ok) return { total_count: 0, items: [] };
-        return await res.json();
-    } catch {
-        return { total_count: 0, items: [] };
-    }
+interface PRItem {
+    repository_url: string;
+    closed_at: string;
+    pull_request?: { merged_at?: string };
 }
 
-async function fetchMemberMonthlyAndOrgData(username: string) {
-    // Fetch all merged PRs from Jan 2026 – Jun 2026 in one query
-    const data = await searchMergedPRs(
-        username,
-        'merged:2026-01-01..2026-06-30'
-    );
+async function fetchAllMergedPRs(username: string): Promise<PRItem[]> {
+    const items: PRItem[] = [];
+    let page = 1;
+
+    while (true) {
+        try {
+            const query = `author:${username} type:pr is:merged`;
+            const url = `https://api.github.com/search/issues?q=${encodeURIComponent(query)}&per_page=100&page=${page}`;
+            const res = await fetch(url, {
+                headers: buildHeaders(),
+                next: { revalidate: 600 },
+            });
+
+            if (!res.ok) break;
+
+            const data = await res.json();
+            if (!data.items || data.items.length === 0) break;
+
+            items.push(...data.items);
+
+            // Stop if we got fewer than 100 items (last page) or exceed 500 total
+            if (data.items.length < 100 || items.length >= 500) break;
+            page++;
+
+            // Small delay between pages to respect rate limits
+            await new Promise(r => setTimeout(r, 200));
+        } catch {
+            break;
+        }
+    }
+
+    return items;
+}
+
+function extractOrgSlug(repositoryUrl: string): string {
+    // "https://api.github.com/repos/openSUSE/open-build-service" → "opensuse"
+    const match = repositoryUrl.match(/repos\/([^/]+)\//);
+    return match ? match[1].toLowerCase() : '';
+}
+
+async function processMember(username: string) {
+    const prs = await fetchAllMergedPRs(username);
 
     const monthCounts: Record<string, number> = {};
     const orgCounts: Record<string, number> = {};
 
-    for (const item of data.items) {
-        // Monthly aggregation via closed_at (= merge date for merged PRs)
-        const mergedAt = item.closed_at;
+    for (const pr of prs) {
+        // Use closed_at as merge date (for merged PRs, closed_at === merged date)
+        const mergedAt = pr.closed_at || '';
+
+        // Monthly count — only for Jan–Jun 2026
         if (mergedAt) {
-            const monthKey = mergedAt.substring(0, 7); // e.g. "2026-03"
-            monthCounts[monthKey] = (monthCounts[monthKey] || 0) + 1;
+            const monthKey = mergedAt.substring(0, 7); // "2026-01"
+            if (monthKey >= '2026-01' && monthKey <= '2026-06') {
+                monthCounts[monthKey] = (monthCounts[monthKey] || 0) + 1;
+            }
         }
 
-        // Org aggregation via repository_url
-        // e.g. "https://api.github.com/repos/openSUSE/open-build-service"
-        const repoUrl = item.repository_url || '';
-        const match = repoUrl.match(/repos\/([^/]+)\//);
-        if (match) {
-            const orgSlug = match[1];
-            const normalizedSlug = Object.keys(TARGET_ORGS).find(
-                k => k.toLowerCase() === orgSlug.toLowerCase()
-            );
-            if (normalizedSlug) {
-                orgCounts[normalizedSlug] = (orgCounts[normalizedSlug] || 0) + 1;
-            }
+        // Org count — ALL TIME, for the 5 target orgs
+        const orgSlug = extractOrgSlug(pr.repository_url || '');
+        if (orgSlug && TARGET_ORGS[orgSlug]) {
+            orgCounts[orgSlug] = (orgCounts[orgSlug] || 0) + 1;
         }
     }
 
-    return { monthCounts, orgCounts };
+    return { username, prCount: prs.length, monthCounts, orgCounts };
 }
 
 export async function GET() {
     try {
-        // Fetch all members concurrently (but GitHub search has rate limits — 10 req/s unauthenticated)
-        // Stagger slightly to avoid rate limiting
+        // Fetch all members in parallel (16 members × ~1 API call each)
         const results = await Promise.all(
-            GITHUB_HANDLES.map(handle => fetchMemberMonthlyAndOrgData(handle))
+            GITHUB_HANDLES.map(handle => processMember(handle))
         );
 
-        // Aggregate monthly counts across all members
+        // Aggregate across all members
         const totalMonthCounts: Record<string, number> = {};
         const totalOrgCounts: Record<string, number> = {};
+        let totalMergedPRs = 0;
 
-        for (const { monthCounts, orgCounts } of results) {
+        for (const { prCount, monthCounts, orgCounts } of results) {
+            totalMergedPRs += prCount;
+
             for (const [month, count] of Object.entries(monthCounts)) {
                 totalMonthCounts[month] = (totalMonthCounts[month] || 0) + count;
             }
@@ -126,19 +148,24 @@ export async function GET() {
         }
 
         // Build ordered monthly data (Jan–Jun 2026)
-        const monthlyData = MONTHS.map(m => {
-            const key = m.start.substring(0, 7);
-            return { month: m.label, count: totalMonthCounts[key] || 0 };
-        });
+        const monthlyData = MONTHS.map(m => ({
+            month: m.label,
+            count: totalMonthCounts[m.key] || 0,
+        }));
 
-        // Build ordered org data
+        // Build ordered org data (all-time merged PRs per org)
         const orgData = Object.entries(TARGET_ORGS).map(([slug, displayName]) => ({
             org: displayName,
             count: totalOrgCounts[slug] || 0,
         }));
 
         return NextResponse.json(
-            { monthlyData, orgData, fetchedAt: new Date().toISOString() },
+            {
+                monthlyData,
+                orgData,
+                totalMergedPRs,
+                fetchedAt: new Date().toISOString(),
+            },
             {
                 headers: {
                     'Cache-Control': 's-maxage=600, stale-while-revalidate=1200',
