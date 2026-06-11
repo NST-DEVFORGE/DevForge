@@ -17,14 +17,8 @@ const MEMBERS = [
     { name: "Navya Krushi",      id: "dfb5b428-3bb1-436b-b85d-279ec7c5ba7d", github: "2102508725-hash" },
     { name: "Vikas Sharma",      id: "f6b54245-97ff-40b1-9111-ceca0afaf551", github: "sharmavikas18" },
     { name: "Anushka Gupta",     id: "aece9a98-45a0-405f-a57d-8bbfd882890a", github: "anushkag6393" },
+    { name: "Abhinav",           id: "",                                       github: "Abhi-lab645" },
     { name: "Shivansh Goel",     id: "88544453-fc84-4c5f-a6b6-98890980e7ae", github: "SHIVANSH-ux-ys" },
-    { name: "Summaya",           id: "", github: "summaya" },
-    { name: "Ashmita K",         id: "", github: "ashmita" },
-    { name: "Raaj",              id: "", github: "raaj" },
-    { name: "Izaz",              id: "", github: "izaz" },
-    { name: "Sainy",             id: "", github: "sainy" },
-    { name: "Dhruv",             id: "", github: "dhruv" },
-    { name: "Abhinav",           id: "", github: "abhinav" },
 ];
 
 // Build a lookup map from snapshot JSON

@@ -41,37 +41,37 @@ export default function OpenSourceImpact() {
     const findMember = (nameQuery: string, fallback: any) => 
         prData.members.find(m => m.name?.toLowerCase().includes(nameQuery.toLowerCase())) || fallback;
 
-    const dhiraj = findMember("Dhiraj", { name: "Dhiraj Rathod", allPRs: { merged: 28 }, avatar: "https://github.com/dhiraj-143r.png", github: "dhiraj-143r" });
+    const geetansh = findMember("Geetansh", { name: "Geetansh Goyal", allPRs: { merged: 47 }, avatar: "https://github.com/geetxnshgoyal.png", github: "geetxnshgoyal" });
     const nishtha = findMember("Nishtha", { name: "Nishtha Agarwal", allPRs: { merged: 69 }, avatar: "https://github.com/nishtha-agarwal-211.png", github: "nishtha-agarwal-211" });
-    const nithyaraj = findMember("Nithyaraj", { name: "Nithyaraj", allPRs: { merged: 10 }, avatar: "https://github.com/nithyarajmudhaliyar.png", github: "nithyarajmudhaliyar" });
+    const dhiraj = findMember("Dhiraj", { name: "Dhiraj Rathod", allPRs: { merged: 28 }, avatar: "https://github.com/dhiraj-143r.png", github: "dhiraj-143r" });
 
     const podiumData = [
         { 
-            name: nishtha.name, 
+            name: geetansh.name, 
             place: 2, 
-            quality: 12, 
-            merged: nishtha.allPRs.merged, 
-            avatar: nishtha.avatar || `https://github.com/${nishtha.github}.png`, 
+            quality: 15, 
+            merged: geetansh.allPRs.merged, 
+            avatar: geetansh.avatar || `https://github.com/${geetansh.github}.png`, 
             color: "text-neutral-300", 
             bg: "bg-neutral-800", 
             ring: "ring-neutral-400" 
         },
         { 
-            name: dhiraj.name, 
+            name: nishtha.name, 
             place: 1, 
-            quality: 18, 
-            merged: dhiraj.allPRs.merged, 
-            avatar: dhiraj.avatar || `https://github.com/${dhiraj.github}.png`, 
+            quality: 20, 
+            merged: nishtha.allPRs.merged, 
+            avatar: nishtha.avatar || `https://github.com/${nishtha.github}.png`, 
             color: "text-yellow-400", 
             bg: "bg-yellow-900/20", 
             ring: "ring-yellow-500" 
         },
         { 
-            name: nithyaraj.name, 
+            name: dhiraj.name, 
             place: 3, 
-            quality: 8, 
-            merged: nithyaraj.allPRs.merged, 
-            avatar: nithyaraj.avatar || `https://github.com/${nithyaraj.github}.png`, 
+            quality: 10, 
+            merged: dhiraj.allPRs.merged, 
+            avatar: dhiraj.avatar || `https://github.com/${dhiraj.github}.png`, 
             color: "text-orange-600", 
             bg: "bg-orange-900/20", 
             ring: "ring-orange-600" 
