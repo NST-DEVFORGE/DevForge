@@ -103,11 +103,11 @@ export default function OpenSourceImpact() {
 
     const podiumData = [
         { 
-            name: geetansh.name, 
+            name: dhiraj.name, 
             place: 2, 
-            quality: 15, 
-            merged: geetansh.allPRs.merged, 
-            avatar: geetansh.avatar || `https://github.com/${geetansh.github}.png`, 
+            quality: 10, 
+            merged: dhiraj.allPRs.merged, 
+            avatar: dhiraj.avatar || `https://github.com/${dhiraj.github}.png`, 
             color: "text-neutral-300", 
             bg: "bg-neutral-800", 
             ring: "ring-neutral-400" 
@@ -123,11 +123,11 @@ export default function OpenSourceImpact() {
             ring: "ring-yellow-500" 
         },
         { 
-            name: dhiraj.name, 
+            name: geetansh.name, 
             place: 3, 
-            quality: 10, 
-            merged: dhiraj.allPRs.merged, 
-            avatar: dhiraj.avatar || `https://github.com/${dhiraj.github}.png`, 
+            quality: 7, 
+            merged: geetansh.allPRs.merged, 
+            avatar: geetansh.avatar || `https://github.com/${geetansh.github}.png`, 
             color: "text-orange-600", 
             bg: "bg-orange-900/20", 
             ring: "ring-orange-600" 
