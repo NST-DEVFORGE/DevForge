@@ -115,7 +115,26 @@ export default function ESocPage() {
                                         </span>
                                         <span className="font-bold text-white text-lg">{member.esocPRs.open}</span>
                                     </div>
+                                    
+                                    {member.esocPRs.orgs && member.esocPRs.orgs.length > 0 && (
+                                        <div className="pt-2 border-t border-neutral-800/50">
+                                            <div className="text-xs text-neutral-500 mb-2 uppercase tracking-wider font-semibold">Organizations</div>
+                                            <div className="flex flex-wrap gap-2">
+                                                {member.esocPRs.orgs.map((org: any, idx: number) => (
+                                                    <div key={idx} className="bg-blue-900/20 border border-blue-500/20 rounded-md px-2 py-1 flex items-center gap-1">
+                                                        <span className="text-blue-400 text-xs font-medium">{org.name}</span>
+                                                        <span className="text-neutral-400 text-[10px] ml-1">
+                                                            {org.merged > 0 && <span className="text-green-500" title="Merged">{org.merged}M</span>}
+                                                            {org.merged > 0 && org.open > 0 && <span> </span>}
+                                                            {org.open > 0 && <span className="text-purple-500" title="Open">{org.open}O</span>}
+                                                        </span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
+
                             </motion.div>
                         ))}
                     </div>

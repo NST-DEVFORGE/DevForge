@@ -5,7 +5,8 @@
       "github": "geetxnshgoyal",
       "esocPRs": {
         "merged": 0,
-        "open": 0
+        "open": 0,
+        "orgs": []
       }
     },
     {
@@ -13,7 +14,8 @@
       "github": "ravisharma-09",
       "esocPRs": {
         "merged": 0,
-        "open": 0
+        "open": 0,
+        "orgs": []
       }
     },
     {
@@ -21,7 +23,8 @@
       "github": "Layyzyy",
       "esocPRs": {
         "merged": 0,
-        "open": 0
+        "open": 0,
+        "orgs": []
       }
     },
     {
@@ -29,7 +32,8 @@
       "github": "luvyarana",
       "esocPRs": {
         "merged": 0,
-        "open": 0
+        "open": 0,
+        "orgs": []
       }
     },
     {
@@ -37,7 +41,8 @@
       "github": "sharmavikas18",
       "esocPRs": {
         "merged": 0,
-        "open": 0
+        "open": 0,
+        "orgs": []
       }
     },
     {
@@ -45,7 +50,8 @@
       "github": "AryanPatel-ui",
       "esocPRs": {
         "merged": 0,
-        "open": 0
+        "open": 0,
+        "orgs": []
       }
     },
     {
@@ -53,7 +59,8 @@
       "github": "nithyarajmudhaliyar",
       "esocPRs": {
         "merged": 0,
-        "open": 0
+        "open": 0,
+        "orgs": []
       }
     },
     {
@@ -61,7 +68,8 @@
       "github": "prateek6789-ai",
       "esocPRs": {
         "merged": 0,
-        "open": 0
+        "open": 0,
+        "orgs": []
       }
     },
     {
@@ -69,7 +77,19 @@
       "github": "Sahitya0805",
       "esocPRs": {
         "merged": 0,
-        "open": 4
+        "open": 4,
+        "orgs": [
+          {
+            "name": "shap",
+            "merged": 0,
+            "open": 2
+          },
+          {
+            "name": "sktime",
+            "merged": 0,
+            "open": 2
+          }
+        ]
       }
     },
     {
@@ -77,7 +97,14 @@
       "github": "saurabhyuvi14-ai",
       "esocPRs": {
         "merged": 0,
-        "open": 1
+        "open": 1,
+        "orgs": [
+          {
+            "name": "sktime",
+            "merged": 0,
+            "open": 1
+          }
+        ]
       }
     },
     {
@@ -85,7 +112,8 @@
       "github": "SidharthxNST",
       "esocPRs": {
         "merged": 0,
-        "open": 0
+        "open": 0,
+        "orgs": []
       }
     },
     {
@@ -93,7 +121,14 @@
       "github": "bhavesh-210",
       "esocPRs": {
         "merged": 0,
-        "open": 1
+        "open": 1,
+        "orgs": [
+          {
+            "name": "sktime",
+            "merged": 0,
+            "open": 1
+          }
+        ]
       }
     },
     {
@@ -101,7 +136,8 @@
       "github": "unnati-jaiswal24",
       "esocPRs": {
         "merged": 0,
-        "open": 0
+        "open": 0,
+        "orgs": []
       }
     },
     {
@@ -109,7 +145,8 @@
       "github": "Shristibot",
       "esocPRs": {
         "merged": 0,
-        "open": 0
+        "open": 0,
+        "orgs": []
       }
     },
     {
@@ -117,7 +154,14 @@
       "github": "dhiraj-143r",
       "esocPRs": {
         "merged": 3,
-        "open": 2
+        "open": 2,
+        "orgs": [
+          {
+            "name": "shap",
+            "merged": 3,
+            "open": 2
+          }
+        ]
       }
     },
     {
@@ -125,7 +169,14 @@
       "github": "nishtha-agarwal-211",
       "esocPRs": {
         "merged": 0,
-        "open": 1
+        "open": 1,
+        "orgs": [
+          {
+            "name": "openml",
+            "merged": 0,
+            "open": 1
+          }
+        ]
       }
     }
   ]

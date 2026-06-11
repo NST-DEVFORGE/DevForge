@@ -50,23 +50,37 @@ for handle in handles:
 
     esoc_merged = 0
     esoc_open = 0
+    org_breakdown = {}
+
+    def add_to_org(repo_url, state_key):
+        for org in esoc_orgs:
+            if f'repos/{org}/' in repo_url:
+                if org not in org_breakdown:
+                    org_breakdown[org] = {'merged': 0, 'open': 0}
+                org_breakdown[org][state_key] += 1
+                return True
+        return False
 
     for item in merged_items:
         repo_url = item.get('repository_url', '').lower()
-        if any(f'repos/{org}/' in repo_url for org in esoc_orgs):
+        if add_to_org(repo_url, 'merged'):
             esoc_merged += 1
 
     for item in open_items:
         repo_url = item.get('repository_url', '').lower()
-        if any(f'repos/{org}/' in repo_url for org in esoc_orgs):
+        if add_to_org(repo_url, 'open'):
             esoc_open += 1
+
+    # Format org breakdown
+    formatted_orgs = [{'name': org, 'merged': counts['merged'], 'open': counts['open']} for org, counts in org_breakdown.items()]
 
     results.append({
         'name': handle,  # we will use handle as name fallback in frontend
         'github': handle,
         'esocPRs': {
             'merged': esoc_merged,
-            'open': esoc_open
+            'open': esoc_open,
+            'orgs': formatted_orgs
         }
     })
 
