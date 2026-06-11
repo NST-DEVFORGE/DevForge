@@ -126,7 +126,6 @@ export default function OpenSourceImpact() {
     const geetansh = findMember("Geetansh", { name: "Geetansh Goyal", allPRs: { merged: 47 }, avatar: "https://github.com/geetxnshgoyal.png", github: "geetxnshgoyal" });
     const nishtha = findMember("Nishtha", { name: "Nishtha Agarwal", allPRs: { merged: 69 }, avatar: "https://github.com/nishtha-agarwal-211.png", github: "nishtha-agarwal-211" });
     const dhiraj = findMember("Dhiraj", { name: "Dhiraj Rathod", allPRs: { merged: 28 }, avatar: "https://github.com/dhiraj-143r.png", github: "dhiraj-143r" });
-    const nithyaraj = findMember("Nithyaraj", { name: "Nithyaraj", allPRs: { merged: 10 }, avatar: "https://github.com/nithyarajmudhaliyar.png", github: "nithyarajmudhaliyar" });
 
     const podiumData = [
         { 
@@ -150,11 +149,11 @@ export default function OpenSourceImpact() {
             ring: "ring-yellow-500" 
         },
         { 
-            name: nithyaraj.name, 
+            name: geetansh.name, 
             place: 3, 
             quality: 7, 
-            merged: nithyaraj.allPRs.merged, 
-            avatar: nithyaraj.avatar || `https://github.com/${nithyaraj.github}.png`, 
+            merged: geetansh.allPRs.merged, 
+            avatar: geetansh.avatar || `https://github.com/${geetansh.github}.png`, 
             color: "text-orange-600", 
             bg: "bg-orange-900/20", 
             ring: "ring-orange-600" 
