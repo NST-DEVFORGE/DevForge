@@ -28,9 +28,16 @@ interface MemberStats {
     nextMilestone: NextMilestone | null;
 }
 
+interface GraphStats {
+    monthlyData: { month: string; count: number }[];
+    orgData: { org: string; count: number }[];
+}
+
 export default function OpenSourceImpact() {
     const [prStatsMembers, setPrStatsMembers] = useState<MemberStats[]>([]);
     const [loadingStats, setLoadingStats] = useState(true);
+    const [graphStats, setGraphStats] = useState<GraphStats | null>(null);
+    const [loadingGraphs, setLoadingGraphs] = useState(true);
 
     useEffect(() => {
         async function fetchStats() {
@@ -46,8 +53,25 @@ export default function OpenSourceImpact() {
                 setLoadingStats(false);
             }
         }
+
+        async function fetchGraphStats() {
+            try {
+                const response = await fetch('/api/graph-stats');
+                if (response.ok) {
+                    const data = await response.json();
+                    setGraphStats(data);
+                }
+            } catch (error) {
+                console.error("Failed to fetch graph stats", error);
+            } finally {
+                setLoadingGraphs(false);
+            }
+        }
+
         fetchStats();
+        fetchGraphStats();
     }, []);
+
 
     // Build top GSSoC achievers sorted by rank (from real snapshot)
     const topGSSoC = [...gssocSnapshot.members]
@@ -135,25 +159,25 @@ export default function OpenSourceImpact() {
         }
     ];
 
-    // Monthly PR activity — merged PRs from allPRs.merged in pr-data-report.json
-    // Last 6 months: Aug 2025 – Jan 2026 (period of active tracked contributions)
-    // Aug–Sep had minimal activity; Oct–Jan shows real upward ramp tracked in gsocPRList
-    const months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'];
-    const monthCounts = [0, 0, 1, 3, 6, 9]; // Merged PR counts from tracked gsocPRList (merged state only)
+    // Live graph data from /api/graph-stats — real GitHub merged PR counts
+    // Jan–Jun 2026 monthly activity fetched per member, aggregated across all accounts
+    const monthlyData = graphStats?.monthlyData ?? [
+        { month: 'Jan', count: 0 }, { month: 'Feb', count: 0 }, { month: 'Mar', count: 0 },
+        { month: 'Apr', count: 0 }, { month: 'May', count: 0 }, { month: 'Jun', count: 0 },
+    ];
+    const months = monthlyData.map(d => d.month);
+    const monthCounts = monthlyData.map(d => d.count);
     const maxCount = Math.max(...monthCounts, 1);
 
-    // Top 5 orgs — merged PR counts derived from member allPRs.merged data
-    // openSUSE: Geetansh (47 merged, primary org per gsocPRList); Zulip: Nithyaraj (10 merged)
-    // OpenFoodFacts: Nishtha (69 merged, known contributor); JSONSchema: Dhiraj (28 merged, known contributor)
-    // MIT App Inventor: Lay Shah + others (7+4+2 = 13 merged)
-    const topOrgs = [
-        { org: 'openSUSE',      count: 47 },
-        { org: 'OpenFoodFacts', count: 69 },
-        { org: 'JSONSchema',    count: 28 },
-        { org: 'Zulip',        count: 10 },
-        { org: 'MIT App',      count: 13 },
+    // Top 5 orgs — real merged PR counts fetched from GitHub for every member account
+    const topOrgs = graphStats?.orgData ?? [
+        { org: 'openSUSE',      count: 0 },
+        { org: 'OpenFoodFacts', count: 0 },
+        { org: 'JSONSchema',    count: 0 },
+        { org: 'Zulip',        count: 0 },
+        { org: 'MIT App',      count: 0 },
     ];
-    const maxOrgCount = Math.max(...topOrgs.map(o => o.count));
+    const maxOrgCount = Math.max(...topOrgs.map(o => o.count), 1);
 
 
 
@@ -210,28 +234,54 @@ export default function OpenSourceImpact() {
                             <h3 className="text-2xl font-bold flex items-center gap-2">
                                 <Activity className="text-orange-500" /> Monthly Activity
                             </h3>
-                            <div className="text-sm text-neutral-400">Total Merged PRs</div>
+                            <div className="flex items-center gap-2">
+                                {loadingGraphs ? (
+                                    <span className="text-xs text-neutral-500 flex items-center gap-1.5">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-500 animate-pulse inline-block" /> Fetching...
+                                    </span>
+                                ) : (
+                                    <span className="text-xs text-green-500 flex items-center gap-1.5">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse inline-block" /> Live
+                                    </span>
+                                )}
+                                <div className="text-sm text-neutral-400">Merged PRs</div>
+                            </div>
                         </div>
-                        <div className="flex items-end justify-between h-48 gap-2">
-                            {monthCounts.map((count, i) => (
-                                <div key={i} className="flex flex-col items-center flex-1 h-full group">
-                                    <div className="w-full relative flex justify-center h-full items-end">
-                                        <motion.div 
-                                            initial={{ height: 0 }}
-                                            whileInView={{ height: `${(count / maxCount) * 100}%` }}
-                                            viewport={{ once: true }}
-                                            transition={{ duration: 1, delay: i * 0.1, type: "spring" }}
-                                            className="w-full max-w-[3rem] bg-gradient-to-t from-orange-600/20 to-orange-500/80 rounded-t-xl relative group-hover:from-orange-500/40 group-hover:to-orange-400 transition-colors cursor-pointer"
-                                        >
-                                            <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black text-white px-3 py-1 rounded-lg text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap border border-neutral-800 shadow-xl z-20">
-                                                {count} PRs
-                                            </div>
-                                        </motion.div>
+                        {loadingGraphs ? (
+                            <div className="flex items-end justify-between h-48 gap-2">
+                                {[40, 55, 35, 65, 50, 75].map((h, i) => (
+                                    <div key={i} className="flex flex-col items-center flex-1 h-full">
+                                        <div className="w-full flex justify-center h-full items-end">
+                                            <div
+                                                className="w-full max-w-[3rem] bg-neutral-800 rounded-t-xl animate-pulse"
+                                                style={{ height: `${h}%` }}
+                                            />
+                                        </div>
+                                        <div className="w-6 h-2 bg-neutral-800 rounded animate-pulse mt-4" />
                                     </div>
-                                    <span className="text-neutral-400 text-xs font-medium mt-4">{months[i]}</span>
-                                </div>
-                            ))}
-                        </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="flex items-end justify-between h-48 gap-2">
+                                {monthCounts.map((count, i) => (
+                                    <div key={i} className="flex flex-col items-center flex-1 h-full group">
+                                        <div className="w-full relative flex justify-center h-full items-end">
+                                            <motion.div
+                                                initial={{ height: 0 }}
+                                                animate={{ height: `${(count / maxCount) * 100}%` }}
+                                                transition={{ duration: 1, delay: i * 0.1, type: "spring" }}
+                                                className="w-full max-w-[3rem] bg-gradient-to-t from-orange-600/20 to-orange-500/80 rounded-t-xl relative group-hover:from-orange-500/40 group-hover:to-orange-400 transition-colors cursor-pointer"
+                                            >
+                                                <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black text-white px-3 py-1 rounded-lg text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap border border-neutral-800 shadow-xl z-20">
+                                                    {count} PRs
+                                                </div>
+                                            </motion.div>
+                                        </div>
+                                        <span className="text-neutral-400 text-xs font-medium mt-4">{months[i]}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
 
                     {/* Organizations Graph */}
@@ -240,30 +290,57 @@ export default function OpenSourceImpact() {
                             <h3 className="text-2xl font-bold flex items-center gap-2">
                                 <Globe2 className="text-blue-500" /> Top Organizations
                             </h3>
-                            <div className="text-sm text-neutral-400">PRs per Org</div>
+                            <div className="flex items-center gap-2">
+                                {loadingGraphs ? (
+                                    <span className="text-xs text-neutral-500 flex items-center gap-1.5">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-500 animate-pulse inline-block" /> Fetching...
+                                    </span>
+                                ) : (
+                                    <span className="text-xs text-green-500 flex items-center gap-1.5">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse inline-block" /> Live
+                                    </span>
+                                )}
+                                <div className="text-sm text-neutral-400">PRs per Org</div>
+                            </div>
                         </div>
-                        <div className="flex items-end justify-between h-48 gap-2">
-                            {topOrgs.map(({ org, count }, i) => (
-                                <div key={i} className="flex flex-col items-center flex-1 h-full group">
-                                    <div className="w-full relative flex justify-center h-full items-end">
-                                        <motion.div 
-                                            initial={{ height: 0 }}
-                                            whileInView={{ height: `${(count / maxOrgCount) * 100}%` }}
-                                            viewport={{ once: true }}
-                                            transition={{ duration: 1, delay: i * 0.1, type: "spring" }}
-                                            className="w-full max-w-[3rem] bg-gradient-to-t from-blue-600/20 to-blue-500/80 rounded-t-xl relative group-hover:from-blue-500/40 group-hover:to-blue-400 transition-colors cursor-pointer"
-                                        >
-                                            <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black text-white px-3 py-1 rounded-lg text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap border border-neutral-800 shadow-xl z-20">
-                                                {count} PRs
-                                            </div>
-                                        </motion.div>
+                        {loadingGraphs ? (
+                            <div className="flex items-end justify-between h-48 gap-2">
+                                {[80, 60, 45, 30, 20].map((h, i) => (
+                                    <div key={i} className="flex flex-col items-center flex-1 h-full">
+                                        <div className="w-full flex justify-center h-full items-end">
+                                            <div
+                                                className="w-full max-w-[3rem] bg-neutral-800 rounded-t-xl animate-pulse"
+                                                style={{ height: `${h}%` }}
+                                            />
+                                        </div>
+                                        <div className="w-10 h-2 bg-neutral-800 rounded animate-pulse mt-4" />
                                     </div>
-                                    <span className="text-neutral-400 text-xs font-medium mt-4 truncate w-full text-center" title={org}>{org}</span>
-                                </div>
-                            ))}
-                        </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="flex items-end justify-between h-48 gap-2">
+                                {topOrgs.map(({ org, count }, i) => (
+                                    <div key={i} className="flex flex-col items-center flex-1 h-full group">
+                                        <div className="w-full relative flex justify-center h-full items-end">
+                                            <motion.div
+                                                initial={{ height: 0 }}
+                                                animate={{ height: `${(count / maxOrgCount) * 100}%` }}
+                                                transition={{ duration: 1, delay: i * 0.1, type: "spring" }}
+                                                className="w-full max-w-[3rem] bg-gradient-to-t from-blue-600/20 to-blue-500/80 rounded-t-xl relative group-hover:from-blue-500/40 group-hover:to-blue-400 transition-colors cursor-pointer"
+                                            >
+                                                <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black text-white px-3 py-1 rounded-lg text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap border border-neutral-800 shadow-xl z-20">
+                                                    {count} PRs
+                                                </div>
+                                            </motion.div>
+                                        </div>
+                                        <span className="text-neutral-400 text-xs font-medium mt-4 truncate w-full text-center" title={org}>{org}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
+
 
                 {/* Podium */}
                 <div className="mb-24 mt-16">
