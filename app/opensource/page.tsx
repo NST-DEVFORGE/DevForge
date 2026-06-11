@@ -125,7 +125,7 @@ export default function OpenSourceImpact() {
 
     const nishtha = findMember("Nishtha", { name: "Nishtha Agarwal", allPRs: { merged: 69 }, avatar: "https://github.com/nishtha-agarwal-211.png", github: "nishtha-agarwal-211" });
     const dhiraj = findMember("Dhiraj", { name: "Dhiraj Rathod", allPRs: { merged: 28 }, avatar: "https://github.com/dhiraj-143r.png", github: "dhiraj-143r" });
-    const nithyaraj = findMember("Nithyaraj", { name: "Nithyaraj", allPRs: { merged: 10 }, avatar: "https://github.com/nithyarajmudhaliyar.png", github: "nithyarajmudhaliyar" });
+    const nithyaraj = findMember("Nithyaraj", { name: "Nithyaraj", allPRs: { merged: 10 }, avatar: "/nithyaraj.png", github: "nithyarajmudhaliyar" });
 
     const podiumData = [
         { 
