@@ -135,27 +135,17 @@ export default function OpenSourceImpact() {
         }
     ];
 
-    // Monthly PR activity data (hardcoded to fix missing dates in pr-data-report)
-    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
-    const currentDate = new Date();
-    const months: string[] = [];
-    for (let i = 5; i >= 0; i--) {
-        const d = new Date(currentDate.getFullYear(), currentDate.getMonth() - i, 1);
-        months.push(monthNames[d.getMonth()]);
-    }
-    
-    // Using realistic progression for the last 6 months that sums exactly to 285
-    const monthCounts = [35, 45, 55, 65, 50, 35];
+    // Monthly PR activity — real data extracted from pr-data-report.json gsocPRList dates
+    // Covers Oct 2025 – Jan 2026 (the months with actual tracked PR activity)
+    const months = ['Oct', 'Nov', 'Dec', 'Jan'];
+    const monthCounts = [1, 3, 6, 9]; // Actual PR counts from the tracked gsocPRList
     const maxCount = Math.max(...monthCounts, 1);
 
-    // Organizations Graph data (Hardcoded to fix missing data and include requested orgs, mathematically consistent with 285 total PRs)
+    // Organizations — real counts from pr-data-report.json gsocPRList repos
     const topOrgs = [
-        { org: 'openSUSE', count: 75 },
-        { org: 'OpenFood', count: 55 },
-        { org: 'MIT App', count: 42 },
-        { org: 'Zulip', count: 35 },
-        { org: 'JSON Schema', count: 25 },
-        { org: 'Mozilla', count: 18 }
+        { org: 'openSUSE', count: 11 },
+        { org: 'Zulip', count: 7 },
+        { org: 'Mozilla', count: 1 },
     ];
     const maxOrgCount = Math.max(...topOrgs.map(o => o.count));
 
@@ -186,10 +176,10 @@ export default function OpenSourceImpact() {
                 {/* Top Metrics */}
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
                     {[
-                        { title: "Total Contributors", value: "25+", icon: <Users size={24} className="text-blue-500" /> },
-                        { title: "Total PRs", value: "285", icon: <GitBranch size={24} className="text-purple-500" /> },
+                        { title: "Total Contributors", value: `${totalContributors}+`, icon: <Users size={24} className="text-blue-500" /> },
+                        { title: "Total PRs", value: `${totalMergedPRs}`, icon: <GitBranch size={24} className="text-purple-500" /> },
                         { title: "Quality PRs", value: "60+", icon: <Activity className="text-green-500" size={24} /> },
-                        { title: "Open Source Orgs", value: "15+", icon: <Globe2 className="text-orange-500" size={24} /> }
+                        { title: "Open Source Orgs", value: "8+", icon: <Globe2 className="text-orange-500" size={24} /> }
                     ].map((metric, i) => (
                         <motion.div
                             key={i}
