@@ -65,7 +65,7 @@ export const hackathonWinners: HackathonWinner[] = [
   {
     id: "hack-6",
     hackathonName: "Campfire Bengaluru",
-    year: "2025",
+    year: "2026",
     position: "1st Place",
     teamName: "Solo",
     projectTitle: "Campfire Winner",
@@ -80,7 +80,7 @@ export const hackathonWinners: HackathonWinner[] = [
   {
     id: "hack-7",
     hackathonName: "Campfire Bengaluru",
-    year: "2025",
+    year: "2026",
     position: "3rd Place",
     teamName: "Solo",
     projectTitle: "Campfire Bronze",
@@ -95,7 +95,7 @@ export const hackathonWinners: HackathonWinner[] = [
   {
     id: "hack-8",
     hackathonName: "CodeDay",
-    year: "2025",
+    year: "2026",
     position: "1st Place",
     teamName: "Team Alpha",
     projectTitle: "CodeDay Winner",
@@ -113,7 +113,7 @@ export const hackathonWinners: HackathonWinner[] = [
   {
     id: "hack-9",
     hackathonName: "CodeDay",
-    year: "2025",
+    year: "2026",
     position: "1st Place",
     teamName: "Team Beta",
     projectTitle: "CodeDay Co-Winner",
@@ -129,7 +129,7 @@ export const hackathonWinners: HackathonWinner[] = [
   {
     id: "hack-10",
     hackathonName: "CodeDay",
-    year: "2025",
+    year: "2026",
     position: "1st Place",
     teamName: "Solo",
     projectTitle: "CodeDay Solo Winner",
@@ -144,7 +144,7 @@ export const hackathonWinners: HackathonWinner[] = [
   {
     id: "hack-11",
     hackathonName: "CodeDay",
-    year: "2025",
+    year: "2026",
     position: "1st Place",
     teamName: "Team Gamma",
     projectTitle: "CodeDay Outstanding Project",
@@ -162,7 +162,7 @@ export const hackathonWinners: HackathonWinner[] = [
   {
     id: "hack-12",
     hackathonName: "CodeDay",
-    year: "2025",
+    year: "2026",
     position: "1st Place",
     teamName: "Team Delta",
     projectTitle: "CodeDay Innovation",
