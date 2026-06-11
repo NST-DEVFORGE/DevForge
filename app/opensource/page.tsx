@@ -123,15 +123,15 @@ export default function OpenSourceImpact() {
     const findMember = (nameQuery: string, fallback: any) => 
         prData.members.find(m => m.name?.toLowerCase().includes(nameQuery.toLowerCase())) || fallback;
 
-    const geetansh = findMember("Geetansh", { name: "Geetansh Goyal", allPRs: { merged: 47 }, avatar: "https://github.com/geetxnshgoyal.png", github: "geetxnshgoyal" });
     const nishtha = findMember("Nishtha", { name: "Nishtha Agarwal", allPRs: { merged: 69 }, avatar: "https://github.com/nishtha-agarwal-211.png", github: "nishtha-agarwal-211" });
     const dhiraj = findMember("Dhiraj", { name: "Dhiraj Rathod", allPRs: { merged: 28 }, avatar: "https://github.com/dhiraj-143r.png", github: "dhiraj-143r" });
+    const nithyaraj = findMember("Nithyaraj", { name: "Nithyaraj", allPRs: { merged: 10 }, avatar: "https://github.com/nithyarajmudhaliyar.png", github: "nithyarajmudhaliyar" });
 
     const podiumData = [
         { 
             name: dhiraj.name, 
             place: 2, 
-            quality: 10, 
+            quality: 18, 
             merged: dhiraj.allPRs.merged, 
             avatar: dhiraj.avatar || `https://github.com/${dhiraj.github}.png`, 
             color: "text-neutral-300", 
@@ -149,11 +149,11 @@ export default function OpenSourceImpact() {
             ring: "ring-yellow-500" 
         },
         { 
-            name: geetansh.name, 
+            name: nithyaraj.name, 
             place: 3, 
-            quality: 7, 
-            merged: geetansh.allPRs.merged, 
-            avatar: geetansh.avatar || `https://github.com/${geetansh.github}.png`, 
+            quality: 8, 
+            merged: nithyaraj.allPRs.merged, 
+            avatar: nithyaraj.avatar || `https://github.com/${nithyaraj.github}.png`, 
             color: "text-orange-600", 
             bg: "bg-orange-900/20", 
             ring: "ring-orange-600" 
