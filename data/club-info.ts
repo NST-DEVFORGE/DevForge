@@ -11,13 +11,13 @@ export const clubLeadership = [
     role: "President",
     photo: "https://github.com/Sahitya0805.png",
     github: "https://github.com/Sahitya0805",
-    linkedin: "https://linkedin.com/in/sahitya-singh"
+    linkedin: "https://www.linkedin.com/in/sahitya-singh-7012b137b/"
   },
   {
     name: "Vikas Sharma",
     role: "Vice President",
     photo: "https://github.com/sharmavikas18.png",
     github: "https://github.com/sharmavikas18",
-    linkedin: "https://linkedin.com"
+    linkedin: "https://www.linkedin.com/in/sharmavikas18/"
   }
 ];

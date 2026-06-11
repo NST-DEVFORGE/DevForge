@@ -21,7 +21,7 @@ export const studentsData: StudentProfile[] = [
     organizations: ["Google", "GirlScript Foundation"],
     photo: "/sahitya-placeholder.jpg",
     githubUrl: "https://github.com/Sahitya0805",
-    linkedinUrl: "https://linkedin.com/in/sahitya-singh",
+    linkedinUrl: "https://www.linkedin.com/in/sahitya-singh-7012b137b/",
     journey: "My journey into open source began with small contributions, leading to my acceptance into the prestigious Google Summer of Code program. I spent the summer diving deep into complex codebases and collaborating with some of the best minds in the industry.",
     learnings: [
       "Communication is just as important as writing clean code.",
