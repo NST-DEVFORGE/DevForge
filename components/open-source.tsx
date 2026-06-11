@@ -17,7 +17,7 @@ const topContributors = [...prData.members]
     .slice(0, 4);
 
 // Stats including ESoC contributions
-const totalMerged = 280;
+const totalMerged = 285;
 const totalOpen   = prData.members.reduce((acc, m) => acc + m.allPRs.open, 0);
 const totalPRs    = 335;
 
