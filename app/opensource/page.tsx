@@ -2,11 +2,53 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Trophy, Star, ExternalLink, GitMerge, Users, GitBranch, Globe2, Activity, Medal } from "lucide-react";
+import { Trophy, Star, ExternalLink, GitMerge, Users, GitBranch, Globe2, Activity, Medal, Award, Github } from "lucide-react";
 import prData from "../../pr-data-report.json";
 import gssocSnapshot from "../../data/gssoc-snapshot.json";
+import { useEffect, useState } from "react";
+
+interface Milestone {
+    name: string;
+    count: number;
+    emoji: string;
+}
+
+interface NextMilestone extends Milestone {
+    progress: number;
+}
+
+interface MemberStats {
+    name: string;
+    github: string;
+    role: string;
+    avatar: string;
+    prCount: number;
+    totalPRs: number;
+    milestones: Milestone[];
+    nextMilestone: NextMilestone | null;
+}
 
 export default function OpenSourceImpact() {
+    const [prStatsMembers, setPrStatsMembers] = useState<MemberStats[]>([]);
+    const [loadingStats, setLoadingStats] = useState(true);
+
+    useEffect(() => {
+        async function fetchStats() {
+            try {
+                const response = await fetch('/api/pr-stats');
+                if (response.ok) {
+                    const data = await response.json();
+                    setPrStatsMembers([...data.members].sort((a, b) => b.prCount - a.prCount));
+                }
+            } catch (error) {
+                console.error("Failed to fetch PR stats", error);
+            } finally {
+                setLoadingStats(false);
+            }
+        }
+        fetchStats();
+    }, []);
+
     // Build top GSSoC achievers sorted by rank (from real snapshot)
     const topGSSoC = [...gssocSnapshot.members]
         .sort((a, b) => a.rank - b.rank)
@@ -292,41 +334,131 @@ export default function OpenSourceImpact() {
                     <h3 className="text-3xl font-bold text-white text-center mb-12">
                         Open Source <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-500">Hall of Fame</span>
                     </h3>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {topContributors.map((contributor, i) => (
-                            <motion.div
-                                key={contributor.github}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.05 }}
-                                whileHover={{ y: -5 }}
-                            >
-                                <a
-                                    href={`https://github.com/${contributor.github}`}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="block h-full bg-neutral-900/40 border border-neutral-800 p-6 rounded-3xl hover:border-orange-500/50 transition-all duration-300"
+                    
+                    {loadingStats ? (
+                        <div className="flex justify-center py-12">
+                            <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+                        </div>
+                    ) : (
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {prStatsMembers.map((member, index) => (
+                                <motion.div
+                                    key={member.github}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.1 }}
+                                    whileHover={{ y: -10 }}
+                                    className="group"
                                 >
-                                    <div className="w-20 h-20 mx-auto mb-4 rounded-full overflow-hidden border-2 border-neutral-800 group-hover:border-orange-500 transition-colors">
-                                        <img
-                                            src={contributor.avatar || `https://github.com/${contributor.github}.png`}
-                                            alt={contributor.name}
-                                            className="w-full h-full object-cover"
-                                        />
-                                    </div>
-                                    <div className="text-center">
-                                        <h4 className="text-lg font-bold text-white mb-1 truncate">{contributor.name}</h4>
-                                        <p className="text-neutral-500 text-xs mb-3">@{contributor.github}</p>
-                                        <div className="inline-flex items-center justify-center gap-1.5 bg-orange-500/10 border border-orange-500/20 text-orange-400 text-sm font-bold px-3 py-1.5 rounded-full">
-                                            <GitMerge size={13} />
-                                            {contributor.allPRs.merged} PRs
+                                    <div className="relative bg-neutral-900/50 backdrop-blur-md border border-neutral-800 rounded-2xl p-6 overflow-hidden hover:border-orange-500/50 transition-all duration-300 h-full">
+                                        <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                                        <div className="relative">
+                                            {/* Profile */}
+                                            <div className="flex items-center gap-4 mb-6">
+                                                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-orange-500/30">
+                                                    <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
+                                                </div>
+                                                <div className="flex-1">
+                                                    <h3 className="text-xl font-bold text-white">{member.name}</h3>
+                                                    <p className="text-sm text-orange-500">{member.role}</p>
+                                                </div>
+                                            </div>
+
+                                            {/* PR Count */}
+                                            <div className="space-y-3 mb-6">
+                                                <div className="text-center py-4 bg-gradient-to-br from-orange-500/10 to-purple-500/10 rounded-xl border border-orange-500/50">
+                                                    <div className="text-4xl font-bold text-orange-500 mb-1">{member.prCount}</div>
+                                                    <p className="text-neutral-400 text-sm">Quality PRs</p>
+                                                </div>
+                                                <div className="text-center py-3 bg-neutral-800/30 rounded-xl border border-neutral-700">
+                                                    <div className="text-2xl font-semibold text-blue-400 mb-1">{member.totalPRs}</div>
+                                                    <p className="text-neutral-500 text-xs">Total Merged</p>
+                                                </div>
+                                            </div>
+
+                                            {/* Milestones */}
+                                            <div className="mb-6">
+                                                <div className="flex items-center gap-2 mb-3">
+                                                    <Award className="w-4 h-4 text-orange-500" />
+                                                    <h4 className="text-sm font-semibold text-neutral-300">Achievements</h4>
+                                                </div>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {member.milestones.map((milestone) => (
+                                                        <div
+                                                            key={milestone.name}
+                                                            className={`${milestone.count === 15
+                                                                ? 'bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border-blue-500/50 ring-2 ring-blue-500/30'
+                                                                : milestone.count === 25
+                                                                    ? 'bg-gradient-to-r from-orange-500/20 to-purple-500/20 border-orange-500/50 ring-2 ring-orange-500/30'
+                                                                    : 'bg-neutral-800/50 border-orange-500/30'
+                                                                } border rounded-lg px-3 py-1 text-xs`}
+                                                        >
+                                                            <span className="mr-1">{milestone.emoji}</span>
+                                                            <span className={
+                                                                milestone.count === 15
+                                                                    ? 'text-blue-400 font-semibold'
+                                                                    : milestone.count === 25
+                                                                        ? 'text-orange-400 font-semibold'
+                                                                        : 'text-neutral-400'
+                                                            }>
+                                                                {milestone.name}
+                                                            </span>
+                                                        </div>
+                                                    ))}
+                                                    {member.github === 'geetxnshgoyal' && (
+                                                        <a
+                                                            href="https://summerofcode.withgoogle.com/programs/2026/projects/yJH1saNZ"
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="bg-gradient-to-r from-orange-500/20 to-orange-600/20 border border-orange-500/50 ring-2 ring-orange-500/30 rounded-lg px-3 py-1 text-xs inline-flex items-center gap-1.5 hover:from-orange-500/30 hover:to-orange-600/30 transition-all duration-200"
+                                                        >
+                                                            <span>☀️</span>
+                                                            <span className="text-orange-400 font-semibold">GSoC&apos;26</span>
+                                                            <ExternalLink className="w-3 h-3 text-orange-400" />
+                                                        </a>
+                                                    )}
+                                                </div>
+                                            </div>
+
+                                            {/* Next Milestone */}
+                                            {member.nextMilestone && (
+                                                <div className="mb-6">
+                                                    <div className="flex justify-between items-center mb-2">
+                                                        <span className="text-xs text-neutral-400">
+                                                            Next: {member.nextMilestone.emoji} {member.nextMilestone.name}
+                                                        </span>
+                                                        <span className="text-xs text-orange-500 font-semibold">
+                                                            {member.prCount} / {member.nextMilestone.count}
+                                                        </span>
+                                                    </div>
+                                                    <div className="w-full h-2 bg-neutral-800 rounded-full overflow-hidden">
+                                                        <div
+                                                            className="h-full bg-gradient-to-r from-orange-500 to-purple-500 transition-all duration-500"
+                                                            style={{ width: `${member.nextMilestone.progress}%` }}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {/* GitHub Link */}
+                                            <a
+                                                href={`https://github.com/${member.github}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex items-center justify-center gap-2 w-full py-2 bg-neutral-800/50 hover:bg-neutral-800 border border-neutral-700 hover:border-orange-500/50 rounded-lg transition-all duration-200 text-neutral-400 hover:text-orange-500"
+                                            >
+                                                <Github className="w-4 h-4" />
+                                                <span className="text-sm">View Profile</span>
+                                                <ExternalLink className="w-3 h-3" />
+                                            </a>
                                         </div>
                                     </div>
-                                </a>
-                            </motion.div>
-                        ))}
-                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    )}
                 </div>
 
             </div>
