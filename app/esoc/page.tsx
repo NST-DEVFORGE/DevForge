@@ -124,9 +124,9 @@ export default function ESocPage() {
                                                     <div key={idx} className="bg-blue-900/20 border border-blue-500/20 rounded-md px-2 py-1 flex items-center gap-1">
                                                         <span className="text-blue-400 text-xs font-medium">{org.name}</span>
                                                         <span className="text-neutral-400 text-[10px] ml-1">
-                                                            {org.merged > 0 && <span className="text-green-500" title="Merged">{org.merged}M</span>}
+                                                            {org.merged > 0 && <span className="text-green-500" title="Merged">{org.merged} merged</span>}
                                                             {org.merged > 0 && org.open > 0 && <span> </span>}
-                                                            {org.open > 0 && <span className="text-purple-500" title="Open">{org.open}O</span>}
+                                                            {org.open > 0 && <span className="text-purple-500" title="Open">{org.open} open</span>}
                                                         </span>
                                                     </div>
                                                 ))}

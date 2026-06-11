@@ -145,10 +145,41 @@ const MEMBER_DATA = [
     { name: 'Saurabh', github: 'saurabhyuvi14-ai', role: 'Member', avatar: '/saurabh.jpg', merged: 6, quality: 1 },
     { name: 'Sidharth', github: 'SidharthxNST', role: 'Member', avatar: '/sidharth.png', merged: 4, quality: 2 },
     { name: 'Bhavesh Sharma', github: 'bhavesh-210', role: 'Member', avatar: '/bhavesh.jpg', merged: 13, quality: 0 },
-    { name: 'Unnati Jaiswal', github: 'unnati-jaiswal24', role: 'Member', avatar: '/unnati.png', merged: 8, quality: 3 },
-    { name: 'Shristi Kumari', github: 'Shristibot', role: 'Member', avatar: 'https://github.com/Shristibot.png', merged: 8, quality: 3 },
+    { name: 'Unnati Jaiswal', github: 'unnati-jaiswal24', role: 'Member', avatar: '/unnati.png', merged: 13, quality: 3 },
+    { name: 'Shristi Kumari', github: 'Shristibot', role: 'Member', avatar: 'https://github.com/Shristibot.png', merged: 4, quality: 3 },
     { name: 'Dhiraj Rathod', github: 'dhiraj-143r', role: 'Member', avatar: 'https://github.com/dhiraj-143r.png', merged: 28, quality: 18 }
 ];
+
+async function fetchUserMergedPRsCount(username: string): Promise<number> {
+    try {
+        const headers: HeadersInit = {
+            'Accept': 'application/vnd.github.v3+json',
+            'User-Agent': 'DevForge-PR-Stats'
+        };
+
+        if (process.env.GITHUB_TOKEN) {
+            headers['Authorization'] = `token ${process.env.GITHUB_TOKEN}`;
+        }
+
+        const query = `author:${username} type:pr is:merged`;
+        const url = `https://api.github.com/search/issues?q=${encodeURIComponent(query)}&per_page=1`;
+
+        const response = await fetch(url, {
+            headers,
+            next: { revalidate: 300 } // Cache for 5 minutes
+        });
+
+        if (!response.ok) {
+            return 0;
+        }
+
+        const data = await response.json();
+        return data.total_count || 0;
+    } catch (error) {
+        console.error(`Error fetching PR count for ${username}:`, error);
+        return 0;
+    }
+}
 
 function calculateMilestones(count: number, milestones: typeof INDIVIDUAL_MILESTONES) {
     const achieved = milestones.filter(m => count >= m.count);
@@ -167,24 +198,39 @@ function calculateMilestones(count: number, milestones: typeof INDIVIDUAL_MILEST
 
 export async function GET() {
     try {
-        const memberStats = MEMBER_DATA.map((member) => {
-            const { achieved, nextMilestone } = calculateMilestones(member.quality, INDIVIDUAL_MILESTONES);
+        const memberStats = await Promise.all(
+            MEMBER_DATA.map(async (member) => {
+                let mergedCount = await fetchUserMergedPRsCount(member.github);
+                
+                // Fallback to static data if API call returns 0
+                if (mergedCount === 0) {
+                    mergedCount = member.merged;
+                }
 
-            return {
-                name: member.name,
-                github: member.github,
-                role: member.role,
-                avatar: member.avatar,
-                prCount: member.quality, // Quality PRs for milestones
-                totalPRs: member.merged,  // All merged PRs
-                milestones: achieved,
-                nextMilestone
-            };
-        });
+                // If Sahitya, ensure it is at least 28 as requested
+                if (member.github === 'Sahitya0805') {
+                    mergedCount = Math.max(mergedCount, 28);
+                }
 
-        // Use the exact hardcoded totals requested by the user
-        const totalQualityPRs = 60;
-        const totalAllPRs = 188;
+                const { achieved, nextMilestone } = calculateMilestones(member.quality, INDIVIDUAL_MILESTONES);
+
+                return {
+                    name: member.name,
+                    github: member.github,
+                    role: member.role,
+                    avatar: member.avatar,
+                    prCount: member.quality, // Quality PRs for milestones
+                    totalPRs: mergedCount,   // All merged PRs
+                    milestones: achieved,
+                    nextMilestone
+                };
+            })
+        );
+
+        // Sum quality PRs
+        const totalQualityPRs = 60; // Hardcoded quality PRs total as requested
+        // Dynamically sum all fetched merged PRs (ensuring at least 188)
+        const totalAllPRs = Math.max(memberStats.reduce((sum, member) => sum + member.totalPRs, 0), 188);
 
         // Calculate team milestones based on quality PRs
         const { achieved: teamMilestonesAchieved, nextMilestone: nextTeamMilestone } =
