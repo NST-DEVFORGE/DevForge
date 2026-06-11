@@ -45,12 +45,11 @@ export default function ESocPage() {
                 </motion.div>
 
                 {/* Top Stats */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 max-w-4xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 max-w-3xl mx-auto">
                     {[
                         { title: "Total Contributors", value: totalContributors, icon: <Users className="text-blue-500" /> },
                         { title: "Merged PRs", value: totalMergedPRs, icon: <GitMerge className="text-green-500" /> },
-                        { title: "Open PRs", value: totalOpenPRs, icon: <GitBranch className="text-purple-500" /> },
-                        { title: "ESoC Orgs", value: "10+", icon: <Globe2 className="text-orange-500" /> }
+                        { title: "Open PRs", value: totalOpenPRs, icon: <GitBranch className="text-purple-500" /> }
                     ].map((metric, i) => (
                         <motion.div
                             key={i}
