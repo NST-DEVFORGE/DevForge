@@ -25,6 +25,7 @@ export function Navbar() {
         { name: "Open Source", href: "/opensource" },
         { name: "ESoC", href: "/esoc" },
         { name: "Hackathons", href: "/hackathons" },
+        { name: "Conferences", href: "/conferences" },
         { name: "Dev Club", href: "/club" },
         { name: "Learn", href: "/learn" },
     ];
