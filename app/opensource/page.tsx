@@ -153,7 +153,7 @@ export default function OpenSourceImpact() {
             place: 3, 
             quality: 8, 
             merged: nithyaraj.allPRs.merged, 
-            avatar: nithyaraj.avatar || `https://github.com/${nithyaraj.github}.png`, 
+            avatar: "/nithyaraj.png", 
             color: "text-orange-600", 
             bg: "bg-orange-900/20", 
             ring: "ring-orange-600" 
