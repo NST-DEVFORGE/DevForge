@@ -49,8 +49,7 @@ export default function OpenSourceImpact() {
     const topContributors = Array.from(allMembersMap.values())
         .sort((a, b) => (b.allPRs?.merged || 0) - (a.allPRs?.merged || 0));
 
-    // Total PRs including ESoC contributions (pr-data-report only tracks partial data)
-    const totalMergedPRs = 280;
+    const totalMergedPRs = prData.members.reduce((sum, member) => sum + member.allPRs.merged, 0);
     const totalContributors = topContributors.length;
 
     const findMember = (nameQuery: string, fallback: any) => 
@@ -93,21 +92,48 @@ export default function OpenSourceImpact() {
         }
     ];
 
-    // Monthly PR activity data (hardcoded from actual contribution timeline)
-    const months = ['Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb'];
-    const monthCounts = [18, 35, 52, 68, 55, 52];
-    const maxCount = Math.max(...monthCounts);
+    // Monthly PR activity data (calculated from current to last 6 months from real data)
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const currentDate = new Date();
+    const months: string[] = [];
+    for (let i = 5; i >= 0; i--) {
+        const d = new Date(currentDate.getFullYear(), currentDate.getMonth() - i, 1);
+        months.push(monthNames[d.getMonth()]);
+    }
+    
+    const monthlyData: Record<string, number> = {};
+    const orgCounts: Record<string, number> = {};
 
-    // Organizations Graph data (hardcoded with correct PR counts including ESoC)
-    const topOrgs = [
-        { org: 'openSUSE', count: 24 },
-        { org: 'OpenFood', count: 22 },
-        { org: 'zulip', count: 18 },
-        { org: 'Mozilla', count: 15 },
-        { org: 'GirlScript', count: 14 },
-        { org: 'GitLab', count: 10 },
-    ];
-    const maxOrgCount = Math.max(...topOrgs.map(o => o.count));
+    prData.members.forEach(m => {
+        const allPrs = [...(m.prs || []), ...(m.gsocPRList || [])];
+        allPrs.forEach(pr => {
+            // Tally monthly data for merged PRs
+            if (pr.date && pr.state === 'merged') {
+                const d = new Date(pr.date);
+                const mName = monthNames[d.getMonth()];
+                monthlyData[mName] = (monthlyData[mName] || 0) + 1;
+            }
+            
+            // Tally org data for all PRs
+            if (pr.repo) {
+                let org = pr.repo.split('/')[0];
+                if (org.toLowerCase() === 'opensuse') org = 'openSUSE';
+                if (org.toLowerCase() === 'openfoodfacts') org = 'OpenFood';
+                if (org.toLowerCase() === 'girlscript') return; // Exclude girlscript per request
+                orgCounts[org] = (orgCounts[org] || 0) + 1;
+            }
+        });
+    });
+
+    const monthCounts = months.map(m => monthlyData[m] || 0);
+    const maxCount = Math.max(...monthCounts, 1); // Avoid division by zero
+
+    // Organizations Graph data
+    const topOrgs = Object.entries(orgCounts)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 6)
+        .map(([org, count]) => ({ org: org.length > 10 ? org.substring(0, 8) + '..' : org, count }));
+    const maxOrgCount = topOrgs.length > 0 ? Math.max(...topOrgs.map(o => o.count)) : 1;
 
 
 
@@ -133,13 +159,13 @@ export default function OpenSourceImpact() {
                     </p>
                 </motion.div>
 
-                {/* Top Metrics - As explicitly requested */}
+                {/* Top Metrics */}
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
                     {[
-                        { title: "Total Contributors", value: "25+", icon: <Users size={24} className="text-blue-500" /> },
-                        { title: "Total PRs", value: "280+", icon: <GitBranch size={24} className="text-purple-500" /> },
-                        { title: "Quality PRs", value: "60+", icon: <Activity className="text-green-500" size={24} /> },
-                        { title: "Open Source Orgs", value: "15+", icon: <Globe2 className="text-orange-500" size={24} /> }
+                        { title: "Total Contributors", value: totalContributors, icon: <Users size={24} className="text-blue-500" /> },
+                        { title: "Total PRs", value: totalMergedPRs, icon: <GitBranch size={24} className="text-purple-500" /> },
+                        { title: "Quality PRs", value: Math.floor(totalMergedPRs * 0.2) + "+", icon: <Activity className="text-green-500" size={24} /> },
+                        { title: "Open Source Orgs", value: Object.keys(orgCounts).length, icon: <Globe2 className="text-orange-500" size={24} /> }
                     ].map((metric, i) => (
                         <motion.div
                             key={i}

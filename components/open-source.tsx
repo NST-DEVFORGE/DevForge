@@ -16,10 +16,10 @@ const topContributors = [...prData.members]
     .sort((a, b) => b.allPRs.merged - a.allPRs.merged)
     .slice(0, 4);
 
-// Stats including ESoC contributions (pr-data-report only tracks partial data)
-const totalMerged = 280;
+// Stats from real data
+const totalMerged = prData.members.reduce((acc, m) => acc + m.allPRs.merged, 0);
 const totalOpen   = prData.members.reduce((acc, m) => acc + m.allPRs.open, 0);
-const totalPRs    = 335;
+const totalPRs    = prData.members.reduce((acc, m) => acc + m.allPRs.merged + m.allPRs.open + m.allPRs.closed, 0);
 
 export function OpenSource() {
     return (
