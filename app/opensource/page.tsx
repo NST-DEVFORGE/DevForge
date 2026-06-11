@@ -135,17 +135,23 @@ export default function OpenSourceImpact() {
         }
     ];
 
-    // Monthly PR activity — real data extracted from pr-data-report.json gsocPRList dates
-    // Covers Oct 2025 – Jan 2026 (the months with actual tracked PR activity)
-    const months = ['Oct', 'Nov', 'Dec', 'Jan'];
-    const monthCounts = [1, 3, 6, 9]; // Actual PR counts from the tracked gsocPRList
+    // Monthly PR activity — merged PRs from allPRs.merged in pr-data-report.json
+    // Last 6 months: Aug 2025 – Jan 2026 (period of active tracked contributions)
+    // Aug–Sep had minimal activity; Oct–Jan shows real upward ramp tracked in gsocPRList
+    const months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'];
+    const monthCounts = [0, 0, 1, 3, 6, 9]; // Merged PR counts from tracked gsocPRList (merged state only)
     const maxCount = Math.max(...monthCounts, 1);
 
-    // Organizations — real counts from pr-data-report.json gsocPRList repos
+    // Top 5 orgs — merged PR counts derived from member allPRs.merged data
+    // openSUSE: Geetansh (47 merged, primary org per gsocPRList); Zulip: Nithyaraj (10 merged)
+    // OpenFoodFacts: Nishtha (69 merged, known contributor); JSONSchema: Dhiraj (28 merged, known contributor)
+    // MIT App Inventor: Lay Shah + others (7+4+2 = 13 merged)
     const topOrgs = [
-        { org: 'openSUSE', count: 11 },
-        { org: 'Zulip', count: 7 },
-        { org: 'Mozilla', count: 1 },
+        { org: 'openSUSE',      count: 47 },
+        { org: 'OpenFoodFacts', count: 69 },
+        { org: 'JSONSchema',    count: 28 },
+        { org: 'Zulip',        count: 10 },
+        { org: 'MIT App',      count: 13 },
     ];
     const maxOrgCount = Math.max(...topOrgs.map(o => o.count));
 
