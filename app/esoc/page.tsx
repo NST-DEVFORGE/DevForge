@@ -3,16 +3,26 @@
 import { motion } from "framer-motion";
 import { Globe2, GitBranch, GitMerge, Users, Activity, ExternalLink } from "lucide-react";
 import prData from "../../pr-data-report.json";
+import esocStats from "../../data/esoc-stats.json";
 import Link from "next/link";
 
 export default function ESocPage() {
-    // Sort members by total merged PRs, taking all from stat page without hardcoding any specific one
-    const members = [...prData.members]
-        .sort((a, b) => b.allPRs.merged - a.allPRs.merged)
-        .filter(m => m.allPRs.merged > 0); // Only show active contributors
+    // Map ESoC stats to member profiles and filter by ESoC-only contributions
+    const members = esocStats.members.map((esocM: any) => {
+        const prM = prData.members.find(m => m.github.toLowerCase() === esocM.github.toLowerCase());
+        return {
+            name: prM?.name || esocM.name,
+            github: esocM.github,
+            avatar: prM?.avatar || `https://github.com/${esocM.github}.png`,
+            esocPRs: esocM.esocPRs
+        };
+    })
+    .filter(m => m.esocPRs.merged > 0 || m.esocPRs.open > 0) // Only show active ESoC contributors
+    .sort((a, b) => b.esocPRs.merged - a.esocPRs.merged);
 
     const totalContributors = members.length;
-    const totalMergedPRs = members.reduce((sum, member) => sum + member.allPRs.merged, 0);
+    const totalMergedPRs = members.reduce((sum, member) => sum + member.esocPRs.merged, 0);
+    const totalOpenPRs = members.reduce((sum, member) => sum + member.esocPRs.open, 0);
 
     return (
         <div className="min-h-screen pt-24 pb-16 relative">
@@ -39,8 +49,8 @@ export default function ESocPage() {
                     {[
                         { title: "Total Contributors", value: totalContributors, icon: <Users className="text-blue-500" /> },
                         { title: "Merged PRs", value: totalMergedPRs, icon: <GitMerge className="text-green-500" /> },
-                        { title: "Open PRs", value: members.reduce((sum, m) => sum + m.allPRs.open, 0), icon: <GitBranch className="text-purple-500" /> },
-                        { title: "Global Reach", value: "EU", icon: <Globe2 className="text-orange-500" /> }
+                        { title: "Open PRs", value: totalOpenPRs, icon: <GitBranch className="text-purple-500" /> },
+                        { title: "ESoC Orgs", value: "10+", icon: <Globe2 className="text-orange-500" /> }
                     ].map((metric, i) => (
                         <motion.div
                             key={i}
@@ -95,15 +105,15 @@ export default function ESocPage() {
                                 <div className="mt-auto space-y-3 relative z-10">
                                     <div className="bg-black/50 border border-neutral-800 rounded-xl p-3 flex justify-between items-center group-hover:border-blue-900/50 transition-colors">
                                         <span className="text-neutral-400 text-sm flex items-center gap-2">
-                                            <GitMerge size={16} className="text-green-500" /> Merged PRs
+                                            <GitMerge size={16} className="text-green-500" /> ESoC Merged
                                         </span>
-                                        <span className="font-bold text-white text-lg">{member.allPRs.merged}</span>
+                                        <span className="font-bold text-white text-lg">{member.esocPRs.merged}</span>
                                     </div>
                                     <div className="bg-black/50 border border-neutral-800 rounded-xl p-3 flex justify-between items-center group-hover:border-blue-900/50 transition-colors">
                                         <span className="text-neutral-400 text-sm flex items-center gap-2">
-                                            <GitBranch size={16} className="text-purple-500" /> Open PRs
+                                            <GitBranch size={16} className="text-purple-500" /> ESoC Open
                                         </span>
-                                        <span className="font-bold text-white text-lg">{member.allPRs.open}</span>
+                                        <span className="font-bold text-white text-lg">{member.esocPRs.open}</span>
                                     </div>
                                 </div>
                             </motion.div>
