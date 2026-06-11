@@ -197,7 +197,7 @@
       "name": "Nithyaraj",
       "github": "nithyarajmudhaliyar",
       "allPRs": {
-        "merged": 0,
+        "merged": 10,
         "open": 5,
         "closed": 0
       },
@@ -279,7 +279,7 @@
       },
       "gsocPRList": [
         {
-          "title": "Refine README.md for user profile page: enhance feature descriptions,…",
+          "title": "Refine README.md for user profile page: enhance feature descriptions,\u2026",
           "url": "https://github.com/Mozilla-Campus-Club-Cummins/Design_HacktoberFest2025/pull/20",
           "repo": "Mozilla-Campus-Club-Cummins/Design_HacktoberFest2025",
           "number": 20,
@@ -367,7 +367,7 @@
       "name": "Dhiraj Rathod",
       "github": "dhiraj-143r",
       "allPRs": {
-        "merged": 0,
+        "merged": 28,
         "open": 0,
         "closed": 0
       },
@@ -377,6 +377,18 @@
         "closed": 0
       },
       "gsocPRList": []
+    },
+    {
+      "name": "Nishtha Agarwal",
+      "github": "nishtha-agarwal-211",
+      "avatar": "https://github.com/nishtha-agarwal-211.png",
+      "allPRs": {
+        "total": 69,
+        "open": 0,
+        "closed": 0,
+        "merged": 69
+      },
+      "prs": []
     }
   ]
 }

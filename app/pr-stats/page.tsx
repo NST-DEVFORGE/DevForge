@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function PRStatsPage() {
     return (
-        <div className="bg-black text-white selection:bg-orange-500 selection:text-black">
+        <div className="bg-transparent text-white selection:bg-orange-500 selection:text-black">
             <PRStats />
         </div>
     );

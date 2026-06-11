@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Navbar } from "@/components/navbar";
+import { FloatingBackground } from "@/components/floating-background";
 
 export const metadata: Metadata = {
     title: {
@@ -85,7 +87,9 @@ export default function RootLayout({
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
                 />
             </head>
-            <body className="antialiased">
+            <body className="antialiased bg-black text-white relative">
+                <FloatingBackground />
+                <Navbar />
                 {children}
             </body>
         </html>

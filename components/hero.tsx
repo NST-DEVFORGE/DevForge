@@ -78,7 +78,7 @@ export function Hero() {
                         📊 PR Stats
                     </a>
                     <a
-                        href="#events"
+                        href="/events"
                         className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-medium text-lg rounded-xl border border-white/10 transition-colors backdrop-blur-sm"
                     >
                         View Events
