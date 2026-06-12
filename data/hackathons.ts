@@ -63,21 +63,6 @@ export const hackathonWinners: HackathonWinner[] = [
     ]
   },
   {
-    id: "hack-6",
-    hackathonName: "Campfire Bengaluru",
-    year: "2026",
-    position: "1st Place",
-    teamName: "Solo",
-    projectTitle: "Campfire Winner",
-    description: "First prize winning project at Campfire Bengaluru.",
-    technologies: ["TypeScript", "Next.js"],
-    githubUrl: "https://github.com/geetxnshgoyal",
-    photoUrl: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&q=80",
-    members: [
-      { name: "Geetansh Goyal", github: "geetxnshgoyal" }
-    ]
-  },
-  {
     id: "hack-7",
     hackathonName: "Campfire Bengaluru",
     year: "2026",
