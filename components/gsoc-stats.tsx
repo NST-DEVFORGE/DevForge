@@ -136,14 +136,14 @@ export function GsocStats() {
                         </div>
 
                         <div className="grid grid-cols-4 gap-6">
-                            <div className="text-center p-6 bg-green-500/10 rounded-2xl border border-green-500/30">
-                                <GitMerge className="w-10 h-10 text-green-500 mx-auto mb-3" />
-                                <div className="text-5xl font-bold text-green-500 mb-1">{data.summary.gsocMerged}</div>
+                            <div className="text-center p-6 bg-purple-500/10 rounded-2xl border border-purple-500/30">
+                                <GitMerge className="w-10 h-10 text-purple-500 mx-auto mb-3" />
+                                <div className="text-5xl font-bold text-purple-500 mb-1">{data.summary.gsocMerged}</div>
                                 <p className="text-neutral-400 text-lg">Merged</p>
                             </div>
-                            <div className="text-center p-6 bg-purple-500/10 rounded-2xl border border-purple-500/30">
-                                <GitPullRequest className="w-10 h-10 text-purple-500 mx-auto mb-3" />
-                                <div className="text-5xl font-bold text-purple-500 mb-1">{data.summary.gsocOpen}</div>
+                            <div className="text-center p-6 bg-green-500/10 rounded-2xl border border-green-500/30">
+                                <GitPullRequest className="w-10 h-10 text-green-500 mx-auto mb-3" />
+                                <div className="text-5xl font-bold text-green-500 mb-1">{data.summary.gsocOpen}</div>
                                 <p className="text-neutral-400 text-lg">Open</p>
                             </div>
                             <div className="text-center p-6 bg-red-500/10 rounded-2xl border border-red-500/30">
@@ -254,7 +254,7 @@ export function GsocStats() {
                                             contentStyle={{ backgroundColor: '#1a1a1a', border: '1px solid #333', borderRadius: '8px' }}
                                         />
                                         <Legend />
-                                        <Bar dataKey="merged" stackId="a" fill="#22c55e" name="Merged" />
+                                        <Bar dataKey="merged" stackId="a" fill="#a855f7" name="Merged" />
                                         <Bar dataKey="open" stackId="a" fill="#eab308" name="Open" />
                                         <Bar dataKey="closed" stackId="a" fill="#ef4444" name="Closed" />
                                     </BarChart>
@@ -266,7 +266,7 @@ export function GsocStats() {
                     {/* Contribution Insights */}
                     <div className="mt-6 grid md:grid-cols-3 gap-4">
                         <div className="bg-neutral-900/50 border border-neutral-700 rounded-xl p-4 text-center">
-                            <div className="text-3xl font-bold text-green-500 mb-1">
+                            <div className="text-3xl font-bold text-purple-500 mb-1">
                                 {data.summary.gsocTotal > 0 ? Math.round((data.summary.gsocMerged / data.summary.gsocTotal) * 100) : 0}%
                             </div>
                             <div className="text-neutral-400 text-sm">Merge Rate</div>
@@ -284,7 +284,7 @@ export function GsocStats() {
                             <div className="text-xs text-neutral-500 mt-1">Unique GSoC orgs contributed to</div>
                         </div>
                         <div className="bg-neutral-900/50 border border-neutral-700 rounded-xl p-4 text-center">
-                            <div className="text-3xl font-bold text-purple-500 mb-1">
+                            <div className="text-3xl font-bold text-green-500 mb-1">
                                 {data.members.length}
                             </div>
                             <div className="text-neutral-400 text-sm">Contributors</div>
@@ -343,12 +343,12 @@ export function GsocStats() {
 
                                 {/* Quick Stats */}
                                 <div className="grid grid-cols-3 gap-4 mb-6">
-                                    <div className="text-center p-3 bg-green-500/10 rounded-lg">
-                                        <div className="text-2xl font-bold text-green-500">{member.gsocMerged}</div>
+                                    <div className="text-center p-3 bg-purple-500/10 rounded-lg">
+                                        <div className="text-2xl font-bold text-purple-500">{member.gsocMerged}</div>
                                         <div className="text-xs text-neutral-400">Merged</div>
                                     </div>
-                                    <div className="text-center p-3 bg-purple-500/10 rounded-lg">
-                                        <div className="text-2xl font-bold text-purple-500">{member.gsocOpen}</div>
+                                    <div className="text-center p-3 bg-green-500/10 rounded-lg">
+                                        <div className="text-2xl font-bold text-green-500">{member.gsocOpen}</div>
                                         <div className="text-xs text-neutral-400">Open</div>
                                     </div>
                                     <div className="text-center p-3 bg-red-500/10 rounded-lg">
@@ -382,8 +382,8 @@ export function GsocStats() {
                                                     {org.org}
                                                 </a>
                                                 <div className="flex items-center gap-4 text-sm">
-                                                    <span className="text-green-500">✓ {org.merged}</span>
-                                                    <span className="text-purple-500">○ {org.open}</span>
+                                                    <span className="text-purple-500">✓ {org.merged}</span>
+                                                    <span className="text-green-500">○ {org.open}</span>
                                                     <span className="text-red-500">✗ {org.closed}</span>
                                                     <span className="text-orange-500 font-bold">Total: {org.total}</span>
                                                 </div>
@@ -398,8 +398,8 @@ export function GsocStats() {
                                                         target="_blank"
                                                         className="flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors"
                                                     >
-                                                        {pr.state === 'merged' && <GitMerge className="w-4 h-4 text-green-500 flex-shrink-0" />}
-                                                        {pr.state === 'open' && <GitPullRequest className="w-4 h-4 text-purple-500 flex-shrink-0" />}
+                                                        {pr.state === 'merged' && <GitMerge className="w-4 h-4 text-purple-500 flex-shrink-0" />}
+                                                        {pr.state === 'open' && <GitPullRequest className="w-4 h-4 text-green-500 flex-shrink-0" />}
                                                         {pr.state === 'closed' && <XCircle className="w-4 h-4 text-red-500 flex-shrink-0" />}
                                                         <span className="truncate">{pr.title}</span>
                                                         <span className="text-neutral-600 flex-shrink-0">#{pr.number}</span>
@@ -449,11 +449,11 @@ export function GsocStats() {
                                 <div className="flex items-start justify-between gap-4">
                                     <div className="flex-1">
                                         <div className="flex items-center gap-2 mb-2">
-                                            {pr.state === 'merged' && <GitMerge className="w-5 h-5 text-green-500" />}
-                                            {pr.state === 'open' && <GitPullRequest className="w-5 h-5 text-purple-500" />}
+                                            {pr.state === 'merged' && <GitMerge className="w-5 h-5 text-purple-500" />}
+                                            {pr.state === 'open' && <GitPullRequest className="w-5 h-5 text-green-500" />}
                                             {pr.state === 'closed' && <XCircle className="w-5 h-5 text-red-500" />}
-                                            <span className={`text-xs px-2 py-1 rounded ${pr.state === 'merged' ? 'bg-green-500/20 text-green-400' :
-                                                pr.state === 'open' ? 'bg-purple-500/20 text-purple-400' :
+                                            <span className={`text-xs px-2 py-1 rounded ${pr.state === 'merged' ? 'bg-purple-500/20 text-purple-400' :
+                                                pr.state === 'open' ? 'bg-green-500/20 text-green-400' :
                                                     'bg-red-500/20 text-red-400'
                                                 }`}>
                                                 {pr.state.toUpperCase()}
