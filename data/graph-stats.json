@@ -1,0 +1,51 @@
+{
+  "monthlyData": [
+    {
+      "month": "Jan",
+      "count": 40
+    },
+    {
+      "month": "Feb",
+      "count": 26
+    },
+    {
+      "month": "Mar",
+      "count": 13
+    },
+    {
+      "month": "Apr",
+      "count": 13
+    },
+    {
+      "month": "May",
+      "count": 60
+    },
+    {
+      "month": "Jun",
+      "count": 33
+    }
+  ],
+  "orgData": [
+    {
+      "org": "openSUSE",
+      "count": 8
+    },
+    {
+      "org": "OpenFoodFacts",
+      "count": 20
+    },
+    {
+      "org": "JSONSchema",
+      "count": 4
+    },
+    {
+      "org": "Zulip",
+      "count": 8
+    },
+    {
+      "org": "MIT App",
+      "count": 2
+    }
+  ],
+  "totalMergedPRs": 258
+}

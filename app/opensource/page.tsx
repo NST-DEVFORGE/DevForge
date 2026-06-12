@@ -2,11 +2,78 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Trophy, Star, ExternalLink, GitMerge, Users, GitBranch, Globe2, Activity, Medal } from "lucide-react";
+import { Trophy, Star, ExternalLink, GitMerge, Users, GitBranch, Globe2, Activity, Medal, Award, Github } from "lucide-react";
 import prData from "../../pr-data-report.json";
 import gssocSnapshot from "../../data/gssoc-snapshot.json";
+import { useEffect, useState } from "react";
+
+interface Milestone {
+    name: string;
+    count: number;
+    emoji: string;
+}
+
+interface NextMilestone extends Milestone {
+    progress: number;
+}
+
+interface MemberStats {
+    name: string;
+    github: string;
+    role: string;
+    avatar: string;
+    prCount: number;
+    totalPRs: number;
+    milestones: Milestone[];
+    nextMilestone: NextMilestone | null;
+}
+
+interface GraphStats {
+    monthlyData: { month: string; count: number }[];
+    orgData: { org: string; count: number }[];
+    totalMergedPRs: number;
+}
 
 export default function OpenSourceImpact() {
+    const [prStatsMembers, setPrStatsMembers] = useState<MemberStats[]>([]);
+    const [loadingStats, setLoadingStats] = useState(true);
+    const [graphStats, setGraphStats] = useState<GraphStats | null>(null);
+    const [loadingGraphs, setLoadingGraphs] = useState(true);
+
+    useEffect(() => {
+        async function fetchStats() {
+            try {
+                const response = await fetch('/api/pr-stats');
+                if (response.ok) {
+                    const data = await response.json();
+                    setPrStatsMembers([...data.members].sort((a, b) => b.prCount - a.prCount));
+                }
+            } catch (error) {
+                console.error("Failed to fetch PR stats", error);
+            } finally {
+                setLoadingStats(false);
+            }
+        }
+
+        async function fetchGraphStats() {
+            try {
+                const response = await fetch('/api/graph-stats');
+                if (response.ok) {
+                    const data = await response.json();
+                    setGraphStats(data);
+                }
+            } catch (error) {
+                console.error("Failed to fetch graph stats", error);
+            } finally {
+                setLoadingGraphs(false);
+            }
+        }
+
+        fetchStats();
+        fetchGraphStats();
+    }, []);
+
+
     // Build top GSSoC achievers sorted by rank (from real snapshot)
     const topGSSoC = [...gssocSnapshot.members]
         .sort((a, b) => a.rank - b.rank)
@@ -19,12 +86,26 @@ export default function OpenSourceImpact() {
         allMembersMap.set(m.github?.toLowerCase() || m.name?.toLowerCase(), m);
     });
 
+    // Name mapping for GSSoC-only members (snapshot only has github handles)
+    const gssocNameMap: Record<string, string> = {
+        'zenowinged': 'Dhruv Mehta',
+        'mahaveerjain-18': 'Mahaveer Jain',
+        'layyzyyy': 'Lay Shah',
+        'adhikaryrachana00428-hash': 'Rachana Adhikary',
+        'shreyaagrawal29': 'Shreya Agrawal',
+        'ravisharma-09': 'Ravi Sharma',
+        '2102508725-hash': 'Navya Krushi',
+        'anushkag6393': 'Anushka Gupta',
+        'abhi-lab645': 'Abhinav',
+        'shivansh-ux-ys': 'Shivansh Goel',
+    };
+
     gssocSnapshot.members.forEach(m => {
         const anyM = m as any;
         const key = m.github?.toLowerCase();
         if (key && !allMembersMap.has(key)) {
             allMembersMap.set(key, {
-                name: anyM.name || m.github,
+                name: gssocNameMap[key] || anyM.name || m.github,
                 github: m.github,
                 avatar: `https://github.com/${m.github}.png`,
                 allPRs: { merged: anyM.merged_prs || anyM.prs || 0 }
@@ -35,23 +116,24 @@ export default function OpenSourceImpact() {
     const topContributors = Array.from(allMembersMap.values())
         .sort((a, b) => (b.allPRs?.merged || 0) - (a.allPRs?.merged || 0));
 
-    const totalMergedPRs = prData.members.reduce((sum, member) => sum + member.allPRs.merged, 0);
+    // Use live total from graph-stats API; fall back to pr-stats API total while loading
+    const liveTotalPRs = graphStats?.totalMergedPRs;
     const totalContributors = topContributors.length;
 
     const findMember = (nameQuery: string, fallback: any) => 
         prData.members.find(m => m.name?.toLowerCase().includes(nameQuery.toLowerCase())) || fallback;
 
-    const geetansh = findMember("Geetansh", { name: "Geetansh Goyal", allPRs: { merged: 47 }, avatar: "https://github.com/geetxnshgoyal.png", github: "geetxnshgoyal" });
     const nishtha = findMember("Nishtha", { name: "Nishtha Agarwal", allPRs: { merged: 69 }, avatar: "https://github.com/nishtha-agarwal-211.png", github: "nishtha-agarwal-211" });
     const dhiraj = findMember("Dhiraj", { name: "Dhiraj Rathod", allPRs: { merged: 28 }, avatar: "https://github.com/dhiraj-143r.png", github: "dhiraj-143r" });
+    const nithyaraj = findMember("Nithyaraj", { name: "Nithyaraj", allPRs: { merged: 10 }, avatar: "/nithyaraj.png", github: "nithyarajmudhaliyar" });
 
     const podiumData = [
         { 
-            name: geetansh.name, 
+            name: dhiraj.name, 
             place: 2, 
-            quality: 15, 
-            merged: geetansh.allPRs.merged, 
-            avatar: geetansh.avatar || `https://github.com/${geetansh.github}.png`, 
+            quality: 18, 
+            merged: dhiraj.allPRs.merged, 
+            avatar: dhiraj.avatar || `https://github.com/${dhiraj.github}.png`, 
             color: "text-neutral-300", 
             bg: "bg-neutral-800", 
             ring: "ring-neutral-400" 
@@ -67,38 +149,36 @@ export default function OpenSourceImpact() {
             ring: "ring-yellow-500" 
         },
         { 
-            name: dhiraj.name, 
+            name: nithyaraj.name, 
             place: 3, 
-            quality: 10, 
-            merged: dhiraj.allPRs.merged, 
-            avatar: dhiraj.avatar || `https://github.com/${dhiraj.github}.png`, 
+            quality: 8, 
+            merged: nithyaraj.allPRs.merged, 
+            avatar: "/nithyaraj.png", 
             color: "text-orange-600", 
             bg: "bg-orange-900/20", 
             ring: "ring-orange-600" 
         }
     ];
 
-    // Compute simple monthly PR activity graph data
-    const months = ['Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb'];
-    const monthCounts = [15, 30, 45, 60, 85, 120]; // Mock activity curve
-    const maxCount = Math.max(...monthCounts);
+    // Live graph data from /api/graph-stats — real GitHub merged PR counts
+    // Jan–Jun 2026 monthly activity fetched per member, aggregated across all accounts
+    const monthlyData = graphStats?.monthlyData ?? [
+        { month: 'Jan', count: 0 }, { month: 'Feb', count: 0 }, { month: 'Mar', count: 0 },
+        { month: 'Apr', count: 0 }, { month: 'May', count: 0 }, { month: 'Jun', count: 0 },
+    ];
+    const months = monthlyData.map(d => d.month);
+    const monthCounts = monthlyData.map(d => d.count);
+    const maxCount = Math.max(...monthCounts, 1);
 
-    // Compute Organizations Graph data
-    const orgCounts: Record<string, number> = {};
-    prData.members.forEach(m => {
-        const allPrs = [...(m.prs || []), ...(m.gsocPRList || [])];
-        allPrs.forEach(pr => {
-            if (!pr.repo) return;
-            const org = pr.repo.split('/')[0];
-            orgCounts[org] = (orgCounts[org] || 0) + 1;
-        });
-    });
-    
-    const topOrgs = Object.entries(orgCounts)
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 6)
-        .map(([org, count]) => ({ org: org.length > 10 ? org.substring(0, 8) + '..' : org, count }));
-    const maxOrgCount = topOrgs.length > 0 ? Math.max(...topOrgs.map(o => o.count)) : 1;
+    // Top 5 orgs — real merged PR counts fetched from GitHub for every member account
+    const topOrgs = graphStats?.orgData ?? [
+        { org: 'openSUSE',      count: 0 },
+        { org: 'OpenFoodFacts', count: 0 },
+        { org: 'JSONSchema',    count: 0 },
+        { org: 'Zulip',        count: 0 },
+        { org: 'MIT App',      count: 0 },
+    ];
+    const maxOrgCount = Math.max(...topOrgs.map(o => o.count), 1);
 
 
 
@@ -124,13 +204,13 @@ export default function OpenSourceImpact() {
                     </p>
                 </motion.div>
 
-                {/* Top Metrics - As explicitly requested */}
+                {/* Top Metrics */}
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
                     {[
-                        { title: "Total Contributors", value: totalContributors + "+", icon: <Users size={24} className="text-blue-500" /> },
-                        { title: "Total PRs", value: totalMergedPRs, icon: <GitBranch size={24} className="text-purple-500" /> },
+                        { title: "Total Contributors", value: `${totalContributors}+`, icon: <Users size={24} className="text-blue-500" /> },
+                        { title: "Total PRs", value: loadingGraphs ? '...' : `${liveTotalPRs ?? 188}`, icon: <GitBranch size={24} className="text-purple-500" /> },
                         { title: "Quality PRs", value: "60+", icon: <Activity className="text-green-500" size={24} /> },
-                        { title: "Open Source Orgs", value: "15+", icon: <Globe2 className="text-orange-500" size={24} /> }
+                        { title: "Open Source Orgs", value: "8+", icon: <Globe2 className="text-orange-500" size={24} /> }
                     ].map((metric, i) => (
                         <motion.div
                             key={i}
@@ -155,28 +235,54 @@ export default function OpenSourceImpact() {
                             <h3 className="text-2xl font-bold flex items-center gap-2">
                                 <Activity className="text-orange-500" /> Monthly Activity
                             </h3>
-                            <div className="text-sm text-neutral-400">Total Merged PRs</div>
+                            <div className="flex items-center gap-2">
+                                {loadingGraphs ? (
+                                    <span className="text-xs text-neutral-500 flex items-center gap-1.5">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-500 animate-pulse inline-block" /> Fetching...
+                                    </span>
+                                ) : (
+                                    <span className="text-xs text-green-500 flex items-center gap-1.5">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse inline-block" /> Live
+                                    </span>
+                                )}
+                                <div className="text-sm text-neutral-400">Merged PRs</div>
+                            </div>
                         </div>
-                        <div className="flex items-end justify-between h-48 gap-2">
-                            {monthCounts.map((count, i) => (
-                                <div key={i} className="flex flex-col items-center flex-1 h-full group">
-                                    <div className="w-full relative flex justify-center h-full items-end">
-                                        <motion.div 
-                                            initial={{ height: 0 }}
-                                            whileInView={{ height: `${(count / maxCount) * 100}%` }}
-                                            viewport={{ once: true }}
-                                            transition={{ duration: 1, delay: i * 0.1, type: "spring" }}
-                                            className="w-full max-w-[3rem] bg-gradient-to-t from-orange-600/20 to-orange-500/80 rounded-t-xl relative group-hover:from-orange-500/40 group-hover:to-orange-400 transition-colors cursor-pointer"
-                                        >
-                                            <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black text-white px-3 py-1 rounded-lg text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap border border-neutral-800 shadow-xl z-20">
-                                                {count} PRs
-                                            </div>
-                                        </motion.div>
+                        {loadingGraphs ? (
+                            <div className="flex items-end justify-between h-48 gap-2">
+                                {[40, 55, 35, 65, 50, 75].map((h, i) => (
+                                    <div key={i} className="flex flex-col items-center flex-1 h-full">
+                                        <div className="w-full flex justify-center h-full items-end">
+                                            <div
+                                                className="w-full max-w-[3rem] bg-neutral-800 rounded-t-xl animate-pulse"
+                                                style={{ height: `${h}%` }}
+                                            />
+                                        </div>
+                                        <div className="w-6 h-2 bg-neutral-800 rounded animate-pulse mt-4" />
                                     </div>
-                                    <span className="text-neutral-400 text-xs font-medium mt-4">{months[i]}</span>
-                                </div>
-                            ))}
-                        </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="flex items-end justify-between h-48 gap-2">
+                                {monthCounts.map((count, i) => (
+                                    <div key={i} className="flex flex-col items-center flex-1 h-full group">
+                                        <div className="w-full relative flex justify-center h-full items-end">
+                                            <motion.div
+                                                initial={{ height: 0 }}
+                                                animate={{ height: `${(count / maxCount) * 100}%` }}
+                                                transition={{ duration: 1, delay: i * 0.1, type: "spring" }}
+                                                className="w-full max-w-[3rem] bg-gradient-to-t from-orange-600/20 to-orange-500/80 rounded-t-xl relative group-hover:from-orange-500/40 group-hover:to-orange-400 transition-colors cursor-pointer"
+                                            >
+                                                <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black text-white px-3 py-1 rounded-lg text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap border border-neutral-800 shadow-xl z-20">
+                                                    {count} PRs
+                                                </div>
+                                            </motion.div>
+                                        </div>
+                                        <span className="text-neutral-400 text-xs font-medium mt-4">{months[i]}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
 
                     {/* Organizations Graph */}
@@ -185,30 +291,57 @@ export default function OpenSourceImpact() {
                             <h3 className="text-2xl font-bold flex items-center gap-2">
                                 <Globe2 className="text-blue-500" /> Top Organizations
                             </h3>
-                            <div className="text-sm text-neutral-400">PRs per Org</div>
+                            <div className="flex items-center gap-2">
+                                {loadingGraphs ? (
+                                    <span className="text-xs text-neutral-500 flex items-center gap-1.5">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-500 animate-pulse inline-block" /> Fetching...
+                                    </span>
+                                ) : (
+                                    <span className="text-xs text-green-500 flex items-center gap-1.5">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse inline-block" /> Live
+                                    </span>
+                                )}
+                                <div className="text-sm text-neutral-400">PRs per Org</div>
+                            </div>
                         </div>
-                        <div className="flex items-end justify-between h-48 gap-2">
-                            {topOrgs.map(({ org, count }, i) => (
-                                <div key={i} className="flex flex-col items-center flex-1 h-full group">
-                                    <div className="w-full relative flex justify-center h-full items-end">
-                                        <motion.div 
-                                            initial={{ height: 0 }}
-                                            whileInView={{ height: `${(count / maxOrgCount) * 100}%` }}
-                                            viewport={{ once: true }}
-                                            transition={{ duration: 1, delay: i * 0.1, type: "spring" }}
-                                            className="w-full max-w-[3rem] bg-gradient-to-t from-blue-600/20 to-blue-500/80 rounded-t-xl relative group-hover:from-blue-500/40 group-hover:to-blue-400 transition-colors cursor-pointer"
-                                        >
-                                            <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black text-white px-3 py-1 rounded-lg text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap border border-neutral-800 shadow-xl z-20">
-                                                {count} PRs
-                                            </div>
-                                        </motion.div>
+                        {loadingGraphs ? (
+                            <div className="flex items-end justify-between h-48 gap-2">
+                                {[80, 60, 45, 30, 20].map((h, i) => (
+                                    <div key={i} className="flex flex-col items-center flex-1 h-full">
+                                        <div className="w-full flex justify-center h-full items-end">
+                                            <div
+                                                className="w-full max-w-[3rem] bg-neutral-800 rounded-t-xl animate-pulse"
+                                                style={{ height: `${h}%` }}
+                                            />
+                                        </div>
+                                        <div className="w-10 h-2 bg-neutral-800 rounded animate-pulse mt-4" />
                                     </div>
-                                    <span className="text-neutral-400 text-xs font-medium mt-4 truncate w-full text-center" title={org}>{org}</span>
-                                </div>
-                            ))}
-                        </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="flex items-end justify-between h-48 gap-2">
+                                {topOrgs.map(({ org, count }, i) => (
+                                    <div key={i} className="flex flex-col items-center flex-1 h-full group">
+                                        <div className="w-full relative flex justify-center h-full items-end">
+                                            <motion.div
+                                                initial={{ height: 0 }}
+                                                animate={{ height: `${(count / maxOrgCount) * 100}%` }}
+                                                transition={{ duration: 1, delay: i * 0.1, type: "spring" }}
+                                                className="w-full max-w-[3rem] bg-gradient-to-t from-blue-600/20 to-blue-500/80 rounded-t-xl relative group-hover:from-blue-500/40 group-hover:to-blue-400 transition-colors cursor-pointer"
+                                            >
+                                                <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black text-white px-3 py-1 rounded-lg text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap border border-neutral-800 shadow-xl z-20">
+                                                    {count} PRs
+                                                </div>
+                                            </motion.div>
+                                        </div>
+                                        <span className="text-neutral-400 text-xs font-medium mt-4 truncate w-full text-center" title={org}>{org}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
+
 
                 {/* Podium */}
                 <div className="mb-24 mt-16">
@@ -257,41 +390,131 @@ export default function OpenSourceImpact() {
                     <h3 className="text-3xl font-bold text-white text-center mb-12">
                         Open Source <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-500">Hall of Fame</span>
                     </h3>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {topContributors.map((contributor, i) => (
-                            <motion.div
-                                key={contributor.github}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.05 }}
-                                whileHover={{ y: -5 }}
-                            >
-                                <a
-                                    href={`https://github.com/${contributor.github}`}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="block h-full bg-neutral-900/40 border border-neutral-800 p-6 rounded-3xl hover:border-orange-500/50 transition-all duration-300"
+                    
+                    {loadingStats ? (
+                        <div className="flex justify-center py-12">
+                            <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+                        </div>
+                    ) : (
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {prStatsMembers.map((member, index) => (
+                                <motion.div
+                                    key={member.github}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.1 }}
+                                    whileHover={{ y: -10 }}
+                                    className="group"
                                 >
-                                    <div className="w-20 h-20 mx-auto mb-4 rounded-full overflow-hidden border-2 border-neutral-800 group-hover:border-orange-500 transition-colors">
-                                        <img
-                                            src={contributor.avatar || `https://github.com/${contributor.github}.png`}
-                                            alt={contributor.name}
-                                            className="w-full h-full object-cover"
-                                        />
-                                    </div>
-                                    <div className="text-center">
-                                        <h4 className="text-lg font-bold text-white mb-1 truncate">{contributor.name}</h4>
-                                        <p className="text-neutral-500 text-xs mb-3">@{contributor.github}</p>
-                                        <div className="inline-flex items-center justify-center gap-1.5 bg-orange-500/10 border border-orange-500/20 text-orange-400 text-sm font-bold px-3 py-1.5 rounded-full">
-                                            <GitMerge size={13} />
-                                            {contributor.allPRs.merged} PRs
+                                    <div className="relative bg-neutral-900/50 backdrop-blur-md border border-neutral-800 rounded-2xl p-6 overflow-hidden hover:border-orange-500/50 transition-all duration-300 h-full">
+                                        <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                                        <div className="relative">
+                                            {/* Profile */}
+                                            <div className="flex items-center gap-4 mb-6">
+                                                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-orange-500/30">
+                                                    <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
+                                                </div>
+                                                <div className="flex-1">
+                                                    <h3 className="text-xl font-bold text-white">{member.name}</h3>
+                                                    <p className="text-sm text-orange-500">{member.role}</p>
+                                                </div>
+                                            </div>
+
+                                            {/* PR Count */}
+                                            <div className="space-y-3 mb-6">
+                                                <div className="text-center py-4 bg-gradient-to-br from-orange-500/10 to-purple-500/10 rounded-xl border border-orange-500/50">
+                                                    <div className="text-4xl font-bold text-orange-500 mb-1">{member.prCount}</div>
+                                                    <p className="text-neutral-400 text-sm">Quality PRs</p>
+                                                </div>
+                                                <div className="text-center py-3 bg-neutral-800/30 rounded-xl border border-neutral-700">
+                                                    <div className="text-2xl font-semibold text-blue-400 mb-1">{member.totalPRs}</div>
+                                                    <p className="text-neutral-500 text-xs">Total Merged</p>
+                                                </div>
+                                            </div>
+
+                                            {/* Milestones */}
+                                            <div className="mb-6">
+                                                <div className="flex items-center gap-2 mb-3">
+                                                    <Award className="w-4 h-4 text-orange-500" />
+                                                    <h4 className="text-sm font-semibold text-neutral-300">Achievements</h4>
+                                                </div>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {member.milestones.map((milestone) => (
+                                                        <div
+                                                            key={milestone.name}
+                                                            className={`${milestone.count === 15
+                                                                ? 'bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border-blue-500/50 ring-2 ring-blue-500/30'
+                                                                : milestone.count === 25
+                                                                    ? 'bg-gradient-to-r from-orange-500/20 to-purple-500/20 border-orange-500/50 ring-2 ring-orange-500/30'
+                                                                    : 'bg-neutral-800/50 border-orange-500/30'
+                                                                } border rounded-lg px-3 py-1 text-xs`}
+                                                        >
+                                                            <span className="mr-1">{milestone.emoji}</span>
+                                                            <span className={
+                                                                milestone.count === 15
+                                                                    ? 'text-blue-400 font-semibold'
+                                                                    : milestone.count === 25
+                                                                        ? 'text-orange-400 font-semibold'
+                                                                        : 'text-neutral-400'
+                                                            }>
+                                                                {milestone.name}
+                                                            </span>
+                                                        </div>
+                                                    ))}
+                                                    {member.github === 'geetxnshgoyal' && (
+                                                        <a
+                                                            href="https://summerofcode.withgoogle.com/programs/2026/projects/yJH1saNZ"
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="bg-gradient-to-r from-orange-500/20 to-orange-600/20 border border-orange-500/50 ring-2 ring-orange-500/30 rounded-lg px-3 py-1 text-xs inline-flex items-center gap-1.5 hover:from-orange-500/30 hover:to-orange-600/30 transition-all duration-200"
+                                                        >
+                                                            <span>☀️</span>
+                                                            <span className="text-orange-400 font-semibold">GSoC&apos;26</span>
+                                                            <ExternalLink className="w-3 h-3 text-orange-400" />
+                                                        </a>
+                                                    )}
+                                                </div>
+                                            </div>
+
+                                            {/* Next Milestone */}
+                                            {member.nextMilestone && (
+                                                <div className="mb-6">
+                                                    <div className="flex justify-between items-center mb-2">
+                                                        <span className="text-xs text-neutral-400">
+                                                            Next: {member.nextMilestone.emoji} {member.nextMilestone.name}
+                                                        </span>
+                                                        <span className="text-xs text-orange-500 font-semibold">
+                                                            {member.prCount} / {member.nextMilestone.count}
+                                                        </span>
+                                                    </div>
+                                                    <div className="w-full h-2 bg-neutral-800 rounded-full overflow-hidden">
+                                                        <div
+                                                            className="h-full bg-gradient-to-r from-orange-500 to-purple-500 transition-all duration-500"
+                                                            style={{ width: `${member.nextMilestone.progress}%` }}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {/* GitHub Link */}
+                                            <a
+                                                href={`https://github.com/${member.github}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex items-center justify-center gap-2 w-full py-2 bg-neutral-800/50 hover:bg-neutral-800 border border-neutral-700 hover:border-orange-500/50 rounded-lg transition-all duration-200 text-neutral-400 hover:text-orange-500"
+                                            >
+                                                <Github className="w-4 h-4" />
+                                                <span className="text-sm">View Profile</span>
+                                                <ExternalLink className="w-3 h-3" />
+                                            </a>
                                         </div>
                                     </div>
-                                </a>
-                            </motion.div>
-                        ))}
-                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    )}
                 </div>
 
             </div>

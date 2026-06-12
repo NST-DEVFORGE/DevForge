@@ -133,12 +133,11 @@ export default function HackathonsHallOfFame() {
                                         <Users2 size={18} className="text-orange-500" />
                                         Team {winner.teamName}
                                     </div>
-                                    <div className="flex flex-wrap gap-3">
+                                    <div className="flex flex-wrap gap-2">
                                         {winner.members.map(member => (
-                                            <a key={member.github} href={`https://github.com/${member.github}`} target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-black border border-neutral-800 px-3 py-1.5 rounded-full hover:border-orange-500/50 transition-colors">
-                                                <img src={`https://github.com/${member.github}.png`} alt={member.name} className="w-6 h-6 rounded-full" />
+                                            <div key={member.name} className="flex items-center bg-black border border-neutral-800 px-3.5 py-1.5 rounded-full">
                                                 <span className="text-sm font-medium text-neutral-300">{member.name}</span>
-                                            </a>
+                                            </div>
                                         ))}
                                     </div>
                                 </div>
@@ -152,6 +151,8 @@ export default function HackathonsHallOfFame() {
                         <p className="text-neutral-500 text-xl">No hackathon winners found for this year.</p>
                     </div>
                 )}
+
+
             </div>
         </div>
     );
