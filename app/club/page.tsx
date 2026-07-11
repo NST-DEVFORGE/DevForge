@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Users2, Github, Linkedin } from "lucide-react";
 import { clubLeadership } from "../../data/club-info";
+import { Join } from "@/components/join";
 
 export default function DeveloperClub() {
     return (
@@ -60,6 +61,8 @@ export default function DeveloperClub() {
                 </motion.section>
 
             </div>
+
+            <Join />
         </div>
     );
 }
