@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Github, Linkedin, Instagram } from "lucide-react";
 
 export function Footer() {
@@ -13,24 +14,24 @@ export function Footer() {
                             Dev<span className="text-orange-500">Forge</span>
                         </h3>
                         <p className="text-neutral-500 text-sm">
-                            © 2025 DevForge. Built by NST x SVYASA.
+                            © {new Date().getFullYear()} DevForge. Built by NST x SVYASA.
                         </p>
                     </div>
 
                     {/* Quick Links */}
                     <div className="flex items-center gap-6 text-sm">
-                        <a href="#about" className="text-neutral-400 hover:text-orange-500 transition-colors">
+                        <Link href="/club" className="text-neutral-400 hover:text-orange-500 transition-colors">
                             About
-                        </a>
-                        <a href="#events" className="text-neutral-400 hover:text-orange-500 transition-colors">
+                        </Link>
+                        <Link href="/events" className="text-neutral-400 hover:text-orange-500 transition-colors">
                             Events
-                        </a>
-                        <a href="/pr-stats" className="text-neutral-400 hover:text-orange-500 transition-colors">
+                        </Link>
+                        <Link href="/pr-stats" className="text-neutral-400 hover:text-orange-500 transition-colors">
                             PR Stats
-                        </a>
-                        <a href="#team" className="text-neutral-400 hover:text-orange-500 transition-colors">
+                        </Link>
+                        <Link href="/club" className="text-neutral-400 hover:text-orange-500 transition-colors">
                             Team
-                        </a>
+                        </Link>
                     </div>
 
                     {/* Social links */}

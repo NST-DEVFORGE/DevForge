@@ -1,7 +1,21 @@
 import type { Metadata } from "next";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 import { FloatingBackground } from "@/components/floating-background";
+
+const inter = Inter({
+    subsets: ["latin"],
+    variable: "--font-geist-sans",
+    display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+    subsets: ["latin"],
+    variable: "--font-geist-mono",
+    display: "swap",
+});
 
 export const metadata: Metadata = {
     title: {
@@ -74,8 +88,7 @@ export default function RootLayout({
         "description": "The premier developer community at Newton School of Technology.",
         "address": {
             "@type": "PostalAddress",
-            "addressLocality": "India",
-            "addressRegion": "Rishikesh" // Assuming location based on SVYASA
+            "addressCountry": "IN"
         }
     };
 
@@ -87,10 +100,11 @@ export default function RootLayout({
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
                 />
             </head>
-            <body className="antialiased bg-black text-white relative">
+            <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-black text-white relative`}>
                 <FloatingBackground />
                 <Navbar />
                 {children}
+                <Footer />
             </body>
         </html>
     );
