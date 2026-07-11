@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Trophy, TrendingUp, Users, Award, Github, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { DataState } from "@/components/ui/empty-state";
 
 interface Milestone {
     name: string;
@@ -67,29 +68,15 @@ export function PRStats() {
         return () => clearInterval(refreshInterval);
     }, []);
 
-    if (loading) {
+    if (loading || error || !stats) {
         return (
-            <div className="min-h-screen bg-gradient-to-b from-black via-neutral-950 to-black flex items-center justify-center">
-                <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                    <p className="text-neutral-400 text-lg">Loading PR statistics...</p>
-                </div>
-            </div>
-        );
-    }
-
-    if (error || !stats) {
-        return (
-            <div className="min-h-screen bg-gradient-to-b from-black via-neutral-950 to-black flex items-center justify-center">
-                <div className="text-center">
-                    <p className="text-red-500 text-xl mb-4">⚠️ {error || 'Failed to load stats'}</p>
-                    <button
-                        onClick={() => window.location.reload()}
-                        className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors"
-                    >
-                        Retry
-                    </button>
-                </div>
+            <div className="min-h-screen bg-gradient-to-b from-black via-neutral-950 to-black">
+                <DataState
+                    loading={loading}
+                    error={error ? `⚠️ ${error}` : !stats ? "⚠️ Failed to load stats" : null}
+                    loadingLabel="Loading PR statistics..."
+                    onRetry={() => window.location.reload()}
+                />
             </div>
         );
     }

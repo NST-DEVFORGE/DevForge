@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Github, ExternalLink, GitMerge, GitPullRequest, XCircle, Star, TrendingUp, PieChart as PieChartIcon, BarChart3 } from "lucide-react";
 import { useEffect, useState, useMemo } from "react";
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import { DataState } from "@/components/ui/empty-state";
 
 interface PR {
     title: string;
@@ -74,26 +75,15 @@ export function GsocStats() {
         fetchData();
     }, []);
 
-    if (loading) {
+    if (loading || error || !data) {
         return (
-            <div className="min-h-screen bg-gradient-to-b from-black via-neutral-950 to-black flex items-center justify-center">
-                <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                    <p className="text-neutral-400 text-lg">Loading GSoC data...</p>
-                </div>
-            </div>
-        );
-    }
-
-    if (error || !data) {
-        return (
-            <div className="min-h-screen bg-gradient-to-b from-black via-neutral-950 to-black flex items-center justify-center">
-                <div className="text-center">
-                    <p className="text-red-500 text-xl mb-4">⚠️ {error}</p>
-                    <button onClick={() => window.location.reload()} className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg">
-                        Retry
-                    </button>
-                </div>
+            <div className="min-h-screen bg-gradient-to-b from-black via-neutral-950 to-black">
+                <DataState
+                    loading={loading}
+                    error={error ? `⚠️ ${error}` : !data ? "⚠️ Failed to load GSoC data" : null}
+                    loadingLabel="Loading GSoC data..."
+                    onRetry={() => window.location.reload()}
+                />
             </div>
         );
     }

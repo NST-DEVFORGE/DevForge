@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Github, ExternalLink, Star, GitFork, Calendar, Filter, SortDesc } from "lucide-react";
 import { useEffect, useState } from "react";
+import { DataState } from "@/components/ui/empty-state";
 
 interface QualityPR {
     title: string;
@@ -53,29 +54,15 @@ export function QualityPRsList() {
         fetchPRs();
     }, []);
 
-    if (loading) {
+    if (loading || error || !data) {
         return (
-            <div className="min-h-screen bg-gradient-to-b from-black via-neutral-950 to-black flex items-center justify-center">
-                <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                    <p className="text-neutral-400 text-lg">Loading quality PRs...</p>
-                </div>
-            </div>
-        );
-    }
-
-    if (error || !data) {
-        return (
-            <div className="min-h-screen bg-gradient-to-b from-black via-neutral-950 to-black flex items-center justify-center">
-                <div className="text-center">
-                    <p className="text-red-500 text-xl mb-4">⚠️ {error || 'Failed to load PRs'}</p>
-                    <button
-                        onClick={() => window.location.reload()}
-                        className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors"
-                    >
-                        Retry
-                    </button>
-                </div>
+            <div className="min-h-screen bg-gradient-to-b from-black via-neutral-950 to-black">
+                <DataState
+                    loading={loading}
+                    error={error ? `⚠️ ${error}` : !data ? "⚠️ Failed to load PRs" : null}
+                    loadingLabel="Loading quality PRs..."
+                    onRetry={() => window.location.reload()}
+                />
             </div>
         );
     }
