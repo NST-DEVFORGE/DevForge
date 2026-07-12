@@ -10,7 +10,7 @@ export function DataState({ loading, error, loadingLabel = "Loading...", onRetry
         return (
             <div className="min-h-[40vh] flex items-center justify-center">
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                    <div className="w-16 h-16 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
                     <p className="text-neutral-400 text-lg">{loadingLabel}</p>
                 </div>
             </div>
@@ -25,7 +25,7 @@ export function DataState({ loading, error, loadingLabel = "Loading...", onRetry
                     {onRetry && (
                         <button
                             onClick={onRetry}
-                            className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors"
+                            className="px-6 py-3 bg-cyan-400 hover:bg-cyan-500 text-black rounded-lg transition-colors"
                         >
                             Retry
                         </button>

@@ -21,7 +21,7 @@ export const studentsData: StudentProfile[] = [
   {
     slug: "sahitya",
     name: "Sahitya Singh",
-    role: "Google Summer of Code (GSoC) '24",
+    role: "Google Summer of Code (GSoC)",
     organizations: ["Google", "GirlScript Foundation"],
     photo: "/sahitya-placeholder.jpg",
     githubUrl: "https://github.com/Sahitya0805",

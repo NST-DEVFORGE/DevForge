@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function GsocPage() {
     return (
-        <div className="bg-transparent text-white selection:bg-orange-500 selection:text-black">
+        <div className="bg-transparent text-white selection:bg-cyan-400 selection:text-black">
             <GsocStats />
         </div>
     );

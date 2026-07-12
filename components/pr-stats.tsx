@@ -95,7 +95,7 @@ export function PRStats() {
                     className="text-center mb-16"
                 >
                     <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">
-                        PR <span className="text-orange-500">Statistics</span>
+                        PR <span className="text-cyan-400">Statistics</span>
                     </h1>
                     <p className="text-xl text-neutral-400 max-w-2xl mx-auto">
                         Track our collective contributions and celebrate individual achievements
@@ -109,13 +109,13 @@ export function PRStats() {
                     transition={{ duration: 0.6, delay: 0.1 }}
                     className="mb-16"
                 >
-                    <div className="relative bg-gradient-to-br from-orange-500/10 to-purple-500/10 backdrop-blur-md border border-orange-500/30 rounded-3xl p-8 overflow-hidden">
+                    <div className="relative bg-gradient-to-br from-cyan-400/10 to-purple-500/10 backdrop-blur-md border border-cyan-400/30 rounded-3xl p-8 overflow-hidden">
                         {/* Animated background gradient */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-orange-500/5 via-purple-500/5 to-orange-500/5 animate-pulse"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/5 via-purple-500/5 to-cyan-400/5 animate-pulse"></div>
 
                         <div className="relative">
                             <div className="flex items-center justify-center gap-3 mb-6">
-                                <Trophy className="w-10 h-10 text-orange-500" />
+                                <Trophy className="w-10 h-10 text-cyan-400" />
                                 <h2 className="text-4xl font-bold text-white">Club PRs</h2>
                             </div>
 
@@ -131,15 +131,15 @@ export function PRStats() {
                                 </div>
 
                                 {/* Quality PRs */}
-                                <div className="text-center p-6 bg-gradient-to-br from-orange-500/10 to-purple-500/10 rounded-2xl border border-orange-500/50">
-                                    <div className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-purple-500 mb-2">
+                                <div className="text-center p-6 bg-gradient-to-br from-cyan-400/10 to-purple-500/10 rounded-2xl border border-cyan-400/50">
+                                    <div className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-2">
                                         {stats.totalPRs}
                                     </div>
                                     <p className="text-xl text-neutral-300 mb-1">Quality PRs</p>
-                                    <p className="text-sm text-orange-400 mb-3">≥100 ⭐ and ≥100 forks</p>
+                                    <p className="text-sm text-cyan-300 mb-3">≥100 ⭐ and ≥100 forks</p>
                                     <Link
                                         href="/quality-prs"
-                                        className="inline-flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors text-sm font-semibold"
+                                        className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-400 hover:bg-cyan-500 text-black rounded-lg transition-colors text-sm font-semibold"
                                     >
                                         <ExternalLink className="w-4 h-4" />
                                         View All Quality PRs
@@ -155,11 +155,11 @@ export function PRStats() {
                                         initial={{ opacity: 0, scale: 0.8 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         transition={{ delay: 0.2 + index * 0.1 }}
-                                        className="bg-neutral-900/50 border border-orange-500/50 rounded-xl px-6 py-3"
+                                        className="bg-neutral-900/50 border border-cyan-400/50 rounded-xl px-6 py-3"
                                     >
                                         <div className="text-3xl mb-1">{milestone.emoji}</div>
                                         <div className="text-sm text-neutral-400">{milestone.name}</div>
-                                        <div className="text-xs text-orange-500">{milestone.count} PRs</div>
+                                        <div className="text-xs text-cyan-400">{milestone.count} PRs</div>
                                     </motion.div>
                                 ))}
                             </div>
@@ -169,7 +169,7 @@ export function PRStats() {
                                 <div className="max-w-2xl mx-auto">
                                     <div className="flex justify-between items-center mb-2">
                                         <span className="text-neutral-400">Next: {stats.nextTeamMilestone.emoji} {stats.nextTeamMilestone.name}</span>
-                                        <span className="text-orange-500 font-semibold">
+                                        <span className="text-cyan-400 font-semibold">
                                             {stats.totalPRs} / {stats.nextTeamMilestone.count}
                                         </span>
                                     </div>
@@ -178,7 +178,7 @@ export function PRStats() {
                                             initial={{ width: 0 }}
                                             animate={{ width: `${stats.nextTeamMilestone.progress}%` }}
                                             transition={{ duration: 1, delay: 0.5 }}
-                                            className="h-full bg-gradient-to-r from-orange-500 to-purple-500"
+                                            className="h-full bg-gradient-to-r from-cyan-400 to-purple-500"
                                         />
                                     </div>
                                 </div>
@@ -195,7 +195,7 @@ export function PRStats() {
                     className="mb-16"
                 >
                     <div className="flex items-center justify-center gap-3 mb-8">
-                        <TrendingUp className="w-8 h-8 text-orange-500" />
+                        <TrendingUp className="w-8 h-8 text-cyan-400" />
                         <h2 className="text-3xl font-bold text-white">Leaderboard</h2>
                     </div>
 
@@ -205,8 +205,8 @@ export function PRStats() {
                             const podiumOrder = [sortedMembers[1], sortedMembers[0], sortedMembers[2]];
                             const podiumColors = [
                                 'from-gray-400/20 to-gray-500/20 border-gray-400/50',      // 2nd place
-                                'from-yellow-500/20 to-orange-500/20 border-yellow-500/50', // 1st place
-                                'from-orange-700/20 to-orange-800/20 border-orange-700/50'  // 3rd place
+                                'from-yellow-500/20 to-cyan-400/20 border-yellow-500/50', // 1st place
+                                'from-cyan-600/20 to-cyan-700/20 border-cyan-600/50'  // 3rd place
                             ];
                             const podiumEmojis = ['🥈', '🥇', '🥉'];
                             const podiumHeights = ['mt-8', 'mt-0', 'mt-12']; // 1st is tallest (no margin), 2nd medium, 3rd shortest
@@ -224,11 +224,11 @@ export function PRStats() {
                                     >
                                         <div className={`bg-gradient-to-br ${podiumColors[displayIndex]} backdrop-blur-md border rounded-2xl p-6 text-center`}>
                                             <div className="text-5xl mb-2">{podiumEmojis[displayIndex]}</div>
-                                            <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-4 border-orange-500/50">
+                                            <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-4 border-cyan-400/50">
                                                 <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
                                             </div>
                                             <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
-                                            <p className="text-orange-500 text-sm mb-3">{member.role}</p>
+                                            <p className="text-cyan-400 text-sm mb-3">{member.role}</p>
 
                                             {/* Quality PRs - Primary */}
                                             <div className="mb-2">
@@ -257,13 +257,13 @@ export function PRStats() {
                     className="mb-16"
                 >
                     <div className="flex items-center justify-center gap-3 mb-8">
-                        <Award className="w-8 h-8 text-orange-500" />
+                        <Award className="w-8 h-8 text-cyan-400" />
                         <h2 className="text-3xl font-bold text-white">Milestone Rewards</h2>
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
                         {/* Individual Rewards */}
-                        <div className="bg-gradient-to-br from-orange-500/10 to-purple-500/10 backdrop-blur-md border border-orange-500/30 rounded-2xl p-6">
+                        <div className="bg-gradient-to-br from-cyan-400/10 to-purple-500/10 backdrop-blur-md border border-cyan-400/30 rounded-2xl p-6">
                             <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                                 <span className="text-2xl">🎯</span> Individual Milestones
                             </h3>
@@ -279,12 +279,12 @@ export function PRStats() {
                                     </div>
                                     <span className="text-blue-400 font-bold">15 PRs</span>
                                 </div>
-                                <div className="flex items-center justify-between p-3 bg-gradient-to-r from-orange-500/20 to-purple-500/20 rounded-lg border border-orange-500/50 ring-2 ring-orange-500/30">
+                                <div className="flex items-center justify-between p-3 bg-gradient-to-r from-cyan-400/20 to-purple-500/20 rounded-lg border border-cyan-400/50 ring-2 ring-cyan-400/30">
                                     <div className="flex items-center gap-2">
                                         <span className="text-white font-semibold">👕 Active</span>
-                                        <span className="text-orange-400 text-sm">🎁 T-shirt!</span>
+                                        <span className="text-cyan-300 text-sm">🎁 T-shirt!</span>
                                     </div>
-                                    <span className="text-orange-400 font-bold">25 PRs</span>
+                                    <span className="text-cyan-300 font-bold">25 PRs</span>
                                 </div>
                                 <div className="flex items-center justify-between p-3 bg-gradient-to-r from-yellow-500/20 to-amber-500/20 rounded-lg border border-yellow-500/50 ring-2 ring-yellow-500/30">
                                     <div className="flex items-center gap-2">
@@ -300,7 +300,7 @@ export function PRStats() {
                                     </div>
                                     <span className="text-purple-400 font-bold">100 PRs</span>
                                 </div>
-                                <div className="flex items-center justify-between p-3 bg-gradient-to-r from-red-500/20 to-orange-500/20 rounded-lg border border-red-500/50 ring-2 ring-red-500/30">
+                                <div className="flex items-center justify-between p-3 bg-gradient-to-r from-red-500/20 to-cyan-400/20 rounded-lg border border-red-500/50 ring-2 ring-red-500/30">
                                     <div className="flex items-center gap-2">
                                         <span className="text-white font-semibold">🚀 Master</span>
                                         <span className="text-red-400 text-sm">🎁 Premium Prize!</span>
@@ -311,12 +311,12 @@ export function PRStats() {
                         </div>
 
                         {/* Club Rewards */}
-                        <div className="bg-gradient-to-br from-purple-500/10 to-orange-500/10 backdrop-blur-md border border-purple-500/30 rounded-2xl p-6">
+                        <div className="bg-gradient-to-br from-purple-500/10 to-cyan-400/10 backdrop-blur-md border border-purple-500/30 rounded-2xl p-6">
                             <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                                 <span className="text-2xl">🏆</span> Club Milestones
                             </h3>
                             <div className="space-y-3">
-                                <div className="flex items-center justify-between p-3 bg-gradient-to-r from-amber-700/20 to-orange-700/20 rounded-lg border border-amber-700/50">
+                                <div className="flex items-center justify-between p-3 bg-gradient-to-r from-amber-700/20 to-cyan-600/20 rounded-lg border border-amber-700/50">
                                     <div className="flex items-center gap-2">
                                         <span className="text-white font-semibold">🥉 Bronze</span>
                                         <span className="text-amber-400 text-sm">🍫 Chocolate Party!</span>
@@ -330,7 +330,7 @@ export function PRStats() {
                                     </div>
                                     <span className="text-purple-500 font-semibold">100 PRs</span>
                                 </div>
-                                <div className="flex items-center justify-between p-3 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-lg border border-yellow-500/50">
+                                <div className="flex items-center justify-between p-3 bg-gradient-to-r from-yellow-500/20 to-cyan-400/20 rounded-lg border border-yellow-500/50">
                                     <div className="flex items-center gap-2">
                                         <span className="text-white font-semibold">🥇 Gold</span>
                                         <span className="text-yellow-400 text-sm">🍕 Pizza Party!</span>
@@ -368,7 +368,7 @@ export function PRStats() {
                     transition={{ duration: 0.6, delay: 0.3 }}
                 >
                     <div className="flex items-center justify-center gap-3 mb-8">
-                        <Users className="w-8 h-8 text-orange-500" />
+                        <Users className="w-8 h-8 text-cyan-400" />
                         <h2 className="text-3xl font-bold text-white">Individual Stats</h2>
                     </div>
 
@@ -382,27 +382,27 @@ export function PRStats() {
                                 whileHover={{ y: -10 }}
                                 className="group"
                             >
-                                <div className="relative bg-neutral-900/50 backdrop-blur-md border border-neutral-800 rounded-2xl p-6 overflow-hidden hover:border-orange-500/50 transition-all duration-300 h-full">
+                                <div className="relative bg-neutral-900/50 backdrop-blur-md border border-neutral-800 rounded-2xl p-6 overflow-hidden hover:border-cyan-400/50 transition-all duration-300 h-full">
                                     {/* Gradient overlay */}
-                                    <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                                     <div className="relative">
                                         {/* Profile */}
                                         <div className="flex items-center gap-4 mb-6">
-                                            <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-orange-500/30">
+                                            <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-cyan-400/30">
                                                 <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
                                             </div>
                                             <div className="flex-1">
                                                 <h3 className="text-xl font-bold text-white">{member.name}</h3>
-                                                <p className="text-sm text-orange-500">{member.role}</p>
+                                                <p className="text-sm text-cyan-400">{member.role}</p>
                                             </div>
                                         </div>
 
                                         {/* PR Count */}
                                         <div className="space-y-3 mb-6">
                                             {/* Quality PRs - Primary */}
-                                            <div className="text-center py-4 bg-gradient-to-br from-orange-500/10 to-purple-500/10 rounded-xl border border-orange-500/50">
-                                                <div className="text-4xl font-bold text-orange-500 mb-1">{member.prCount}</div>
+                                            <div className="text-center py-4 bg-gradient-to-br from-cyan-400/10 to-purple-500/10 rounded-xl border border-cyan-400/50">
+                                                <div className="text-4xl font-bold text-cyan-400 mb-1">{member.prCount}</div>
                                                 <p className="text-neutral-400 text-sm">Quality PRs</p>
                                             </div>
                                             {/* Total PRs - Secondary */}
@@ -415,7 +415,7 @@ export function PRStats() {
                                         {/* Milestones */}
                                         <div className="mb-6">
                                             <div className="flex items-center gap-2 mb-3">
-                                                <Award className="w-4 h-4 text-orange-500" />
+                                                <Award className="w-4 h-4 text-cyan-400" />
                                                 <h4 className="text-sm font-semibold text-neutral-300">Achievements</h4>
                                             </div>
                                             <div className="flex flex-wrap gap-2">
@@ -425,8 +425,8 @@ export function PRStats() {
                                                         className={`${milestone.count === 15
                                                             ? 'bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border-blue-500/50 ring-2 ring-blue-500/30'
                                                             : milestone.count === 25
-                                                                ? 'bg-gradient-to-r from-orange-500/20 to-purple-500/20 border-orange-500/50 ring-2 ring-orange-500/30'
-                                                                : 'bg-neutral-800/50 border-orange-500/30'
+                                                                ? 'bg-gradient-to-r from-cyan-400/20 to-purple-500/20 border-cyan-400/50 ring-2 ring-cyan-400/30'
+                                                                : 'bg-neutral-800/50 border-cyan-400/30'
                                                             } border rounded-lg px-3 py-1 text-xs`}
                                                         title={
                                                             milestone.count === 15
@@ -441,13 +441,13 @@ export function PRStats() {
                                                             milestone.count === 15
                                                                 ? 'text-blue-400 font-semibold'
                                                                 : milestone.count === 25
-                                                                    ? 'text-orange-400 font-semibold'
+                                                                    ? 'text-cyan-300 font-semibold'
                                                                     : 'text-neutral-400'
                                                         }>
                                                             {milestone.name}
                                                         </span>
                                                         {milestone.count === 15 && <span className="ml-1 text-blue-400">🎁</span>}
-                                                        {milestone.count === 25 && <span className="ml-1 text-orange-400">🎁</span>}
+                                                        {milestone.count === 25 && <span className="ml-1 text-cyan-300">🎁</span>}
                                                     </div>
                                                 ))}
                                                 {member.github === 'geetxnshgoyal' && (
@@ -455,12 +455,12 @@ export function PRStats() {
                                                         href="https://summerofcode.withgoogle.com/programs/2026/projects/yJH1saNZ"
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                        className="bg-gradient-to-r from-orange-500/20 to-orange-600/20 border border-orange-500/50 ring-2 ring-orange-500/30 rounded-lg px-3 py-1 text-xs inline-flex items-center gap-1.5 hover:from-orange-500/30 hover:to-orange-600/30 transition-all duration-200"
+                                                        className="bg-gradient-to-r from-cyan-400/20 to-cyan-500/20 border border-cyan-400/50 ring-2 ring-cyan-400/30 rounded-lg px-3 py-1 text-xs inline-flex items-center gap-1.5 hover:from-cyan-400/30 hover:to-cyan-500/30 transition-all duration-200"
                                                         title="Google Summer of Code 2026"
                                                     >
                                                         <span>☀️</span>
-                                                        <span className="text-orange-400 font-semibold">GSoC&apos;26</span>
-                                                        <ExternalLink className="w-3 h-3 text-orange-400" />
+                                                        <span className="text-cyan-300 font-semibold">GSoC&apos;26</span>
+                                                        <ExternalLink className="w-3 h-3 text-cyan-300" />
                                                     </a>
                                                 )}
                                             </div>
@@ -473,13 +473,13 @@ export function PRStats() {
                                                     <span className="text-xs text-neutral-400">
                                                         Next: {member.nextMilestone.emoji} {member.nextMilestone.name}
                                                     </span>
-                                                    <span className="text-xs text-orange-500 font-semibold">
+                                                    <span className="text-xs text-cyan-400 font-semibold">
                                                         {member.prCount} / {member.nextMilestone.count}
                                                     </span>
                                                 </div>
                                                 <div className="w-full h-2 bg-neutral-800 rounded-full overflow-hidden">
                                                     <div
-                                                        className="h-full bg-gradient-to-r from-orange-500 to-purple-500 transition-all duration-500"
+                                                        className="h-full bg-gradient-to-r from-cyan-400 to-purple-500 transition-all duration-500"
                                                         style={{ width: `${member.nextMilestone.progress}%` }}
                                                     />
                                                 </div>
@@ -491,7 +491,7 @@ export function PRStats() {
                                             href={`https://github.com/${member.github}`}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="flex items-center justify-center gap-2 w-full py-2 bg-neutral-800/50 hover:bg-neutral-800 border border-neutral-700 hover:border-orange-500/50 rounded-lg transition-all duration-200 text-neutral-400 hover:text-orange-500"
+                                            className="flex items-center justify-center gap-2 w-full py-2 bg-neutral-800/50 hover:bg-neutral-800 border border-neutral-700 hover:border-cyan-400/50 rounded-lg transition-all duration-200 text-neutral-400 hover:text-cyan-400"
                                         >
                                             <Github className="w-4 h-4" />
                                             <span className="text-sm">View Profile</span>

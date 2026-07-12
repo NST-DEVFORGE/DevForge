@@ -47,7 +47,7 @@ export function BootAnimation({ onComplete }: { onComplete: () => void }) {
             ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            ctx.fillStyle = "#f97316";
+            ctx.fillStyle = "#22d3ee";
             ctx.font = fontSize + "px monospace";
 
             for (let i = 0; i < drops.length; i++) {
@@ -100,7 +100,7 @@ export function BootAnimation({ onComplete }: { onComplete: () => void }) {
 
             <button
                 onClick={onComplete}
-                className="absolute top-6 right-6 z-20 text-xs font-mono text-neutral-500 hover:text-orange-400 border border-neutral-800 hover:border-orange-500/40 rounded-full px-4 py-2 transition-colors"
+                className="absolute top-6 right-6 z-20 text-xs font-mono text-neutral-500 hover:text-cyan-300 border border-neutral-800 hover:border-cyan-400/40 rounded-full px-4 py-2 transition-colors"
             >
                 Skip →
             </button>
@@ -116,7 +116,7 @@ export function BootAnimation({ onComplete }: { onComplete: () => void }) {
                     repeat: Infinity,
                     repeatDelay: 2,
                 }}
-                className="absolute inset-0 bg-orange-500 mix-blend-screen"
+                className="absolute inset-0 bg-cyan-400 mix-blend-screen"
             />
 
             {/* Main content */}
@@ -129,7 +129,7 @@ export function BootAnimation({ onComplete }: { onComplete: () => void }) {
                     className="text-center mb-12"
                 >
                     <h1 className="text-6xl md:text-8xl font-black mb-4">
-                        <span className="text-orange-500">Dev</span>
+                        <span className="text-cyan-400">Dev</span>
                         <span className="text-white">Forge</span>
                     </h1>
                 </motion.div>
@@ -139,7 +139,7 @@ export function BootAnimation({ onComplete }: { onComplete: () => void }) {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.8 }}
-                    className="bg-black/60 backdrop-blur-sm border border-orange-500/30 rounded-lg p-6 font-mono text-sm md:text-base space-y-2"
+                    className="bg-black/60 backdrop-blur-sm border border-cyan-400/30 rounded-lg p-6 font-mono text-sm md:text-base space-y-2"
                 >
                     {displayText.map((text, i) => (
                         <motion.div
@@ -150,7 +150,7 @@ export function BootAnimation({ onComplete }: { onComplete: () => void }) {
                             className={`${text.includes("✓")
                                 ? "text-green-400 font-bold"
                                 : text.includes("$")
-                                    ? "text-orange-400"
+                                    ? "text-cyan-300"
                                     : "text-neutral-400"
                                 }`}
                         >
@@ -161,7 +161,7 @@ export function BootAnimation({ onComplete }: { onComplete: () => void }) {
                         <motion.span
                             animate={{ opacity: [1, 0] }}
                             transition={{ duration: 0.8, repeat: Infinity }}
-                            className="text-orange-500 text-xl"
+                            className="text-cyan-400 text-xl"
                         >
                             ▊
                         </motion.span>
@@ -173,7 +173,7 @@ export function BootAnimation({ onComplete }: { onComplete: () => void }) {
                     initial={{ width: 0 }}
                     animate={{ width: "100%" }}
                     transition={{ duration: 3, ease: "easeOut" }}
-                    className="mt-6 h-1 bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500 rounded-full"
+                    className="mt-6 h-1 bg-gradient-to-r from-cyan-400 via-cyan-300 to-cyan-400 rounded-full"
                 />
             </div>
         </motion.div>

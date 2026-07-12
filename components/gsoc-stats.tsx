@@ -102,7 +102,7 @@ export function GsocStats() {
                     className="text-center mb-12"
                 >
                     <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">
-                        <span className="text-orange-500">GSoC</span> Ready
+                        <span className="text-cyan-400">GSoC</span> Ready
                     </h1>
                     <p className="text-xl text-neutral-400 max-w-2xl mx-auto">
                         PR bifurcation for Google Summer of Code eligible organizations
@@ -116,10 +116,10 @@ export function GsocStats() {
                     transition={{ delay: 0.1 }}
                     className="mb-12"
                 >
-                    <div className="bg-gradient-to-br from-orange-500/20 to-purple-500/20 border-2 border-orange-500 rounded-3xl p-8 shadow-[0_0_50px_rgba(249,115,22,0.3)]">
+                    <div className="bg-gradient-to-br from-cyan-400/20 to-purple-500/20 border-2 border-cyan-400 rounded-3xl p-8 shadow-[0_0_50px_rgba(34, 211, 238,0.3)]">
                         <div className="text-center mb-8">
                             <div className="flex items-center justify-center gap-3 mb-4">
-                                <Star className="w-10 h-10 text-orange-500" />
+                                <Star className="w-10 h-10 text-cyan-400" />
                                 <h2 className="text-3xl font-bold text-white">GSoC Organization PRs</h2>
                             </div>
                             <p className="text-neutral-400">Contributions to Google Summer of Code eligible organizations</p>
@@ -141,10 +141,10 @@ export function GsocStats() {
                                 <div className="text-5xl font-bold text-red-500 mb-1">{data.summary.gsocClosed}</div>
                                 <p className="text-neutral-400 text-lg">Closed</p>
                             </div>
-                            <div className="text-center p-6 bg-gradient-to-br from-orange-500/20 to-purple-500/20 rounded-2xl border border-orange-500/50">
-                                <Star className="w-10 h-10 text-orange-500 mx-auto mb-3" />
-                                <div className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-purple-500 mb-1">{data.summary.gsocTotal}</div>
-                                <p className="text-orange-400 text-lg font-semibold">Total GSoC</p>
+                            <div className="text-center p-6 bg-gradient-to-br from-cyan-400/20 to-purple-500/20 rounded-2xl border border-cyan-400/50">
+                                <Star className="w-10 h-10 text-cyan-400 mx-auto mb-3" />
+                                <div className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-1">{data.summary.gsocTotal}</div>
+                                <p className="text-cyan-300 text-lg font-semibold">Total GSoC</p>
                             </div>
                         </div>
                     </div>
@@ -158,7 +158,7 @@ export function GsocStats() {
                     className="mb-12"
                 >
                     <div className="flex items-center justify-center gap-3 mb-8">
-                        <TrendingUp className="w-8 h-8 text-orange-500" />
+                        <TrendingUp className="w-8 h-8 text-cyan-400" />
                         <h2 className="text-3xl font-bold text-white">Contribution Trends</h2>
                     </div>
 
@@ -166,7 +166,7 @@ export function GsocStats() {
                         {/* Organization Distribution Pie Chart */}
                         <div className="bg-neutral-900/50 border border-neutral-700 rounded-2xl p-4 md:p-6">
                             <div className="flex items-center gap-2 mb-4">
-                                <PieChartIcon className="w-5 h-5 text-orange-500" />
+                                <PieChartIcon className="w-5 h-5 text-cyan-400" />
                                 <h3 className="text-lg md:text-xl font-bold text-white">Organization Distribution</h3>
                             </div>
                             <div className="h-72 md:h-80">
@@ -193,7 +193,7 @@ export function GsocStats() {
                                             paddingAngle={2}
                                         >
                                             {[
-                                                '#f97316', '#a855f7', '#22c55e', '#3b82f6', '#ef4444', '#eab308'
+                                                '#22d3ee', '#a855f7', '#22c55e', '#3b82f6', '#ef4444', '#eab308'
                                             ].map((color, index) => (
                                                 <Cell key={`cell-${index}`} fill={color} />
                                             ))}
@@ -217,7 +217,7 @@ export function GsocStats() {
                         {/* Per-Member Contribution Bar Chart */}
                         <div className="bg-neutral-900/50 border border-neutral-700 rounded-2xl p-6">
                             <div className="flex items-center gap-2 mb-4">
-                                <BarChart3 className="w-5 h-5 text-orange-500" />
+                                <BarChart3 className="w-5 h-5 text-cyan-400" />
                                 <h3 className="text-xl font-bold text-white">GSoC PRs per Member</h3>
                             </div>
                             <div className="h-80">
@@ -263,7 +263,7 @@ export function GsocStats() {
                             <div className="text-xs text-neutral-500 mt-1">PRs successfully merged</div>
                         </div>
                         <div className="bg-neutral-900/50 border border-neutral-700 rounded-xl p-4 text-center">
-                            <div className="text-3xl font-bold text-orange-500 mb-1">
+                            <div className="text-3xl font-bold text-cyan-400 mb-1">
                                 {(() => {
                                     const orgSet = new Set<string>();
                                     data.members.forEach(m => m.orgBreakdown?.forEach(o => orgSet.add(o.org)));
@@ -301,7 +301,7 @@ export function GsocStats() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3 + i * 0.1 }}
-                                className="bg-gradient-to-br from-orange-500/10 to-purple-500/10 border border-orange-500/30 rounded-2xl p-6"
+                                className="bg-gradient-to-br from-cyan-400/10 to-purple-500/10 border border-cyan-400/30 rounded-2xl p-6"
                             >
                                 {/* Member Header */}
                                 <div className="flex items-center justify-between mb-6">
@@ -309,14 +309,14 @@ export function GsocStats() {
                                         <img
                                             src={`https://github.com/${member.github}.png`}
                                             alt={member.name}
-                                            className="w-16 h-16 rounded-full border-2 border-orange-500"
+                                            className="w-16 h-16 rounded-full border-2 border-cyan-400"
                                         />
                                         <div>
                                             <h3 className="text-2xl font-bold text-white">{member.name}</h3>
                                             <a
                                                 href={`https://github.com/${member.github}`}
                                                 target="_blank"
-                                                className="text-orange-400 hover:text-orange-300 flex items-center gap-1"
+                                                className="text-cyan-300 hover:text-cyan-200 flex items-center gap-1"
                                             >
                                                 <Github className="w-4 h-4" />
                                                 @{member.github}
@@ -324,7 +324,7 @@ export function GsocStats() {
                                         </div>
                                     </div>
                                     <div className="text-right">
-                                        <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-purple-500">
+                                        <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
                                             {member.gsocMerged + member.gsocOpen + member.gsocClosed}
                                         </div>
                                         <div className="text-neutral-400 text-sm">GSoC PRs</div>
@@ -350,7 +350,7 @@ export function GsocStats() {
                                 {/* Organization Breakdown */}
                                 <div className="space-y-3">
                                     <h4 className="text-lg font-semibold text-white flex items-center gap-2">
-                                        <Star className="w-5 h-5 text-orange-500" />
+                                        <Star className="w-5 h-5 text-cyan-400" />
                                         Organizations Contributed To
                                     </h4>
                                     {member.orgBreakdown && member.orgBreakdown.map((org) => (
@@ -362,7 +362,7 @@ export function GsocStats() {
                                                 <a
                                                     href={`https://github.com/${org.org}`}
                                                     target="_blank"
-                                                    className="text-xl font-semibold text-white hover:text-orange-500 flex items-center gap-2"
+                                                    className="text-xl font-semibold text-white hover:text-cyan-400 flex items-center gap-2"
                                                 >
                                                     <img
                                                         src={`https://github.com/${org.org}.png`}
@@ -375,7 +375,7 @@ export function GsocStats() {
                                                     <span className="text-green-500">✓ {org.merged}</span>
                                                     <span className="text-yellow-500">○ {org.open}</span>
                                                     <span className="text-red-500">✗ {org.closed}</span>
-                                                    <span className="text-orange-500 font-bold">Total: {org.total}</span>
+                                                    <span className="text-cyan-400 font-bold">Total: {org.total}</span>
                                                 </div>
                                             </div>
 
@@ -434,7 +434,7 @@ export function GsocStats() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.4 + i * 0.03 }}
-                                className="block bg-neutral-900/50 border border-neutral-800 hover:border-orange-500/50 rounded-xl p-4 transition-all"
+                                className="block bg-neutral-900/50 border border-neutral-800 hover:border-cyan-400/50 rounded-xl p-4 transition-all"
                             >
                                 <div className="flex items-start justify-between gap-4">
                                     <div className="flex-1">

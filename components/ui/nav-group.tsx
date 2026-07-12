@@ -33,7 +33,7 @@ export function NavGroup({ label, items }: NavGroupProps) {
         <div className="relative" onMouseEnter={openNow} onMouseLeave={closeSoon}>
             <button
                 className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                    isActive ? "bg-orange-500/10 text-orange-500" : "text-neutral-400 hover:text-white hover:bg-white/5"
+                    isActive ? "bg-cyan-400/10 text-cyan-400" : "text-neutral-400 hover:text-white hover:bg-white/5"
                 }`}
                 aria-expanded={open}
                 aria-haspopup="true"
@@ -54,7 +54,7 @@ export function NavGroup({ label, items }: NavGroupProps) {
                             role="menuitem"
                             className={`block px-4 py-2.5 text-sm transition-colors ${
                                 pathname === item.href
-                                    ? "bg-orange-500/10 text-orange-500"
+                                    ? "bg-cyan-400/10 text-cyan-400"
                                     : "text-neutral-300 hover:text-white hover:bg-white/5"
                             }`}
                             onClick={() => setOpen(false)}

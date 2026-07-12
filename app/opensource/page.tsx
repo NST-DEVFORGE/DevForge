@@ -155,9 +155,9 @@ export default function OpenSourceImpact() {
             quality: 8, 
             merged: nithyaraj.allPRs.merged, 
             avatar: "/nithyaraj.png", 
-            color: "text-orange-600", 
-            bg: "bg-orange-900/20", 
-            ring: "ring-orange-600" 
+            color: "text-cyan-500", 
+            bg: "bg-cyan-800/20", 
+            ring: "ring-cyan-500" 
         }
     ];
 
@@ -194,11 +194,11 @@ export default function OpenSourceImpact() {
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center mb-16"
                 >
-                    <div className="inline-flex items-center justify-center p-4 bg-orange-500/10 text-orange-500 rounded-full mb-8 border border-orange-500/20">
+                    <div className="inline-flex items-center justify-center p-4 bg-cyan-400/10 text-cyan-400 rounded-full mb-8 border border-cyan-400/20">
                         <Globe2 size={32} />
                     </div>
                     <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
-                        Open Source <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-500">Impact</span>
+                        Open Source <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-violet-400">Impact</span>
                     </h1>
                     <p className="text-xl text-neutral-400 max-w-3xl mx-auto">
                         Real-time analytics and visualizations of our growing open source footprint across the globe.
@@ -211,7 +211,7 @@ export default function OpenSourceImpact() {
                         { title: "Total Contributors", value: `${totalContributors}+`, icon: <Users size={24} className="text-blue-500" /> },
                         { title: "Total PRs", value: loadingGraphs ? '...' : `${liveTotalPRs ?? 188}`, icon: <GitBranch size={24} className="text-purple-500" /> },
                         { title: "Quality PRs", value: "60+", icon: <Activity className="text-green-500" size={24} /> },
-                        { title: "Open Source Orgs", value: "8+", icon: <Globe2 className="text-orange-500" size={24} /> }
+                        { title: "Open Source Orgs", value: "8+", icon: <Globe2 className="text-cyan-400" size={24} /> }
                     ].map((metric, i) => (
                         <motion.div
                             key={i}
@@ -219,7 +219,7 @@ export default function OpenSourceImpact() {
                             animate={{ opacity: 1, scale: 1 }}
                             whileHover={{ scale: 1.05, y: -5 }}
                             transition={{ delay: i * 0.1 }}
-                            className="bg-neutral-900/50 border border-neutral-800 p-6 rounded-3xl text-center backdrop-blur-sm shadow-xl hover:border-orange-500/30 transition-colors cursor-default"
+                            className="bg-neutral-900/50 border border-neutral-800 p-6 rounded-3xl text-center backdrop-blur-sm shadow-xl hover:border-cyan-400/30 transition-colors cursor-default"
                         >
                             <div className="flex justify-center mb-4">{metric.icon}</div>
                             <div className="text-4xl font-bold text-white mb-2">{metric.value}</div>
@@ -231,10 +231,10 @@ export default function OpenSourceImpact() {
                 {/* Graphs Section */}
                 <div className="grid lg:grid-cols-2 gap-6 mb-24">
                     {/* Activity Graph Bar */}
-                    <div className="bg-neutral-900/40 border border-neutral-800 p-8 rounded-3xl backdrop-blur-md hover:border-orange-500/20 transition-colors">
+                    <div className="bg-neutral-900/40 border border-neutral-800 p-8 rounded-3xl backdrop-blur-md hover:border-cyan-400/20 transition-colors">
                         <div className="flex items-center justify-between mb-8">
                             <h3 className="text-2xl font-bold flex items-center gap-2">
-                                <Activity className="text-orange-500" /> Monthly Activity
+                                <Activity className="text-cyan-400" /> Monthly Activity
                             </h3>
                             <div className="flex items-center gap-2">
                                 {loadingGraphs ? (
@@ -272,7 +272,7 @@ export default function OpenSourceImpact() {
                                                 initial={{ height: 0 }}
                                                 animate={{ height: `${(count / maxCount) * 100}%` }}
                                                 transition={{ duration: 1, delay: i * 0.1, type: "spring" }}
-                                                className="w-full max-w-[3rem] bg-gradient-to-t from-orange-600/20 to-orange-500/80 rounded-t-xl relative group-hover:from-orange-500/40 group-hover:to-orange-400 transition-colors cursor-pointer"
+                                                className="w-full max-w-[3rem] bg-gradient-to-t from-cyan-500/20 to-cyan-400/80 rounded-t-xl relative group-hover:from-cyan-400/40 group-hover:to-cyan-300 transition-colors cursor-pointer"
                                             >
                                                 <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black text-white px-3 py-1 rounded-lg text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap border border-neutral-800 shadow-xl z-20">
                                                     {count} PRs
@@ -348,7 +348,7 @@ export default function OpenSourceImpact() {
                     <div className="bg-neutral-900/40 border border-neutral-800 p-8 rounded-3xl backdrop-blur-md">
                         <div className="mb-6">
                             <h3 className="text-2xl font-bold flex items-center gap-2 mb-2">
-                                <Globe2 className="text-orange-500" /> Who Contributed Where
+                                <Globe2 className="text-cyan-400" /> Who Contributed Where
                             </h3>
                             <p className="text-sm text-neutral-500">
                                 Real PR counts per member, per organization — from recorded GSoC and ESoC contributions. Not every contributor has org-level detail available yet.
@@ -380,7 +380,7 @@ export default function OpenSourceImpact() {
                                 </div>
                                 
                                 <h4 className="text-2xl font-bold text-white mb-1 text-center">{user.name}</h4>
-                                <div className="text-orange-500 font-medium mb-8">Member</div>
+                                <div className="text-cyan-400 font-medium mb-8">Member</div>
                                 
                                 <div className="w-full space-y-4">
                                     <div className="text-center">
@@ -403,12 +403,12 @@ export default function OpenSourceImpact() {
                 {/* Hall of Fame List */}
                 <div className="mb-16">
                     <h3 className="text-3xl font-bold text-white text-center mb-12">
-                        Open Source <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-500">Hall of Fame</span>
+                        Open Source <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-violet-400">Hall of Fame</span>
                     </h3>
                     
                     {loadingStats ? (
                         <div className="flex justify-center py-12">
-                            <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+                            <div className="w-12 h-12 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
                         </div>
                     ) : (
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -422,25 +422,25 @@ export default function OpenSourceImpact() {
                                     whileHover={{ y: -10 }}
                                     className="group"
                                 >
-                                    <div className="relative bg-neutral-900/50 backdrop-blur-md border border-neutral-800 rounded-2xl p-6 overflow-hidden hover:border-orange-500/50 transition-all duration-300 h-full">
-                                        <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                    <div className="relative bg-neutral-900/50 backdrop-blur-md border border-neutral-800 rounded-2xl p-6 overflow-hidden hover:border-cyan-400/50 transition-all duration-300 h-full">
+                                        <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                                         <div className="relative">
                                             {/* Profile */}
                                             <div className="flex items-center gap-4 mb-6">
-                                                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-orange-500/30">
+                                                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-cyan-400/30">
                                                     <img src={member.avatar} alt={member.name} className="w-full h-full object-cover" />
                                                 </div>
                                                 <div className="flex-1">
                                                     <h3 className="text-xl font-bold text-white">{member.name}</h3>
-                                                    <p className="text-sm text-orange-500">{member.role}</p>
+                                                    <p className="text-sm text-cyan-400">{member.role}</p>
                                                 </div>
                                             </div>
 
                                             {/* PR Count */}
                                             <div className="space-y-3 mb-6">
-                                                <div className="text-center py-4 bg-gradient-to-br from-orange-500/10 to-purple-500/10 rounded-xl border border-orange-500/50">
-                                                    <div className="text-4xl font-bold text-orange-500 mb-1">{member.prCount}</div>
+                                                <div className="text-center py-4 bg-gradient-to-br from-cyan-400/10 to-purple-500/10 rounded-xl border border-cyan-400/50">
+                                                    <div className="text-4xl font-bold text-cyan-400 mb-1">{member.prCount}</div>
                                                     <p className="text-neutral-400 text-sm">Quality PRs</p>
                                                 </div>
                                                 <div className="text-center py-3 bg-neutral-800/30 rounded-xl border border-neutral-700">
@@ -452,7 +452,7 @@ export default function OpenSourceImpact() {
                                             {/* Milestones */}
                                             <div className="mb-6">
                                                 <div className="flex items-center gap-2 mb-3">
-                                                    <Award className="w-4 h-4 text-orange-500" />
+                                                    <Award className="w-4 h-4 text-cyan-400" />
                                                     <h4 className="text-sm font-semibold text-neutral-300">Achievements</h4>
                                                 </div>
                                                 <div className="flex flex-wrap gap-2">
@@ -462,8 +462,8 @@ export default function OpenSourceImpact() {
                                                             className={`${milestone.count === 15
                                                                 ? 'bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border-blue-500/50 ring-2 ring-blue-500/30'
                                                                 : milestone.count === 25
-                                                                    ? 'bg-gradient-to-r from-orange-500/20 to-purple-500/20 border-orange-500/50 ring-2 ring-orange-500/30'
-                                                                    : 'bg-neutral-800/50 border-orange-500/30'
+                                                                    ? 'bg-gradient-to-r from-cyan-400/20 to-purple-500/20 border-cyan-400/50 ring-2 ring-cyan-400/30'
+                                                                    : 'bg-neutral-800/50 border-cyan-400/30'
                                                                 } border rounded-lg px-3 py-1 text-xs`}
                                                         >
                                                             <span className="mr-1">{milestone.emoji}</span>
@@ -471,7 +471,7 @@ export default function OpenSourceImpact() {
                                                                 milestone.count === 15
                                                                     ? 'text-blue-400 font-semibold'
                                                                     : milestone.count === 25
-                                                                        ? 'text-orange-400 font-semibold'
+                                                                        ? 'text-cyan-300 font-semibold'
                                                                         : 'text-neutral-400'
                                                             }>
                                                                 {milestone.name}
@@ -483,11 +483,11 @@ export default function OpenSourceImpact() {
                                                             href="https://summerofcode.withgoogle.com/programs/2026/projects/yJH1saNZ"
                                                             target="_blank"
                                                             rel="noopener noreferrer"
-                                                            className="bg-gradient-to-r from-orange-500/20 to-orange-600/20 border border-orange-500/50 ring-2 ring-orange-500/30 rounded-lg px-3 py-1 text-xs inline-flex items-center gap-1.5 hover:from-orange-500/30 hover:to-orange-600/30 transition-all duration-200"
+                                                            className="bg-gradient-to-r from-cyan-400/20 to-cyan-500/20 border border-cyan-400/50 ring-2 ring-cyan-400/30 rounded-lg px-3 py-1 text-xs inline-flex items-center gap-1.5 hover:from-cyan-400/30 hover:to-cyan-500/30 transition-all duration-200"
                                                         >
                                                             <span>☀️</span>
-                                                            <span className="text-orange-400 font-semibold">GSoC&apos;26</span>
-                                                            <ExternalLink className="w-3 h-3 text-orange-400" />
+                                                            <span className="text-cyan-300 font-semibold">GSoC&apos;26</span>
+                                                            <ExternalLink className="w-3 h-3 text-cyan-300" />
                                                         </a>
                                                     )}
                                                 </div>
@@ -500,13 +500,13 @@ export default function OpenSourceImpact() {
                                                         <span className="text-xs text-neutral-400">
                                                             Next: {member.nextMilestone.emoji} {member.nextMilestone.name}
                                                         </span>
-                                                        <span className="text-xs text-orange-500 font-semibold">
+                                                        <span className="text-xs text-cyan-400 font-semibold">
                                                             {member.prCount} / {member.nextMilestone.count}
                                                         </span>
                                                     </div>
                                                     <div className="w-full h-2 bg-neutral-800 rounded-full overflow-hidden">
                                                         <div
-                                                            className="h-full bg-gradient-to-r from-orange-500 to-purple-500 transition-all duration-500"
+                                                            className="h-full bg-gradient-to-r from-cyan-400 to-purple-500 transition-all duration-500"
                                                             style={{ width: `${member.nextMilestone.progress}%` }}
                                                         />
                                                     </div>
@@ -518,7 +518,7 @@ export default function OpenSourceImpact() {
                                                 href={`https://github.com/${member.github}`}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="flex items-center justify-center gap-2 w-full py-2 bg-neutral-800/50 hover:bg-neutral-800 border border-neutral-700 hover:border-orange-500/50 rounded-lg transition-all duration-200 text-neutral-400 hover:text-orange-500"
+                                                className="flex items-center justify-center gap-2 w-full py-2 bg-neutral-800/50 hover:bg-neutral-800 border border-neutral-700 hover:border-cyan-400/50 rounded-lg transition-all duration-200 text-neutral-400 hover:text-cyan-400"
                                             >
                                                 <Github className="w-4 h-4" />
                                                 <span className="text-sm">View Profile</span>

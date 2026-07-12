@@ -9,7 +9,7 @@ export function Hero() {
     return (
         <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black px-4">
             {/* Grid background */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#f973161a_1px,transparent_1px),linear-gradient(to_bottom,#f973161a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#22d3ee1a_1px,transparent_1px),linear-gradient(to_bottom,#22d3ee1a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
 
             <div className="relative z-10 max-w-5xl mx-auto text-center space-y-8">
                 {/* Thesis line */}
@@ -19,9 +19,9 @@ export function Hero() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.7, delay: 0.1 }}
                 >
-                    We don&apos;t just <span className="text-orange-500">learn</span> to code.
+                    We don&apos;t just <span className="text-cyan-400">learn</span> to code.
                     <br />
-                    We <span className="text-orange-500">ship</span>.
+                    We <span className="text-cyan-400">ship</span>.
                 </motion.h1>
 
                 {/* Live proof, not marketing copy */}
@@ -31,7 +31,7 @@ export function Hero() {
                     transition={{ duration: 0.6, delay: 0.9 }}
                     className="flex items-center justify-center gap-3 text-2xl md:text-3xl text-neutral-300"
                 >
-                    <GitMerge className="text-orange-500" size={28} />
+                    <GitMerge className="text-cyan-400" size={28} />
                     <CountUp value={TOTAL_MERGED_PRS} delay={1.1} className="text-white font-bold" />
                     <span>PRs merged by</span>
                     <CountUp value={TOTAL_CONTRIBUTORS} delay={1.3} className="text-white font-bold" />
@@ -49,14 +49,14 @@ export function Hero() {
                         href="https://forms.gle/M8rDS4wG1jyuGiSC6"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-red-600 text-white font-bold text-lg rounded-xl overflow-hidden transition-transform hover:scale-105"
+                        className="group relative px-8 py-4 bg-gradient-to-r from-cyan-400 to-violet-600 text-white font-bold text-lg rounded-xl overflow-hidden transition-transform hover:scale-105"
                     >
                         <span className="relative z-10">Apply to Join DevForge</span>
-                        <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-violet-700 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </a>
                     <a
                         href="/opensource"
-                        className="px-8 py-4 bg-orange-500/10 hover:bg-orange-500/20 text-orange-500 font-medium text-lg rounded-xl border border-orange-500/30 hover:border-orange-500/50 transition-colors backdrop-blur-sm"
+                        className="px-8 py-4 bg-cyan-400/10 hover:bg-cyan-400/20 text-cyan-400 font-medium text-lg rounded-xl border border-cyan-400/30 hover:border-cyan-400/50 transition-colors backdrop-blur-sm"
                     >
                         See the record
                     </a>

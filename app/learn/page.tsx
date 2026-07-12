@@ -53,16 +53,16 @@ export default function LearnPage() {
                 {/* GSoC Playbook banner */}
                 <Link
                     href="/learn/gsoc"
-                    className="flex items-center gap-4 bg-gradient-to-r from-orange-500/15 to-transparent border border-orange-500/30 hover:border-orange-500/60 rounded-2xl p-5 mb-12 transition-colors group"
+                    className="flex items-center gap-4 bg-gradient-to-r from-cyan-400/15 to-transparent border border-cyan-400/30 hover:border-cyan-400/60 rounded-2xl p-5 mb-12 transition-colors group"
                 >
-                    <div className="w-12 h-12 rounded-xl bg-orange-500/15 flex items-center justify-center flex-shrink-0">
-                        <Sun className="text-orange-500" size={24} />
+                    <div className="w-12 h-12 rounded-xl bg-cyan-400/15 flex items-center justify-center flex-shrink-0">
+                        <Sun className="text-cyan-400" size={24} />
                     </div>
                     <div className="flex-1">
-                        <div className="font-bold text-white group-hover:text-orange-400 transition-colors">The GSoC Playbook</div>
+                        <div className="font-bold text-white group-hover:text-cyan-300 transition-colors">The GSoC Playbook</div>
                         <div className="text-sm text-neutral-400">Timeline, tools, copy-paste prompts, and the 5-step formula — from students who got selected.</div>
                     </div>
-                    <ArrowUpRight className="text-neutral-500 group-hover:text-orange-500 transition-colors flex-shrink-0" size={20} />
+                    <ArrowUpRight className="text-neutral-500 group-hover:text-cyan-400 transition-colors flex-shrink-0" size={20} />
                 </Link>
 
                 {/* Track picker */}
@@ -119,7 +119,7 @@ export default function LearnPage() {
                                         return (
                                             <div
                                                 key={node.title}
-                                                className="flex items-center gap-3 p-4 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-300"
+                                                className="flex items-center gap-3 p-4 rounded-xl bg-cyan-400/10 border border-cyan-400/20 text-cyan-200"
                                             >
                                                 <Flag size={18} />
                                                 <span className="font-semibold">{node.title}</span>
@@ -134,10 +134,10 @@ export default function LearnPage() {
                                         >
                                             <button
                                                 onClick={() => toggle(nodeId)}
-                                                className="mt-0.5 text-neutral-600 hover:text-orange-500 transition-colors flex-shrink-0"
+                                                className="mt-0.5 text-neutral-600 hover:text-cyan-400 transition-colors flex-shrink-0"
                                                 aria-label={isDone ? "Mark incomplete" : "Mark complete"}
                                             >
-                                                {isDone ? <CheckCircle2 className="text-orange-500" size={20} /> : <Circle size={20} />}
+                                                {isDone ? <CheckCircle2 className="text-cyan-400" size={20} /> : <Circle size={20} />}
                                             </button>
                                             <div className="flex-1 min-w-0">
                                                 <div className="flex items-center gap-2 flex-wrap">
@@ -162,7 +162,7 @@ export default function LearnPage() {
                                                     href={node.url}
                                                     target={node.url.startsWith("http") ? "_blank" : undefined}
                                                     rel={node.url.startsWith("http") ? "noopener noreferrer" : undefined}
-                                                    className="flex-shrink-0 text-neutral-500 hover:text-orange-500 transition-colors"
+                                                    className="flex-shrink-0 text-neutral-500 hover:text-cyan-400 transition-colors"
                                                     aria-label={`Open resource: ${node.title}`}
                                                 >
                                                     <ExternalLink size={16} />
@@ -180,7 +180,7 @@ export default function LearnPage() {
                 <section className="mt-20">
                     <div className="mb-8">
                         <h2 className="text-2xl font-bold text-white flex items-center gap-2 mb-2">
-                            <GitPullRequest size={22} className="text-orange-500" /> Your first PRs — real, active repos
+                            <GitPullRequest size={22} className="text-cyan-400" /> Your first PRs — real, active repos
                         </h2>
                         <p className="text-neutral-400 max-w-2xl">
                             Not toy projects. Pick one, set it up locally (expect it to take a few days — that struggle is the lesson), then take a labeled beginner issue.
@@ -193,10 +193,10 @@ export default function LearnPage() {
                                 href={repo.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="block bg-neutral-900/50 border border-neutral-800 hover:border-orange-500/40 rounded-2xl p-5 transition-colors group"
+                                className="block bg-neutral-900/50 border border-neutral-800 hover:border-cyan-400/40 rounded-2xl p-5 transition-colors group"
                             >
                                 <div className="flex items-center justify-between gap-2 mb-2">
-                                    <span className="font-bold text-white group-hover:text-orange-400 transition-colors">{repo.name}</span>
+                                    <span className="font-bold text-white group-hover:text-cyan-300 transition-colors">{repo.name}</span>
                                     <span className="text-[10px] font-semibold uppercase tracking-wider text-neutral-500 bg-white/5 border border-white/10 rounded-full px-2 py-0.5 flex-shrink-0">
                                         {KIND_LABELS[repo.kind]}
                                     </span>

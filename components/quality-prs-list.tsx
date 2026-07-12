@@ -92,12 +92,12 @@ export function QualityPRsList() {
                     className="text-center mb-12"
                 >
                     <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">
-                        Quality <span className="text-orange-500">PRs</span>
+                        Quality <span className="text-cyan-400">PRs</span>
                     </h1>
                     <p className="text-xl text-neutral-400 max-w-2xl mx-auto mb-2">
                         Browse all merged PRs to repositories with ≥100 ⭐ and ≥100 forks
                     </p>
-                    <p className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-purple-500">
+                    <p className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
                         {data.totalCount} Quality PRs
                     </p>
                 </motion.div>
@@ -111,7 +111,7 @@ export function QualityPRsList() {
                 >
                     {/* Author Filter */}
                     <div className="flex items-center gap-2 bg-neutral-900/50 border border-neutral-700 rounded-lg px-4 py-2">
-                        <Filter className="w-4 h-4 text-orange-500" />
+                        <Filter className="w-4 h-4 text-cyan-400" />
                         <select
                             value={filterAuthor}
                             onChange={(e) => setFilterAuthor(e.target.value)}
@@ -128,7 +128,7 @@ export function QualityPRsList() {
 
                     {/* Sort */}
                     <div className="flex items-center gap-2 bg-neutral-900/50 border border-neutral-700 rounded-lg px-4 py-2">
-                        <SortDesc className="w-4 h-4 text-orange-500" />
+                        <SortDesc className="w-4 h-4 text-cyan-400" />
                         <select
                             value={sortBy}
                             onChange={(e) => setSortBy(e.target.value as SortOption)}
@@ -157,9 +157,9 @@ export function QualityPRsList() {
                             whileHover={{ y: -5 }}
                             className="group"
                         >
-                            <div className="relative bg-neutral-900/50 backdrop-blur-md border border-neutral-800 rounded-2xl p-6 overflow-hidden hover:border-orange-500/50 transition-all duration-300 h-full flex flex-col">
+                            <div className="relative bg-neutral-900/50 backdrop-blur-md border border-neutral-800 rounded-2xl p-6 overflow-hidden hover:border-cyan-400/50 transition-all duration-300 h-full flex flex-col">
                                 {/* Gradient overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                                 <div className="relative flex-1 flex flex-col">
                                     {/* Repo info */}
@@ -168,7 +168,7 @@ export function QualityPRsList() {
                                             href={pr.repoUrl}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="flex items-center gap-2 text-sm text-orange-500 hover:text-orange-400 transition-colors"
+                                            className="flex items-center gap-2 text-sm text-cyan-400 hover:text-cyan-300 transition-colors"
                                         >
                                             <Github className="w-4 h-4" />
                                             <span className="truncate max-w-[200px]">{pr.repoName}</span>
@@ -194,7 +194,7 @@ export function QualityPRsList() {
                                         rel="noopener noreferrer"
                                         className="block mb-4 flex-1"
                                     >
-                                        <h3 className="text-lg font-semibold text-white group-hover:text-orange-500 transition-colors line-clamp-2">
+                                        <h3 className="text-lg font-semibold text-white group-hover:text-cyan-400 transition-colors line-clamp-2">
                                             {pr.title}
                                         </h3>
                                         <span className="text-xs text-neutral-500">#{pr.number}</span>
@@ -206,7 +206,7 @@ export function QualityPRsList() {
                                             <img
                                                 src={pr.author.avatar}
                                                 alt={pr.author.name}
-                                                className="w-8 h-8 rounded-full border border-orange-500/30"
+                                                className="w-8 h-8 rounded-full border border-cyan-400/30"
                                             />
                                             <span className="text-sm text-neutral-400">{pr.author.name}</span>
                                         </div>
@@ -221,7 +221,7 @@ export function QualityPRsList() {
                                         href={pr.url}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="mt-4 flex items-center justify-center gap-2 w-full py-2 bg-neutral-800/50 hover:bg-orange-500/20 border border-neutral-700 hover:border-orange-500/50 rounded-lg transition-all duration-200 text-neutral-400 hover:text-orange-500"
+                                        className="mt-4 flex items-center justify-center gap-2 w-full py-2 bg-neutral-800/50 hover:bg-cyan-400/20 border border-neutral-700 hover:border-cyan-400/50 rounded-lg transition-all duration-200 text-neutral-400 hover:text-cyan-400"
                                     >
                                         <span className="text-sm">View PR</span>
                                         <ExternalLink className="w-3 h-3" />

@@ -43,11 +43,11 @@ export default function EventsCalendar() {
             animate={{ opacity: 1, y: 0 }}
             className="text-center mb-16"
         >
-            <div className="inline-flex items-center justify-center p-4 bg-orange-500/10 text-orange-500 rounded-full mb-6 border border-orange-500/20">
+            <div className="inline-flex items-center justify-center p-4 bg-cyan-400/10 text-cyan-400 rounded-full mb-6 border border-cyan-400/20">
                 <CalendarIcon size={32} />
             </div>
             <h1 className="text-5xl md:text-6xl font-bold mb-4 tracking-tight">
-                Event <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-500">Calendar</span>
+                Event <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-violet-400">Calendar</span>
             </h1>
             <p className="text-xl text-neutral-400">
                 Stay updated with workshops, hackathons, and community meetups.
@@ -91,14 +91,14 @@ export default function EventsCalendar() {
                   <div 
                     key={day} 
                     onClick={() => { if (dayEvents.length > 0) setSelectedEvent(dayEvents[0]); }}
-                    className={`aspect-square p-2 rounded-xl border flex flex-col transition-all cursor-pointer hover:border-orange-500/50 ${
-                      isToday ? 'bg-orange-500/10 border-orange-500/30' : 'bg-neutral-900/40 border-neutral-800'
+                    className={`aspect-square p-2 rounded-xl border flex flex-col transition-all cursor-pointer hover:border-cyan-400/50 ${
+                      isToday ? 'bg-cyan-400/10 border-cyan-400/30' : 'bg-neutral-900/40 border-neutral-800'
                     }`}
                   >
-                    <span className={`text-sm font-bold ${isToday ? 'text-orange-400' : 'text-neutral-300'}`}>{day}</span>
+                    <span className={`text-sm font-bold ${isToday ? 'text-cyan-300' : 'text-neutral-300'}`}>{day}</span>
                     <div className="mt-auto space-y-1">
                       {dayEvents.map(e => (
-                        <div key={e.id} className="w-full h-1.5 bg-orange-500 rounded-full" title={e.title} />
+                        <div key={e.id} className="w-full h-1.5 bg-cyan-400 rounded-full" title={e.title} />
                       ))}
                     </div>
                   </div>
@@ -116,10 +116,10 @@ export default function EventsCalendar() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-neutral-900/40 border border-neutral-800 p-6 rounded-2xl group hover:border-orange-500/30 transition-colors"
+                className="bg-neutral-900/40 border border-neutral-800 p-6 rounded-2xl group hover:border-cyan-400/30 transition-colors"
               >
-                <div className="text-sm font-bold text-orange-400 mb-2 uppercase tracking-wider">{event.category}</div>
-                <h4 className="text-xl font-bold mb-4 group-hover:text-orange-400 transition-colors">{event.title}</h4>
+                <div className="text-sm font-bold text-cyan-300 mb-2 uppercase tracking-wider">{event.category}</div>
+                <h4 className="text-xl font-bold mb-4 group-hover:text-cyan-300 transition-colors">{event.title}</h4>
                 
                 <div className="space-y-3 text-neutral-400 text-sm">
                   <div className="flex items-center gap-3">
@@ -159,7 +159,7 @@ export default function EventsCalendar() {
                 <X size={20} />
               </button>
 
-              <div className="text-sm font-bold text-orange-400 mb-2 uppercase tracking-wider">
+              <div className="text-sm font-bold text-cyan-300 mb-2 uppercase tracking-wider">
                 {selectedEvent.category}
               </div>
               <h3 className="text-3xl font-bold text-white mb-6">
@@ -169,7 +169,7 @@ export default function EventsCalendar() {
               <div className="space-y-4 mb-8">
                 <div className="flex items-center gap-3 text-neutral-300">
                   <div className="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center">
-                    <CalendarIcon size={18} className="text-orange-500" />
+                    <CalendarIcon size={18} className="text-cyan-400" />
                   </div>
                   <div>
                     <div className="font-semibold text-white">Date</div>
@@ -179,7 +179,7 @@ export default function EventsCalendar() {
 
                 <div className="flex items-center gap-3 text-neutral-300">
                   <div className="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center">
-                    <Clock size={18} className="text-orange-500" />
+                    <Clock size={18} className="text-cyan-400" />
                   </div>
                   <div>
                     <div className="font-semibold text-white">Time</div>
@@ -189,7 +189,7 @@ export default function EventsCalendar() {
 
                 <div className="flex items-center gap-3 text-neutral-300">
                   <div className="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center">
-                    <MapPin size={18} className="text-orange-500" />
+                    <MapPin size={18} className="text-cyan-400" />
                   </div>
                   <div>
                     <div className="font-semibold text-white">Location</div>
@@ -199,7 +199,7 @@ export default function EventsCalendar() {
 
                 <div className="flex items-center gap-3 text-neutral-300">
                   <div className="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center">
-                    <Users size={18} className="text-orange-500" />
+                    <Users size={18} className="text-cyan-400" />
                   </div>
                   <div>
                     <div className="font-semibold text-white">POC</div>
@@ -208,7 +208,7 @@ export default function EventsCalendar() {
                 </div>
               </div>
 
-              <div className="p-4 bg-orange-500/10 border border-orange-500/20 rounded-xl text-orange-200 text-sm leading-relaxed">
+              <div className="p-4 bg-cyan-400/10 border border-cyan-400/20 rounded-xl text-cyan-100 text-sm leading-relaxed">
                 {selectedEvent.description}
               </div>
               

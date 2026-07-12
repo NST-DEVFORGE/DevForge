@@ -12,7 +12,7 @@ export function StudentSpotlight() {
         <section className="py-24 relative">
             <div className="max-w-6xl mx-auto px-4">
                 <SectionHeading
-                    title={<>Student <span className="text-orange-500">Spotlight</span></>}
+                    title={<>Student <span className="text-cyan-400">Spotlight</span></>}
                     dek="In their own words — the path from first PR to real recognition."
                 />
 
@@ -21,7 +21,7 @@ export function StudentSpotlight() {
                         <Reveal key={student.slug} delay={i * 0.1}>
                             <Link
                                 href={`/students/${student.slug}`}
-                                className="block h-full bg-neutral-900/50 border border-neutral-800 hover:border-orange-500/40 rounded-2xl p-6 transition-colors group"
+                                className="block h-full bg-neutral-900/50 border border-neutral-800 hover:border-cyan-400/40 rounded-2xl p-6 transition-colors group"
                             >
                                 <div className="flex items-center gap-3 mb-4">
                                     <Avatar
@@ -32,13 +32,13 @@ export function StudentSpotlight() {
                                     />
                                     <div>
                                         <div className="font-bold text-white text-sm">{student.name}</div>
-                                        <div className="text-xs text-orange-400">{student.role}</div>
+                                        <div className="text-xs text-cyan-300">{student.role}</div>
                                     </div>
                                 </div>
                                 <p className="text-neutral-400 text-sm leading-relaxed line-clamp-4">
                                     &ldquo;{student.journey}&rdquo;
                                 </p>
-                                <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-orange-400 group-hover:gap-2 transition-all">
+                                <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-cyan-300 group-hover:gap-2 transition-all">
                                     Read the full story <ArrowUpRight size={14} />
                                 </div>
                             </Link>

@@ -15,7 +15,7 @@ export default function Home() {
 
     return (
         <HomeBoot>
-            <div className="bg-transparent text-white selection:bg-orange-500 selection:text-black">
+            <div className="bg-transparent text-white selection:bg-cyan-400 selection:text-black">
                 <Hero />
                 <ThisMonth />
                 <OpenSource />

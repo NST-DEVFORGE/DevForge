@@ -20,11 +20,11 @@ export default function ProjectsPage() {
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center mb-16"
                 >
-                    <div className="inline-flex items-center justify-center p-4 bg-orange-500/10 text-orange-500 rounded-full mb-6 border border-orange-500/20">
+                    <div className="inline-flex items-center justify-center p-4 bg-cyan-400/10 text-cyan-400 rounded-full mb-6 border border-cyan-400/20">
                         <Rocket size={32} />
                     </div>
                     <h1 className="text-5xl md:text-6xl font-bold mb-4 tracking-tight">
-                        Our <span className="text-orange-500">Projects</span>
+                        Our <span className="text-cyan-400">Projects</span>
                     </h1>
                     <p className="text-xl text-neutral-400 max-w-2xl mx-auto">
                         Tools the club has actually built and shipped.
@@ -37,7 +37,7 @@ export default function ProjectsPage() {
                         onClick={() => setFilter("all")}
                         className={`px-4 py-1.5 rounded-full text-sm font-medium border transition-colors ${
                             filter === "all"
-                                ? "bg-orange-500/10 text-orange-500 border-orange-500/40"
+                                ? "bg-cyan-400/10 text-cyan-400 border-cyan-400/40"
                                 : "text-neutral-400 border-neutral-800 hover:border-neutral-700"
                         }`}
                     >
@@ -49,7 +49,7 @@ export default function ProjectsPage() {
                             onClick={() => setFilter(tech)}
                             className={`px-4 py-1.5 rounded-full text-sm font-medium border transition-colors ${
                                 filter === tech
-                                    ? "bg-orange-500/10 text-orange-500 border-orange-500/40"
+                                    ? "bg-cyan-400/10 text-cyan-400 border-cyan-400/40"
                                     : "text-neutral-400 border-neutral-800 hover:border-neutral-700"
                             }`}
                         >
@@ -69,7 +69,7 @@ export default function ProjectsPage() {
                                     {project.tech.map((tech) => (
                                         <span
                                             key={tech}
-                                            className="px-2 py-1 bg-orange-500/10 text-orange-400 text-xs font-medium rounded border border-orange-500/20"
+                                            className="px-2 py-1 bg-cyan-400/10 text-cyan-300 text-xs font-medium rounded border border-cyan-400/20"
                                         >
                                             {tech}
                                         </span>
@@ -82,7 +82,7 @@ export default function ProjectsPage() {
                                             href={project.demoUrl}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="flex items-center gap-2 px-4 py-2 bg-orange-500/10 hover:bg-orange-500/20 text-orange-400 rounded-lg transition-colors text-sm font-medium"
+                                            className="flex items-center gap-2 px-4 py-2 bg-cyan-400/10 hover:bg-cyan-400/20 text-cyan-300 rounded-lg transition-colors text-sm font-medium"
                                         >
                                             <ExternalLink size={16} /> Demo
                                         </a>

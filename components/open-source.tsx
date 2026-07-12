@@ -21,7 +21,7 @@ export function OpenSource() {
     return (
         <section className="py-24 relative overflow-hidden" id="opensource">
             {/* Premium blurred blobs */}
-            <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/8 blur-[140px] rounded-full pointer-events-none" />
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-400/8 blur-[140px] rounded-full pointer-events-none" />
             <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-amber-500/8 blur-[140px] rounded-full pointer-events-none" />
 
             <div className="max-w-7xl mx-auto px-4 relative z-10">
@@ -33,12 +33,12 @@ export function OpenSource() {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <div className="inline-flex items-center gap-2 bg-orange-500/10 border border-orange-500/20 text-orange-400 px-4 py-1.5 rounded-full text-sm font-medium mb-6">
+                    <div className="inline-flex items-center gap-2 bg-cyan-400/10 border border-cyan-400/20 text-cyan-300 px-4 py-1.5 rounded-full text-sm font-medium mb-6">
                         <Zap size={14} /> Open Source Impact
                     </div>
                     <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">
                         Our Impact in{" "}
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-300">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-violet-300">
                             Open Source
                         </span>
                     </h2>
@@ -51,7 +51,7 @@ export function OpenSource() {
                 <div className="grid grid-cols-3 gap-4 mb-20 max-w-3xl mx-auto">
                     {[
                         { label: "Merged PRs", value: TOTAL_MERGED_PRS, icon: <GitMerge size={20} className="text-purple-400" /> },
-                        { label: "Total PRs", value: TOTAL_PRS, icon: <Code2 size={20} className="text-orange-400" /> },
+                        { label: "Total PRs", value: TOTAL_PRS, icon: <Code2 size={20} className="text-cyan-300" /> },
                         { label: "Contributors", value: TOTAL_CONTRIBUTORS, icon: <Users size={20} className="text-blue-400" /> },
                     ].map((stat, i) => (
                         <motion.div
@@ -60,7 +60,7 @@ export function OpenSource() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
-                            className="bg-neutral-900/50 border border-neutral-800 rounded-2xl p-5 text-center backdrop-blur-sm hover:border-orange-500/30 transition-colors"
+                            className="bg-neutral-900/50 border border-neutral-800 rounded-2xl p-5 text-center backdrop-blur-sm hover:border-cyan-400/30 transition-colors"
                         >
                             <div className="flex justify-center mb-2">{stat.icon}</div>
                             <div className="text-3xl font-black text-white mb-1">{stat.value}</div>
@@ -79,7 +79,7 @@ export function OpenSource() {
                     <div className="flex items-center justify-center gap-3 mb-10">
                         <Trophy className="text-yellow-500" size={28} />
                         <h3 className="text-3xl font-bold text-white">GSSoC Achievers</h3>
-                        <Link href="/gssoc" className="text-sm text-orange-400 hover:text-orange-300 transition-colors ml-2 flex items-center gap-1">
+                        <Link href="/gssoc" className="text-sm text-cyan-300 hover:text-cyan-200 transition-colors ml-2 flex items-center gap-1">
                             View all <ExternalLink size={12} />
                         </Link>
                     </div>
@@ -120,7 +120,7 @@ export function OpenSource() {
                 {/* Hall of Fame */}
                 <div>
                     <h3 className="text-3xl font-bold text-white text-center mb-12">
-                        Hall of <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-500">Fame</span>
+                        Hall of <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-violet-400">Fame</span>
                     </h3>
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {topContributors.map((contributor, i) => (
@@ -137,10 +137,10 @@ export function OpenSource() {
                                     href={`https://github.com/${contributor.github}`}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="block h-full bg-neutral-900/50 border border-neutral-800 p-6 rounded-3xl hover:border-orange-500/50 transition-all duration-300 relative overflow-hidden"
+                                    className="block h-full bg-neutral-900/50 border border-neutral-800 p-6 rounded-3xl hover:border-cyan-400/50 transition-all duration-300 relative overflow-hidden"
                                 >
-                                    <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                    <div className="w-24 h-24 mx-auto mb-5 rounded-full overflow-hidden border-2 border-neutral-800 group-hover:border-orange-500 transition-colors relative z-10">
+                                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                    <div className="w-24 h-24 mx-auto mb-5 rounded-full overflow-hidden border-2 border-neutral-800 group-hover:border-cyan-400 transition-colors relative z-10">
                                         <img
                                             src={`https://github.com/${contributor.github}.png`}
                                             alt={contributor.name}
@@ -150,7 +150,7 @@ export function OpenSource() {
                                     <div className="text-center relative z-10">
                                         <h4 className="text-lg font-bold text-white mb-1">{contributor.name}</h4>
                                         <p className="text-neutral-500 text-xs mb-3">@{contributor.github}</p>
-                                        <div className="flex items-center justify-center gap-1.5 bg-orange-500/10 border border-orange-500/20 text-orange-400 text-sm font-bold px-3 py-1.5 rounded-full">
+                                        <div className="flex items-center justify-center gap-1.5 bg-cyan-400/10 border border-cyan-400/20 text-cyan-300 text-sm font-bold px-3 py-1.5 rounded-full">
                                             <GitMerge size={13} />
                                             {contributor.allPRs.merged} merged PRs
                                         </div>
@@ -160,7 +160,7 @@ export function OpenSource() {
                         ))}
                     </div>
                     <div className="text-center mt-8">
-                        <Link href="/opensource" className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-black font-bold px-8 py-3 rounded-full transition-colors">
+                        <Link href="/opensource" className="inline-flex items-center gap-2 bg-cyan-400 hover:bg-cyan-500 text-black font-bold px-8 py-3 rounded-full transition-colors">
                             View Full Open Source Dashboard <ExternalLink size={16} />
                         </Link>
                     </div>

@@ -11,11 +11,11 @@ export default function RewardsPage() {
         <div className="min-h-screen bg-transparent text-white pt-24 pb-16">
             <div className="max-w-5xl mx-auto px-4">
                 <div className="text-center mb-16">
-                    <div className="inline-flex items-center justify-center p-4 bg-orange-500/10 text-orange-500 rounded-full mb-6 border border-orange-500/20">
+                    <div className="inline-flex items-center justify-center p-4 bg-cyan-400/10 text-cyan-400 rounded-full mb-6 border border-cyan-400/20">
                         <Award size={32} />
                     </div>
                     <h1 className="text-5xl md:text-6xl font-bold mb-4 tracking-tight">
-                        Rewards & <span className="text-orange-500">Leeway</span>
+                        Rewards & <span className="text-cyan-400">Leeway</span>
                     </h1>
                     <p className="text-xl text-neutral-400 max-w-2xl mx-auto">
                         Achieve visibly, earn more than prizes: flexibility, priority, and trust. Everything below is public and predictable — no favorites.
@@ -24,11 +24,11 @@ export default function RewardsPage() {
 
                 {/* Principles */}
                 <div className="bg-neutral-900/50 border border-neutral-800 rounded-2xl p-6 mb-14">
-                    <h2 className="font-bold text-white flex items-center gap-2 mb-4"><Scale size={18} className="text-orange-500" /> How it works</h2>
+                    <h2 className="font-bold text-white flex items-center gap-2 mb-4"><Scale size={18} className="text-cyan-400" /> How it works</h2>
                     <ul className="space-y-2">
                         {rewardPrinciples.map((p) => (
                             <li key={p} className="flex items-start gap-3 text-sm text-neutral-300">
-                                <span className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-1.5 flex-shrink-0" />
+                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-1.5 flex-shrink-0" />
                                 {p}
                             </li>
                         ))}
@@ -60,7 +60,7 @@ export default function RewardsPage() {
                                         {ladder.tiers.map((tier) => (
                                             <tr key={tier.achievement} className="border-b border-neutral-800/60 last:border-b-0 align-top">
                                                 <td className="px-4 py-3 font-semibold text-white whitespace-nowrap">{tier.achievement}</td>
-                                                <td className="px-4 py-3 text-orange-400 font-mono text-xs whitespace-nowrap">{tier.threshold}</td>
+                                                <td className="px-4 py-3 text-cyan-300 font-mono text-xs whitespace-nowrap">{tier.threshold}</td>
                                                 <td className="px-4 py-3 text-neutral-300">{tier.reward}</td>
                                                 <td className="px-4 py-3 text-neutral-400">
                                                     {tier.privilege ? (

@@ -29,7 +29,7 @@ export const YearChapter = forwardRef<HTMLElement, YearChapterProps>(({ chapter 
                                 <Clock size={12} /> Details TBD
                             </span>
                         ) : (
-                            <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-orange-400 bg-orange-500/10 border border-orange-500/20 rounded-full px-3 py-1">
+                            <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-cyan-300 bg-cyan-400/10 border border-cyan-400/20 rounded-full px-3 py-1">
                                 <CheckCircle2 size={12} /> Documented
                             </span>
                         )}
@@ -42,7 +42,7 @@ export const YearChapter = forwardRef<HTMLElement, YearChapterProps>(({ chapter 
                         <ul className="space-y-2.5 mb-6">
                             {chapter.highlights.map((h) => (
                                 <li key={h} className="flex items-start gap-3 text-neutral-300">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-2.5 flex-shrink-0" />
+                                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2.5 flex-shrink-0" />
                                     {h}
                                 </li>
                             ))}

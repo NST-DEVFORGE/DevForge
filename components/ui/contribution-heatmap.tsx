@@ -40,7 +40,7 @@ export function ContributionHeatmap() {
                                             title={count > 0 ? `${member} → ${org}: ${count} PR${count === 1 ? "" : "s"}` : `${member} → ${org}: no recorded PRs`}
                                             className="w-10 h-10 rounded-md flex items-center justify-center text-xs font-mono tabular-nums"
                                             style={{
-                                                background: count === 0 ? "rgba(255,255,255,0.03)" : `rgba(249,115,22,${0.15 + intensity * 0.65})`,
+                                                background: count === 0 ? "rgba(255,255,255,0.03)" : `rgba(34, 211, 238,${0.15 + intensity * 0.65})`,
                                                 color: intensity > 0.5 ? "#0a0407" : "#d4d4d4",
                                             }}
                                         >

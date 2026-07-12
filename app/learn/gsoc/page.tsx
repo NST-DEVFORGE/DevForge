@@ -115,16 +115,16 @@ export default function GsocPlaybookPage() {
     return (
         <div className="min-h-screen bg-transparent text-white pt-24 pb-16">
             <div className="max-w-3xl mx-auto px-4">
-                <Link href="/learn" className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-orange-400 transition-colors mb-8">
+                <Link href="/learn" className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-cyan-300 transition-colors mb-8">
                     <ArrowLeft size={14} /> Learning Tracks
                 </Link>
 
                 <div className="mb-12">
-                    <div className="inline-flex items-center justify-center p-4 bg-orange-500/10 text-orange-500 rounded-full mb-6 border border-orange-500/20">
+                    <div className="inline-flex items-center justify-center p-4 bg-cyan-400/10 text-cyan-400 rounded-full mb-6 border border-cyan-400/20">
                         <Sun size={32} />
                     </div>
                     <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
-                        The GSoC <span className="text-orange-500">Playbook</span>
+                        The GSoC <span className="text-cyan-400">Playbook</span>
                     </h1>
                     <p className="text-lg text-neutral-400">
                         Tools, prompts, and strategies that actually worked for students who got selected. No generic advice.
@@ -170,7 +170,7 @@ export default function GsocPlaybookPage() {
                             <tbody>
                                 {TIMELINE.map((row) => (
                                     <tr key={row.date} className="border-b border-neutral-800/60 last:border-b-0">
-                                        <td className="px-4 py-3 font-mono text-orange-400 whitespace-nowrap">{row.date}</td>
+                                        <td className="px-4 py-3 font-mono text-cyan-300 whitespace-nowrap">{row.date}</td>
                                         <td className="px-4 py-3 text-white font-medium">{row.event}</td>
                                         <td className="px-4 py-3 text-neutral-400">{row.move}</td>
                                     </tr>
@@ -182,11 +182,11 @@ export default function GsocPlaybookPage() {
 
                 {/* Toolkit */}
                 <section className="mb-12">
-                    <h2 className="text-2xl font-bold mb-4 flex items-center gap-2"><Wrench size={20} className="text-orange-500" /> The actual toolkit</h2>
+                    <h2 className="text-2xl font-bold mb-4 flex items-center gap-2"><Wrench size={20} className="text-cyan-400" /> The actual toolkit</h2>
                     <div className="space-y-4 text-neutral-300 text-sm leading-relaxed">
                         <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-5">
                             <h3 className="font-bold text-white mb-2">Code & development</h3>
-                            <p><b className="text-white">VS Code / Cursor</b> with GitLens, Prettier, ESLint, Live Share, and the GitHub Pull Requests extension. <b className="text-white">GitHub Copilot is free for students</b> (normally $10/month). <b className="text-white">GitHub CLI</b>: <code className="bg-white/5 px-1.5 py-0.5 rounded text-orange-300 font-mono text-xs">gh pr create --fill</code> and <code className="bg-white/5 px-1.5 py-0.5 rounded text-orange-300 font-mono text-xs">gh issue list --label &quot;good first issue&quot;</code>. GitKraken is free for open source.</p>
+                            <p><b className="text-white">VS Code / Cursor</b> with GitLens, Prettier, ESLint, Live Share, and the GitHub Pull Requests extension. <b className="text-white">GitHub Copilot is free for students</b> (normally $10/month). <b className="text-white">GitHub CLI</b>: <code className="bg-white/5 px-1.5 py-0.5 rounded text-cyan-200 font-mono text-xs">gh pr create --fill</code> and <code className="bg-white/5 px-1.5 py-0.5 rounded text-cyan-200 font-mono text-xs">gh issue list --label &quot;good first issue&quot;</code>. GitKraken is free for open source.</p>
                         </div>
                         <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-5">
                             <h3 className="font-bold text-white mb-2">Notes & proposal writing</h3>
@@ -201,12 +201,12 @@ export default function GsocPlaybookPage() {
 
                 {/* Prompts */}
                 <section className="mb-12">
-                    <h2 className="text-2xl font-bold mb-2 flex items-center gap-2"><MessageSquareCode size={20} className="text-orange-500" /> Power prompts</h2>
+                    <h2 className="text-2xl font-bold mb-2 flex items-center gap-2"><MessageSquareCode size={20} className="text-cyan-400" /> Power prompts</h2>
                     <p className="text-sm text-neutral-500 mb-4">Copy-paste ready. Find accepted proposals to feed prompt 1 at the archives linked in Resources below.</p>
                     <div className="space-y-3">
                         {PROMPTS.map((prompt) => (
                             <details key={prompt.title} className="bg-neutral-900/50 border border-neutral-800 rounded-xl overflow-hidden group">
-                                <summary className="px-5 py-4 cursor-pointer font-semibold text-white hover:text-orange-400 transition-colors list-none flex items-center justify-between">
+                                <summary className="px-5 py-4 cursor-pointer font-semibold text-white hover:text-cyan-300 transition-colors list-none flex items-center justify-between">
                                     {prompt.title}
                                     <span className="text-neutral-600 text-xs group-open:rotate-180 transition-transform">▼</span>
                                 </summary>
@@ -218,7 +218,7 @@ export default function GsocPlaybookPage() {
 
                 {/* 5-step formula */}
                 <section className="mb-12">
-                    <h2 className="text-2xl font-bold mb-4 flex items-center gap-2"><ListChecks size={20} className="text-orange-500" /> The 5-step formula</h2>
+                    <h2 className="text-2xl font-bold mb-4 flex items-center gap-2"><ListChecks size={20} className="text-cyan-400" /> The 5-step formula</h2>
                     <ol className="space-y-4">
                         {[
                             ["Choose your organization (Nov–Dec)", "Filter gsocorganizations.dev by YOUR tech stack. Pick 2-3 orgs max, check they participated in past years, and prefer orgs whose software you already use — genuine interest shows."],
@@ -228,7 +228,7 @@ export default function GsocPlaybookPage() {
                             ["The waiting game (Apr)", "Keep contributing, keep building relationships, prepare for the coding phase. Activity during the wait gets noticed."],
                         ].map(([title, body], i) => (
                             <li key={title} className="flex gap-4 bg-neutral-900/50 border border-neutral-800 rounded-xl p-5">
-                                <span className="text-2xl font-black font-mono text-orange-500 flex-shrink-0">{i + 1}</span>
+                                <span className="text-2xl font-black font-mono text-cyan-400 flex-shrink-0">{i + 1}</span>
                                 <div>
                                     <h3 className="font-bold text-white mb-1">{title}</h3>
                                     <p className="text-sm text-neutral-400 leading-relaxed">{body}</p>
@@ -236,8 +236,8 @@ export default function GsocPlaybookPage() {
                             </li>
                         ))}
                     </ol>
-                    <div className="mt-4 bg-orange-500/10 border border-orange-500/20 rounded-xl p-5 text-sm text-neutral-300">
-                        <b className="text-orange-400">Late start?</b> One selected student began just 2 months before the deadline: picked a less-crowded org (OWASP/Django), learned the stack fast, and kept constant mentor communication. Less competition beats more polish.
+                    <div className="mt-4 bg-cyan-400/10 border border-cyan-400/20 rounded-xl p-5 text-sm text-neutral-300">
+                        <b className="text-cyan-300">Late start?</b> One selected student began just 2 months before the deadline: picked a less-crowded org (OWASP/Django), learned the stack fast, and kept constant mentor communication. Less competition beats more polish.
                     </div>
                 </section>
 
@@ -256,7 +256,7 @@ export default function GsocPlaybookPage() {
 
                 {/* Resources */}
                 <section>
-                    <h2 className="text-2xl font-bold mb-4 flex items-center gap-2"><BookOpen size={20} className="text-orange-500" /> Essential resources</h2>
+                    <h2 className="text-2xl font-bold mb-4 flex items-center gap-2"><BookOpen size={20} className="text-cyan-400" /> Essential resources</h2>
                     <ul className="space-y-2 text-sm">
                         {[
                             ["SVYASA GSoC tracker (club spreadsheet)", "https://docs.google.com/spreadsheets/d/1TmjLl1CwRliVcsFDIwUlvKB5aw5UxMBI5FHwEneMWcU/edit?usp=sharing"],
@@ -268,7 +268,7 @@ export default function GsocPlaybookPage() {
                             ["Community: r/gsoc", "https://www.reddit.com/r/gsoc/"],
                         ].map(([label, url]) => (
                             <li key={url}>
-                                <a href={url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-neutral-300 hover:text-orange-400 transition-colors">
+                                <a href={url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-neutral-300 hover:text-cyan-300 transition-colors">
                                     <ExternalLink size={14} className="text-neutral-600 flex-shrink-0" /> {label}
                                 </a>
                             </li>

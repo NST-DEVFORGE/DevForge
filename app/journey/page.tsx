@@ -38,11 +38,11 @@ export default function JourneyPage() {
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center mb-16 max-w-2xl mx-auto"
                 >
-                    <div className="inline-flex items-center justify-center p-4 bg-orange-500/10 text-orange-500 rounded-full mb-6 border border-orange-500/20">
+                    <div className="inline-flex items-center justify-center p-4 bg-cyan-400/10 text-cyan-400 rounded-full mb-6 border border-cyan-400/20">
                         <Map size={32} />
                     </div>
                     <h1 className="text-5xl md:text-6xl font-bold mb-4 tracking-tight">
-                        The <span className="text-orange-500">Journey</span>
+                        The <span className="text-cyan-400">Journey</span>
                     </h1>
                     <p className="text-xl text-neutral-400">
                         Every year, in order. Documented years are backed by the data on this site — nothing here is a guess.
@@ -58,7 +58,7 @@ export default function JourneyPage() {
                                     key={c.year}
                                     href={`#year-${c.year}`}
                                     className={`text-sm font-mono font-bold transition-colors ${
-                                        activeYear === c.year ? "text-orange-500" : "text-neutral-700 hover:text-neutral-500"
+                                        activeYear === c.year ? "text-cyan-400" : "text-neutral-700 hover:text-neutral-500"
                                     }`}
                                 >
                                     {c.year}
@@ -75,7 +75,7 @@ export default function JourneyPage() {
                                 href={`#year-${c.year}`}
                                 className={`flex-shrink-0 text-sm font-mono font-bold px-3 py-1.5 rounded-full border transition-colors ${
                                     activeYear === c.year
-                                        ? "text-orange-500 border-orange-500/40 bg-orange-500/10"
+                                        ? "text-cyan-400 border-cyan-400/40 bg-cyan-400/10"
                                         : "text-neutral-500 border-neutral-800"
                                 }`}
                             >

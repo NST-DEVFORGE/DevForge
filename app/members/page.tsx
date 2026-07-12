@@ -28,11 +28,11 @@ export default function MembersPage() {
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center mb-12"
                 >
-                    <div className="inline-flex items-center justify-center p-4 bg-orange-500/10 text-orange-500 rounded-full mb-6 border border-orange-500/20">
+                    <div className="inline-flex items-center justify-center p-4 bg-cyan-400/10 text-cyan-400 rounded-full mb-6 border border-cyan-400/20">
                         <Users size={32} />
                     </div>
                     <h1 className="text-5xl md:text-6xl font-bold mb-4 tracking-tight">
-                        The <span className="text-orange-500">Batch</span>
+                        The <span className="text-cyan-400">Batch</span>
                     </h1>
                     <p className="text-xl text-neutral-400 max-w-2xl mx-auto">
                         The 2025 first batch — all {memberStats.total} of us. {memberStats.withGithub} on GitHub, {memberStats.withLinkedin} on LinkedIn.
@@ -41,7 +41,7 @@ export default function MembersPage() {
 
                 {/* Search */}
                 <div className="max-w-md mx-auto mb-10">
-                    <div className="flex items-center gap-2 bg-neutral-900/60 border border-neutral-800 focus-within:border-orange-500/50 rounded-xl px-4 py-3 transition-colors">
+                    <div className="flex items-center gap-2 bg-neutral-900/60 border border-neutral-800 focus-within:border-cyan-400/50 rounded-xl px-4 py-3 transition-colors">
                         <Search size={18} className="text-neutral-500 flex-shrink-0" />
                         <input
                             type="search"
@@ -61,7 +61,7 @@ export default function MembersPage() {
                     {filtered.map((member) => (
                         <div
                             key={member.usn}
-                            className="flex items-center gap-3 bg-neutral-900/50 border border-neutral-800 hover:border-orange-500/30 rounded-xl p-4 transition-colors"
+                            className="flex items-center gap-3 bg-neutral-900/50 border border-neutral-800 hover:border-cyan-400/30 rounded-xl p-4 transition-colors"
                         >
                             <Avatar
                                 github={member.github ?? undefined}
@@ -81,7 +81,7 @@ export default function MembersPage() {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         aria-label={`${member.name} on GitHub`}
-                                        className="w-8 h-8 rounded-lg bg-white/5 hover:bg-orange-500/20 flex items-center justify-center transition-colors text-neutral-400 hover:text-orange-400"
+                                        className="w-8 h-8 rounded-lg bg-white/5 hover:bg-cyan-400/20 flex items-center justify-center transition-colors text-neutral-400 hover:text-cyan-300"
                                     >
                                         <Github size={15} />
                                     </a>

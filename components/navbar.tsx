@@ -54,9 +54,9 @@ export function Navbar() {
                     <img
                         src="/logo.png"
                         alt="DevForge Logo"
-                        className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-200"
+                        className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-200 [filter:hue-rotate(160deg)_saturate(1.2)]"
                     />
-                    <span className="text-xl font-bold tracking-tight text-white">Dev<span className="text-orange-500">Forge</span></span>
+                    <span className="text-xl font-bold tracking-tight text-white">Dev<span className="text-cyan-400">Forge</span></span>
                 </Link>
 
                 {/* Desktop Nav */}
@@ -70,7 +70,7 @@ export function Navbar() {
                                 aria-current={isActive ? "page" : undefined}
                                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                                     isActive
-                                    ? 'bg-orange-500/10 text-orange-500'
+                                    ? 'bg-cyan-400/10 text-cyan-400'
                                     : 'text-neutral-400 hover:text-white hover:bg-white/5'
                                 }`}
                             >
@@ -89,7 +89,7 @@ export function Navbar() {
                                 aria-current={isActive ? "page" : undefined}
                                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                                     isActive
-                                    ? 'bg-orange-500/10 text-orange-500'
+                                    ? 'bg-cyan-400/10 text-cyan-400'
                                     : 'text-neutral-400 hover:text-white hover:bg-white/5'
                                 }`}
                             >
@@ -135,7 +135,7 @@ export function Navbar() {
                                     onClick={() => setMobileMenuOpen(false)}
                                     className={`text-lg font-medium px-4 py-3 rounded-xl ${
                                         pathname === link.href
-                                        ? 'bg-orange-500/10 text-orange-500'
+                                        ? 'bg-cyan-400/10 text-cyan-400'
                                         : 'text-neutral-400'
                                     }`}
                                 >
@@ -151,7 +151,7 @@ export function Navbar() {
                                     onClick={() => setMobileMenuOpen(false)}
                                     className={`text-lg font-medium px-4 py-3 rounded-xl ${
                                         pathname === link.href
-                                        ? 'bg-orange-500/10 text-orange-500'
+                                        ? 'bg-cyan-400/10 text-cyan-400'
                                         : 'text-neutral-400'
                                     }`}
                                 >
@@ -167,7 +167,7 @@ export function Navbar() {
                                     onClick={() => setMobileMenuOpen(false)}
                                     className={`text-lg font-medium px-4 py-3 rounded-xl ${
                                         pathname === link.href
-                                        ? 'bg-orange-500/10 text-orange-500'
+                                        ? 'bg-cyan-400/10 text-cyan-400'
                                         : 'text-neutral-400'
                                     }`}
                                 >
@@ -182,7 +182,7 @@ export function Navbar() {
                                     onClick={() => setMobileMenuOpen(false)}
                                     className={`text-lg font-medium px-4 py-3 rounded-xl ${
                                         pathname === link.href
-                                        ? 'bg-orange-500/10 text-orange-500'
+                                        ? 'bg-cyan-400/10 text-cyan-400'
                                         : 'text-neutral-400'
                                     }`}
                                 >

@@ -30,7 +30,7 @@ interface BadgeProps {
 }
 
 const VARIANT_STYLES = {
-    ember: "bg-orange-500/10 text-orange-400 border-orange-500/20",
+    ember: "bg-cyan-400/10 text-cyan-300 border-cyan-400/20",
     steel: "bg-sky-500/10 text-sky-300 border-sky-500/20",
     neutral: "bg-white/5 text-neutral-300 border-white/10",
 };

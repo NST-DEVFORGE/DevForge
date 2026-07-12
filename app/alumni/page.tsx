@@ -13,11 +13,11 @@ export default function AlumniPage() {
         <div className="min-h-screen bg-transparent text-white pt-24 pb-16">
             <div className="max-w-4xl mx-auto px-4">
                 <div className="text-center mb-16">
-                    <div className="inline-flex items-center justify-center p-4 bg-orange-500/10 text-orange-500 rounded-full mb-6 border border-orange-500/20">
+                    <div className="inline-flex items-center justify-center p-4 bg-cyan-400/10 text-cyan-400 rounded-full mb-6 border border-cyan-400/20">
                         <GraduationCap size={32} />
                     </div>
                     <h1 className="text-5xl md:text-6xl font-bold mb-4 tracking-tight">
-                        <span className="text-orange-500">Alumni</span>
+                        <span className="text-cyan-400">Alumni</span>
                     </h1>
                     <p className="text-xl text-neutral-400 max-w-2xl mx-auto">
                         Where former members ended up.
@@ -36,7 +36,7 @@ export default function AlumniPage() {
                         </p>
                         <a
                             href="mailto:devclub@nst.edu?subject=Alumni%20entry"
-                            className="inline-flex items-center gap-2 px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-xl transition-colors"
+                            className="inline-flex items-center gap-2 px-6 py-3 bg-cyan-400 hover:bg-cyan-500 text-black font-semibold rounded-xl transition-colors"
                         >
                             <Mail size={18} /> Add yourself
                         </a>
@@ -57,7 +57,7 @@ export default function AlumniPage() {
                                 <div key={alum.name} className="bg-neutral-900/50 border border-neutral-800 rounded-2xl p-6 text-center">
                                     <img src={alum.photo} alt={alum.name} className="w-20 h-20 rounded-full object-cover mx-auto mb-4 border border-neutral-700" />
                                     <h3 className="font-bold text-white">{alum.name}</h3>
-                                    <p className="text-sm text-orange-400">{alum.currentRole} · {alum.currentCompany}</p>
+                                    <p className="text-sm text-cyan-300">{alum.currentRole} · {alum.currentCompany}</p>
                                     <p className="text-xs text-neutral-500 mt-1">Class of {alum.gradYear}</p>
                                 </div>
                             ))}

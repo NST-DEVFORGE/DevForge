@@ -31,22 +31,22 @@ export function FloatingBackground() {
     return (
         <div className="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
             {/* Rich multi-layer gradient background */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(249,115,22,0.08),transparent)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_80%_80%,rgba(245,158,11,0.05),transparent)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(34, 211, 238,0.08),transparent)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_80%_80%,rgba(139, 92, 246,0.05),transparent)]" />
             {!isDataDense && (
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_20%_60%,rgba(249,115,22,0.03),transparent)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_20%_60%,rgba(34, 211, 238,0.03),transparent)]" />
             )}
             <div className="absolute inset-0 bg-black/90" />
 
             {/* Grid overlay */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(249,115,22,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(249,115,22,0.04)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(34, 211, 238,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(34, 211, 238,0.04)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
             {prefersReducedMotion ? (
                 // Static equivalent: same warmth, no perpetual animation
                 <>
-                    <div className="absolute top-1/4 left-1/5 w-80 h-80 bg-orange-500 rounded-full blur-[120px] opacity-[0.08]" />
+                    <div className="absolute top-1/4 left-1/5 w-80 h-80 bg-cyan-400 rounded-full blur-[120px] opacity-[0.08]" />
                     {!isDataDense && (
-                        <div className="absolute top-2/3 right-1/5 w-96 h-96 bg-amber-500 rounded-full blur-[130px] opacity-[0.05]" />
+                        <div className="absolute top-2/3 right-1/5 w-96 h-96 bg-violet-500 rounded-full blur-[130px] opacity-[0.05]" />
                     )}
                 </>
             ) : (
@@ -55,19 +55,19 @@ export function FloatingBackground() {
                     <motion.div
                         animate={{ y: [0, -50, 0], x: [0, 30, 0], scale: [1, 1.15, 1], opacity: [0.08, 0.15, 0.08] }}
                         transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-                        className="absolute top-1/4 left-1/5 w-80 h-80 bg-orange-500 rounded-full blur-[120px]"
+                        className="absolute top-1/4 left-1/5 w-80 h-80 bg-cyan-400 rounded-full blur-[120px]"
                     />
                     {!isDataDense && (
                         <>
                             <motion.div
                                 animate={{ y: [0, 70, 0], x: [0, -40, 0], scale: [1, 1.2, 1], opacity: [0.05, 0.12, 0.05] }}
                                 transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 3 }}
-                                className="absolute top-2/3 right-1/5 w-96 h-96 bg-amber-500 rounded-full blur-[130px]"
+                                className="absolute top-2/3 right-1/5 w-96 h-96 bg-violet-500 rounded-full blur-[130px]"
                             />
                             <motion.div
                                 animate={{ y: [0, -30, 0], x: [0, 20, 0], opacity: [0.03, 0.08, 0.03] }}
                                 transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 6 }}
-                                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-orange-600 rounded-full blur-[160px]"
+                                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-500 rounded-full blur-[160px]"
                             />
                         </>
                     )}
@@ -78,7 +78,7 @@ export function FloatingBackground() {
                             key={i}
                             animate={{ y: [0, i % 2 === 0 ? -25 : 25, 0], rotate: [0, i % 2 === 0 ? 8 : -8, 0], opacity: [0.04, 0.1, 0.04] }}
                             transition={{ duration, repeat: Infinity, ease: "easeInOut", delay }}
-                            className="absolute text-orange-500"
+                            className="absolute text-cyan-400"
                             style={{ left: x, top: y }}
                         >
                             <Icon size={size} strokeWidth={0.8} />
@@ -92,7 +92,7 @@ export function FloatingBackground() {
                                 animate={{ y: [0, -40, 0], x: [0, 25, 0], opacity: [0.025, 0.055, 0.025] }}
                                 transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
                                 className="absolute top-[28%] left-[5%] select-none whitespace-nowrap tracking-tighter pointer-events-none"
-                                style={{ fontSize: 'clamp(5rem, 12vw, 14rem)', fontWeight: 900, WebkitTextStroke: '2px rgba(249, 115, 22, 0.25)', color: 'transparent' }}
+                                style={{ fontSize: 'clamp(5rem, 12vw, 14rem)', fontWeight: 900, WebkitTextStroke: '2px rgba(34, 211, 238, 0.25)', color: 'transparent' }}
                             >
                                 DevForge
                             </motion.div>
@@ -102,7 +102,7 @@ export function FloatingBackground() {
                                 animate={{ y: [0, 50, 0], x: [0, -30, 0], opacity: [0.02, 0.045, 0.02] }}
                                 transition={{ duration: 28, repeat: Infinity, ease: "easeInOut", delay: 7 }}
                                 className="absolute bottom-[12%] right-[-2%] select-none whitespace-nowrap tracking-tighter pointer-events-none"
-                                style={{ fontSize: 'clamp(4rem, 10vw, 12rem)', fontWeight: 900, WebkitTextStroke: '2px rgba(245, 158, 11, 0.2)', color: 'transparent' }}
+                                style={{ fontSize: 'clamp(4rem, 10vw, 12rem)', fontWeight: 900, WebkitTextStroke: '2px rgba(139, 92, 246, 0.2)', color: 'transparent' }}
                             >
                                 Dev Club
                             </motion.div>
