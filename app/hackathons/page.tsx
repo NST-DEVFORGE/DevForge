@@ -61,7 +61,7 @@ export default function HackathonsHallOfFame() {
                                 key={year}
                                 onClick={() => setFilterYear(year)}
                                 className={`px-6 py-2 rounded-xl font-medium transition-all ${
-                                    filterYear === year ? "bg-cyan-400 text-black shadow-[0_0_20px_rgba(34, 211, 238,0.3)]" : "text-neutral-400 hover:text-white hover:bg-neutral-800"
+                                    filterYear === year ? "bg-cyan-400 text-black shadow-[0_0_20px_rgb(var(--ac-400)/0.3)]" : "text-neutral-400 hover:text-white hover:bg-neutral-800"
                                 }`}
                             >
                                 {year}

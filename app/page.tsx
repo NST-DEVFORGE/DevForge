@@ -1,29 +1,21 @@
-import { HomeBoot } from "@/components/home-boot";
-import { Hero } from "@/components/hero";
-import { ThisMonth } from "@/components/this-month";
-import { OpenSource } from "@/components/open-source";
-import { StudentSpotlight } from "@/components/student-spotlight";
-import { BlogTeaser } from "@/components/blog-teaser";
-import { Join } from "@/components/join";
-import { getAllPostsMeta } from "@/lib/blog";
+import dynamic from "next/dynamic";
+import { HeroEditorial } from "@/components/home/hero-editorial";
+
+const TheRecord = dynamic(() => import("@/components/home/the-record").then((m) => m.TheRecord));
+const Chapters = dynamic(() => import("@/components/home/chapters").then((m) => m.Chapters));
+const TheWall = dynamic(() => import("@/components/home/the-wall").then((m) => m.TheWall));
+const Voices = dynamic(() => import("@/components/home/voices").then((m) => m.Voices));
+const Closing = dynamic(() => import("@/components/home/closing").then((m) => m.Closing));
 
 export default function Home() {
-    // Only surfaced once there's enough real content that the homepage
-    // never shows an empty-feeling "Blog" section as a first impression.
-    const latestPosts = getAllPostsMeta().slice(0, 3);
-    const showBlogTeaser = latestPosts.length >= 3;
-
     return (
-        <HomeBoot>
-            <div className="bg-transparent text-white selection:bg-cyan-400 selection:text-black">
-                <Hero />
-                <ThisMonth />
-                <OpenSource />
-                <StudentSpotlight />
-                {showBlogTeaser && <BlogTeaser posts={latestPosts} />}
-                <Join />
-            </div>
-        </HomeBoot>
+        <main className="bg-transparent text-white">
+            <HeroEditorial />
+            <TheRecord />
+            <Chapters />
+            <TheWall />
+            <Voices />
+            <Closing />
+        </main>
     );
 }
-

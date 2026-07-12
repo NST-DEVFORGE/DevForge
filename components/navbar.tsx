@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { NavGroup } from "@/components/ui/nav-group";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 
 const programLinks = [
     { name: "GSoC", href: "/gsoc" },
@@ -100,7 +101,8 @@ export function Navbar() {
                 </nav>
 
                 {/* CTA & Mobile Toggle */}
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3">
+                    <ThemeSwitcher />
                     <Link href="https://forms.gle/M8rDS4wG1jyuGiSC6" target="_blank" className="hidden md:inline-flex px-5 py-2 bg-white text-black font-bold text-sm rounded-full hover:bg-neutral-200 transition-colors">
                         Join Us
                     </Link>

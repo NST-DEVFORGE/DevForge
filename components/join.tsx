@@ -48,7 +48,7 @@ export function Join() {
                                 href="https://discord.gg/devclub"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group relative w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-cyan-400 to-violet-600 text-white font-bold text-lg rounded-xl overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(34, 211, 238,0.5)] flex items-center justify-center gap-2"
+                                className="group relative w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-cyan-400 to-violet-600 text-white font-bold text-lg rounded-xl overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_30px_rgb(var(--ac-400)/0.5)] flex items-center justify-center gap-2"
                             >
                                 <MessageCircle size={20} />
                                 Join Discord

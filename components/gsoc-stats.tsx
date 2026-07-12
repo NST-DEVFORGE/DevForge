@@ -116,7 +116,7 @@ export function GsocStats() {
                     transition={{ delay: 0.1 }}
                     className="mb-12"
                 >
-                    <div className="bg-gradient-to-br from-cyan-400/20 to-purple-500/20 border-2 border-cyan-400 rounded-3xl p-8 shadow-[0_0_50px_rgba(34, 211, 238,0.3)]">
+                    <div className="bg-gradient-to-br from-cyan-400/20 to-purple-500/20 border-2 border-cyan-400 rounded-3xl p-8 shadow-[0_0_50px_rgb(var(--ac-400)/0.3)]">
                         <div className="text-center mb-8">
                             <div className="flex items-center justify-center gap-3 mb-4">
                                 <Star className="w-10 h-10 text-cyan-400" />

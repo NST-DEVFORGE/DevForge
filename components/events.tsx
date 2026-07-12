@@ -69,8 +69,8 @@ export function Events() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className={`p-8 transition-all group rounded-2xl ${isUpcoming
-                        ? 'bg-gradient-to-br from-cyan-400/20 to-purple-500/20 border-2 border-cyan-400 shadow-[0_0_40px_rgba(34, 211, 238,0.4)]'
-                        : 'glow-border hover:shadow-[0_0_30px_rgba(34, 211, 238,0.3)]'
+                        ? 'bg-gradient-to-br from-cyan-400/20 to-purple-500/20 border-2 border-cyan-400 shadow-[0_0_40px_rgb(var(--ac-400)/0.4)]'
+                        : 'glow-border hover:shadow-[0_0_30px_rgb(var(--ac-400)/0.3)]'
                     }`}
             >
                 {isUpcoming && (
