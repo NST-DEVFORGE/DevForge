@@ -16,6 +16,7 @@ const programLinks = [
 const communityLinks = [
     { name: "Journey", href: "/journey" },
     { name: "Alumni", href: "/alumni" },
+    { name: "Memory Lane", href: "/memory-lane" },
 ];
 
 export function Navbar() {

@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { url: `${BASE_URL}/journey`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
         { url: `${BASE_URL}/projects`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.6 },
         { url: `${BASE_URL}/alumni`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
+        { url: `${BASE_URL}/memory-lane`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.4 },
         { url: `${BASE_URL}/events`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.8 },
         { url: `${BASE_URL}/opensource`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9 },
         { url: `${BASE_URL}/pr-stats`, lastModified: new Date(), changeFrequency: 'daily', priority: 0.8 },
