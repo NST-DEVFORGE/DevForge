@@ -6,6 +6,7 @@ import { Trophy, Star, ExternalLink, GitMerge, Users, GitBranch, Globe2, Activit
 import prData from "../../pr-data-report.json";
 import gssocSnapshot from "../../data/gssoc-snapshot.json";
 import { useEffect, useState } from "react";
+import { ContributionHeatmap } from "@/components/ui/contribution-heatmap";
 
 interface Milestone {
     name: string;
@@ -342,6 +343,20 @@ export default function OpenSourceImpact() {
                     </div>
                 </div>
 
+                {/* Contribution matrix — real per-member, per-org PR counts from GSoC + ESoC records */}
+                <div className="mb-24">
+                    <div className="bg-neutral-900/40 border border-neutral-800 p-8 rounded-3xl backdrop-blur-md">
+                        <div className="mb-6">
+                            <h3 className="text-2xl font-bold flex items-center gap-2 mb-2">
+                                <Globe2 className="text-orange-500" /> Who Contributed Where
+                            </h3>
+                            <p className="text-sm text-neutral-500">
+                                Real PR counts per member, per organization — from recorded GSoC and ESoC contributions. Not every contributor has org-level detail available yet.
+                            </p>
+                        </div>
+                        <ContributionHeatmap />
+                    </div>
+                </div>
 
                 {/* Podium */}
                 <div className="mb-24 mt-16">
