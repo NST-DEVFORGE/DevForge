@@ -28,6 +28,7 @@ export function Navbar() {
 
     const navLinks = [
         { name: "Home", href: "/" },
+        { name: "Journey", href: "/journey" },
         { name: "Open Source", href: "/opensource" },
         { name: "Hackathons", href: "/hackathons" },
         { name: "Conferences", href: "/conferences" },
