@@ -38,7 +38,7 @@ export default function ConferencesPage() {
     ];
 
     return (
-        <div className="min-h-screen bg-transparent text-white pt-24 pb-16 selection:bg-orange-500 selection:text-black">
+        <div className="min-h-screen bg-transparent text-white pt-24 pb-16 selection:bg-cyan-400 selection:text-black">
             <div className="max-w-7xl mx-auto px-4">
 
                 {/* Hero Section */}
@@ -47,11 +47,11 @@ export default function ConferencesPage() {
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center mb-16"
                 >
-                    <div className="inline-flex items-center justify-center p-4 bg-orange-500/10 text-orange-500 rounded-full mb-8 border border-orange-500/20 animate-pulse">
+                    <div className="inline-flex items-center justify-center p-4 bg-cyan-400/10 text-cyan-400 rounded-full mb-8 border border-cyan-400/20 animate-pulse">
                         <Globe size={40} />
                     </div>
                     <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
-                        International <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-500">Conferences</span>
+                        International <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-violet-400">Conferences</span>
                     </h1>
                     <p className="text-xl text-neutral-400 max-w-2xl mx-auto">
                         Celebrating our community members presenting research and collaborating on the global open-source stage.
@@ -67,16 +67,16 @@ export default function ConferencesPage() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
-                            className="bg-neutral-900/40 backdrop-blur-sm border border-neutral-800 rounded-[2.5rem] p-8 md:p-12 hover:border-orange-500/50 transition-colors duration-500 relative overflow-hidden group"
+                            className="bg-neutral-900/40 backdrop-blur-sm border border-neutral-800 rounded-[2.5rem] p-8 md:p-12 hover:border-cyan-400/50 transition-colors duration-500 relative overflow-hidden group"
                         >
                             {/* Decorative background glow */}
-                            <div className="absolute -right-24 -top-24 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl group-hover:bg-orange-500/20 transition-all duration-500" />
+                            <div className="absolute -right-24 -top-24 w-64 h-64 bg-cyan-400/10 rounded-full blur-3xl group-hover:bg-cyan-400/20 transition-all duration-500" />
 
                             <div className="grid md:grid-cols-3 gap-8 relative z-10">
                                 {/* Left — main info */}
                                 <div className="md:col-span-2 space-y-6">
                                     <div className="flex flex-wrap items-center gap-3">
-                                        <span className="px-4 py-1.5 rounded-full text-xs font-bold bg-orange-500/10 border border-orange-500/20 text-orange-400 uppercase tracking-wider flex items-center gap-1.5">
+                                        <span className="px-4 py-1.5 rounded-full text-xs font-bold bg-cyan-400/10 border border-cyan-400/20 text-cyan-300 uppercase tracking-wider flex items-center gap-1.5">
                                             <MapPin size={12} /> {conf.location}
                                         </span>
                                         <span className="px-4 py-1.5 rounded-full text-xs font-bold bg-white/5 border border-white/10 text-neutral-300 flex items-center gap-1.5">
@@ -85,7 +85,7 @@ export default function ConferencesPage() {
                                     </div>
 
                                     <div>
-                                        <div className="text-sm text-orange-500 font-bold uppercase tracking-wider mb-1">{conf.type}</div>
+                                        <div className="text-sm text-cyan-400 font-bold uppercase tracking-wider mb-1">{conf.type}</div>
                                         <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">{conf.title}</h2>
                                         <p className="mt-1 text-sm text-neutral-500">Organised by {conf.organiser}</p>
                                     </div>
@@ -97,7 +97,7 @@ export default function ConferencesPage() {
                                     {/* Key Highlights */}
                                     <div className="space-y-3">
                                         <h4 className="text-sm font-bold text-neutral-300 uppercase tracking-wider flex items-center gap-2">
-                                            <Award size={16} className="text-orange-500" /> Key Highlights
+                                            <Award size={16} className="text-cyan-400" /> Key Highlights
                                         </h4>
                                         <div className="flex flex-wrap gap-2">
                                             {conf.highlights.map(highlight => (
@@ -113,13 +113,13 @@ export default function ConferencesPage() {
                                 <div className="space-y-6 md:border-l md:border-neutral-800/80 md:pl-8">
                                     <div>
                                         <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-4 flex items-center gap-2">
-                                            <Users2 size={16} className="text-orange-500" /> Speakers
+                                            <Users2 size={16} className="text-cyan-400" /> Speakers
                                         </h3>
                                         <div className="space-y-3">
                                             {conf.attendees.map(attendee => (
                                                 <div key={attendee.name} className="bg-black/40 border border-neutral-800/60 p-3.5 rounded-2xl space-y-3">
                                                     <div className="flex items-center gap-3">
-                                                        <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-400 font-bold text-sm flex-shrink-0">
+                                                        <div className="w-10 h-10 rounded-xl bg-cyan-400/10 flex items-center justify-center text-cyan-300 font-bold text-sm flex-shrink-0">
                                                             {attendee.initials}
                                                         </div>
                                                         <div>
@@ -132,7 +132,7 @@ export default function ConferencesPage() {
                                                         href={attendee.talkUrl}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                        className="flex items-center gap-2 text-xs text-orange-400 hover:text-orange-300 transition-colors font-medium group/link"
+                                                        className="flex items-center gap-2 text-xs text-cyan-300 hover:text-cyan-200 transition-colors font-medium group/link"
                                                     >
                                                         <Mic size={12} className="flex-shrink-0" />
                                                         <span>View Talk</span>
@@ -144,8 +144,8 @@ export default function ConferencesPage() {
                                     </div>
 
                                     {/* Geeko Foundation badge */}
-                                    <div className="p-4 bg-orange-500/5 border border-orange-500/10 rounded-2xl">
-                                        <div className="flex items-center gap-2 text-xs font-bold text-orange-400 uppercase tracking-wider mb-1">
+                                    <div className="p-4 bg-cyan-400/5 border border-cyan-400/10 rounded-2xl">
+                                        <div className="flex items-center gap-2 text-xs font-bold text-cyan-300 uppercase tracking-wider mb-1">
                                             <GraduationCap size={14} /> Travel Support
                                         </div>
                                         <p className="text-xs text-neutral-500 leading-relaxed">

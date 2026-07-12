@@ -3,10 +3,11 @@
 import { motion } from "framer-motion";
 import { Users2, Github, Linkedin } from "lucide-react";
 import { clubLeadership } from "../../data/club-info";
+import { Join } from "@/components/join";
 
 export default function DeveloperClub() {
     return (
-        <div className="min-h-screen bg-transparent text-white selection:bg-orange-500 selection:text-black pt-24 pb-16">
+        <div className="min-h-screen bg-transparent text-white selection:bg-cyan-400 selection:text-black pt-24 pb-16">
             <div className="max-w-7xl mx-auto px-4">
                 
                 {/* Hero Section */}
@@ -60,6 +61,8 @@ export default function DeveloperClub() {
                 </motion.section>
 
             </div>
+
+            <Join />
         </div>
     );
 }

@@ -1,25 +1,21 @@
-"use client";
+import dynamic from "next/dynamic";
+import { HeroEditorial } from "@/components/home/hero-editorial";
 
-import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
-import { BootAnimation } from "@/components/boot-animation";
-import { Hero } from "@/components/hero";
-import { OpenSource } from "@/components/open-source";
+const TheRecord = dynamic(() => import("@/components/home/the-record").then((m) => m.TheRecord));
+const Chapters = dynamic(() => import("@/components/home/chapters").then((m) => m.Chapters));
+const TheWall = dynamic(() => import("@/components/home/the-wall").then((m) => m.TheWall));
+const Voices = dynamic(() => import("@/components/home/voices").then((m) => m.Voices));
+const Closing = dynamic(() => import("@/components/home/closing").then((m) => m.Closing));
 
 export default function Home() {
-    const [showBoot, setShowBoot] = useState(true);
-
     return (
-        <>
-            <AnimatePresence>
-                {showBoot && <BootAnimation onComplete={() => setShowBoot(false)} />}
-            </AnimatePresence>
-
-            <div className="bg-transparent text-white selection:bg-orange-500 selection:text-black">
-                <Hero />
-                <OpenSource />
-            </div>
-        </>
+        <main className="bg-transparent text-white">
+            <HeroEditorial />
+            <TheRecord />
+            <Chapters />
+            <TheWall />
+            <Voices />
+            <Closing />
+        </main>
     );
 }
-

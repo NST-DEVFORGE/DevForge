@@ -2,21 +2,162 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+  Theme engine: every accent on the site resolves through these RGB
+  triplets (consumed as rgb(var(--ac-N) / alpha) via tailwind.config.ts,
+  which remaps the cyan/violet/purple scales onto them). Switching
+  data-theme on <html> recolors the entire app.
+*/
 :root {
   color-scheme: dark;
+
+  /* accent scale (default: aurora cyan) */
+  --ac-100: 207 250 254;
+  --ac-200: 165 243 252;
+  --ac-300: 103 232 249;
+  --ac-400: 34 211 238;
+  --ac-500: 6 182 212;
+  --ac-600: 8 145 178;
+  --ac-700: 14 116 144;
+  --ac-800: 21 94 117;
+  /* secondary accent (violet) */
+  --ac2-300: 196 181 253;
+  --ac2-400: 167 139 250;
+  --ac2-500: 139 92 246;
+  --ac2-600: 124 58 237;
+  --ac2-700: 109 40 217;
+  /* ground */
+  --g1: #05070d;
+  --g2: #070a14;
+  --g3: #0a0d18;
+
+  --accent: rgb(var(--ac-400));
+  --accent-strong: rgb(var(--ac-500));
   --bg-primary: #010107;
-  --bg-secondary: #0a0506;
-  --bg-card: rgba(20, 8, 8, 0.8);
+  --bg-secondary: #070a12;
+  --bg-card: rgba(10, 14, 24, 0.8);
   --text-primary: #f8fafc;
   --text-muted: #94a3b8;
-  --accent: #f97316;
-  --accent-strong: #ea580c;
-  --border-glow: rgba(249, 115, 22, 0.45);
-  --shadow-glow: 0 0 30px rgba(249, 115, 22, 0.25);
+  --steel: #8fb4c4;
+  --good: #4ade80;
+  --warn: #eab308;
+  --bad: #f87171;
+  --border-glow: rgb(var(--ac-400) / 0.45);
+  --shadow-glow: 0 0 30px rgb(var(--ac-400) / 0.25);
   --radius-xl: 32px;
-  --font-geist-sans: "Inter", "SF Pro Display", "Segoe UI", system-ui,
-    -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-geist-mono: "JetBrains Mono", "SFMono-Regular", "Menlo", monospace;
+}
+
+:root[data-theme="ember"] {
+  --ac-100: 255 237 213; --ac-200: 254 215 170; --ac-300: 253 186 116;
+  --ac-400: 251 146 60; --ac-500: 249 115 22; --ac-600: 234 88 12;
+  --ac-700: 194 65 12; --ac-800: 154 52 18;
+  --ac2-300: 253 164 175; --ac2-400: 251 113 133; --ac2-500: 244 63 94;
+  --ac2-600: 225 29 72; --ac2-700: 190 18 60;
+  --g1: #0d0705; --g2: #120a07; --g3: #170e09;
+}
+
+:root[data-theme="matrix"] {
+  --ac-100: 220 252 231; --ac-200: 187 247 208; --ac-300: 134 239 172;
+  --ac-400: 74 222 128; --ac-500: 34 197 94; --ac-600: 22 163 74;
+  --ac-700: 21 128 61; --ac-800: 22 101 52;
+  --ac2-300: 190 242 100; --ac2-400: 163 230 53; --ac2-500: 132 204 22;
+  --ac2-600: 101 163 13; --ac2-700: 77 124 15;
+  --g1: #050d07; --g2: #07120a; --g3: #09170d;
+}
+
+:root[data-theme="rose"] {
+  --ac-100: 255 228 230; --ac-200: 254 205 211; --ac-300: 253 164 175;
+  --ac-400: 251 113 133; --ac-500: 244 63 94; --ac-600: 225 29 72;
+  --ac-700: 190 18 60; --ac-800: 159 18 57;
+  --ac2-300: 240 171 252; --ac2-400: 232 121 249; --ac2-500: 217 70 239;
+  --ac2-600: 192 38 211; --ac2-700: 162 28 175;
+  --g1: #0d0508; --g2: #12070b; --g3: #17090e;
+}
+
+:root[data-theme="solar"] {
+  --ac-100: 254 243 199; --ac-200: 253 230 138; --ac-300: 252 211 77;
+  --ac-400: 251 191 36; --ac-500: 245 158 11; --ac-600: 217 119 6;
+  --ac-700: 180 83 9; --ac-800: 146 64 14;
+  --ac2-300: 253 186 116; --ac2-400: 251 146 60; --ac2-500: 249 115 22;
+  --ac2-600: 234 88 12; --ac2-700: 194 65 12;
+  --g1: #0d0a04; --g2: #120e06; --g3: #171208;
+}
+
+:root[data-theme="mono"] {
+  --ac-100: 255 255 255; --ac-200: 245 245 245; --ac-300: 229 229 229;
+  --ac-400: 250 250 250; --ac-500: 212 212 212; --ac-600: 163 163 163;
+  --ac-700: 115 115 115; --ac-800: 82 82 82;
+  --ac2-300: 212 212 212; --ac2-400: 163 163 163; --ac2-500: 115 115 115;
+  --ac2-600: 82 82 82; --ac2-700: 64 64 64;
+  --g1: #070707; --g2: #0a0a0a; --g3: #0e0e0e;
+}
+
+:root[data-theme="ocean"] {
+  --ac-100: 219 234 254; --ac-200: 191 219 254; --ac-300: 147 197 253;
+  --ac-400: 96 165 250; --ac-500: 59 130 246; --ac-600: 37 99 235;
+  --ac-700: 29 78 216; --ac-800: 30 64 175;
+  --ac2-300: 125 211 252; --ac2-400: 56 189 248; --ac2-500: 14 165 233;
+  --ac2-600: 2 132 199; --ac2-700: 3 105 161;
+  --g1: #04070f; --g2: #060a16; --g3: #080d1d;
+}
+
+/* Earth's mightiest palette — scarlet and gold on a deep navy ground. */
+:root[data-theme="avengers"] {
+  --ac-100: 254 226 226; --ac-200: 254 202 202; --ac-300: 252 165 165;
+  --ac-400: 248 113 113; --ac-500: 239 68 68; --ac-600: 220 38 38;
+  --ac-700: 185 28 28; --ac-800: 153 27 27;
+  --ac2-300: 252 211 77; --ac2-400: 251 191 36; --ac2-500: 245 158 11;
+  --ac2-600: 217 119 6; --ac2-700: 180 83 9;
+  --g1: #05080f; --g2: #070c18; --g3: #0a1020;
+}
+
+/* Web-slinger red and blue on midnight. */
+:root[data-theme="spiderverse"] {
+  --ac-100: 254 226 226; --ac-200: 254 202 202; --ac-300: 252 165 165;
+  --ac-400: 248 113 113; --ac-500: 239 68 68; --ac-600: 220 38 38;
+  --ac-700: 185 28 28; --ac-800: 153 27 27;
+  --ac2-300: 147 197 253; --ac2-400: 96 165 250; --ac2-500: 59 130 246;
+  --ac2-600: 37 99 235; --ac2-700: 29 78 216;
+  --g1: #04060f; --g2: #060a18; --g3: #080e20;
+}
+
+/* Neon title-card red with an upside-down purple undertone. */
+:root[data-theme="hawkins"] {
+  --ac-100: 255 228 228; --ac-200: 255 200 200; --ac-300: 255 150 150;
+  --ac-400: 255 70 70; --ac-500: 237 29 29; --ac-600: 200 15 15;
+  --ac-700: 165 12 12; --ac-800: 130 10 10;
+  --ac2-300: 216 180 254; --ac2-400: 192 132 252; --ac2-500: 168 85 247;
+  --ac2-600: 147 51 234; --ac2-700: 126 34 206;
+  --g1: #0c0304; --g2: #100405; --g3: #140506;
+}
+
+/* Night City yellow with magenta glitch. */
+:root[data-theme="cyberpunk"] {
+  --ac-100: 254 249 195; --ac-200: 254 240 138; --ac-300: 253 224 71;
+  --ac-400: 250 204 21; --ac-500: 234 179 8; --ac-600: 202 138 4;
+  --ac-700: 161 98 7; --ac-800: 133 77 14;
+  --ac2-300: 240 171 252; --ac2-400: 232 121 249; --ac2-500: 217 70 239;
+  --ac2-600: 192 38 211; --ac2-700: 162 28 175;
+  --g1: #0b0b03; --g2: #0f0e04; --g3: #131205;
+}
+
+/* Sunset-grid pink and indigo. */
+:root[data-theme="synthwave"] {
+  --ac-100: 252 231 243; --ac-200: 251 207 232; --ac-300: 249 168 212;
+  --ac-400: 244 114 182; --ac-500: 236 72 153; --ac-600: 219 39 119;
+  --ac-700: 190 24 93; --ac-800: 157 23 77;
+  --ac2-300: 165 180 252; --ac2-400: 129 140 248; --ac2-500: 99 102 241;
+  --ac2-600: 79 70 229; --ac2-700: 67 56 202;
+  --g1: #0a0416; --g2: #0d061d; --g3: #100824;
+}
+
+:root[data-theme="orchid"] {
+  --ac-100: 243 232 255; --ac-200: 233 213 255; --ac-300: 216 180 254;
+  --ac-400: 192 132 252; --ac-500: 168 85 247; --ac-600: 147 51 234;
+  --ac-700: 126 34 206; --ac-800: 107 33 168;
+  --ac2-300: 240 171 252; --ac2-400: 232 121 249; --ac2-500: 217 70 239;
+  --ac2-600: 192 38 211; --ac2-700: 162 28 175;
+  --g1: #0a050d; --g2: #0e0712; --g3: #120917;
 }
 
 @theme inline {
@@ -30,40 +171,33 @@
   box-sizing: border-box;
 }
 
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
 body {
   min-height: 100vh;
   margin: 0;
-  background-color: var(--bg-primary);
+  background-color: var(--g1);
   color: var(--text-primary);
   font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
   background-image: radial-gradient(circle at 30% 20%,
-      rgba(249, 115, 22, 0.30),
+      rgb(var(--ac-500) / 0.14),
       transparent 45%),
     radial-gradient(circle at 70% 0%,
-      rgba(234, 88, 12, 0.28),
+      rgb(var(--ac2-500) / 0.10),
       transparent 50%),
     radial-gradient(circle at 50% 80%,
-      rgba(251, 146, 60, 0.22),
+      rgb(var(--ac-500) / 0.07),
       transparent 40%),
-    radial-gradient(circle at 10% 60%,
-      rgba(249, 115, 22, 0.18),
-      transparent 35%),
-    radial-gradient(circle at 90% 50%,
-      rgba(251, 100, 10, 0.16),
-      transparent 35%),
-    linear-gradient(135deg, #0a0407 0%, #0f0305 60%, #120507 100%);
+    linear-gradient(135deg, var(--g1) 0%, var(--g2) 60%, var(--g3) 100%);
   background-attachment: fixed;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='1440' height='900' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f97316' fill-opacity='0.06'%3E%3Crect width='1' height='1'/%3E%3C/g%3E%3C/svg%3E");
-  mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.5), transparent 70%);
-  pointer-events: none;
-  z-index: -1;
 }
 
 ::-webkit-scrollbar {
@@ -75,23 +209,38 @@ body::before {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #f97316 0%, #ea580c 100%);
+  background: linear-gradient(180deg, rgb(var(--ac-400)) 0%, rgb(var(--ac2-500)) 100%);
   border-radius: 999px;
 }
 
 ::selection {
-  background: rgba(249, 115, 22, 0.25);
-  color: #fff5ed;
+  background: rgb(var(--ac-400) / 0.3);
+  color: #ffffff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 .glow-border {
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: radial-gradient(circle at 0% 0%,
-      rgba(249, 115, 22, 0.12),
+      rgb(var(--ac-400) / 0.12),
       transparent 45%),
-    rgba(20, 8, 8, 0.8);
+    rgba(10, 14, 24, 0.8);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03),
-    0 15px 40px rgba(12, 4, 4, 0.8);
+    0 15px 40px rgba(4, 8, 16, 0.8);
   border-radius: var(--radius-xl);
   backdrop-filter: blur(28px);
 }
@@ -107,7 +256,7 @@ body::before {
 .glass-panel {
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.07);
-  background: rgba(20, 3, 3, 0.85);
-  box-shadow: 0 15px 45px rgba(20, 2, 2, 0.7);
+  background: rgba(8, 12, 22, 0.85);
+  box-shadow: 0 15px 45px rgba(6, 10, 18, 0.7);
   backdrop-filter: blur(18px);
 }

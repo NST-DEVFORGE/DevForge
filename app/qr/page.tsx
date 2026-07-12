@@ -22,7 +22,7 @@ export default function QrPage() {
     const [size, setSize] = useState(320);
     const [ecc, setEcc] = useState<(typeof ECC_OPTIONS)[number]>("M");
     const [margin, setMargin] = useState(2);
-    const [fg, setFg] = useState("#f97316");
+    const [fg, setFg] = useState("#22d3ee");
     const [bg, setBg] = useState("#0b0b0f");
     const [format, setFormat] = useState<(typeof FORMAT_OPTIONS)[number]>("png");
 
@@ -42,15 +42,15 @@ export default function QrPage() {
     }, [text, size, ecc, margin, fg, bg, format]);
 
     return (
-        <main className="min-h-screen bg-transparent text-white selection:bg-orange-500 selection:text-black">
+        <main className="min-h-screen bg-transparent text-white selection:bg-cyan-400 selection:text-black">
             <section className="relative overflow-hidden px-4 pt-24 pb-16">
                 <div className="absolute inset-0 matrix-grid opacity-60" />
-                <div className="absolute -top-24 right-0 h-64 w-64 rounded-full bg-orange-500/20 blur-[120px]" />
+                <div className="absolute -top-24 right-0 h-64 w-64 rounded-full bg-cyan-400/20 blur-[120px]" />
                 <div className="relative mx-auto max-w-6xl">
                     <div className="glow-border px-8 py-10 md:px-12 md:py-14">
                         <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between">
                             <div className="space-y-6">
-                                <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1 text-sm text-orange-200">
+                                <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-1 text-sm text-cyan-100">
                                     <QrCode size={16} />
                                     DevForge QR Lab
                                 </div>
@@ -63,15 +63,15 @@ export default function QrPage() {
                                 </p>
                                 <div className="flex flex-wrap gap-4 text-sm text-neutral-300">
                                     <div className="flex items-center gap-2 rounded-full bg-white/5 px-4 py-2">
-                                        <Sliders size={16} className="text-orange-400" />
+                                        <Sliders size={16} className="text-cyan-300" />
                                         Deep controls
                                     </div>
                                     <div className="flex items-center gap-2 rounded-full bg-white/5 px-4 py-2">
-                                        <Shield size={16} className="text-orange-400" />
+                                        <Shield size={16} className="text-cyan-300" />
                                         ECC safety
                                     </div>
                                     <div className="flex items-center gap-2 rounded-full bg-white/5 px-4 py-2">
-                                        <Link2 size={16} className="text-orange-400" />
+                                        <Link2 size={16} className="text-cyan-300" />
                                         Instant preview
                                     </div>
                                 </div>
@@ -83,21 +83,21 @@ export default function QrPage() {
                                         <button
                                             type="button"
                                             onClick={() => setText(PRESETS.website)}
-                                            className="rounded-2xl border border-white/20 bg-gradient-to-b from-white/10 to-white/0 px-5 py-4 text-base font-semibold text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] transition hover:border-orange-500/60 hover:bg-orange-500/15 hover:text-white"
+                                            className="rounded-2xl border border-white/20 bg-gradient-to-b from-white/10 to-white/0 px-5 py-4 text-base font-semibold text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] transition hover:border-cyan-400/60 hover:bg-cyan-400/15 hover:text-white"
                                         >
                                             DevForge site
                                         </button>
                                         <button
                                             type="button"
                                             onClick={() => setText(PRESETS.rsvp)}
-                                            className="rounded-2xl border border-white/20 bg-gradient-to-b from-white/10 to-white/0 px-5 py-4 text-base font-semibold text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] transition hover:border-orange-500/60 hover:bg-orange-500/15 hover:text-white"
+                                            className="rounded-2xl border border-white/20 bg-gradient-to-b from-white/10 to-white/0 px-5 py-4 text-base font-semibold text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] transition hover:border-cyan-400/60 hover:bg-cyan-400/15 hover:text-white"
                                         >
                                             Join form
                                         </button>
                                         <button
                                             type="button"
                                             onClick={() => setText(PRESETS.github)}
-                                            className="rounded-2xl border border-white/20 bg-gradient-to-b from-white/10 to-white/0 px-5 py-4 text-base font-semibold text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] transition hover:border-orange-500/60 hover:bg-orange-500/15 hover:text-white"
+                                            className="rounded-2xl border border-white/20 bg-gradient-to-b from-white/10 to-white/0 px-5 py-4 text-base font-semibold text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] transition hover:border-cyan-400/60 hover:bg-cyan-400/15 hover:text-white"
                                         >
                                             GitHub org
                                         </button>
@@ -116,7 +116,7 @@ export default function QrPage() {
                 <div className="glow-border p-8">
                     <div className="flex flex-col gap-6">
                         <div className="flex items-center gap-3 text-lg font-semibold">
-                            <ArrowRight size={20} className="text-orange-400" />
+                            <ArrowRight size={20} className="text-cyan-300" />
                             Generator controls
                         </div>
                         <label className="space-y-2 text-sm text-neutral-300">
@@ -125,7 +125,7 @@ export default function QrPage() {
                                 value={text}
                                 onChange={(event) => setText(event.target.value)}
                                 rows={4}
-                                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 text-base text-white outline-none transition focus:border-orange-500/60"
+                                className="w-full rounded-2xl border border-white/10 bg-black/40 px-4 py-3 text-base text-white outline-none transition focus:border-cyan-400/60"
                                 placeholder="https://devforge.club/events/ignite"
                             />
                         </label>
@@ -139,7 +139,7 @@ export default function QrPage() {
                                     max={720}
                                     value={size}
                                     onChange={(event) => setSize(Number(event.target.value || 320))}
-                                    className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-2 text-base text-white outline-none focus:border-orange-500/60"
+                                    className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-2 text-base text-white outline-none focus:border-cyan-400/60"
                                 />
                             </label>
                             <label className="space-y-2 text-sm text-neutral-300">
@@ -150,7 +150,7 @@ export default function QrPage() {
                                     max={12}
                                     value={margin}
                                     onChange={(event) => setMargin(Number(event.target.value || 2))}
-                                    className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-2 text-base text-white outline-none focus:border-orange-500/60"
+                                    className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-2 text-base text-white outline-none focus:border-cyan-400/60"
                                 />
                             </label>
                             <label className="space-y-2 text-sm text-neutral-300">
@@ -158,7 +158,7 @@ export default function QrPage() {
                                 <select
                                     value={ecc}
                                     onChange={(event) => setEcc(event.target.value as (typeof ECC_OPTIONS)[number])}
-                                    className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-2 text-base text-white outline-none focus:border-orange-500/60"
+                                    className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-2 text-base text-white outline-none focus:border-cyan-400/60"
                                 >
                                     {ECC_OPTIONS.map((option) => (
                                         <option key={option} value={option}>
@@ -172,7 +172,7 @@ export default function QrPage() {
                                 <select
                                     value={format}
                                     onChange={(event) => setFormat(event.target.value as (typeof FORMAT_OPTIONS)[number])}
-                                    className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-2 text-base text-white outline-none focus:border-orange-500/60"
+                                    className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-2 text-base text-white outline-none focus:border-cyan-400/60"
                                 >
                                     {FORMAT_OPTIONS.map((option) => (
                                         <option key={option} value={option}>
@@ -210,7 +210,7 @@ export default function QrPage() {
                 <div className="space-y-6">
                     <div className="glow-border p-8 text-center">
                         <div className="space-y-4">
-                            <p className="text-sm uppercase tracking-[0.2em] text-orange-300">Live preview</p>
+                            <p className="text-sm uppercase tracking-[0.2em] text-cyan-200">Live preview</p>
                             <div className="mx-auto flex h-[320px] w-[320px] items-center justify-center rounded-2xl border border-white/10 bg-black/50">
                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src={qrUrl} alt="Generated QR code" className="h-64 w-64" />
@@ -219,7 +219,7 @@ export default function QrPage() {
                                 href={qrUrl}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 px-6 py-3 text-sm font-semibold text-white transition hover:scale-[1.02]"
+                                className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-400 to-violet-600 px-6 py-3 text-sm font-semibold text-white transition hover:scale-[1.02]"
                             >
                                 <Download size={16} />
                                 Download file
@@ -231,19 +231,19 @@ export default function QrPage() {
                         <h3 className="text-lg font-semibold">Built for DevForge</h3>
                         <div className="mt-4 space-y-3 text-sm text-neutral-300">
                             <div className="flex items-start gap-3">
-                                <span className="mt-1 h-2 w-2 rounded-full bg-orange-400" />
+                                <span className="mt-1 h-2 w-2 rounded-full bg-cyan-300" />
                                 High-contrast themes for stage screens and posters.
                             </div>
                             <div className="flex items-start gap-3">
-                                <span className="mt-1 h-2 w-2 rounded-full bg-orange-400" />
+                                <span className="mt-1 h-2 w-2 rounded-full bg-cyan-300" />
                                 ECC ready for stickers, badges, and merch.
                             </div>
                             <div className="flex items-start gap-3">
-                                <span className="mt-1 h-2 w-2 rounded-full bg-orange-400" />
+                                <span className="mt-1 h-2 w-2 rounded-full bg-cyan-300" />
                                 SVG output for sharp scaling across banners and decks.
                             </div>
                             <div className="flex items-start gap-3">
-                                <span className="mt-1 h-2 w-2 rounded-full bg-orange-400" />
+                                <span className="mt-1 h-2 w-2 rounded-full bg-cyan-300" />
                                 Tuned for DevForge branding and palette control.
                             </div>
                         </div>

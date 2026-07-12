@@ -1,7 +1,32 @@
 import type { Metadata } from "next";
+import { Inter, JetBrains_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
-import { FloatingBackground } from "@/components/floating-background";
+import { Footer } from "@/components/footer";
+import { SmoothScroll } from "@/components/motion/smooth-scroll";
+
+const inter = Inter({
+    subsets: ["latin"],
+    variable: "--font-geist-sans",
+    display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+    subsets: ["latin"],
+    variable: "--font-geist-mono",
+    display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+    subsets: ["latin"],
+    weight: "400",
+    style: ["normal", "italic"],
+    variable: "--font-display",
+    display: "swap",
+});
+
+/** Applies the saved theme before first paint so switching themes never flashes. */
+const themeInitScript = `(function(){try{var t=localStorage.getItem("devforge-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}})()`;
 
 export const metadata: Metadata = {
     title: {
@@ -74,23 +99,24 @@ export default function RootLayout({
         "description": "The premier developer community at Newton School of Technology.",
         "address": {
             "@type": "PostalAddress",
-            "addressLocality": "India",
-            "addressRegion": "Rishikesh" // Assuming location based on SVYASA
+            "addressCountry": "IN"
         }
     };
 
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning>
             <head>
+                <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
                 />
             </head>
-            <body className="antialiased bg-black text-white relative">
-                <FloatingBackground />
+            <body className={`${inter.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable} antialiased text-white relative`}>
+                <SmoothScroll />
                 <Navbar />
                 {children}
+                <Footer />
             </body>
         </html>
     );

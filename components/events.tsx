@@ -69,21 +69,21 @@ export function Events() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className={`p-8 transition-all group rounded-2xl ${isUpcoming
-                        ? 'bg-gradient-to-br from-orange-500/20 to-purple-500/20 border-2 border-orange-500 shadow-[0_0_40px_rgba(249,115,22,0.4)]'
-                        : 'glow-border hover:shadow-[0_0_30px_rgba(249,115,22,0.3)]'
+                        ? 'bg-gradient-to-br from-cyan-400/20 to-purple-500/20 border-2 border-cyan-400 shadow-[0_0_40px_rgb(var(--ac-400)/0.4)]'
+                        : 'glow-border hover:shadow-[0_0_30px_rgb(var(--ac-400)/0.3)]'
                     }`}
             >
                 {isUpcoming && (
                     <div className="flex justify-center mb-4">
-                        <span className="px-4 py-1 bg-orange-500 text-white text-sm font-bold rounded-full animate-pulse">
+                        <span className="px-4 py-1 bg-cyan-400 text-white text-sm font-bold rounded-full animate-pulse">
                             🎉 FUTURE PLAN
                         </span>
                     </div>
                 )}
                 <div className="flex items-start gap-4">
                     <div className={`w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform ${isUpcoming
-                            ? 'bg-gradient-to-br from-orange-500 to-purple-600'
-                            : 'bg-gradient-to-br from-orange-500 to-red-600'
+                            ? 'bg-gradient-to-br from-cyan-400 to-purple-600'
+                            : 'bg-gradient-to-br from-cyan-400 to-violet-600'
                         }`}>
                         <Icon className="text-white" size={28} />
                     </div>
@@ -91,8 +91,8 @@ export function Events() {
                         <h3 className={`font-bold text-white mb-2 ${isUpcoming ? 'text-3xl' : 'text-2xl'}`}>{event.title}</h3>
                         <p className="text-neutral-400 mb-3">{event.description}</p>
                         <span className={`inline-block px-3 py-1 text-sm font-medium rounded-full border ${isUpcoming
-                                ? 'bg-orange-500/20 text-orange-300 border-orange-500/50'
-                                : 'bg-orange-500/10 text-orange-400 border-orange-500/20'
+                                ? 'bg-cyan-400/20 text-cyan-200 border-cyan-400/50'
+                                : 'bg-cyan-400/10 text-cyan-300 border-cyan-400/20'
                             }`}>
                             {event.frequency}
                         </span>
@@ -113,7 +113,7 @@ export function Events() {
                     className="text-center mb-16"
                 >
                     <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">
-                        Events & <span className="text-orange-500">Activities</span>
+                        Events & <span className="text-cyan-400">Activities</span>
                     </h2>
                     <p className="text-xl text-neutral-400 max-w-2xl mx-auto">
                         Regular events designed to help you learn, network, and build.
@@ -123,7 +123,7 @@ export function Events() {
                 {/* Future Plans */}
                 <div className="mb-16">
                     <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                        <Rocket className="text-orange-500" /> Future Plans
+                        <Rocket className="text-cyan-400" /> Future Plans
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {futurePlans.map((event, index) => renderEventCard(event, index))}
@@ -133,7 +133,7 @@ export function Events() {
                 {/* Past Sessions */}
                 <div className="mb-16">
                     <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                        <History className="text-orange-500" /> Past Sessions
+                        <History className="text-cyan-400" /> Past Sessions
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {pastSessions.map((event, index) => renderEventCard(event, index))}
@@ -143,7 +143,7 @@ export function Events() {
                 {/* Regular Events */}
                 <div>
                     <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                        <Calendar className="text-orange-500" /> Regular Activities
+                        <Calendar className="text-cyan-400" /> Regular Activities
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {regularEvents.map((event, index) => renderEventCard(event, index))}

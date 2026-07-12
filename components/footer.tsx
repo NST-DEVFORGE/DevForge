@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Github, Linkedin, Instagram } from "lucide-react";
 
 export function Footer() {
@@ -10,27 +11,27 @@ export function Footer() {
                     {/* Branding */}
                     <div className="text-center md:text-left">
                         <h3 className="text-2xl font-bold text-white mb-2">
-                            Dev<span className="text-orange-500">Forge</span>
+                            Dev<span className="text-cyan-400">Forge</span>
                         </h3>
                         <p className="text-neutral-500 text-sm">
-                            © 2025 DevForge. Built by NST x SVYASA.
+                            © {new Date().getFullYear()} DevForge. Built by NST x SVYASA.
                         </p>
                     </div>
 
                     {/* Quick Links */}
                     <div className="flex items-center gap-6 text-sm">
-                        <a href="#about" className="text-neutral-400 hover:text-orange-500 transition-colors">
+                        <Link href="/club" className="text-neutral-400 hover:text-cyan-400 transition-colors">
                             About
-                        </a>
-                        <a href="#events" className="text-neutral-400 hover:text-orange-500 transition-colors">
+                        </Link>
+                        <Link href="/events" className="text-neutral-400 hover:text-cyan-400 transition-colors">
                             Events
-                        </a>
-                        <a href="/pr-stats" className="text-neutral-400 hover:text-orange-500 transition-colors">
+                        </Link>
+                        <Link href="/pr-stats" className="text-neutral-400 hover:text-cyan-400 transition-colors">
                             PR Stats
-                        </a>
-                        <a href="#team" className="text-neutral-400 hover:text-orange-500 transition-colors">
+                        </Link>
+                        <Link href="/club" className="text-neutral-400 hover:text-cyan-400 transition-colors">
                             Team
-                        </a>
+                        </Link>
                     </div>
 
                     {/* Social links */}
@@ -39,26 +40,26 @@ export function Footer() {
                             href="https://github.com/NST-DEVFORGE"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-10 h-10 rounded-lg bg-white/5 hover:bg-orange-500/20 flex items-center justify-center transition-colors group"
+                            className="w-10 h-10 rounded-lg bg-white/5 hover:bg-cyan-400/20 flex items-center justify-center transition-colors group"
                         >
-                            <Github size={20} className="text-neutral-400 group-hover:text-orange-400 transition-colors" />
+                            <Github size={20} className="text-neutral-400 group-hover:text-cyan-300 transition-colors" />
                         </a>
 
                         <a
                             href="https://linkedin.com/company/nstdevforge"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-10 h-10 rounded-lg bg-white/5 hover:bg-orange-500/20 flex items-center justify-center transition-colors group"
+                            className="w-10 h-10 rounded-lg bg-white/5 hover:bg-cyan-400/20 flex items-center justify-center transition-colors group"
                         >
-                            <Linkedin size={20} className="text-neutral-400 group-hover:text-orange-400 transition-colors" />
+                            <Linkedin size={20} className="text-neutral-400 group-hover:text-cyan-300 transition-colors" />
                         </a>
                         <a
                             href="https://instagram.com/devforgeclub"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-10 h-10 rounded-lg bg-white/5 hover:bg-orange-500/20 flex items-center justify-center transition-colors group"
+                            className="w-10 h-10 rounded-lg bg-white/5 hover:bg-cyan-400/20 flex items-center justify-center transition-colors group"
                         >
-                            <Instagram size={20} className="text-neutral-400 group-hover:text-orange-400 transition-colors" />
+                            <Instagram size={20} className="text-neutral-400 group-hover:text-cyan-300 transition-colors" />
                         </a>
                     </div>
                 </div>

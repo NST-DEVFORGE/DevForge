@@ -46,7 +46,7 @@ function getRankBadge(rank?: number) {
 function MemberCard({ member, liveData }: { member: typeof MEMBERS[0]; liveData: LiveData }) {
     const badge = getRankBadge(liveData.rank);
     const badgeColor =
-        badge === "Top 100" ? "text-orange-400 bg-orange-500/10 border-orange-500/30" :
+        badge === "Top 100" ? "text-cyan-300 bg-cyan-400/10 border-cyan-400/30" :
         badge === "Top 500" ? "text-yellow-400 bg-yellow-500/10 border-yellow-500/30" :
         badge === "Top 15k" ? "text-blue-400 bg-blue-500/10 border-blue-500/30" :
         "text-neutral-400 bg-neutral-800 border-neutral-700";
@@ -55,14 +55,14 @@ function MemberCard({ member, liveData }: { member: typeof MEMBERS[0]; liveData:
         <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-neutral-900/40 border border-neutral-800 rounded-3xl p-6 hover:border-orange-500/50 transition-all duration-300 group backdrop-blur-sm relative overflow-hidden flex flex-col"
+            className="bg-neutral-900/40 border border-neutral-800 rounded-3xl p-6 hover:border-cyan-400/50 transition-all duration-300 group backdrop-blur-sm relative overflow-hidden flex flex-col"
         >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-bl-full -z-10 group-hover:bg-orange-500/10 transition-colors" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-400/5 rounded-bl-full -z-10 group-hover:bg-cyan-400/10 transition-colors" />
 
             {/* Header */}
             <div className="flex justify-between items-start mb-5">
                 <div className="flex items-center gap-3">
-                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-neutral-800 group-hover:border-orange-500 transition-colors flex-shrink-0">
+                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-neutral-800 group-hover:border-cyan-400 transition-colors flex-shrink-0">
                         <img
                             src={`https://github.com/${member.github}.png`}
                             alt={member.name}
@@ -94,10 +94,10 @@ function MemberCard({ member, liveData }: { member: typeof MEMBERS[0]; liveData:
             </div>
 
             {/* Score */}
-            <div className="mb-4 p-3 rounded-2xl bg-black/50 border border-neutral-800/50 group-hover:border-orange-500/20 transition-colors text-center">
+            <div className="mb-4 p-3 rounded-2xl bg-black/50 border border-neutral-800/50 group-hover:border-cyan-400/20 transition-colors text-center">
                 <div className="text-xs text-neutral-500 uppercase tracking-wider font-bold mb-1">GSSoC Score</div>
                 {liveData.score !== undefined ? (
-                    <div className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-500">
+                    <div className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-violet-400">
                         {liveData.score.toLocaleString()}
                     </div>
                 ) : (
@@ -130,7 +130,7 @@ function MemberCard({ member, liveData }: { member: typeof MEMBERS[0]; liveData:
                         href={`https://gssoc.girlscript.tech/profile/${member.id}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="block w-full py-2.5 bg-neutral-800/50 hover:bg-orange-500 hover:text-black text-center rounded-xl font-bold transition-colors duration-300 border border-neutral-700 hover:border-orange-500 text-sm"
+                        className="block w-full py-2.5 bg-neutral-800/50 hover:bg-cyan-400 hover:text-black text-center rounded-xl font-bold transition-colors duration-300 border border-neutral-700 hover:border-cyan-400 text-sm"
                     >
                         View GSSoC Profile →
                     </a>
@@ -205,7 +205,7 @@ export default function GSSoCHallOfFame() {
     const totalMerged = Object.values(ghData).reduce((a, d) => a + d.merged, 0);
 
     return (
-        <div className="min-h-screen bg-transparent text-white selection:bg-orange-500 selection:text-black pt-24 pb-16 relative">
+        <div className="min-h-screen bg-transparent text-white selection:bg-cyan-400 selection:text-black pt-24 pb-16 relative">
             <div className="max-w-7xl mx-auto px-4 relative z-10">
 
                 {/* Header */}
@@ -214,14 +214,14 @@ export default function GSSoCHallOfFame() {
                         <Trophy size={40} />
                     </div>
                     <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
-                        GSSoC <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">Hall of Fame</span>
+                        GSSoC <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-cyan-400">Hall of Fame</span>
                     </h1>
                     <p className="text-xl text-neutral-400 max-w-2xl mx-auto mb-6">
                         GSSoC ranks &amp; scores from the official leaderboard. GitHub PR stats fetched live.
                     </p>
                     <div className="flex flex-wrap items-center justify-center gap-4 text-sm">
                         <div className="flex items-center gap-2 bg-neutral-900 border border-neutral-800 px-4 py-2 rounded-full">
-                            <div className={`w-2 h-2 rounded-full ${loadedCount === MEMBERS.length ? 'bg-green-500' : 'bg-orange-500 animate-pulse'}`} />
+                            <div className={`w-2 h-2 rounded-full ${loadedCount === MEMBERS.length ? 'bg-green-500' : 'bg-cyan-400 animate-pulse'}`} />
                             <span className="text-neutral-400">{loadedCount}/{MEMBERS.length} GitHub profiles loaded</span>
                         </div>
                         <div className="flex items-center gap-2 bg-neutral-900 border border-neutral-800 px-4 py-2 rounded-full">
@@ -232,7 +232,7 @@ export default function GSSoCHallOfFame() {
                             href="https://gssoc.girlscript.tech/leaderboard"
                             target="_blank"
                             rel="noreferrer"
-                            className="flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 text-orange-400 px-4 py-2 rounded-full hover:bg-orange-500/20 transition-colors"
+                            className="flex items-center gap-2 bg-cyan-400/10 border border-cyan-400/30 text-cyan-300 px-4 py-2 rounded-full hover:bg-cyan-400/20 transition-colors"
                         >
                             <RefreshCw size={14} /> View GSSoC Leaderboard
                         </a>
@@ -240,7 +240,7 @@ export default function GSSoCHallOfFame() {
 
                     {/* Snapshot info */}
                     <p className="text-xs text-neutral-600 mt-4">
-                        GSSoC scores last synced: {gssocSnapshot.lastUpdated} · <a href="https://gssoc.girlscript.tech/leaderboard" target="_blank" rel="noreferrer" className="text-orange-600 hover:text-orange-400 underline">Update from leaderboard</a>
+                        GSSoC scores last synced: {gssocSnapshot.lastUpdated} · <a href="https://gssoc.girlscript.tech/leaderboard" target="_blank" rel="noreferrer" className="text-cyan-500 hover:text-cyan-300 underline">Update from leaderboard</a>
                     </p>
                 </motion.div>
 
@@ -251,7 +251,7 @@ export default function GSSoCHallOfFame() {
                         <input
                             type="text"
                             placeholder="Search by name or GitHub handle…"
-                            className="w-full bg-black border border-neutral-800 rounded-xl py-3 pl-12 pr-4 text-white focus:outline-none focus:border-orange-500 transition-colors"
+                            className="w-full bg-black border border-neutral-800 rounded-xl py-3 pl-12 pr-4 text-white focus:outline-none focus:border-cyan-400 transition-colors"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
@@ -259,7 +259,7 @@ export default function GSSoCHallOfFame() {
                     <div className="flex items-center gap-4 w-full md:w-auto">
                         <Filter className="text-neutral-500 shrink-0" size={20} />
                         <select
-                            className="bg-transparent border border-neutral-800 rounded-xl py-3 px-4 text-white focus:outline-none focus:border-orange-500 appearance-none w-full md:w-48"
+                            className="bg-transparent border border-neutral-800 rounded-xl py-3 px-4 text-white focus:outline-none focus:border-cyan-400 appearance-none w-full md:w-48"
                             value={filterRank}
                             onChange={(e) => setFilterRank(e.target.value)}
                         >
