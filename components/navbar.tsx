@@ -13,6 +13,11 @@ const programLinks = [
     { name: "ESoC", href: "/esoc" },
 ];
 
+const communityLinks = [
+    { name: "Journey", href: "/journey" },
+    { name: "Alumni", href: "/alumni" },
+];
+
 export function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -28,7 +33,6 @@ export function Navbar() {
 
     const navLinks = [
         { name: "Home", href: "/" },
-        { name: "Journey", href: "/journey" },
         { name: "Open Source", href: "/opensource" },
         { name: "Projects", href: "/projects" },
         { name: "Hackathons", href: "/hackathons" },
@@ -54,7 +58,7 @@ export function Navbar() {
 
                 {/* Desktop Nav */}
                 <nav className="hidden lg:flex items-center gap-1" aria-label="Primary">
-                    {navLinks.slice(0, 2).map((link) => {
+                    {navLinks.slice(0, 1).map((link) => {
                         const isActive = pathname === link.href;
                         return (
                             <Link
@@ -71,8 +75,9 @@ export function Navbar() {
                             </Link>
                         );
                     })}
+                    <NavGroup label="Community" items={communityLinks} />
                     <NavGroup label="Programs" items={programLinks} />
-                    {navLinks.slice(2).map((link) => {
+                    {navLinks.slice(1).map((link) => {
                         const isActive = pathname === link.href;
                         return (
                             <Link
@@ -120,7 +125,23 @@ export function Navbar() {
                         className="lg:hidden bg-black/95 backdrop-blur-xl border-b border-white/10 overflow-hidden"
                     >
                         <div className="px-4 py-6 flex flex-col gap-4">
-                            {navLinks.slice(0, 2).map((link) => (
+                            {navLinks.slice(0, 1).map((link) => (
+                                <Link
+                                    key={link.name}
+                                    href={link.href}
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    className={`text-lg font-medium px-4 py-3 rounded-xl ${
+                                        pathname === link.href
+                                        ? 'bg-orange-500/10 text-orange-500'
+                                        : 'text-neutral-400'
+                                    }`}
+                                >
+                                    {link.name}
+                                </Link>
+                            ))}
+
+                            <div className="px-4 pt-2 pb-1 text-xs font-semibold uppercase tracking-wider text-neutral-600">Community</div>
+                            {communityLinks.map((link) => (
                                 <Link
                                     key={link.name}
                                     href={link.href}
@@ -151,7 +172,7 @@ export function Navbar() {
                                 </Link>
                             ))}
 
-                            {navLinks.slice(2).map((link) => (
+                            {navLinks.slice(1).map((link) => (
                                 <Link
                                     key={link.name}
                                     href={link.href}
