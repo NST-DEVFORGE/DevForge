@@ -3,89 +3,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Calendar as CalendarIcon, ChevronLeft, ChevronRight, Clock, MapPin, Users, X } from "lucide-react";
-
-// Generated events from schedule
-const pocLeads = [
-  "Geetansh Goyal", "Vikas Sharma", "Shrishti Kumari", "Nishta Agarwal", "Dhruv Mehta", 
-  "Bhavesh Sharma", "Sujan YD", "Sahitya Singh", "Luvya Rana", "Izaz"
-];
-
-const startDate = new Date(2026, 6, 20); // July 20, 2026
-const events: any[] = [];
-
-// Manually mapping the special events from the image
-const specialEvents: Record<number, { type: string, name: string }> = {
-  1: { type: "Masterclass", name: "Masterclass" },
-  2: { type: "Hackathon", name: "Monthly Hackathon" },
-  5: { type: "Masterclass", name: "Masterclass" },
-  7: { type: "Hackathon", name: "Monthly Hackathon" },
-  8: { type: "BigEvent", name: "DevForge Big Event" },
-  10: { type: "Masterclass", name: "Masterclass" },
-  11: { type: "Hackathon", name: "Monthly Hackathon" },
-  14: { type: "Masterclass", name: "Masterclass" },
-  15: { type: "Hackathon", name: "Monthly Hackathon" },
-  16: { type: "BigEvent", name: "DevForge Big Event" },
-  18: { type: "Masterclass", name: "Masterclass" },
-  20: { type: "Hackathon", name: "Monthly Hackathon" },
-  23: { type: "Masterclass", name: "Masterclass" },
-  24: { type: "Hackathon", name: "Monthly Hackathon" },
-  25: { type: "BigEvent", name: "DevForge Big Event" },
-  27: { type: "Masterclass", name: "Masterclass" },
-  28: { type: "Hackathon", name: "Monthly Hackathon" },
-  31: { type: "Masterclass", name: "Masterclass" },
-  32: { type: "Hackathon", name: "Monthly Hackathon" },
-  33: { type: "BigEvent", name: "DevForge Big Event" },
-  35: { type: "Masterclass", name: "Masterclass" },
-  37: { type: "Hackathon", name: "Monthly Hackathon" },
-  40: { type: "Masterclass", name: "Masterclass" },
-  41: { type: "Hackathon", name: "Monthly Hackathon" },
-  42: { type: "BigEvent", name: "DevForge Big Event" },
-  44: { type: "Masterclass", name: "Masterclass" },
-  46: { type: "Hackathon", name: "Monthly Hackathon" },
-  49: { type: "Masterclass", name: "Masterclass" },
-  50: { type: "Hackathon", name: "Monthly Hackathon" }
-};
-
-for (let i = 0; i < 50; i++) {
-  const sessionNumber = i + 1;
-  const date = new Date(startDate);
-  date.setDate(startDate.getDate() + (i * 7));
-  
-  const poc = pocLeads[i % 10];
-  const special = specialEvents[sessionNumber];
-  
-  let title = `Session #${sessionNumber}`;
-  let category = "Weekly Session";
-  
-  if (special) {
-    if (special.type === "Masterclass") {
-      title = `Masterclass & Session #${sessionNumber}`;
-      category = "Masterclass";
-    } else if (special.type === "Hackathon") {
-      title = `Monthly Hackathon & Session #${sessionNumber}`;
-      category = "Hackathon";
-    } else if (special.type === "BigEvent") {
-      title = `DevForge Big Event & Session #${sessionNumber}`;
-      category = "Big Event";
-    }
-  }
-
-  events.push({
-    id: sessionNumber,
-    title,
-    date,
-    time: "6:00 PM - 8:00 PM IST",
-    location: "DevForge Hub",
-    description: `Led by ${poc}. Join us for Session #${sessionNumber} of the annual DevForge calendar.`,
-    category,
-    attendees: Math.floor(Math.random() * 50) + 100,
-    poc
-  });
-}
+import { scheduledEvents as events, ScheduledEvent } from "@/lib/events-schedule";
 
 export default function EventsCalendar() {
   const [currentDate, setCurrentDate] = useState(new Date(2026, 6, 1)); // Start in July 2026
-  const [selectedEvent, setSelectedEvent] = useState<any>(null); // State for popup
+  const [selectedEvent, setSelectedEvent] = useState<ScheduledEvent | null>(null); // State for popup
   
   const nextMonth = () => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
   const prevMonth = () => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));

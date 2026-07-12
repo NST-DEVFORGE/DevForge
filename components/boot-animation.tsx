@@ -98,6 +98,13 @@ export function BootAnimation({ onComplete }: { onComplete: () => void }) {
                 className="absolute inset-0 opacity-20"
             />
 
+            <button
+                onClick={onComplete}
+                className="absolute top-6 right-6 z-20 text-xs font-mono text-neutral-500 hover:text-orange-400 border border-neutral-800 hover:border-orange-500/40 rounded-full px-4 py-2 transition-colors"
+            >
+                Skip →
+            </button>
+
             {/* Glitch overlay */}
             <motion.div
                 animate={{

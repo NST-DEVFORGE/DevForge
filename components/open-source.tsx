@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Trophy, Star, ExternalLink, GitMerge, Users, Code2, Zap } from "lucide-react";
 import prData from "../pr-data-report.json";
 import gssocSnapshot from "../data/gssoc-snapshot.json";
+import { TOTAL_MERGED_PRS, TOTAL_PRS, TOTAL_CONTRIBUTORS } from "@/lib/site-stats";
 
 // Build top GSSoC achievers sorted by rank (from real snapshot)
 const topGSSoC = [...gssocSnapshot.members]
@@ -15,11 +16,6 @@ const topGSSoC = [...gssocSnapshot.members]
 const topContributors = [...prData.members]
     .sort((a, b) => b.allPRs.merged - a.allPRs.merged)
     .slice(0, 4);
-
-// Stats including ESoC contributions
-const totalMerged = 285;
-const totalOpen   = prData.members.reduce((acc, m) => acc + m.allPRs.open, 0);
-const totalPRs    = 335;
 
 export function OpenSource() {
     return (
@@ -54,9 +50,9 @@ export function OpenSource() {
                 {/* Live Stats Row */}
                 <div className="grid grid-cols-3 gap-4 mb-20 max-w-3xl mx-auto">
                     {[
-                        { label: "Merged PRs", value: totalMerged, icon: <GitMerge size={20} className="text-purple-400" /> },
-                        { label: "Total PRs", value: totalPRs, icon: <Code2 size={20} className="text-orange-400" /> },
-                        { label: "Contributors", value: prData.members.length, icon: <Users size={20} className="text-blue-400" /> },
+                        { label: "Merged PRs", value: TOTAL_MERGED_PRS, icon: <GitMerge size={20} className="text-purple-400" /> },
+                        { label: "Total PRs", value: TOTAL_PRS, icon: <Code2 size={20} className="text-orange-400" /> },
+                        { label: "Contributors", value: TOTAL_CONTRIBUTORS, icon: <Users size={20} className="text-blue-400" /> },
                     ].map((stat, i) => (
                         <motion.div
                             key={i}
