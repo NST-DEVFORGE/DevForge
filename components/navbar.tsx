@@ -15,6 +15,8 @@ const programLinks = [
 
 const communityLinks = [
     { name: "Journey", href: "/journey" },
+    { name: "Members", href: "/members" },
+    { name: "Rewards", href: "/rewards" },
     { name: "Alumni", href: "/alumni" },
     { name: "Memory Lane", href: "/memory-lane" },
 ];
