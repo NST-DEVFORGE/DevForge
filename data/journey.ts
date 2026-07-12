@@ -15,30 +15,16 @@ const hackathonWinsByYear = (year: string) =>
 
 export const journeyChapters: JourneyChapter[] = [
     {
-        year: "2023",
-        status: "tbd",
-        headline: "Where it started",
-        summary:
-            "The founding story — date, founders, first workshop — hasn't been recorded here yet. This chapter ships once the team confirms it, rather than guessing.",
-        highlights: [],
-    },
-    {
-        year: "2024",
-        status: "documented",
-        headline: "First open-source seat",
-        summary: "The club's first documented open-source milestone: a member selected into Google Summer of Code.",
-        highlights: [
-            "Sahitya Singh selected for Google Summer of Code (GSoC) 2024, working with GirlScript Foundation",
-        ],
-    },
-    {
         year: "2025",
         status: "documented",
-        headline: "First wins",
-        summary: "Hackathon results start showing up as a record, not a claim.",
+        headline: "Year one — founded with the first batch",
+        summary:
+            "The college opened its doors in 2025, and DevForge started with it. One batch, a first set of workshops, and the first wins on the board before the year was out.",
         highlights: [
-            `${hackathonWinsByYear("2025")} first-place hackathon wins, including the DevForge Hackathon and Ideathon`,
-            "First cohort of members contributing to GSSoC-affiliated open-source organizations",
+            "DevForge founded at NST x SVYASA alongside the college's first-ever batch",
+            "First workshops run by members: Getting Started with Open Source (Sahitya Singh), Web Development Bootcamp (Unnati Jaiswal), AI & Machine Learning 101 (Sujan YD)",
+            `${hackathonWinsByYear("2025")} first-place hackathon wins in the first year, including the DevForge Hackathon and Ideathon`,
+            "First members start contributing to GSSoC-affiliated open-source organizations",
         ],
     },
     {

@@ -21,6 +21,65 @@ export interface LearnTrack {
 
 export const learningTracks: LearnTrack[] = [
     {
+        slug: "fundamentals",
+        title: "Computer Fundamentals",
+        level: "Beginner",
+        description: "The must-know questions. If you can answer all of these, you actually understand the machine you code on.",
+        modules: [
+            {
+                title: "The Machine",
+                nodes: [
+                    { title: "What is this machine?", type: "concept", description: "CPU, RAM, storage — what each one does and why you run out of them." },
+                    { title: "How do I talk to it without clicking?", type: "concept", description: "The shell: pwd, ls, cd." },
+                    { title: "Where does my stuff live?", type: "concept", description: "Files, paths, hidden files, extensions." },
+                    { title: "What is a file, really?", type: "concept", description: "Plain text, nano, VS Code." },
+                    { title: "What is my machine doing right now?", type: "concept", description: "The OS, processes, force quit." },
+                    { title: "Why does \"command not found\" happen?", type: "concept", description: "Permissions, PATH, environment variables." },
+                    { title: "How do I become faster on this machine?", type: "concept", description: "Piping, grep, shortcuts, man pages." },
+                    { title: "How do I make my machine do work for me?", type: "concept", description: "Scripts, Homebrew, automation, runtimes." },
+                ],
+            },
+            {
+                title: "Working With AI",
+                nodes: [
+                    { title: "How do I have a useful conversation with AI?", type: "concept", description: "Probing, follow-ups." },
+                    { title: "How do I know when AI is lying?", type: "concept", description: "Hallucinations, doubt, checking the docs." },
+                    { title: "What is AI actually doing when it responds?", type: "concept", description: "Tokens, context window, models." },
+                    { title: "How do I think through AI, not just ask it?", type: "concept", description: "Prompting, system prompts, API calls." },
+                    { title: "Language exploration with AI", type: "concept", description: "Use AI to learn an unfamiliar programming language hands-on." },
+                    { title: "Technology exploration with AI", type: "concept", description: "Use AI to map an unfamiliar technology before diving in." },
+                    { title: "Repo exploration with AI", type: "concept", description: "Use AI to navigate an unfamiliar codebase — see also the blog post on reading codebases." },
+                ],
+            },
+            {
+                title: "How Computers Think",
+                nodes: [
+                    { title: "How does a computer count?", type: "concept", description: "Binary, encoding, ASCII, UTF-8." },
+                    { title: "How does a computer decide?", type: "concept", description: "Boolean logic, conditions, comparisons." },
+                ],
+            },
+            {
+                title: "Networks & The Web",
+                nodes: [
+                    { title: "How does my machine find another machine?", type: "concept", description: "IP, ports, DNS." },
+                    { title: "What happens when I type a URL?", type: "concept", description: "HTTP, status codes, HTTPS, curl." },
+                    { title: "What's on the other side?", type: "concept", description: "Servers, clients, request-response, localhost." },
+                    { title: "How do machines talk without humans?", type: "concept", description: "APIs, JSON, packages, frameworks." },
+                    { title: "What does a website look like underneath?", type: "concept", description: "View source, HTML, DevTools." },
+                ],
+            },
+            {
+                title: "Code, Breakage & Sharing",
+                nodes: [
+                    { title: "What is software and what happens when it breaks?", type: "concept", description: "Source code, interpreted languages, errors, stack traces." },
+                    { title: "How do I undo a mistake?", type: "concept", description: "git, commits, history, diff, branches." },
+                    { title: "How do I share my work?", type: "concept", description: "GitHub, push/pull, README, Markdown." },
+                    { title: "You can answer every question above", type: "milestone" },
+                ],
+            },
+        ],
+    },
+    {
         slug: "open-source",
         title: "Open Source",
         level: "Beginner",

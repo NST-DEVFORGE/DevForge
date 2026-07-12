@@ -1,10 +1,19 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { BookOpen, ExternalLink, CheckCircle2, Circle, Presentation, Flag } from "lucide-react";
+import { BookOpen, ExternalLink, CheckCircle2, Circle, Presentation, Flag, Sun, ArrowUpRight, GitPullRequest } from "lucide-react";
 import { learningTracks } from "@/data/learning-tracks";
+import { starterRepos } from "@/data/open-source-starters";
 import { useLearnProgress } from "@/lib/use-learn-progress";
+
+const KIND_LABELS: Record<string, string> = {
+    practice: "Practice ground",
+    repo: "Active repo",
+    guide: "Guide",
+    discovery: "Discovery",
+};
 
 const LEVEL_STYLES: Record<string, string> = {
     Beginner: "bg-green-500/10 text-green-400 border-green-500/20",
@@ -40,6 +49,21 @@ export default function LearnPage() {
                         Where our own workshops sit alongside the resources we'd point you to anyway.
                     </p>
                 </motion.div>
+
+                {/* GSoC Playbook banner */}
+                <Link
+                    href="/learn/gsoc"
+                    className="flex items-center gap-4 bg-gradient-to-r from-orange-500/15 to-transparent border border-orange-500/30 hover:border-orange-500/60 rounded-2xl p-5 mb-12 transition-colors group"
+                >
+                    <div className="w-12 h-12 rounded-xl bg-orange-500/15 flex items-center justify-center flex-shrink-0">
+                        <Sun className="text-orange-500" size={24} />
+                    </div>
+                    <div className="flex-1">
+                        <div className="font-bold text-white group-hover:text-orange-400 transition-colors">The GSoC Playbook</div>
+                        <div className="text-sm text-neutral-400">Timeline, tools, copy-paste prompts, and the 5-step formula — from students who got selected.</div>
+                    </div>
+                    <ArrowUpRight className="text-neutral-500 group-hover:text-orange-500 transition-colors flex-shrink-0" size={20} />
+                </Link>
 
                 {/* Track picker */}
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
@@ -151,6 +175,37 @@ export default function LearnPage() {
                         </div>
                     ))}
                 </motion.div>
+
+                {/* Real starter repos */}
+                <section className="mt-20">
+                    <div className="mb-8">
+                        <h2 className="text-2xl font-bold text-white flex items-center gap-2 mb-2">
+                            <GitPullRequest size={22} className="text-orange-500" /> Your first PRs — real, active repos
+                        </h2>
+                        <p className="text-neutral-400 max-w-2xl">
+                            Not toy projects. Pick one, set it up locally (expect it to take a few days — that struggle is the lesson), then take a labeled beginner issue.
+                        </p>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-4">
+                        {starterRepos.map((repo) => (
+                            <a
+                                key={repo.url}
+                                href={repo.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="block bg-neutral-900/50 border border-neutral-800 hover:border-orange-500/40 rounded-2xl p-5 transition-colors group"
+                            >
+                                <div className="flex items-center justify-between gap-2 mb-2">
+                                    <span className="font-bold text-white group-hover:text-orange-400 transition-colors">{repo.name}</span>
+                                    <span className="text-[10px] font-semibold uppercase tracking-wider text-neutral-500 bg-white/5 border border-white/10 rounded-full px-2 py-0.5 flex-shrink-0">
+                                        {KIND_LABELS[repo.kind]}
+                                    </span>
+                                </div>
+                                <p className="text-sm text-neutral-400 leading-relaxed">{repo.why}</p>
+                            </a>
+                        ))}
+                    </div>
+                </section>
             </div>
         </div>
     );
