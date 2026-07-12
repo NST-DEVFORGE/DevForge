@@ -151,7 +151,7 @@ export default function GsocPlaybookPage() {
                                 <div className="text-xs text-neutral-400 uppercase tracking-wider mt-1">Acceptance</div>
                             </div>
                         </div>
-                        <p className="text-sm text-neutral-400 mt-4">This isn't a participation-trophy program. You need a strategy.</p>
+                        <p className="text-sm text-neutral-400 mt-4">This isn&apos;t a participation-trophy program. You need a strategy.</p>
                     </div>
                 </section>
 

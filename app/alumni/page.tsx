@@ -30,9 +30,9 @@ export default function AlumniPage() {
                             Nothing here yet — on purpose.
                         </p>
                         <p className="text-neutral-500 mb-8">
-                            We don't have a real graduate record to show, and we'd rather leave this
-                            page empty than fill it with placeholder names. If you're a DevForge alum,
-                            tell us where you landed and we'll add you.
+                            We don&apos;t have a real graduate record to show, and we&apos;d rather leave this
+                            page empty than fill it with placeholder names. If you&apos;re a DevForge alum,
+                            tell us where you landed and we&apos;ll add you.
                         </p>
                         <a
                             href="mailto:devclub@nst.edu?subject=Alumni%20entry"

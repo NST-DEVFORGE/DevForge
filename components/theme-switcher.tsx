@@ -51,7 +51,7 @@ export function ThemeSwitcher() {
                 <div
                     role="menu"
                     aria-label="Theme"
-                    className="absolute right-0 top-full mt-2 w-44 rounded-xl border border-white/10 bg-black/95 backdrop-blur-xl py-1.5 shadow-2xl z-50"
+                    className="absolute right-0 top-full mt-2 w-48 max-h-[70vh] overflow-y-auto rounded-xl border border-white/10 bg-black/95 backdrop-blur-xl py-1.5 shadow-2xl z-50"
                 >
                     {themes.map((theme) => (
                         <button

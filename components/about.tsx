@@ -46,7 +46,7 @@ export function About() {
                         What We <span className="text-cyan-400">Do</span>
                     </h2>
                     <p className="text-xl text-neutral-400 max-w-2xl mx-auto">
-                        We're a community of passionate developers building the future, one line of code at a time.
+                        We&apos;re a community of passionate developers building the future, one line of code at a time.
                     </p>
                 </motion.div>
 

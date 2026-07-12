@@ -10,6 +10,11 @@ export const THEME_STORAGE_KEY = "devforge-theme";
 
 export const themes: ThemeDef[] = [
     { id: "aurora", name: "Aurora", swatch: ["#22d3ee", "#8b5cf6"] },
+    { id: "avengers", name: "Avengers", swatch: ["#ef4444", "#fbbf24"] },
+    { id: "spiderverse", name: "Spider-Verse", swatch: ["#ef4444", "#3b82f6"] },
+    { id: "hawkins", name: "Hawkins", swatch: ["#ff4646", "#a855f7"] },
+    { id: "cyberpunk", name: "Cyberpunk", swatch: ["#facc15", "#e879f9"] },
+    { id: "synthwave", name: "Synthwave", swatch: ["#f472b6", "#818cf8"] },
     { id: "ember", name: "Ember", swatch: ["#fb923c", "#f43f5e"] },
     { id: "matrix", name: "Matrix", swatch: ["#4ade80", "#a3e635"] },
     { id: "ocean", name: "Ocean", swatch: ["#60a5fa", "#38bdf8"] },

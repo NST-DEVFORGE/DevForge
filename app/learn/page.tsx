@@ -46,7 +46,7 @@ export default function LearnPage() {
                         Learning <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">Tracks</span>
                     </h1>
                     <p className="text-xl text-neutral-400 max-w-2xl mx-auto">
-                        Where our own workshops sit alongside the resources we'd point you to anyway.
+                        Where our own workshops sit alongside the resources we&apos;d point you to anyway.
                     </p>
                 </motion.div>
 

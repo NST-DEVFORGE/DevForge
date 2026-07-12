@@ -22,8 +22,8 @@ export function Join() {
                         Ready to <span className="text-cyan-400">Join?</span>
                     </h2>
                     <p className="text-xl text-neutral-400 mb-12 max-w-2xl mx-auto">
-                        Become part of DevForge, NST x SVYASA's thriving developer community.
-                        Whether you're a beginner or an expert, there's a place for you here.
+                        Become part of DevForge, NST x SVYASA&apos;s thriving developer community.
+                        Whether you&apos;re a beginner or an expert, there&apos;s a place for you here.
                     </p>
 
                     {/* CTA Card */}
