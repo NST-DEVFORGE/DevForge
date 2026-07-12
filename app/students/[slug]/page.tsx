@@ -3,7 +3,7 @@
 import { use } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, Play, Github, Linkedin, Twitter, ExternalLink, Code2, BookOpen, GitMerge, GitPullRequest, GitPullRequestDraft } from "lucide-react";
+import { ArrowLeft, Play, Github, Linkedin, Twitter, ExternalLink, Code2, BookOpen, GitMerge, GitPullRequest, GitPullRequestDraft, Trophy, Quote } from "lucide-react";
 import { studentsData } from "../../../data/students";
 import prData from "../../../pr-data-report.json";
 import { notFound } from "next/navigation";
@@ -169,6 +169,50 @@ export default function StudentProfilePage({ params }: { params: Promise<{ slug:
                                             </div>
                                         ))}
                                     </div>
+                                </motion.div>
+                            )}
+
+                            {/* Milestones */}
+                            {richData.milestones && richData.milestones.length > 0 && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                >
+                                    <div className="flex items-center gap-4 mb-6">
+                                        <div className="p-3 bg-yellow-500/20 text-yellow-400 rounded-xl">
+                                            <Trophy size={28} />
+                                        </div>
+                                        <h2 className="text-3xl font-bold">Proudest Milestones</h2>
+                                    </div>
+                                    <ul className="space-y-3">
+                                        {richData.milestones.map((milestone, i) => (
+                                            <li key={i} className="flex items-start gap-3 bg-neutral-900/50 border border-neutral-800 p-5 rounded-2xl hover:border-yellow-500/40 transition-colors">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-2.5 flex-shrink-0" />
+                                                <p className="text-neutral-300">{milestone}</p>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </motion.div>
+                            )}
+
+                            {/* Advice to juniors */}
+                            {richData.advice && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                >
+                                    <div className="flex items-center gap-4 mb-6">
+                                        <div className="p-3 bg-green-500/20 text-green-400 rounded-xl">
+                                            <Quote size={28} />
+                                        </div>
+                                        <h2 className="text-3xl font-bold">Advice to Juniors</h2>
+                                    </div>
+                                    <blockquote className="bg-gradient-to-br from-green-500/10 to-transparent border border-green-500/20 p-8 rounded-3xl">
+                                        <p className="text-neutral-200 text-lg leading-relaxed italic">&ldquo;{richData.advice}&rdquo;</p>
+                                        <footer className="mt-4 text-sm text-green-400 font-semibold not-italic">— {richData.name}</footer>
+                                    </blockquote>
                                 </motion.div>
                             )}
 
