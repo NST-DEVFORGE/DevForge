@@ -1,5 +1,7 @@
 import { MetadataRoute } from 'next'
 import { studentsData } from '@/data/students'
+import { getAllPostsMeta } from '@/lib/blog'
+import { blogAuthors } from '@/data/blog-authors'
 
 const BASE_URL = 'https://www.devforge.club'
 
@@ -28,5 +30,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.5,
     }))
 
-    return [...staticRoutes, ...studentRoutes]
+    const blogRoutes: MetadataRoute.Sitemap = [
+        { url: `${BASE_URL}/blog`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.7 },
+        ...getAllPostsMeta().map((p) => ({
+            url: `${BASE_URL}/blog/${p.slug}`,
+            lastModified: new Date(p.date),
+            changeFrequency: 'monthly' as const,
+            priority: 0.6,
+        })),
+        ...blogAuthors.map((a) => ({
+            url: `${BASE_URL}/blog/author/${a.slug}`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly' as const,
+            priority: 0.4,
+        })),
+    ]
+
+    return [...staticRoutes, ...studentRoutes, ...blogRoutes]
 }

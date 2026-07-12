@@ -35,6 +35,7 @@ export function Navbar() {
         { name: "Conferences", href: "/conferences" },
         { name: "Dev Club", href: "/club" },
         { name: "Learn", href: "/learn" },
+        { name: "Blog", href: "/blog" },
     ];
 
     return (
