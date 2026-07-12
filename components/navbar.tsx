@@ -30,6 +30,7 @@ export function Navbar() {
         { name: "Home", href: "/" },
         { name: "Journey", href: "/journey" },
         { name: "Open Source", href: "/opensource" },
+        { name: "Projects", href: "/projects" },
         { name: "Hackathons", href: "/hackathons" },
         { name: "Conferences", href: "/conferences" },
         { name: "Dev Club", href: "/club" },
