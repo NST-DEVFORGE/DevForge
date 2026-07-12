@@ -48,8 +48,8 @@ export default function ESocPage() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 max-w-3xl mx-auto">
                     {[
                         { title: "Total Contributors", value: totalContributors, icon: <Users className="text-blue-500" /> },
-                        { title: "Merged PRs", value: totalMergedPRs, icon: <GitMerge className="text-green-500" /> },
-                        { title: "Open PRs", value: totalOpenPRs, icon: <GitBranch className="text-purple-500" /> }
+                        { title: "Merged PRs", value: totalMergedPRs, icon: <GitMerge className="text-purple-500" /> },
+                        { title: "Open PRs", value: totalOpenPRs, icon: <GitBranch className="text-green-500" /> }
                     ].map((metric, i) => (
                         <motion.div
                             key={i}
@@ -104,13 +104,13 @@ export default function ESocPage() {
                                 <div className="mt-auto space-y-3 relative z-10">
                                     <div className="bg-black/50 border border-neutral-800 rounded-xl p-3 flex justify-between items-center group-hover:border-blue-900/50 transition-colors">
                                         <span className="text-neutral-400 text-sm flex items-center gap-2">
-                                            <GitMerge size={16} className="text-green-500" /> ESoC Merged
+                                            <GitMerge size={16} className="text-purple-500" /> ESoC Merged
                                         </span>
                                         <span className="font-bold text-white text-lg">{member.esocPRs.merged}</span>
                                     </div>
                                     <div className="bg-black/50 border border-neutral-800 rounded-xl p-3 flex justify-between items-center group-hover:border-blue-900/50 transition-colors">
                                         <span className="text-neutral-400 text-sm flex items-center gap-2">
-                                            <GitBranch size={16} className="text-purple-500" /> ESoC Open
+                                            <GitBranch size={16} className="text-green-500" /> ESoC Open
                                         </span>
                                         <span className="font-bold text-white text-lg">{member.esocPRs.open}</span>
                                     </div>
@@ -123,9 +123,9 @@ export default function ESocPage() {
                                                     <div key={idx} className="bg-blue-900/20 border border-blue-500/20 rounded-md px-2 py-1 flex items-center gap-1">
                                                         <span className="text-blue-400 text-xs font-medium">{org.name}</span>
                                                         <span className="text-neutral-400 text-[10px] ml-1">
-                                                            {org.merged > 0 && <span className="text-green-500" title="Merged">{org.merged} merged</span>}
+                                                            {org.merged > 0 && <span className="text-purple-500" title="Merged">{org.merged} merged</span>}
                                                             {org.merged > 0 && org.open > 0 && <span> </span>}
-                                                            {org.open > 0 && <span className="text-purple-500" title="Open">{org.open} open</span>}
+                                                            {org.open > 0 && <span className="text-green-500" title="Open">{org.open} open</span>}
                                                         </span>
                                                     </div>
                                                 ))}
