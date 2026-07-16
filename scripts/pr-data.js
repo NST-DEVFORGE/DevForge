@@ -4,10 +4,18 @@
 // Run with: node scripts/pr-data.js
 
 const TEAM_MEMBERS = [
+    { name: 'Abhijit Saha', github: 'AbhijitSaha-coder' },
+    { name: 'Anant Sharma', github: 'anant2526' },
+    { name: 'Bhavesh Sharma', github: 'bhavesh-210' },
+    { name: 'Dhruv Mehta', github: 'zenowinged' },
     { name: 'Geetansh Goyal', github: 'geetxnshgoyal' },
     { name: 'Lay Shah', github: 'Layyzyy' },
     { name: 'Luvya Rana', github: 'luvyarana' },
+    { name: 'Nishtha Agarwal', github: 'nishtha-agarwal-211' },
+    { name: 'Prateek', github: 'prateek6789-ai' },
     { name: 'Ravi Sharma', github: 'ravisharma-09' },
+    { name: 'Sahitya Singh', github: 'Sahitya0805' },
+    { name: 'Sujan Y D', github: 'sujanyd' },
     { name: 'Vikas Sharma', github: 'sharmavikas18' },
     { name: 'Aryan Patel', github: 'AryanPatel-ui' },
     { name: 'Nithyaraj', github: 'nithyarajmudhaliyar' },
@@ -18,7 +26,8 @@ const TEAM_MEMBERS = [
     { name: 'Bhavesh Sharma', github: 'bhavesh-210' },
     { name: 'Unnati Jaiswal', github: 'unnati-jaiswal24' },
     { name: 'Shristi Kumari', github: 'Shristibot' },
-    { name: 'Dhiraj Rathod', github: 'dhiraj-143r' }
+    { name: 'Dhiraj Rathod', github: 'dhiraj-143r' },
+    { name: 'Kumari Shristi', github: 'Shristibot' }
 ];
 
 // Comprehensive GSoC Organizations List (GSoC 2024/2025)
