@@ -184,15 +184,15 @@ export default function GsocPlaybookPage() {
                 <section className="mb-12">
                     <h2 className="text-2xl font-bold mb-4 flex items-center gap-2"><Wrench size={20} className="text-cyan-400" /> The actual toolkit</h2>
                     <div className="space-y-4 text-neutral-300 text-sm leading-relaxed">
-                        <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-5">
+                        <div className="glass rounded-xl p-5">
                             <h3 className="font-bold text-white mb-2">Code & development</h3>
                             <p><b className="text-white">VS Code / Cursor</b> with GitLens, Prettier, ESLint, Live Share, and the GitHub Pull Requests extension. <b className="text-white">GitHub Copilot is free for students</b> (normally $10/month). <b className="text-white">GitHub CLI</b>: <code className="bg-white/5 px-1.5 py-0.5 rounded text-cyan-200 font-mono text-xs">gh pr create --fill</code> and <code className="bg-white/5 px-1.5 py-0.5 rounded text-cyan-200 font-mono text-xs">gh issue list --label &quot;good first issue&quot;</code>. GitKraken is free for open source.</p>
                         </div>
-                        <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-5">
+                        <div className="glass rounded-xl p-5">
                             <h3 className="font-bold text-white mb-2">Notes & proposal writing</h3>
                             <p><b className="text-white">Notion</b> (free for students) for a contribution tracker with checkboxes. <b className="text-white">Obsidian</b> for research notes. <b className="text-white">Overleaf</b> for the proposal itself — a polished LaTeX proposal stands out from generic Google Docs; use Docs only for quick mentor-feedback drafts.</p>
                         </div>
-                        <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-5">
+                        <div className="glass rounded-xl p-5">
                             <h3 className="font-bold text-white mb-2">Communication</h3>
                             <p>Discord/Slack for modern projects; IRC (HexChat or IRCCloud) for older ones like Mozilla and Apache. Use a professional email address for official communication.</p>
                         </div>
@@ -205,7 +205,7 @@ export default function GsocPlaybookPage() {
                     <p className="text-sm text-neutral-500 mb-4">Copy-paste ready. Find accepted proposals to feed prompt 1 at the archives linked in Resources below.</p>
                     <div className="space-y-3">
                         {PROMPTS.map((prompt) => (
-                            <details key={prompt.title} className="bg-neutral-900/50 border border-neutral-800 rounded-xl overflow-hidden group">
+                            <details key={prompt.title} className="glass rounded-xl overflow-hidden group">
                                 <summary className="px-5 py-4 cursor-pointer font-semibold text-white hover:text-cyan-300 transition-colors list-none flex items-center justify-between">
                                     {prompt.title}
                                     <span className="text-neutral-600 text-xs group-open:rotate-180 transition-transform">▼</span>
@@ -227,7 +227,7 @@ export default function GsocPlaybookPage() {
                             ["Write your proposal (Mar 1–15)", "Title & synopsis → benefits to community → week-by-week timeline → technical design → related work → about you. Submit a draft to a mentor by Mar 10 for feedback."],
                             ["The waiting game (Apr)", "Keep contributing, keep building relationships, prepare for the coding phase. Activity during the wait gets noticed."],
                         ].map(([title, body], i) => (
-                            <li key={title} className="flex gap-4 bg-neutral-900/50 border border-neutral-800 rounded-xl p-5">
+                            <li key={title} className="flex gap-4 glass rounded-xl p-5">
                                 <span className="text-2xl font-black font-mono text-cyan-400 flex-shrink-0">{i + 1}</span>
                                 <div>
                                     <h3 className="font-bold text-white mb-1">{title}</h3>
@@ -246,7 +246,7 @@ export default function GsocPlaybookPage() {
                     <h2 className="text-2xl font-bold mb-4">Top 8 mistakes (from actual mentors)</h2>
                     <div className="grid sm:grid-cols-2 gap-3">
                         {MISTAKES.map(([mistake, fix]) => (
-                            <div key={mistake} className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-4 text-sm">
+                            <div key={mistake} className="glass rounded-xl p-4 text-sm">
                                 <div className="text-red-400 font-semibold mb-1">✗ {mistake}</div>
                                 <div className="text-green-400">→ {fix}</div>
                             </div>

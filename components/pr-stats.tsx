@@ -122,7 +122,7 @@ export function PRStats() {
                             {/* Dual Stats Display */}
                             <div className="grid md:grid-cols-2 gap-6 mb-8">
                                 {/* Total All PRs */}
-                                <div className="text-center p-6 bg-neutral-900/50 rounded-2xl border border-neutral-700">
+                                <div className="text-center p-6 glass rounded-2xl">
                                     <div className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-500 mb-2">
                                         {stats.totalAllPRs}
                                     </div>
@@ -382,7 +382,7 @@ export function PRStats() {
                                 whileHover={{ y: -10 }}
                                 className="group"
                             >
-                                <div className="relative bg-neutral-900/50 backdrop-blur-md border border-neutral-800 rounded-2xl p-6 overflow-hidden hover:border-cyan-400/50 transition-all duration-300 h-full">
+                                <div className="relative glass rounded-2xl p-6 overflow-hidden hover:border-cyan-400/50 transition-all duration-300 h-full">
                                     {/* Gradient overlay */}
                                     <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 

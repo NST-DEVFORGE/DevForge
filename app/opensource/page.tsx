@@ -219,7 +219,7 @@ export default function OpenSourceImpact() {
                             animate={{ opacity: 1, scale: 1 }}
                             whileHover={{ scale: 1.05, y: -5 }}
                             transition={{ delay: i * 0.1 }}
-                            className="bg-neutral-900/50 border border-neutral-800 p-6 rounded-3xl text-center backdrop-blur-sm shadow-xl hover:border-cyan-400/30 transition-colors cursor-default"
+                            className="glass p-6 rounded-3xl text-center backdrop-blur-sm shadow-xl hover:border-cyan-400/30 transition-colors cursor-default"
                         >
                             <div className="flex justify-center mb-4">{metric.icon}</div>
                             <div className="text-4xl font-bold text-white mb-2">{metric.value}</div>
@@ -231,7 +231,7 @@ export default function OpenSourceImpact() {
                 {/* Graphs Section */}
                 <div className="grid lg:grid-cols-2 gap-6 mb-24">
                     {/* Activity Graph Bar */}
-                    <div className="bg-neutral-900/40 border border-neutral-800 p-8 rounded-3xl backdrop-blur-md hover:border-cyan-400/20 transition-colors">
+                    <div className="glass-subtle p-8 rounded-3xl backdrop-blur-md hover:border-cyan-400/20 transition-colors">
                         <div className="flex items-center justify-between mb-8">
                             <h3 className="text-2xl font-bold flex items-center gap-2">
                                 <Activity className="text-cyan-400" /> Monthly Activity
@@ -287,7 +287,7 @@ export default function OpenSourceImpact() {
                     </div>
 
                     {/* Organizations Graph */}
-                    <div className="bg-neutral-900/40 border border-neutral-800 p-8 rounded-3xl backdrop-blur-md hover:border-blue-500/20 transition-colors">
+                    <div className="glass-subtle p-8 rounded-3xl backdrop-blur-md hover:border-blue-500/20 transition-colors">
                         <div className="flex items-center justify-between mb-8">
                             <h3 className="text-2xl font-bold flex items-center gap-2">
                                 <Globe2 className="text-blue-500" /> Top Organizations
@@ -345,7 +345,7 @@ export default function OpenSourceImpact() {
 
                 {/* Contribution matrix — real per-member, per-org PR counts from GSoC + ESoC records */}
                 <div className="mb-24">
-                    <div className="bg-neutral-900/40 border border-neutral-800 p-8 rounded-3xl backdrop-blur-md">
+                    <div className="glass-subtle p-8 rounded-3xl backdrop-blur-md">
                         <div className="mb-6">
                             <h3 className="text-2xl font-bold flex items-center gap-2 mb-2">
                                 <Globe2 className="text-cyan-400" /> Who Contributed Where
@@ -370,7 +370,7 @@ export default function OpenSourceImpact() {
                                 initial={{ opacity: 0, y: 50 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: i * 0.2 }}
-                                className={`flex flex-col items-center bg-neutral-900/50 border border-neutral-800 rounded-3xl p-8 backdrop-blur-md relative ${user.place === 1 ? 'md:-translate-y-8 z-10 shadow-2xl shadow-yellow-500/10 border-yellow-500/20' : ''}`}
+                                className={`flex flex-col items-center glass rounded-3xl p-8 backdrop-blur-md relative ${user.place === 1 ? 'md:-translate-y-8 z-10 shadow-2xl shadow-yellow-500/10 border-yellow-500/20' : ''}`}
                             >
                                 <Medal className={`mb-4 ${user.color}`} size={32} />
                                 <div className={`text-5xl font-black mb-6 ${user.color}`}>{user.place}</div>
@@ -422,7 +422,7 @@ export default function OpenSourceImpact() {
                                     whileHover={{ y: -10 }}
                                     className="group"
                                 >
-                                    <div className="relative bg-neutral-900/50 backdrop-blur-md border border-neutral-800 rounded-2xl p-6 overflow-hidden hover:border-cyan-400/50 transition-all duration-300 h-full">
+                                    <div className="relative glass rounded-2xl p-6 overflow-hidden hover:border-cyan-400/50 transition-all duration-300 h-full">
                                         <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                                         <div className="relative">

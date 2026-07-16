@@ -55,7 +55,7 @@ export default function HackathonsHallOfFame() {
 
                 {/* Filter */}
                 <div className="flex justify-center mb-12">
-                    <div className="inline-flex bg-neutral-900 border border-neutral-800 rounded-2xl p-2 gap-2">
+                    <div className="inline-flex glass-subtle rounded-2xl p-2 gap-2">
                         {["All", "2026", "2025"].map(year => (
                             <button
                                 key={year}
@@ -79,7 +79,7 @@ export default function HackathonsHallOfFame() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
-                            className="bg-neutral-900/40 backdrop-blur-sm border border-neutral-800 rounded-[2rem] overflow-hidden group hover:border-cyan-400/50 transition-colors duration-500"
+                            className="glass-subtle rounded-[2rem] overflow-hidden group hover:border-cyan-400/50 transition-colors duration-500"
                         >
                             {/* Project Image */}
                             <div className="h-64 bg-neutral-800 relative overflow-hidden">

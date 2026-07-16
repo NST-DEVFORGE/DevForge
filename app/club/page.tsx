@@ -37,7 +37,7 @@ export default function DeveloperClub() {
                     <h2 className="text-4xl font-bold mb-12 text-center">Current Leadership</h2>
                     <div className="flex flex-wrap justify-center gap-8">
                         {clubLeadership.map((leader, i) => (
-                            <div key={i} className="w-full md:w-80 group relative bg-neutral-900/50 border border-neutral-800 rounded-3xl p-6 text-center hover:border-purple-500/50 transition-colors">
+                            <div key={i} className="w-full md:w-80 group relative glass rounded-3xl p-6 text-center hover:border-purple-500/50 transition-colors">
                                 <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl pointer-events-none" />
                                 
                                 <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-neutral-800 group-hover:border-purple-500/50 transition-colors">

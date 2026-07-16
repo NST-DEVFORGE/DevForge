@@ -61,7 +61,7 @@ export function Closing() {
                         </p>
                         <Magnetic>
                             <a
-                                href="https://forms.gle/M8rDS4wG1jyuGiSC6"
+                                href="https://forms.gle/kBYengUpz5D7WHSz9"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center whitespace-nowrap px-9 py-4 bg-cyan-400 text-black font-semibold rounded-full hover:bg-white transition-colors duration-300"

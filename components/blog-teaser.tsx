@@ -17,7 +17,7 @@ export function BlogTeaser({ posts }: { posts: BlogPostMeta[] }) {
                         <Reveal key={post.slug} delay={i * 0.1}>
                             <Link
                                 href={`/blog/${post.slug}`}
-                                className="block h-full bg-neutral-900/50 border border-neutral-800 hover:border-cyan-400/40 rounded-2xl p-6 transition-colors group"
+                                className="block h-full glass hover:border-cyan-400/40 rounded-2xl p-6 transition-colors group"
                             >
                                 <div className="text-xs text-cyan-300 font-semibold uppercase tracking-wider mb-3">{post.category}</div>
                                 <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">{post.title}</h3>

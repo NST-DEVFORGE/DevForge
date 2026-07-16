@@ -164,7 +164,7 @@ export function GsocStats() {
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         {/* Organization Distribution Pie Chart */}
-                        <div className="bg-neutral-900/50 border border-neutral-700 rounded-2xl p-4 md:p-6">
+                        <div className="glass rounded-2xl p-4 md:p-6">
                             <div className="flex items-center gap-2 mb-4">
                                 <PieChartIcon className="w-5 h-5 text-cyan-400" />
                                 <h3 className="text-lg md:text-xl font-bold text-white">Organization Distribution</h3>
@@ -215,7 +215,7 @@ export function GsocStats() {
                         </div>
 
                         {/* Per-Member Contribution Bar Chart */}
-                        <div className="bg-neutral-900/50 border border-neutral-700 rounded-2xl p-6">
+                        <div className="glass rounded-2xl p-6">
                             <div className="flex items-center gap-2 mb-4">
                                 <BarChart3 className="w-5 h-5 text-cyan-400" />
                                 <h3 className="text-xl font-bold text-white">GSoC PRs per Member</h3>
@@ -255,14 +255,14 @@ export function GsocStats() {
 
                     {/* Contribution Insights */}
                     <div className="mt-6 grid md:grid-cols-3 gap-4">
-                        <div className="bg-neutral-900/50 border border-neutral-700 rounded-xl p-4 text-center">
+                        <div className="glass rounded-xl p-4 text-center">
                             <div className="text-3xl font-bold text-purple-500 mb-1">
                                 {data.summary.gsocTotal > 0 ? Math.round((data.summary.gsocMerged / data.summary.gsocTotal) * 100) : 0}%
                             </div>
                             <div className="text-neutral-400 text-sm">Merge Rate</div>
                             <div className="text-xs text-neutral-500 mt-1">PRs successfully merged</div>
                         </div>
-                        <div className="bg-neutral-900/50 border border-neutral-700 rounded-xl p-4 text-center">
+                        <div className="glass rounded-xl p-4 text-center">
                             <div className="text-3xl font-bold text-cyan-400 mb-1">
                                 {(() => {
                                     const orgSet = new Set<string>();
@@ -273,7 +273,7 @@ export function GsocStats() {
                             <div className="text-neutral-400 text-sm">Organizations</div>
                             <div className="text-xs text-neutral-500 mt-1">Unique GSoC orgs contributed to</div>
                         </div>
-                        <div className="bg-neutral-900/50 border border-neutral-700 rounded-xl p-4 text-center">
+                        <div className="glass rounded-xl p-4 text-center">
                             <div className="text-3xl font-bold text-green-500 mb-1">
                                 {data.members.length}
                             </div>
@@ -356,7 +356,7 @@ export function GsocStats() {
                                     {member.orgBreakdown && member.orgBreakdown.map((org) => (
                                         <div
                                             key={org.org}
-                                            className="bg-neutral-900/50 rounded-xl p-4 border border-neutral-700"
+                                            className="glass rounded-xl p-4"
                                         >
                                             <div className="flex items-center justify-between mb-3">
                                                 <a
@@ -434,7 +434,7 @@ export function GsocStats() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.4 + i * 0.03 }}
-                                className="block bg-neutral-900/50 border border-neutral-800 hover:border-cyan-400/50 rounded-xl p-4 transition-all"
+                                className="block glass hover:border-cyan-400/50 rounded-xl p-4 transition-all"
                             >
                                 <div className="flex items-start justify-between gap-4">
                                     <div className="flex-1">

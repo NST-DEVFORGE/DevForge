@@ -57,7 +57,7 @@ export default function ESocPage() {
                             animate={{ opacity: 1, scale: 1 }}
                             whileHover={{ scale: 1.05, y: -5 }}
                             transition={{ delay: i * 0.1 }}
-                            className="bg-neutral-900/50 border border-blue-900/30 p-6 rounded-3xl text-center backdrop-blur-sm shadow-lg hover:border-blue-500/30 transition-colors"
+                            className="glass border border-blue-900/30 p-6 rounded-3xl text-center shadow-lg hover:border-blue-500/30 transition-colors"
                         >
                             <div className="flex justify-center mb-4">{metric.icon}</div>
                             <div className="text-4xl font-bold text-white mb-2">{metric.value}</div>
@@ -81,7 +81,7 @@ export default function ESocPage() {
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.05 }}
                                 whileHover={{ scale: 1.02 }}
-                                className="bg-neutral-900/40 border border-blue-900/20 p-6 rounded-3xl hover:border-blue-500/50 transition-all group relative overflow-hidden flex flex-col"
+                                className="glass border border-blue-900/20 p-6 rounded-3xl hover:border-blue-500/50 transition-all group relative overflow-hidden flex flex-col"
                             >
                                 <div className="absolute -top-12 -right-12 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl group-hover:bg-blue-500/20 transition-colors" />
                                 

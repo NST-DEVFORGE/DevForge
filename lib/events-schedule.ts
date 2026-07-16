@@ -61,8 +61,17 @@ function buildSchedule(): ScheduledEvent[] {
 
         let title = `Session #${sessionNumber}`;
         let category = "Weekly Session";
+        let time = "6:00 PM - 8:00 PM IST";
+        let location = "DevForge Hub";
+        let description = `Led by ${poc}. Join us for Session #${sessionNumber} of the annual DevForge calendar.`;
 
-        if (special?.type === "Masterclass") {
+        if (sessionNumber === 1) {
+            title = "DevForge Orientation Session";
+            category = "Orientation";
+            time = "7:00 PM - 8:00 PM IST";
+            location = "Google Meet";
+            description = "Welcome orientation session for our incoming juniors! Join us to get to know everything about the club, our vision, upcoming events, projects, leadership structure, and what being a DevForge member is all about.";
+        } else if (special?.type === "Masterclass") {
             title = `Masterclass & Session #${sessionNumber}`;
             category = "Masterclass";
         } else if (special?.type === "Hackathon") {
@@ -77,11 +86,11 @@ function buildSchedule(): ScheduledEvent[] {
             id: sessionNumber,
             title,
             date,
-            time: "6:00 PM - 8:00 PM IST",
-            location: "DevForge Hub",
-            description: `Led by ${poc}. Join us for Session #${sessionNumber} of the annual DevForge calendar.`,
+            time,
+            location,
+            description,
             category,
-            poc,
+            poc: sessionNumber === 1 ? "Geetansh Goyal" : poc,
         });
     }
 

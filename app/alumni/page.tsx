@@ -25,7 +25,7 @@ export default function AlumniPage() {
                 </div>
 
                 {alumniEntries.length === 0 ? (
-                    <div className="text-center bg-neutral-900/50 border border-neutral-800 rounded-3xl p-12 max-w-xl mx-auto">
+                    <div className="text-center glass rounded-3xl p-12 max-w-xl mx-auto">
                         <p className="text-neutral-300 text-lg mb-3">
                             Nothing here yet — on purpose.
                         </p>
@@ -54,7 +54,7 @@ export default function AlumniPage() {
                         )}
                         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             {alumniEntries.map((alum) => (
-                                <div key={alum.name} className="bg-neutral-900/50 border border-neutral-800 rounded-2xl p-6 text-center">
+                                <div key={alum.name} className="glass rounded-2xl p-6 text-center">
                                     <img src={alum.photo} alt={alum.name} className="w-20 h-20 rounded-full object-cover mx-auto mb-4 border border-neutral-700" />
                                     <h3 className="font-bold text-white">{alum.name}</h3>
                                     <p className="text-sm text-cyan-300">{alum.currentRole} · {alum.currentCompany}</p>

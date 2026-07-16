@@ -41,7 +41,7 @@ export default function MembersPage() {
 
                 {/* Search */}
                 <div className="max-w-md mx-auto mb-10">
-                    <div className="flex items-center gap-2 bg-neutral-900/60 border border-neutral-800 focus-within:border-cyan-400/50 rounded-xl px-4 py-3 transition-colors">
+                    <div className="flex items-center gap-2 glass focus-within:border-cyan-400/50 rounded-xl px-4 py-3 transition-colors">
                         <Search size={18} className="text-neutral-500 flex-shrink-0" />
                         <input
                             type="search"
@@ -61,7 +61,7 @@ export default function MembersPage() {
                     {filtered.map((member) => (
                         <div
                             key={member.usn}
-                            className="flex items-center gap-3 bg-neutral-900/50 border border-neutral-800 hover:border-cyan-400/30 rounded-xl p-4 transition-colors"
+                            className="flex items-center gap-3 glass hover:border-cyan-400/30 rounded-xl p-4 transition-colors"
                         >
                             <Avatar
                                 github={member.github ?? undefined}

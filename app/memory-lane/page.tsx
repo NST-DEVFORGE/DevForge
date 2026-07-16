@@ -24,7 +24,7 @@ export default function MemoryLanePage() {
 
                 <div className="space-y-6 mb-12">
                     {memories.map((memory) => (
-                        <div key={memory.photo} className="bg-neutral-900/50 border border-neutral-800 rounded-3xl overflow-hidden md:flex">
+                        <div key={memory.photo} className="glass rounded-3xl overflow-hidden md:flex">
                             <img src={memory.photo} alt={memory.title} className="w-full md:w-72 h-56 md:h-auto object-cover" />
                             <div className="p-6 flex flex-col justify-center">
                                 <span className="text-xs text-cyan-300 font-semibold uppercase tracking-wider mb-2">{memory.date}</span>
@@ -35,7 +35,7 @@ export default function MemoryLanePage() {
                     ))}
                 </div>
 
-                <div className="text-center bg-neutral-900/30 border border-dashed border-neutral-800 rounded-3xl p-10">
+                <div className="text-center glass-subtle border-dashed rounded-3xl p-10">
                     <p className="text-neutral-300 mb-2">
                         There are {uncaptionedPhotoCount} more real photos sitting in the project already, waiting on a caption.
                     </p>

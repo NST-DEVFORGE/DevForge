@@ -36,7 +36,7 @@ export default function BlogIndexPage() {
                                 <Link
                                     key={post.slug}
                                     href={`/blog/${post.slug}`}
-                                    className="block bg-neutral-900/50 border border-neutral-800 hover:border-cyan-400/40 rounded-2xl p-6 transition-colors group"
+                                    className="block glass hover:border-cyan-400/40 rounded-2xl p-6 transition-colors group"
                                 >
                                     <div className="flex items-center gap-2 mb-2 text-xs">
                                         <span className="text-cyan-300 font-semibold uppercase tracking-wider">{post.category}</span>

@@ -32,12 +32,12 @@ interface BadgeProps {
 const VARIANT_STYLES = {
     ember: "bg-cyan-400/10 text-cyan-300 border-cyan-400/20",
     steel: "bg-sky-500/10 text-sky-300 border-sky-500/20",
-    neutral: "bg-white/5 text-neutral-300 border-white/10",
+    neutral: "glass-subtle text-neutral-300",
 };
 
 export function Badge({ children, variant = "neutral" }: BadgeProps) {
     return (
-        <span className={`inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full border ${VARIANT_STYLES[variant]}`}>
+        <span className={`inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full ${variant !== "neutral" ? "border " : ""}${VARIANT_STYLES[variant]}`}>
             {children}
         </span>
     );

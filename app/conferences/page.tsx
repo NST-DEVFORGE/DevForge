@@ -67,7 +67,7 @@ export default function ConferencesPage() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
-                            className="bg-neutral-900/40 backdrop-blur-sm border border-neutral-800 rounded-[2.5rem] p-8 md:p-12 hover:border-cyan-400/50 transition-colors duration-500 relative overflow-hidden group"
+                            className="glass-subtle rounded-[2.5rem] p-8 md:p-12 hover:border-cyan-400/50 transition-colors duration-500 relative overflow-hidden group"
                         >
                             {/* Decorative background glow */}
                             <div className="absolute -right-24 -top-24 w-64 h-64 bg-cyan-400/10 rounded-full blur-3xl group-hover:bg-cyan-400/20 transition-all duration-500" />

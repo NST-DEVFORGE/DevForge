@@ -8,8 +8,8 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
 export function Card({ children, hover = true, className = "", ...rest }: CardProps) {
     return (
         <div
-            className={`relative bg-neutral-900/50 backdrop-blur-md border border-neutral-800 rounded-2xl overflow-hidden ${
-                hover ? "transition-all duration-300 hover:border-cyan-400/50" : ""
+            className={`relative glass rounded-2xl overflow-hidden ${
+                hover ? "glass-hover" : ""
             } ${className}`}
             {...rest}
         >

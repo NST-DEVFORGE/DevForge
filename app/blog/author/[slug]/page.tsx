@@ -35,7 +35,7 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
                         <Link
                             key={post.slug}
                             href={`/blog/${post.slug}`}
-                            className="block bg-neutral-900/50 border border-neutral-800 hover:border-cyan-400/40 rounded-2xl p-6 transition-colors group"
+                            className="block glass hover:border-cyan-400/40 rounded-2xl p-6 transition-colors group"
                         >
                             <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">{post.title}</h3>
                             <p className="text-neutral-400 mb-3">{post.excerpt}</p>

@@ -58,7 +58,7 @@ export default function EventsCalendar() {
         <div className="grid lg:grid-cols-3 gap-8">
           
           {/* Calendar View */}
-          <div className="lg:col-span-2 bg-neutral-900/40 border border-neutral-800 p-6 rounded-3xl backdrop-blur-sm">
+          <div className="lg:col-span-2 glass-subtle p-6 rounded-3xl backdrop-blur-sm">
             <div className="flex items-center justify-between mb-8">
               <h2 className="text-2xl font-bold">{monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}</h2>
               <div className="flex gap-2">
@@ -116,7 +116,7 @@ export default function EventsCalendar() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-neutral-900/40 border border-neutral-800 p-6 rounded-2xl group hover:border-cyan-400/30 transition-colors"
+                className="glass-subtle p-6 rounded-2xl group hover:border-cyan-400/30 transition-colors"
               >
                 <div className="text-sm font-bold text-cyan-300 mb-2 uppercase tracking-wider">{event.category}</div>
                 <h4 className="text-xl font-bold mb-4 group-hover:text-cyan-300 transition-colors">{event.title}</h4>
@@ -150,7 +150,7 @@ export default function EventsCalendar() {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="bg-neutral-900 border border-neutral-800 p-8 rounded-3xl max-w-md w-full relative shadow-2xl"
+              className="glass-strong p-8 rounded-3xl max-w-md w-full relative shadow-2xl"
             >
               <button 
                 onClick={() => setSelectedEvent(null)}

@@ -130,7 +130,7 @@ export default function LearnPage() {
                                     return (
                                         <div
                                             key={node.title}
-                                            className="flex items-start gap-3 p-4 rounded-xl bg-neutral-900/50 border border-neutral-800 hover:border-neutral-700 transition-colors"
+                                            className="flex items-start gap-3 p-4 rounded-xl glass hover:border-neutral-700 transition-colors"
                                         >
                                             <button
                                                 onClick={() => toggle(nodeId)}
@@ -193,7 +193,7 @@ export default function LearnPage() {
                                 href={repo.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="block bg-neutral-900/50 border border-neutral-800 hover:border-cyan-400/40 rounded-2xl p-5 transition-colors group"
+                                className="block glass hover:border-cyan-400/40 rounded-2xl p-5 transition-colors group"
                             >
                                 <div className="flex items-center justify-between gap-2 mb-2">
                                     <span className="font-bold text-white group-hover:text-cyan-300 transition-colors">{repo.name}</span>

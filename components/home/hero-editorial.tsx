@@ -57,7 +57,7 @@ export function HeroEditorial() {
                     <div className="flex flex-wrap items-center gap-4">
                         <Magnetic>
                             <a
-                                href="https://forms.gle/M8rDS4wG1jyuGiSC6"
+                                href="https://forms.gle/kBYengUpz5D7WHSz9"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center whitespace-nowrap px-8 py-4 bg-white text-black font-semibold rounded-full hover:bg-cyan-400 transition-colors duration-300"

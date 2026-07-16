@@ -55,7 +55,7 @@ function MemberCard({ member, liveData }: { member: typeof MEMBERS[0]; liveData:
         <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-neutral-900/40 border border-neutral-800 rounded-3xl p-6 hover:border-cyan-400/50 transition-all duration-300 group backdrop-blur-sm relative overflow-hidden flex flex-col"
+            className="glass-subtle rounded-3xl p-6 hover:border-cyan-400/50 transition-all duration-300 group backdrop-blur-sm relative overflow-hidden flex flex-col"
         >
             <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-400/5 rounded-bl-full -z-10 group-hover:bg-cyan-400/10 transition-colors" />
 
@@ -220,11 +220,11 @@ export default function GSSoCHallOfFame() {
                         GSSoC ranks &amp; scores from the official leaderboard. GitHub PR stats fetched live.
                     </p>
                     <div className="flex flex-wrap items-center justify-center gap-4 text-sm">
-                        <div className="flex items-center gap-2 bg-neutral-900 border border-neutral-800 px-4 py-2 rounded-full">
+                        <div className="flex items-center gap-2 glass-subtle px-4 py-2 rounded-full">
                             <div className={`w-2 h-2 rounded-full ${loadedCount === MEMBERS.length ? 'bg-green-500' : 'bg-cyan-400 animate-pulse'}`} />
                             <span className="text-neutral-400">{loadedCount}/{MEMBERS.length} GitHub profiles loaded</span>
                         </div>
-                        <div className="flex items-center gap-2 bg-neutral-900 border border-neutral-800 px-4 py-2 rounded-full">
+                        <div className="flex items-center gap-2 glass-subtle px-4 py-2 rounded-full">
                             <GitMerge size={14} className="text-purple-400" />
                             <span className="text-neutral-400">{totalMerged} total merged PRs</span>
                         </div>
@@ -245,7 +245,7 @@ export default function GSSoCHallOfFame() {
                 </motion.div>
 
                 {/* Filters */}
-                <div className="flex flex-col md:flex-row gap-4 mb-12 items-center justify-between bg-neutral-900/50 p-4 rounded-2xl border border-neutral-800 backdrop-blur-md">
+                <div className="flex flex-col md:flex-row gap-4 mb-12 items-center justify-between glass p-4 rounded-2xl">
                     <div className="relative w-full md:w-96">
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500" size={20} />
                         <input

@@ -23,7 +23,7 @@ export default function RewardsPage() {
                 </div>
 
                 {/* Principles */}
-                <div className="bg-neutral-900/50 border border-neutral-800 rounded-2xl p-6 mb-14">
+                <div className="glass rounded-2xl p-6 mb-14">
                     <h2 className="font-bold text-white flex items-center gap-2 mb-4"><Scale size={18} className="text-cyan-400" /> How it works</h2>
                     <ul className="space-y-2">
                         {rewardPrinciples.map((p) => (

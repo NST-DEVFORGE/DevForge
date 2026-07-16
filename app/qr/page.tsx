@@ -5,7 +5,7 @@ import { ArrowRight, Download, Link2, QrCode, Shield, Sliders } from "lucide-rea
 
 const PRESETS = {
     website: "https://www.devforge.club",
-    rsvp: "https://forms.gle/M8rDS4wG1jyuGiSC6",
+    rsvp: "https://forms.gle/kBYengUpz5D7WHSz9",
     github: "https://github.com/NST-DEVFORGE"
 };
 

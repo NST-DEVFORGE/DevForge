@@ -103,7 +103,7 @@ export default function StudentProfilePage({ params }: { params: Promise<{ slug:
                 <div className="max-w-4xl mx-auto px-4">
                     <h3 className="text-2xl font-bold mb-8 text-center">Open Source Contributions</h3>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                        <div className="bg-neutral-900 p-6 rounded-3xl border border-neutral-800 text-center">
+                        <div className="glass p-6 rounded-3xl text-center">
                             <div className="text-4xl font-bold text-white mb-2">{totalPRs}</div>
                             <div className="text-neutral-500 text-sm font-medium uppercase tracking-wider">Total PRs</div>
                         </div>
@@ -144,7 +144,7 @@ export default function StudentProfilePage({ params }: { params: Promise<{ slug:
                                     </div>
                                     <h2 className="text-3xl font-bold">The Journey</h2>
                                 </div>
-                                <div className="prose prose-invert prose-cyan max-w-none bg-neutral-900/30 p-8 rounded-3xl border border-neutral-800/50">
+                                <div className="prose prose-invert prose-cyan max-w-none glass-subtle p-8 rounded-3xl">
                                     <p className="text-neutral-300 text-lg leading-relaxed">{richData.journey}</p>
                                 </div>
                             </motion.div>
@@ -164,7 +164,7 @@ export default function StudentProfilePage({ params }: { params: Promise<{ slug:
                                     </div>
                                     <div className="grid md:grid-cols-2 gap-6">
                                         {richData.learnings.map((learning, i) => (
-                                            <div key={i} className="bg-neutral-900/50 border border-neutral-800 p-6 rounded-2xl hover:border-purple-500/50 transition-colors">
+                                            <div key={i} className="glass p-6 rounded-2xl hover:border-purple-500/50 transition-colors">
                                                 <p className="text-neutral-300">{learning}</p>
                                             </div>
                                         ))}
@@ -187,7 +187,7 @@ export default function StudentProfilePage({ params }: { params: Promise<{ slug:
                                     </div>
                                     <ul className="space-y-3">
                                         {richData.milestones.map((milestone, i) => (
-                                            <li key={i} className="flex items-start gap-3 bg-neutral-900/50 border border-neutral-800 p-5 rounded-2xl hover:border-yellow-500/40 transition-colors">
+                                            <li key={i} className="flex items-start gap-3 glass p-5 rounded-2xl hover:border-yellow-500/40 transition-colors">
                                                 <span className="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-2.5 flex-shrink-0" />
                                                 <p className="text-neutral-300">{milestone}</p>
                                             </li>

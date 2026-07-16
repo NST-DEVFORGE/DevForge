@@ -25,7 +25,7 @@ export const YearChapter = forwardRef<HTMLElement, YearChapterProps>(({ chapter 
                             {chapter.year}
                         </span>
                         {isTBD ? (
-                            <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-neutral-500 bg-neutral-900 border border-neutral-800 rounded-full px-3 py-1">
+                            <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-neutral-500 glass-subtle rounded-full px-3 py-1">
                                 <Clock size={12} /> Details TBD
                             </span>
                         ) : (
@@ -52,7 +52,7 @@ export const YearChapter = forwardRef<HTMLElement, YearChapterProps>(({ chapter 
                     {chapter.stats && (
                         <div className="flex flex-wrap gap-4 mt-4">
                             {chapter.stats.map((s) => (
-                                <div key={s.label} className="bg-neutral-900/50 border border-neutral-800 rounded-xl px-5 py-3">
+                                <div key={s.label} className="glass rounded-xl px-5 py-3">
                                     <div className="text-2xl font-bold text-white font-mono tabular-nums">{s.value}</div>
                                     <div className="text-xs text-neutral-500 uppercase tracking-wider">{s.label}</div>
                                 </div>

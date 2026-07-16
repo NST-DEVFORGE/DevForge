@@ -47,8 +47,8 @@ export function Navbar() {
     ];
 
     return (
-        <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-black/80 backdrop-blur-md border-b border-white/10 py-3' : 'bg-transparent py-5'}`}>
-            <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
+        <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'py-3' : 'py-5'}`}>
+            <div className={`max-w-7xl mx-auto px-4 flex items-center justify-between transition-all duration-500 ${isScrolled ? 'glass !rounded-full px-4 md:px-6 py-2 border border-white/10' : ''}`}>
                 
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2 group">
@@ -103,7 +103,7 @@ export function Navbar() {
                 {/* CTA & Mobile Toggle */}
                 <div className="flex items-center gap-3">
                     <ThemeSwitcher />
-                    <Link href="https://forms.gle/M8rDS4wG1jyuGiSC6" target="_blank" className="hidden md:inline-flex px-5 py-2 bg-white text-black font-bold text-sm rounded-full hover:bg-neutral-200 transition-colors">
+                    <Link href="https://forms.gle/kBYengUpz5D7WHSz9" target="_blank" className="hidden md:inline-flex px-5 py-2 bg-white text-black font-bold text-sm rounded-full hover:bg-neutral-200 transition-colors">
                         Join Us
                     </Link>
                     
@@ -127,7 +127,7 @@ export function Navbar() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="lg:hidden bg-black/95 backdrop-blur-xl border-b border-white/10 overflow-hidden"
+                        className="lg:hidden glass-strong rounded-none border-x-0 border-t-0 overflow-hidden"
                     >
                         <div className="px-4 py-6 flex flex-col gap-4">
                             {navLinks.slice(0, 1).map((link) => (

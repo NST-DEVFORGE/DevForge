@@ -110,7 +110,7 @@ export function QualityPRsList() {
                     className="flex flex-wrap gap-4 justify-center mb-12"
                 >
                     {/* Author Filter */}
-                    <div className="flex items-center gap-2 bg-neutral-900/50 border border-neutral-700 rounded-lg px-4 py-2">
+                    <div className="flex items-center gap-2 glass rounded-lg px-4 py-2">
                         <Filter className="w-4 h-4 text-cyan-400" />
                         <select
                             value={filterAuthor}
@@ -127,7 +127,7 @@ export function QualityPRsList() {
                     </div>
 
                     {/* Sort */}
-                    <div className="flex items-center gap-2 bg-neutral-900/50 border border-neutral-700 rounded-lg px-4 py-2">
+                    <div className="flex items-center gap-2 glass rounded-lg px-4 py-2">
                         <SortDesc className="w-4 h-4 text-cyan-400" />
                         <select
                             value={sortBy}
@@ -157,7 +157,7 @@ export function QualityPRsList() {
                             whileHover={{ y: -5 }}
                             className="group"
                         >
-                            <div className="relative bg-neutral-900/50 backdrop-blur-md border border-neutral-800 rounded-2xl p-6 overflow-hidden hover:border-cyan-400/50 transition-all duration-300 h-full flex flex-col">
+                            <div className="relative glass rounded-2xl p-6 overflow-hidden hover:border-cyan-400/50 transition-all duration-300 h-full flex flex-col">
                                 {/* Gradient overlay */}
                                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 

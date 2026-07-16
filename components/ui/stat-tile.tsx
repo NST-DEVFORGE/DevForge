@@ -17,10 +17,10 @@ export function StatTile({ icon, value, label, sublabel, delay = 0, emphasized =
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay }}
-            className={`text-center p-5 rounded-2xl border backdrop-blur-sm ${
+            className={`text-center p-5 rounded-2xl ${
                 emphasized
-                    ? "bg-gradient-to-br from-cyan-400/10 to-purple-500/10 border-cyan-400/50"
-                    : "bg-neutral-900/50 border-neutral-800 hover:border-cyan-400/30 transition-colors"
+                    ? "glass-strong bg-gradient-to-br from-cyan-400/10 to-purple-500/10 border border-cyan-400/40"
+                    : "glass glass-hover"
             }`}
         >
             {icon && <div className="flex justify-center mb-2">{icon}</div>}

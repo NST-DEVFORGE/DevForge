@@ -73,7 +73,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                                 <Link
                                     key={r.slug}
                                     href={`/blog/${r.slug}`}
-                                    className="block p-4 rounded-xl bg-neutral-900/50 border border-neutral-800 hover:border-cyan-400/40 transition-colors group"
+                                    className="block p-4 rounded-xl glass hover:border-cyan-400/40 transition-colors group"
                                 >
                                     <div className="flex items-center justify-between gap-2">
                                         <span className="font-medium text-white group-hover:text-cyan-300 transition-colors">{r.title}</span>
