@@ -8,7 +8,8 @@
         "start": "next start",
         "lint": "eslint",
         "seed:members": "tsx scripts/seed-members.ts",
-        "verify:guard": "tsx scripts/verify-firestore-guard.ts"
+        "verify:guard": "tsx scripts/verify-firestore-guard.ts",
+        "test:auth": "tsx scripts/test-auth-flow.ts"
     },
     "dependencies": {
         "bcrypt": "^6.0.0",
