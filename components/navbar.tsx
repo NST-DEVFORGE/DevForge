@@ -7,6 +7,7 @@ import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { NavGroup, NavGroupSection } from "@/components/ui/nav-group";
 import { ThemeSwitcher } from "@/components/theme-switcher";
+import { NavAuthLink } from "@/components/auth/nav-auth-link";
 
 /*
  * Four categories, each opening onto sub-grouped links. The row is capped at
@@ -119,6 +120,7 @@ export function Navbar() {
                 {/* CTA & Mobile Toggle */}
                 <div className="flex items-center gap-3 shrink-0">
                     <ThemeSwitcher />
+                    <NavAuthLink />
                     <Link href="https://forms.gle/kBYengUpz5D7WHSz9" target="_blank" className="hidden md:inline-flex px-5 py-2 bg-white text-black font-bold text-sm rounded-full whitespace-nowrap hover:bg-neutral-200 transition-colors">
                         Join Us
                     </Link>
