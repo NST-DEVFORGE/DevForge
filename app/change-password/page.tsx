@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
 import { KeyRound } from "lucide-react";
 import { AuthError, AuthField, AuthSubmit } from "@/components/auth/auth-field";
 
@@ -52,11 +51,8 @@ export default function ChangePasswordPage() {
     return (
         <div className="min-h-screen bg-transparent text-white pt-32 pb-16">
             <div className="max-w-md mx-auto px-4">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-center mb-10"
-                >
+                {/* See app/login/page.tsx — template.tsx already animates the route. */}
+                <div className="text-center mb-10">
                     <div className="inline-flex items-center justify-center p-4 bg-cyan-400/10 text-cyan-400 rounded-full mb-6 border border-cyan-400/20">
                         <KeyRound size={28} />
                     </div>
@@ -67,12 +63,9 @@ export default function ChangePasswordPage() {
                         The one we emailed you was generated for first sign-in. Replace it with
                         something only you know.
                     </p>
-                </motion.div>
+                </div>
 
-                <motion.form
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 }}
+                <form
                     onSubmit={onSubmit}
                     className="glass-strong rounded-3xl p-8 space-y-5"
                 >
@@ -106,7 +99,7 @@ export default function ChangePasswordPage() {
                     />
                     <AuthError message={error} />
                     <AuthSubmit pending={pending}>Update password</AuthSubmit>
-                </motion.form>
+                </form>
             </div>
         </div>
     );

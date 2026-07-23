@@ -2,7 +2,6 @@
 
 import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { motion } from "framer-motion";
 import { LogIn } from "lucide-react";
 import { AuthError, AuthField, AuthSubmit } from "@/components/auth/auth-field";
 
@@ -74,12 +73,13 @@ function LoginForm() {
 export default function LoginPage() {
     return (
         <div className="min-h-screen bg-transparent text-white pt-32 pb-16">
+            {/* No per-element entrance animation here: app/template.tsx already
+                fade-rises every route, and stacking a second delayed fade on top
+                left the form invisible for the better part of a second — on a
+                sign-in page, the fastest thing to a usable field wins. It also
+                ignored prefers-reduced-motion, which template.tsx honours. */}
             <div className="max-w-md mx-auto px-4">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-center mb-10"
-                >
+                <div className="text-center mb-10">
                     <div className="inline-flex items-center justify-center p-4 bg-cyan-400/10 text-cyan-400 rounded-full mb-6 border border-cyan-400/20">
                         <LogIn size={28} />
                     </div>
@@ -89,20 +89,16 @@ export default function LoginPage() {
                     <p className="text-neutral-400">
                         For DevForge members. Everything else on the site is open to everyone.
                     </p>
-                </motion.div>
+                </div>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 }}
-                >
+                <div>
                     <Suspense fallback={<div className="glass-strong rounded-3xl h-80 animate-pulse" />}>
                         <LoginForm />
                     </Suspense>
-                    <p className="text-center text-xs text-neutral-600 mt-6">
+                    <p className="text-center text-xs text-neutral-400 mt-6">
                         Lost your credentials? Ask an admin to reissue them.
                     </p>
-                </motion.div>
+                </div>
             </div>
         </div>
     );
