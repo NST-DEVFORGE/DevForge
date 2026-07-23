@@ -30,18 +30,18 @@ export function NavAuthLink() {
         ? { href: "/dashboard", label: "Dashboard", Icon: LayoutDashboard }
         : { href: "/login", label: "Sign in", Icon: LogIn };
 
-    // Stays a bare icon until 2xl. The overflow that originally forced this is
-    // gone — the nav is grouped into four dropdowns now and leaves ~270px spare
-    // even at lg — so the label could safely appear earlier if that reads better.
+    // Icon-only on small screens, labelled from lg up. It was icon-only until
+    // 2xl while the header overflowed its row; grouping the nav into dropdowns
+    // freed ~270px, so the label fits from the breakpoint the full nav appears.
     return (
         <Link
             href={href}
             aria-label={label}
             title={label}
-            className="inline-flex items-center gap-1.5 p-2 2xl:px-4 2xl:py-2 glass-subtle hover:border-cyan-400/40 text-sm font-medium text-neutral-200 hover:text-white rounded-full transition-colors"
+            className="inline-flex items-center gap-1.5 p-2 lg:px-4 lg:py-2 glass-subtle hover:border-cyan-400/40 text-sm font-medium text-neutral-200 hover:text-white rounded-full transition-colors"
         >
             <Icon size={15} />
-            <span className="hidden 2xl:inline">{label}</span>
+            <span className="hidden lg:inline">{label}</span>
         </Link>
     );
 }
