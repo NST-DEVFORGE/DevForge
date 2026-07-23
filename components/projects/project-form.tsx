@@ -100,17 +100,17 @@ export function ProjectForm({ project }: ProjectFormProps) {
             />
 
             <div>
-                <label htmlFor="description" className="block text-xs uppercase tracking-wider text-neutral-500 mb-2">
+                <label htmlFor="description" className={FIELD_LABEL}>
                     Description
                 </label>
-                <div className="glass focus-within:border-cyan-400/50 rounded-xl px-4 py-3 transition-colors">
+                <div className={FIELD_SURFACE}>
                     <textarea
                         id="description"
                         name="description"
                         rows={5}
                         defaultValue={project?.description}
                         placeholder="What problem does it solve? What did you learn building it?"
-                        className="bg-transparent outline-none w-full text-sm text-white placeholder:text-neutral-600 resize-y"
+                        className={`${FIELD_INPUT} resize-y`}
                     />
                 </div>
             </div>
@@ -128,10 +128,10 @@ export function ProjectForm({ project }: ProjectFormProps) {
             />
 
             <div>
-                <label htmlFor="tech" className="block text-xs uppercase tracking-wider text-neutral-500 mb-2">
+                <label htmlFor="tech" className={FIELD_LABEL}>
                     Tech used
                 </label>
-                <div className="flex items-center gap-2 glass focus-within:border-cyan-400/50 rounded-xl px-4 py-3 transition-colors">
+                <div className={FIELD_SURFACE}>
                     <input
                         id="tech"
                         value={techDraft}
@@ -146,7 +146,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
                         onBlur={addTech}
                         placeholder={tech.length >= 12 ? "That's plenty" : "Next.js, Firestore… press Enter"}
                         disabled={tech.length >= 12}
-                        className="bg-transparent outline-none w-full text-sm text-white placeholder:text-neutral-600"
+                        className={FIELD_INPUT}
                     />
                 </div>
                 {tech.length > 0 && (
@@ -206,6 +206,18 @@ export function ProjectForm({ project }: ProjectFormProps) {
     );
 }
 
+/**
+ * Shares AuthField's surface treatment: glass-subtle with an outline focus
+ * ring, and neutral-400 text. Anything dimmer fails AA against this card —
+ * neutral-500 measures 3.5:1 where 4.5:1 is needed.
+ */
+const FIELD_SURFACE =
+    "flex items-center gap-2 glass-subtle !rounded-xl focus-within:outline focus-within:outline-2 focus-within:outline-cyan-400/50 px-4 py-3 transition-colors";
+const FIELD_LABEL = "block text-xs uppercase tracking-wider text-neutral-400 mb-2";
+const FIELD_INPUT =
+    "bg-transparent outline-none w-full text-sm text-white placeholder:text-neutral-400";
+const FIELD_HINT = "text-xs text-neutral-400 mt-2";
+
 function Field({
     label,
     hint,
@@ -213,17 +225,13 @@ function Field({
 }: React.InputHTMLAttributes<HTMLInputElement> & { label: string; hint?: string }) {
     return (
         <div>
-            <label htmlFor={input.name} className="block text-xs uppercase tracking-wider text-neutral-500 mb-2">
+            <label htmlFor={input.name} className={FIELD_LABEL}>
                 {label}
             </label>
-            <div className="glass focus-within:border-cyan-400/50 rounded-xl px-4 py-3 transition-colors">
-                <input
-                    {...input}
-                    id={input.name}
-                    className="bg-transparent outline-none w-full text-sm text-white placeholder:text-neutral-600"
-                />
+            <div className={FIELD_SURFACE}>
+                <input {...input} id={input.name} className={FIELD_INPUT} />
             </div>
-            {hint && <p className="text-xs text-neutral-600 mt-2">{hint}</p>}
+            {hint && <p className={FIELD_HINT}>{hint}</p>}
         </div>
     );
 }

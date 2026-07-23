@@ -90,15 +90,15 @@ export function RepoPicker({ value, onChange, onDemoUrl }: RepoPickerProps) {
             </div>
 
             {showManual ? (
-                <div className="flex items-center gap-2 glass focus-within:border-cyan-400/50 rounded-xl px-4 py-3 transition-colors">
-                    <Github size={16} className="text-neutral-500 flex-shrink-0" />
+                <div className="flex items-center gap-2 glass-subtle !rounded-xl focus-within:outline focus-within:outline-2 focus-within:outline-cyan-400/50 px-4 py-3 transition-colors">
+                    <Github size={16} className="text-neutral-400 flex-shrink-0" />
                     <input
                         name="repoUrl"
                         type="url"
                         value={value}
                         onChange={(e) => onChange(e.target.value)}
                         placeholder="https://github.com/you/your-project"
-                        className="bg-transparent outline-none w-full text-sm text-white placeholder:text-neutral-600"
+                        className="bg-transparent outline-none w-full text-sm text-white placeholder:text-neutral-400"
                     />
                 </div>
             ) : (
@@ -117,7 +117,7 @@ export function RepoPicker({ value, onChange, onDemoUrl }: RepoPickerProps) {
                                         : "Loading your repos…"
                                 }
                                 aria-label="Search your repositories"
-                                className="bg-transparent outline-none w-full text-sm text-white placeholder:text-neutral-600"
+                                className="bg-transparent outline-none w-full text-sm text-white placeholder:text-neutral-400"
                             />
                         </div>
 

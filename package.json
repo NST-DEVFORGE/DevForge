@@ -9,7 +9,10 @@
         "lint": "eslint",
         "seed:members": "tsx scripts/seed-members.ts",
         "verify:guard": "tsx scripts/verify-firestore-guard.ts",
-        "test:auth": "tsx scripts/test-auth-flow.ts"
+        "test:auth": "tsx scripts/test-auth-flow.ts",
+        "test:projects": "tsx scripts/test-projects-api.ts",
+        "test:portal": "tsx scripts/test-portal-apis.ts",
+        "generate-icons": "tsx scripts/generate-pwa-icons.ts"
     },
     "dependencies": {
         "bcrypt": "^6.0.0",

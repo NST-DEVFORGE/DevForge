@@ -81,16 +81,16 @@ export default function JoinPage() {
                             hint="Your university seat number."
                         />
                         <div>
-                            <label htmlFor="note" className="block text-xs uppercase tracking-wider text-neutral-500 mb-2">
+                            <label htmlFor="note" className="block text-xs uppercase tracking-wider text-neutral-400 mb-2">
                                 Anything to add?
                             </label>
-                            <div className="glass focus-within:border-cyan-400/50 rounded-xl px-4 py-3 transition-colors">
+                            <div className="glass-subtle !rounded-xl focus-within:outline focus-within:outline-2 focus-within:outline-cyan-400/50 px-4 py-3 transition-colors">
                                 <textarea
                                     id="note"
                                     name="note"
                                     rows={3}
                                     placeholder="What are you hoping to build or learn? Optional."
-                                    className="bg-transparent outline-none w-full text-sm text-white placeholder:text-neutral-600 resize-y"
+                                    className="bg-transparent outline-none w-full text-sm text-white placeholder:text-neutral-400 resize-y"
                                 />
                             </div>
                         </div>
