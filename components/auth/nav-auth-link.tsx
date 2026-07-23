@@ -30,8 +30,9 @@ export function NavAuthLink() {
         ? { href: "/dashboard", label: "Dashboard", Icon: LayoutDashboard }
         : { href: "/login", label: "Sign in", Icon: LogIn };
 
-    // The primary nav already overflows its row below ~1500px, so this stays a
-    // bare icon until there is room for the label — it must not add to that.
+    // Stays a bare icon until 2xl. The overflow that originally forced this is
+    // gone — the nav is grouped into four dropdowns now and leaves ~270px spare
+    // even at lg — so the label could safely appear earlier if that reads better.
     return (
         <Link
             href={href}
