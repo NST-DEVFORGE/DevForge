@@ -47,6 +47,17 @@ async function expect(label: string, outcome: "allowed" | "blocked", fn: () => u
         return (snap.docs[0].ref as any).set({ probe: true });
     });
 
+    // Regression: aggregate snapshots carry no ref/docs, so they hit the strict
+    // proxy directly — data() must still be treated as the read that it is.
+    await expect("students count().data()", "allowed", async () => {
+        const agg = await external("students").count().get();
+        return agg.data().count;
+    });
+    await expect("students doc snapshot.data()", "allowed", async () => {
+        const snap = await external("students").doc("2102508748").get();
+        return snap.data();
+    });
+
     console.log("\nclub namespace (must be usable)");
     await expect("read devforge_members", "allowed", () => club(COLLECTIONS.members).limit(1).get());
     await expect("club() rejects foreign name", "blocked", () => (club as any)("students"));

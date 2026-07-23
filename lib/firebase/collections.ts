@@ -33,8 +33,14 @@ export type ClubCollection = (typeof COLLECTIONS)[keyof typeof COLLECTIONS];
 export const EXTERNAL_READONLY = ["students"] as const;
 export type ExternalCollection = (typeof EXTERNAL_READONLY)[number];
 
-/** Query surface we allow on someone else's collection. */
+/**
+ * Query surface we allow on someone else's collection. Snapshot accessors
+ * (data/exists/size/...) belong here too: aggregate results from count() carry
+ * no `ref` or `docs`, so they reach this proxy directly rather than
+ * sealSnapshot, and refusing data() there would block a legitimate read.
+ */
 const READ_METHODS = new Set([
+    // queries
     "doc",
     "get",
     "where",
@@ -44,6 +50,7 @@ const READ_METHODS = new Set([
     "offset",
     "select",
     "count",
+    "aggregate",
     "startAt",
     "startAfter",
     "endAt",
@@ -51,6 +58,15 @@ const READ_METHODS = new Set([
     "listDocuments",
     "id",
     "path",
+    // snapshot reads
+    "data",
+    "exists",
+    "size",
+    "empty",
+    "isEqual",
+    "readTime",
+    "createTime",
+    "updateTime",
 ]);
 
 function refuse(collection: string, method: string): never {
