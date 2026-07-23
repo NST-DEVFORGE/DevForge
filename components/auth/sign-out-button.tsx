@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { LogOut } from "lucide-react";
+import { clearServiceWorkerCaches } from "@/components/pwa/sw-register";
 
 export function SignOutButton() {
     const router = useRouter();
@@ -12,6 +13,9 @@ export function SignOutButton() {
         setPending(true);
         try {
             await fetch("/api/auth/logout", { method: "POST" });
+            // Shared laptops are the norm here — leave nothing of this member
+            // behind for whoever opens the app next.
+            clearServiceWorkerCaches();
             router.replace("/");
             // Drops any cached server-rendered view of the member app.
             router.refresh();

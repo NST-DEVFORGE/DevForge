@@ -1,8 +1,9 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { FolderGit2, CalendarCheck, Trophy, ShieldCheck } from "lucide-react";
+import { FolderGit2, CalendarCheck, Trophy, ShieldCheck, Users } from "lucide-react";
 import { getMember, getSession } from "@/lib/session";
 import { SignOutButton } from "@/components/auth/sign-out-button";
+import { PushToggle } from "@/components/pwa/push-toggle";
 
 export const metadata = { title: "Dashboard" };
 
@@ -48,7 +49,7 @@ export default async function DashboardPage() {
                         href="/dashboard/projects"
                         icon={<FolderGit2 size={20} />}
                         title="Your projects"
-                        body="Publish what you're building and bring collaborators on board."
+                        body="Publish what you're building — pick a repo straight from GitHub."
                     />
                     <Tile
                         href="/dashboard/events"
@@ -57,7 +58,13 @@ export default async function DashboardPage() {
                         body="See what's coming up and reserve your spot."
                     />
                     <Tile
-                        href="/leaderboard"
+                        href="/dashboard/members"
+                        icon={<Users size={20} />}
+                        title="Members"
+                        body="Everyone in the club, with what they're working on."
+                    />
+                    <Tile
+                        href="/dashboard/leaderboard"
                         icon={<Trophy size={20} />}
                         title="Leaderboard"
                         body="Where you stand across the club this semester."
@@ -70,6 +77,14 @@ export default async function DashboardPage() {
                             body="Review membership requests and manage the roster."
                         />
                     )}
+                </div>
+
+                <div className="mt-8 pt-6 border-t border-white/5">
+                    <PushToggle />
+                    <p className="text-xs text-neutral-600 mt-2">
+                        Get told about new sessions and club announcements. Install DevForge from your
+                        browser menu to use it like an app.
+                    </p>
                 </div>
             </div>
         </div>

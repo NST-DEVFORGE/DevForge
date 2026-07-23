@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { SmoothScroll } from "@/components/motion/smooth-scroll";
+import { ServiceWorkerRegistrar } from "@/components/pwa/sw-register";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -64,8 +65,17 @@ export const metadata: Metadata = {
         images: ["/logo.png"],
     },
     icons: {
-        icon: "/logo.png",
-        apple: "/logo.png", // Assuming same logo for now
+        icon: [
+            { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+            { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+        ],
+        // iOS ignores the manifest and needs an opaque square of its own.
+        apple: "/apple-touch-icon.png",
+    },
+    appleWebApp: {
+        capable: true,
+        title: "DevForge",
+        statusBarStyle: "black-translucent",
     },
     robots: {
         index: true,
@@ -114,6 +124,7 @@ export default function RootLayout({
             </head>
             <body className={`${inter.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable} antialiased text-white relative`}>
                 <SmoothScroll />
+                <ServiceWorkerRegistrar />
                 <Navbar />
                 {children}
                 <Footer />

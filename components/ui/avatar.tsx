@@ -11,21 +11,25 @@ interface AvatarProps {
 const FALLBACK = "/placeholder-avatar.jpg";
 
 export function Avatar({ github, src, alt, size = 48, className = "" }: AvatarProps) {
-    const resolvedSrc = src ?? (github ? `https://github.com/${github}.png` : FALLBACK);
+    // Ordered candidates. Members carry a portal photo, which is preferred, but
+    // it 404s for anyone not in the student roster — so GitHub still gets a turn
+    // before the placeholder rather than being skipped on first error.
+    const chain = [src, github ? `https://github.com/${github}.png` : undefined, FALLBACK].filter(
+        Boolean,
+    ) as string[];
 
     return (
         <img
-            src={resolvedSrc}
+            src={chain[0]}
             alt={alt}
             width={size}
             height={size}
             loading="lazy"
-            className={`rounded-full object-cover flex-shrink-0 ${className}`}
+            className={`rounded-full object-cover flex-shrink-0 bg-white/5 ${className}`}
             style={{ width: size, height: size }}
             onError={(e) => {
-                if (!e.currentTarget.src.endsWith(FALLBACK)) {
-                    e.currentTarget.src = FALLBACK;
-                }
+                const next = chain[chain.indexOf(e.currentTarget.getAttribute("src") ?? "") + 1];
+                if (next) e.currentTarget.src = next;
             }}
         />
     );
