@@ -29,5 +29,5 @@ export function proxy(request: NextRequest) {
 // Proxy always runs on the Node.js runtime in Next 16, so jsonwebtoken's use of
 // node crypto is fine here and the signature can be verified rather than assumed.
 export const config = {
-    matcher: ["/dashboard/:path*", "/admin/:path*"],
+    matcher: ["/dashboard/:path*", "/admin/:path*", "/change-password"],
 };
