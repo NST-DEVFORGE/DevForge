@@ -57,17 +57,21 @@ export async function loadRoster(): Promise<MemberCard[]> {
 
     const cards = await Promise.all(
         members.map(async (member): Promise<MemberCard> => {
-            const student = await external("students").doc(member.usn).get();
-            const data = student.exists ? (student.data() as Record<string, string>) : {};
+            // Off-roster members (mentors) carry their own identity fields;
+            // student members leave them unset and we look them up by USN. Only
+            // hit the portal when the member doc doesn't already have the field.
+            const needsPortal = !member.github || !member.linkedin || member.photo === undefined;
+            const student = needsPortal ? await external("students").doc(member.usn).get() : null;
+            const data = student?.exists ? (student.data() as Record<string, string>) : {};
             return {
                 usn: member.usn,
                 name: member.name,
                 role: member.role,
                 points: member.points ?? 0,
                 badges: member.badges ?? 0,
-                github: normalizeGithub(data.github),
-                linkedin: normalizeLinkedin(data.linkedin),
-                hasPhoto: Boolean(data.photo),
+                github: normalizeGithub(member.github ?? data.github),
+                linkedin: normalizeLinkedin(member.linkedin ?? data.linkedin),
+                hasPhoto: Boolean(member.photo || data.photo),
             };
         }),
     );
