@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutGrid, FolderGit2, CalendarCheck, Users, Trophy, ShieldCheck } from "lucide-react";
+import { LayoutGrid, FolderGit2, Compass, CalendarCheck, Users, Trophy, ShieldCheck } from "lucide-react";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { SignOutButton } from "@/components/auth/sign-out-button";
 
@@ -18,6 +18,7 @@ interface NavLink {
 const LINKS: NavLink[] = [
     { name: "Overview", href: "/dashboard", icon: <LayoutGrid size={16} /> },
     { name: "Projects", href: "/dashboard/projects", icon: <FolderGit2 size={16} /> },
+    { name: "Explore", href: "/dashboard/explore", icon: <Compass size={16} /> },
     { name: "Sessions", href: "/dashboard/events", icon: <CalendarCheck size={16} /> },
     { name: "Members", href: "/dashboard/members", icon: <Users size={16} /> },
     { name: "Leaderboard", href: "/dashboard/leaderboard", icon: <Trophy size={16} /> },

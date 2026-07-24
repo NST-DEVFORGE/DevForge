@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { FolderGit2, Plus, Github, ExternalLink, Pencil } from "lucide-react";
+import { FolderGit2, Plus, Github, ExternalLink, Pencil, Users } from "lucide-react";
 import { club, COLLECTIONS } from "@/lib/firebase/collections";
 import { getSession } from "@/lib/session";
 import type { Project } from "@/lib/projects";
@@ -83,13 +83,23 @@ export default async function ProjectsPage() {
                                         )}
                                     </div>
 
-                                    <Link
-                                        href={`/dashboard/projects/${project.id}/edit`}
-                                        aria-label={`Edit ${project.title}`}
-                                        className="glass-subtle hover:border-cyan-400/40 text-neutral-400 hover:text-cyan-300 rounded-full p-2 transition-colors flex-shrink-0"
-                                    >
-                                        <Pencil size={14} />
-                                    </Link>
+                                    <div className="flex items-center gap-2 flex-shrink-0">
+                                        <Link
+                                            href={`/dashboard/projects/${project.id}/manage`}
+                                            aria-label={`Manage team for ${project.title}`}
+                                            title="Team & requests"
+                                            className="glass-subtle hover:border-cyan-400/40 text-neutral-400 hover:text-cyan-300 rounded-full p-2 transition-colors"
+                                        >
+                                            <Users size={14} />
+                                        </Link>
+                                        <Link
+                                            href={`/dashboard/projects/${project.id}/edit`}
+                                            aria-label={`Edit ${project.title}`}
+                                            className="glass-subtle hover:border-cyan-400/40 text-neutral-400 hover:text-cyan-300 rounded-full p-2 transition-colors"
+                                        >
+                                            <Pencil size={14} />
+                                        </Link>
+                                    </div>
                                 </div>
 
                                 {(project.repoUrl || project.demoUrl) && (

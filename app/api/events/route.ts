@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { club, COLLECTIONS } from "@/lib/firebase/collections";
 import { authErrorResponse, requireAdmin, requireUser } from "@/lib/session";
 import { eventInputSchema, type ClubEvent } from "@/lib/events";
+import { notifyAllMembers } from "@/lib/push";
 
 export const runtime = "nodejs";
 
@@ -41,6 +42,18 @@ export async function POST(request: NextRequest) {
         };
 
         await ref.set(event);
+
+        // Tell everyone a session is on the calendar. The creator already knows.
+        await notifyAllMembers(
+            {
+                title: `New session: ${event.title}`,
+                body: event.summary,
+                url: "/dashboard/events",
+                tag: `event-${event.id}`,
+            },
+            member.usn,
+        );
+
         return NextResponse.json({ ok: true, event }, { status: 201 });
     } catch (error) {
         return authErrorResponse(error);

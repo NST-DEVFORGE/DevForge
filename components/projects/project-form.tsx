@@ -20,6 +20,9 @@ export function ProjectForm({ project }: ProjectFormProps) {
     const [demoUrl, setDemoUrl] = useState(project?.demoUrl ?? "");
     const [tech, setTech] = useState<string[]>(project?.tech ?? []);
     const [techDraft, setTechDraft] = useState("");
+    const [collabLimit, setCollabLimit] = useState(
+        project?.collaboratorLimit == null ? "" : String(project.collaboratorLimit),
+    );
     const [error, setError] = useState<string | null>(null);
     const [pending, setPending] = useState(false);
 
@@ -47,6 +50,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
             repoUrl: repoUrl || undefined,
             demoUrl: demoUrl || undefined,
             status,
+            collaboratorLimit: collabLimit.trim() === "" ? null : Number(collabLimit),
         };
 
         try {
@@ -125,6 +129,18 @@ export function ProjectForm({ project }: ProjectFormProps) {
                 onChange={(e) => setDemoUrl(e.target.value)}
                 placeholder="https://your-project.vercel.app"
                 hint="Optional. Filled in automatically if your repo has a homepage set."
+            />
+
+            <Field
+                label="Collaborators wanted"
+                name="collaboratorLimit"
+                type="number"
+                min={0}
+                max={50}
+                value={collabLimit}
+                onChange={(e) => setCollabLimit(e.target.value)}
+                placeholder="Open — no limit"
+                hint="How many teammates you'll take. Blank = open, 0 = not looking. Members request to join once it's published."
             />
 
             <div>
