@@ -12,7 +12,8 @@
         "test:auth": "tsx scripts/test-auth-flow.ts",
         "test:projects": "tsx scripts/test-projects-api.ts",
         "test:portal": "tsx scripts/test-portal-apis.ts",
-        "generate-icons": "tsx scripts/generate-pwa-icons.ts"
+        "generate-icons": "tsx scripts/generate-pwa-icons.ts",
+        "set:photo": "tsx scripts/set-photo.ts"
     },
     "dependencies": {
         "bcrypt": "^6.0.0",

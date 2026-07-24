@@ -220,6 +220,15 @@ body::after {
   border-radius: 999px;
 }
 
+/* Horizontal nav scroll on mobile shouldn't show a scrollbar under the pills. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 ::selection {
   background: rgb(var(--ac-400) / 0.3);
   color: #ffffff;

@@ -1,6 +1,7 @@
 "use client";
 
 import { Suspense, useState } from "react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { LogIn } from "lucide-react";
 import { AuthError, AuthField, AuthSubmit } from "@/components/auth/auth-field";
@@ -95,7 +96,13 @@ export default function LoginPage() {
                     <Suspense fallback={<div className="glass-strong rounded-3xl h-80 animate-pulse" />}>
                         <LoginForm />
                     </Suspense>
-                    <p className="text-center text-xs text-neutral-400 mt-6">
+                    <p className="text-center text-sm text-neutral-400 mt-6">
+                        Not a member yet?{" "}
+                        <Link href="/join" className="text-cyan-300 hover:text-cyan-200 font-medium">
+                            Request to join
+                        </Link>
+                    </p>
+                    <p className="text-center text-xs text-neutral-500 mt-2">
                         Lost your credentials? Ask an admin to reissue them.
                     </p>
                 </div>

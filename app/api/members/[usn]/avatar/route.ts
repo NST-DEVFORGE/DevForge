@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createHash } from "node:crypto";
-import { external } from "@/lib/firebase/collections";
+import { club, external, COLLECTIONS } from "@/lib/firebase/collections";
 import { authErrorResponse, requireUser } from "@/lib/session";
 
 export const runtime = "nodejs";
@@ -20,8 +20,14 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
         await requireUser();
         const { usn } = await params;
 
-        const snap = await external("students").doc(usn).get();
-        const photo = snap.exists ? (snap.data() as { photo?: string }).photo : undefined;
+        // A member's own photo wins (off-roster mentors store it on their doc);
+        // otherwise fall back to the student portal by USN.
+        const memberSnap = await club(COLLECTIONS.members).doc(usn).get();
+        let photo = memberSnap.exists ? (memberSnap.data() as { photo?: string }).photo : undefined;
+        if (!photo) {
+            const snap = await external("students").doc(usn).get();
+            photo = snap.exists ? (snap.data() as { photo?: string }).photo : undefined;
+        }
 
         if (!photo) return new NextResponse(null, { status: 404 });
 

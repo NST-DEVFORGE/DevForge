@@ -2,7 +2,6 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { FolderGit2, CalendarCheck, Trophy, ShieldCheck, Users } from "lucide-react";
 import { getMember, getSession } from "@/lib/session";
-import { SignOutButton } from "@/components/auth/sign-out-button";
 import { PushToggle } from "@/components/pwa/push-toggle";
 
 export const metadata = { title: "Dashboard" };
@@ -24,18 +23,15 @@ export default async function DashboardPage() {
     const elevated = member.role === "admin" || member.role === "mentor";
 
     return (
-        <div className="min-h-screen bg-transparent text-white pt-24 pb-16">
+        <div className="min-h-screen bg-transparent text-white pt-28 pb-16">
             <div className="max-w-5xl mx-auto px-4">
-                <div className="flex flex-wrap items-start justify-between gap-4 mb-10">
-                    <div>
-                        <p className="text-xs uppercase tracking-wider text-neutral-400 mb-2">
-                            {ROLE_LABEL[member.role] ?? "Member"} · {member.usn}
-                        </p>
-                        <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
-                            Welcome back, <span className="text-cyan-400">{firstName}</span>
-                        </h1>
-                    </div>
-                    <SignOutButton />
+                <div className="mb-10">
+                    <p className="text-xs uppercase tracking-wider text-neutral-400 mb-2">
+                        {ROLE_LABEL[member.role] ?? "Member"} · {member.usn}
+                    </p>
+                    <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+                        Welcome back, <span className="text-cyan-400">{firstName}</span>
+                    </h1>
                 </div>
 
                 <div className="grid sm:grid-cols-3 gap-3 mb-10">
