@@ -3,6 +3,7 @@ import Link from "next/link";
 import { FolderGit2, CalendarCheck, Trophy, ShieldCheck, Users } from "lucide-react";
 import { getMember, getSession } from "@/lib/session";
 import { PushToggle } from "@/components/pwa/push-toggle";
+import { InstallButton } from "@/components/pwa/install-button";
 
 export const metadata = { title: "Dashboard" };
 
@@ -76,10 +77,13 @@ export default async function DashboardPage() {
                 </div>
 
                 <div className="mt-8 pt-6 border-t border-white/5">
-                    <PushToggle />
+                    <div className="flex flex-wrap items-center gap-3">
+                        <InstallButton />
+                        <PushToggle />
+                    </div>
                     <p className="text-xs text-neutral-600 mt-2">
-                        Get told about new sessions and club announcements. Install DevForge from your
-                        browser menu to use it like an app.
+                        Install DevForge to use it like an app, and turn on notifications for new
+                        sessions and club announcements.
                     </p>
                 </div>
             </div>
