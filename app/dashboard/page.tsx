@@ -102,55 +102,26 @@ function Stat({ value, label, mono = true }: { value: string | number; label: st
     );
 }
 
-/**
- * `ready: false` renders the tile as inert rather than a link. All four
- * destinations below are unbuilt — shipping them as links sent every click on
- * the dashboard to a 404, which is a worse first impression than saying so.
- * Flip a tile to `ready` when its route lands.
- */
 function Tile({
     href,
     icon,
     title,
     body,
-    ready = false,
 }: {
     href: string;
     icon: React.ReactNode;
     title: string;
     body: string;
-    ready?: boolean;
 }) {
-    const inner = (
-        <>
-            <div className="flex items-start justify-between gap-3 mb-4">
-                <div className="inline-flex items-center justify-center p-2.5 bg-cyan-400/10 text-cyan-400 rounded-xl border border-cyan-400/20">
-                    {icon}
-                </div>
-                {!ready && (
-                    <span className="text-[10px] uppercase tracking-wider font-semibold text-neutral-400 border border-white/10 rounded-full px-2.5 py-1">
-                        Coming soon
-                    </span>
-                )}
+    return (
+        <Link href={href} className="group glass glass-hover rounded-2xl p-6 block">
+            <div className="inline-flex items-center justify-center p-2.5 bg-cyan-400/10 text-cyan-400 rounded-xl mb-4 border border-cyan-400/20">
+                {icon}
             </div>
-            <h2 className={`text-lg font-bold mb-1 ${ready ? "text-white group-hover:text-cyan-300 transition-colors" : "text-neutral-300"}`}>
+            <h2 className="text-lg font-bold text-white mb-1 group-hover:text-cyan-300 transition-colors">
                 {title}
             </h2>
             <p className="text-sm text-neutral-400 leading-relaxed">{body}</p>
-        </>
-    );
-
-    if (!ready) {
-        return (
-            <div aria-disabled className="glass rounded-2xl p-6 opacity-60">
-                {inner}
-            </div>
-        );
-    }
-
-    return (
-        <Link href={href} className="group glass glass-hover rounded-2xl p-6 block">
-            {inner}
         </Link>
     );
 }
