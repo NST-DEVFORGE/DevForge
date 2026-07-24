@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { AUTH_COOKIE, verifySession, type MemberRole, type SessionClaims } from "./auth";
@@ -24,6 +25,9 @@ export interface MemberRecord {
     github?: string;
     linkedin?: string;
     photo?: string;
+    /** Executive Council title, e.g. "President". Unset for regular members. */
+    councilPosition?: string;
+    joinedAt?: string;
 }
 
 export class AuthError extends Error {
@@ -48,10 +52,16 @@ export async function requireUser(): Promise<SessionClaims> {
     return session;
 }
 
-export async function getMember(usn: string): Promise<MemberRecord | null> {
+/**
+ * Wrapped in React cache() so the dashboard layout and the page it renders
+ * share a single read per request instead of hitting Firestore twice on every
+ * navigation. (Deduped within a request only; not cached across navigations,
+ * so points/role stay current.)
+ */
+export const getMember = cache(async (usn: string): Promise<MemberRecord | null> => {
     const snap = await club<MemberRecord>(COLLECTIONS.members).doc(usn).get();
     return snap.exists ? (snap.data() as MemberRecord) : null;
-}
+});
 
 /**
  * Authorizes against the member's *current* Firestore record, not the token's

@@ -20,7 +20,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
 
     return (
         <>
-            <DashboardNav />
+            <DashboardNav elevated={member.role === "admin" || member.role === "mentor"} />
             {children}
         </>
     );
