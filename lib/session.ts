@@ -15,6 +15,15 @@ export interface MemberRecord {
     mustChangePassword?: boolean;
     points?: number;
     badges?: number;
+    /**
+     * Identity fields, optional. Student members leave these unset and their
+     * GitHub/LinkedIn/photo are read from the student portal by USN. Off-roster
+     * members (mentors, staff) aren't in that portal, so they carry their own
+     * here instead. `photo` is a base64 data URI when present.
+     */
+    github?: string;
+    linkedin?: string;
+    photo?: string;
 }
 
 export class AuthError extends Error {
