@@ -3,6 +3,7 @@ import { club, COLLECTIONS } from "@/lib/firebase/collections";
 import { authErrorResponse, getMember, requireUser } from "@/lib/session";
 import { checkRateLimit, RATE_LIMITS } from "@/lib/rate-limit";
 import { projectInputSchema, slugify, type Project } from "@/lib/projects";
+import { notifyAllMembers } from "@/lib/push";
 
 export const runtime = "nodejs";
 
@@ -80,6 +81,21 @@ export async function POST(request: NextRequest) {
         // createdAt is an ISO string, which sorts lexicographically — no
         // separate server timestamp is needed for ordering.
         await ref.set(project);
+
+        // A project that goes straight to published is worth announcing; drafts
+        // stay quiet until they're published (handled in the PATCH route).
+        if (project.status === "published") {
+            await notifyAllMembers(
+                {
+                    title: `New project: ${project.title}`,
+                    body: `${project.ownerName} — ${project.tagline}`,
+                    url: "/dashboard/projects",
+                    tag: `project-${project.id}`,
+                },
+                member.usn,
+            );
+        }
+
         return NextResponse.json({ ok: true, project }, { status: 201 });
     } catch (error) {
         return authErrorResponse(error);

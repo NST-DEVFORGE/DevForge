@@ -26,6 +26,8 @@ export function RepoPicker({ value, onChange, onDemoUrl }: RepoPickerProps) {
     const [state, setState] = useState<State>({ status: "loading" });
     const [query, setQuery] = useState("");
     const [manual, setManual] = useState(false);
+    // Once a repo is chosen the list collapses; "Change" reopens it.
+    const [picking, setPicking] = useState(false);
 
     async function fetchRepos(): Promise<State> {
         try {
@@ -70,6 +72,9 @@ export function RepoPicker({ value, onChange, onDemoUrl }: RepoPickerProps) {
     }, [state, query]);
 
     const showManual = manual || state.status === "unavailable";
+    const selectedRepo = state.status === "ready" ? state.repos.find((r) => r.url === value) : undefined;
+    // Collapse to a summary once something's picked, unless the user reopened it.
+    const showList = picking || !selectedRepo;
 
     return (
         <div>
@@ -104,6 +109,30 @@ export function RepoPicker({ value, onChange, onDemoUrl }: RepoPickerProps) {
             ) : (
                 <>
                     <input type="hidden" name="repoUrl" value={value} />
+
+                    {selectedRepo && !showList && (
+                        <div className="flex items-center gap-3 glass-subtle !rounded-xl px-4 py-3">
+                            <Check size={16} className="text-cyan-400 flex-shrink-0" />
+                            <div className="min-w-0 flex-1">
+                                <p className="text-sm font-medium text-white truncate">{selectedRepo.name}</p>
+                                {selectedRepo.description && (
+                                    <p className="text-xs text-neutral-500 truncate">{selectedRepo.description}</p>
+                                )}
+                            </div>
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setQuery("");
+                                    setPicking(true);
+                                }}
+                                className="text-xs text-cyan-300 hover:text-cyan-200 flex-shrink-0"
+                            >
+                                Change
+                            </button>
+                        </div>
+                    )}
+
+                    {showList && (
                     <div className="glass rounded-xl overflow-hidden">
                         <div className="flex items-center gap-2 px-4 py-2.5 border-b border-white/5">
                             <Search size={14} className="text-neutral-500 flex-shrink-0" />
@@ -144,6 +173,7 @@ export function RepoPicker({ value, onChange, onDemoUrl }: RepoPickerProps) {
                                             onClick={() => {
                                                 onChange(repo.url);
                                                 if (repo.homepage && onDemoUrl) onDemoUrl(repo.homepage);
+                                                setPicking(false); // collapse the list
                                             }}
                                             className={`w-full text-left px-4 py-3 border-b border-white/5 last:border-0 transition-colors ${
                                                 selected ? "bg-cyan-400/10" : "hover:bg-white/5"
@@ -181,6 +211,7 @@ export function RepoPicker({ value, onChange, onDemoUrl }: RepoPickerProps) {
                                 })}
                         </div>
                     </div>
+                    )}
                 </>
             )}
 

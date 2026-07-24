@@ -4,6 +4,7 @@ import { club, COLLECTIONS } from "@/lib/firebase/collections";
 import { getSession, getMember, type MemberRecord } from "@/lib/session";
 import type { AdminMemberRow } from "@/app/api/admin/members/route";
 import { MemberRow } from "@/components/admin/member-row";
+import { NotifyComposer } from "@/components/admin/notify-composer";
 
 export const metadata = { title: "Admin" };
 
@@ -63,6 +64,10 @@ export default async function AdminPage() {
                             : "No requests waiting."}
                     </p>
                 </div>
+
+                <section className="mb-10">
+                    <NotifyComposer />
+                </section>
 
                 {pending.length > 0 && (
                     <section className="mb-10">

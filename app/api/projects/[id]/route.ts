@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { club, COLLECTIONS } from "@/lib/firebase/collections";
 import { authErrorResponse, getSession, requireUser } from "@/lib/session";
 import { canEditProject, projectInputSchema, type Project } from "@/lib/projects";
+import { notifyAllMembers } from "@/lib/push";
 
 export const runtime = "nodejs";
 
@@ -51,6 +52,19 @@ export async function PATCH(request: NextRequest, { params }: Params) {
         // Ownership and identity fields are never taken from the request body.
         const updates = { ...parsed.data, updatedAt: new Date().toISOString() };
         await club<Project>(COLLECTIONS.projects).doc(id).update(updates);
+
+        // Announce only on the draft → published transition, not on every edit.
+        if (updates.status === "published" && project.status !== "published") {
+            await notifyAllMembers(
+                {
+                    title: `New project: ${project.title}`,
+                    body: `${project.ownerName} — ${project.tagline}`,
+                    url: "/dashboard/projects",
+                    tag: `project-${project.id}`,
+                },
+                project.ownerUsn,
+            );
+        }
 
         return NextResponse.json({ ok: true, project: { ...project, ...updates } });
     } catch (error) {

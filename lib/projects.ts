@@ -16,9 +16,40 @@ export interface Project {
     ownerName: string;
     /** USNs of members who asked to join and were accepted by the owner. */
     collaborators: string[];
+    /**
+     * How many collaborators the owner will take. null means open/uncapped, 0
+     * means not looking for any. Accepting is blocked once collaborators reach
+     * this number.
+     */
+    collaboratorLimit: number | null;
     status: ProjectStatus;
     createdAt: string;
     updatedAt: string;
+}
+
+export type CollabStatus = "pending" | "accepted" | "rejected";
+
+export interface CollabRequest {
+    /** `${projectId}:${usn}` — one standing request per member per project. */
+    id: string;
+    projectId: string;
+    projectTitle: string;
+    ownerUsn: string;
+    /** The member asking to join. */
+    usn: string;
+    name: string;
+    message: string;
+    status: CollabStatus;
+    createdAt: string;
+    updatedAt: string;
+}
+
+export function collabId(projectId: string, usn: string): string {
+    return `${projectId}:${usn}`;
+}
+
+export function collaboratorsFull(project: Pick<Project, "collaborators" | "collaboratorLimit">): boolean {
+    return project.collaboratorLimit !== null && project.collaborators.length >= project.collaboratorLimit;
 }
 
 /** http(s) only — a javascript: or data: URL here would end up in an href. */
@@ -42,6 +73,13 @@ export const projectInputSchema = z.object({
     repoUrl: externalUrl,
     demoUrl: externalUrl,
     status: z.enum(["draft", "published"]).default("draft"),
+    collaboratorLimit: z
+        .number()
+        .int()
+        .min(0)
+        .max(50)
+        .nullable()
+        .default(null),
 });
 
 export type ProjectInput = z.infer<typeof projectInputSchema>;
