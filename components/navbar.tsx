@@ -96,6 +96,12 @@ export function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    // The member app renders its own DashboardNav; showing the marketing nav
+    // (Programs, Community, "Join Us") on top of it makes no sense once signed in.
+    if (pathname.startsWith("/dashboard") || pathname.startsWith("/admin")) {
+        return null;
+    }
+
     return (
         <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'py-3' : 'py-5'}`}>
             <div className={`max-w-7xl mx-auto px-4 flex items-center justify-between gap-4 transition-all duration-500 ${isScrolled ? 'glass !rounded-full px-4 md:px-6 py-2 border border-white/10' : ''}`}>
@@ -121,7 +127,7 @@ export function Navbar() {
                 <div className="flex items-center gap-3 shrink-0">
                     <ThemeSwitcher />
                     <NavAuthLink />
-                    <Link href="https://forms.gle/kBYengUpz5D7WHSz9" target="_blank" className="hidden md:inline-flex px-5 py-2 bg-white text-black font-bold text-sm rounded-full whitespace-nowrap hover:bg-neutral-200 transition-colors">
+                    <Link href="/join" className="hidden md:inline-flex px-5 py-2 bg-white text-black font-bold text-sm rounded-full whitespace-nowrap hover:bg-neutral-200 transition-colors">
                         Join Us
                     </Link>
 

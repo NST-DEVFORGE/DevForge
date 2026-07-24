@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { redirect } from "next/navigation";
 import { getMember, getSession } from "@/lib/session";
+import { DashboardNav } from "@/components/dashboard/dashboard-nav";
 
 /**
  * Server-side gate for the whole member app. proxy.ts already redirects
@@ -17,5 +18,10 @@ export default async function DashboardLayout({ children }: { children: ReactNod
     // Lives outside /dashboard precisely so this redirect can't loop.
     if (member.mustChangePassword) redirect("/change-password");
 
-    return <>{children}</>;
+    return (
+        <>
+            <DashboardNav />
+            {children}
+        </>
+    );
 }
