@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { club, COLLECTIONS } from "@/lib/firebase/collections";
-import { authErrorResponse, getSession, requireUser } from "@/lib/session";
+import { authErrorResponse, getMember, getSession, requireActiveMember } from "@/lib/session";
 import { canEditProject, projectInputSchema, type Project } from "@/lib/projects";
 import { notifyAllMembers } from "@/lib/push";
 
@@ -22,7 +22,8 @@ export async function GET(_request: NextRequest, { params }: Params) {
     // 404 rather than a 403, so an id can't be probed for existence.
     if (project.status === "draft") {
         const session = await getSession();
-        if (!session || !canEditProject(project, session)) {
+        const actor = session ? await getMember(session.usn) : null;
+        if (!actor || !canEditProject(project, actor)) {
             return NextResponse.json({ ok: false, message: "Not found" }, { status: 404 });
         }
     }
@@ -33,11 +34,11 @@ export async function GET(_request: NextRequest, { params }: Params) {
 export async function PATCH(request: NextRequest, { params }: Params) {
     try {
         const { id } = await params;
-        const session = await requireUser();
+        const { member } = await requireActiveMember();
         const project = await load(id);
 
         if (!project) return NextResponse.json({ ok: false, message: "Not found" }, { status: 404 });
-        if (!canEditProject(project, session)) {
+        if (!canEditProject(project, member)) {
             return NextResponse.json({ ok: false, message: "This isn't your project" }, { status: 403 });
         }
 
@@ -58,7 +59,7 @@ export async function PATCH(request: NextRequest, { params }: Params) {
             await notifyAllMembers(
                 {
                     title: `New project: ${project.title}`,
-                    body: `${project.ownerName} — ${project.tagline}`,
+                    body: `${project.ownerName}, ${project.tagline}`,
                     url: "/dashboard/projects",
                     tag: `project-${project.id}`,
                 },
@@ -75,11 +76,11 @@ export async function PATCH(request: NextRequest, { params }: Params) {
 export async function DELETE(_request: NextRequest, { params }: Params) {
     try {
         const { id } = await params;
-        const session = await requireUser();
+        const { member } = await requireActiveMember();
         const project = await load(id);
 
         if (!project) return NextResponse.json({ ok: false, message: "Not found" }, { status: 404 });
-        if (!canEditProject(project, session)) {
+        if (!canEditProject(project, member)) {
             return NextResponse.json({ ok: false, message: "This isn't your project" }, { status: 403 });
         }
 

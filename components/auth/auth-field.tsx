@@ -14,7 +14,7 @@ interface AuthFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "cl
  *
  * Text here is neutral-400 or lighter throughout: neutral-500/600 measured
  * 3.5:1 and 2.1:1 against this card, well under the 4.5:1 AA needs, which left
- * the labels and hints all but invisible. glass-subtle rather than glass —
+ * the labels and hints all but invisible. glass-subtle rather than glass -
  * glass bakes in a 20px radius and a 34px drop shadow meant for whole panels,
  * which on a control read as a second ring floating inside the field.
  */

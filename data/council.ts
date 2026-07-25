@@ -1,5 +1,5 @@
 /**
- * DevForge Executive Council — the founding governance office bearers.
+ * DevForge Executive Council, the founding governance office bearers.
  * Source of truth for the public /governance page and for assigning council
  * titles to member records (scripts/set-council.ts). Order is the governance
  * hierarchy: President first.

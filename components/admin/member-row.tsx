@@ -11,7 +11,15 @@ const STATUS_STYLES: Record<string, string> = {
     rejected: "bg-red-500/10 text-red-400 border-red-500/25",
 };
 
-export function MemberRow({ member, isSelf }: { member: AdminMemberRow; isSelf: boolean }) {
+export function MemberRow({
+    member,
+    isSelf,
+    canManageRoles = false,
+}: {
+    member: AdminMemberRow;
+    isSelf: boolean;
+    canManageRoles?: boolean;
+}) {
     const router = useRouter();
     const [pending, setPending] = useState(false);
     const [message, setMessage] = useState<string | null>(null);
@@ -92,7 +100,7 @@ export function MemberRow({ member, isSelf }: { member: AdminMemberRow; isSelf: 
                         </>
                     )}
 
-                    {member.status === "approved" && !isSelf && (
+                    {member.status === "approved" && !isSelf && canManageRoles && (
                         <select
                             value={member.role}
                             onChange={(e) => act("set-role", e.target.value)}

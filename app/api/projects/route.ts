@@ -14,7 +14,7 @@ export const runtime = "nodejs";
 /**
  * Sorted in memory rather than with orderBy. Combining a where() with an
  * orderBy() on a different field needs a composite index, and this Firestore
- * project belongs to the student portal — adding indexes there is a
+ * project belongs to the student portal, adding indexes there is a
  * shared-resource change, not ours to make unilaterally. A club's project
  * list is small enough that this costs nothing.
  */
@@ -78,7 +78,7 @@ export async function POST(request: NextRequest) {
             updatedAt: now,
         };
 
-        // createdAt is an ISO string, which sorts lexicographically — no
+        // createdAt is an ISO string, which sorts lexicographically, no
         // separate server timestamp is needed for ordering.
         await ref.set(project);
 
@@ -88,7 +88,7 @@ export async function POST(request: NextRequest) {
             await notifyAllMembers(
                 {
                     title: `New project: ${project.title}`,
-                    body: `${project.ownerName} — ${project.tagline}`,
+                    body: `${project.ownerName}, ${project.tagline}`,
                     url: "/dashboard/projects",
                     tag: `project-${project.id}`,
                 },

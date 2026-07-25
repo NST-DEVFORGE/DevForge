@@ -24,7 +24,7 @@ export async function GET(_request: NextRequest, { params }: Params) {
 
 /**
  * Claims a spot. The RSVP id is `${eventId}:${usn}`, so a double-click can't
- * produce two rows, and the capacity check runs inside a transaction — two
+ * produce two rows, and the capacity check runs inside a transaction, two
  * members racing for the last seat can't both win.
  */
 export async function POST(_request: NextRequest, { params }: Params) {
@@ -74,7 +74,7 @@ export async function POST(_request: NextRequest, { params }: Params) {
     }
 }
 
-/** Gives the spot back. Idempotent — cancelling twice is not an error. */
+/** Gives the spot back. Idempotent, cancelling twice is not an error. */
 export async function DELETE(_request: NextRequest, { params }: Params) {
     try {
         const session = await requireUser();

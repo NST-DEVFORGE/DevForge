@@ -13,7 +13,7 @@ export interface MemberCard {
     councilPosition?: string;
     points: number;
     badges: number;
-    /** Bare GitHub username, never a URL — see normalizeGithub. */
+    /** Bare GitHub username, never a URL, see normalizeGithub. */
     github?: string;
     linkedin?: string;
     /** Photos are fetched separately from /api/members/[usn]/avatar. */
@@ -98,7 +98,7 @@ async function fetchRoster(): Promise<MemberCard[]> {
  * cache each visit cost ~27 Firestore reads (the members collection plus a
  * student read each), which on the free tier's daily read budget adds up fast.
  * Now it's ~14 reads at most once per minute, shared across every navigation
- * and every user — a large cut in both latency and read count. A newly approved
+ * and every user, a large cut in both latency and read count. A newly approved
  * member appears in the directory within a minute.
  */
 export const loadRoster = unstable_cache(fetchRoster, ["devforge-roster"], {

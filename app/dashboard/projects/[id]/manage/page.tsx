@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { ArrowLeft, Users } from "lucide-react";
 import { club, external, COLLECTIONS } from "@/lib/firebase/collections";
-import { getSession } from "@/lib/session";
+import { getMember, getSession } from "@/lib/session";
 import { canEditProject, collaboratorsFull, type CollabRequest, type Project } from "@/lib/projects";
 import { normalizeGithub } from "@/lib/members";
 import { Avatar } from "@/components/ui/avatar";
@@ -18,7 +18,8 @@ export default async function ManageProjectPage({ params }: { params: Promise<{ 
     const snap = await club<Project>(COLLECTIONS.projects).doc(id).get();
     if (!snap.exists) notFound();
     const project = snap.data() as Project;
-    if (!canEditProject(project, session)) notFound();
+    const viewer = await getMember(session.usn);
+    if (!viewer || !canEditProject(project, viewer)) notFound();
 
     const requestsSnap = await club<CollabRequest>(COLLECTIONS.collabRequests).where("projectId", "==", id).get();
     const requests = requestsSnap.docs.map((d) => d.data());
@@ -64,7 +65,7 @@ export default async function ManageProjectPage({ params }: { params: Promise<{ 
                     </h2>
                     {full && pendingCount > 0 && (
                         <p className="text-xs text-yellow-400/80 mb-3">
-                            Slots are full — free one up or raise the limit to accept more.
+                            Slots are full, free one up or raise the limit to accept more.
                         </p>
                     )}
                     <CollabRequests projectId={id} requests={requests} full={full} />

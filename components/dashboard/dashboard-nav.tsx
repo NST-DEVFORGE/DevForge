@@ -38,7 +38,7 @@ const LINKS: NavLink[] = [
 /**
  * The member app's own top bar. Replaces the public marketing navbar once
  * signed in. `elevated` comes from the server layout (which already reads the
- * member) rather than a client fetch — one fewer round-trip per navigation.
+ * member) rather than a client fetch, one fewer round-trip per navigation.
  *
  * Desktop shows a pill row; below `lg` it collapses to a hamburger, since seven
  * links scrolling sideways on a phone read as clutter.
@@ -106,7 +106,7 @@ export function DashboardNav({ elevated = false }: { elevated?: boolean }) {
                     </div>
                 </div>
 
-                {/* Mobile menu — opaque (var background, not translucent glass) so
+                {/* Mobile menu, opaque (var background, not translucent glass) so
                     the page content behind it doesn't bleed through. */}
                 <AnimatePresence>
                     {open && (
@@ -121,7 +121,7 @@ export function DashboardNav({ elevated = false }: { elevated?: boolean }) {
                                     className="lg:hidden fixed inset-0 z-40 bg-black/70 cursor-default"
                                 />
                                 {/* Fixed + high z so it clears the page's stacking contexts.
-                                    Only the slide is animated, never opacity — a throttled
+                                    Only the slide is animated, never opacity, a throttled
                                     animation frame could otherwise freeze the panel
                                     half-transparent and let the page bleed through. */}
                                 <motion.nav

@@ -4,7 +4,7 @@ import { club, COLLECTIONS } from "@/lib/firebase/collections";
 import { authErrorResponse, getMember, requireUser } from "@/lib/session";
 import { checkRateLimit, RATE_LIMITS } from "@/lib/rate-limit";
 import { notifyMember } from "@/lib/push";
-import { collabId, collaboratorsFull, type CollabRequest, type Project } from "@/lib/projects";
+import { canEditProject, collabId, collaboratorsFull, type CollabRequest, type Project } from "@/lib/projects";
 
 export const runtime = "nodejs";
 
@@ -22,7 +22,8 @@ export async function GET(_request: NextRequest, { params }: Params) {
         if (!projectSnap.exists) return NextResponse.json({ ok: false, message: "Not found" }, { status: 404 });
 
         const project = projectSnap.data() as Project;
-        if (project.ownerUsn !== session.usn && session.role !== "admin") {
+        const member = await getMember(session.usn);
+        if (!member || !canEditProject(project, member)) {
             return NextResponse.json({ ok: false, message: "Not your project" }, { status: 403 });
         }
 

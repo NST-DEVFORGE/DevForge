@@ -139,7 +139,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
                 max={50}
                 value={collabLimit}
                 onChange={(e) => setCollabLimit(e.target.value)}
-                placeholder="Open — no limit"
+                placeholder="Open, no limit"
                 hint="How many teammates you'll take. Blank = open, 0 = not looking. Members request to join once it's published."
             />
 
@@ -224,7 +224,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
 
 /**
  * Shares AuthField's surface treatment: glass-subtle with an outline focus
- * ring, and neutral-400 text. Anything dimmer fails AA against this card —
+ * ring, and neutral-400 text. Anything dimmer fails AA against this card -
  * neutral-500 measures 3.5:1 where 4.5:1 is needed.
  */
 const FIELD_SURFACE =

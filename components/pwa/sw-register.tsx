@@ -5,12 +5,12 @@ import type { BeforeInstallPromptEvent, WindowWithInstall } from "./install-type
 
 /**
  * Registers the service worker so the member app is installable. Registration
- * is deferred to the load event — it competes with hydration otherwise, and
+ * is deferred to the load event, it competes with hydration otherwise, and
  * nothing on first paint depends on it.
  */
 export function ServiceWorkerRegistrar() {
     useEffect(() => {
-        // Capture the install prompt as early as possible — the event fires once
+        // Capture the install prompt as early as possible, the event fires once
         // and is easily missed if a button mounts later. Stash it globally and
         // announce it so InstallButton can pick it up whenever it renders.
         const onBeforeInstall = (event: Event) => {

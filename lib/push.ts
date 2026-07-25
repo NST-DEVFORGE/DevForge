@@ -3,7 +3,7 @@ import { club, COLLECTIONS } from "./firebase/collections";
 import type { MemberRecord } from "./session";
 
 export interface PushSubscriptionRecord {
-    /** Hash of the endpoint — endpoints are long and contain URL-unsafe characters. */
+    /** Hash of the endpoint, endpoints are long and contain URL-unsafe characters. */
     id: string;
     usn: string;
     endpoint: string;
@@ -51,7 +51,7 @@ export interface DeliveryReport {
  * Sends to every subscription belonging to the given members.
  *
  * A 404 or 410 from the push service means the browser threw the subscription
- * away — the row is deleted rather than retried, otherwise dead endpoints
+ * away, the row is deleted rather than retried, otherwise dead endpoints
  * accumulate forever and every future send gets slower.
  */
 export async function sendToMembers(usns: string[], payload: PushPayload): Promise<DeliveryReport> {
@@ -99,7 +99,7 @@ export async function sendToMembers(usns: string[], payload: PushPayload): Promi
 /**
  * Fire-and-forget notification to every approved member, optionally excluding
  * one USN (e.g. the person whose action triggered it). Swallows its own errors
- * and never throws — an announcement failing to deliver must not fail the
+ * and never throws, an announcement failing to deliver must not fail the
  * request that created the session or project.
  */
 export async function notifyAllMembers(payload: PushPayload, exceptUsn?: string): Promise<void> {

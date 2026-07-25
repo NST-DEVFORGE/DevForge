@@ -13,7 +13,7 @@ export const runtime = "nodejs";
  * cache each face independently.
  *
  * These are personal photos from a live student system, so they require a
- * session — never public, and never on a shared CDN cache.
+ * session, never public, and never on a shared CDN cache.
  */
 export async function GET(_request: NextRequest, { params }: { params: Promise<{ usn: string }> }) {
     try {
@@ -31,7 +31,7 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
 
         if (!photo) return new NextResponse(null, { status: 404 });
 
-        // [\s\S] rather than . with the s flag — tsconfig targets ES2017.
+        // [\s\S] rather than . with the s flag, tsconfig targets ES2017.
         const match = /^data:(image\/[a-z+]+);base64,([\s\S]+)$/i.exec(photo);
         if (!match) return new NextResponse(null, { status: 415 });
 

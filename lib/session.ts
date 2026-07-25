@@ -3,8 +3,7 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { AUTH_COOKIE, verifySession, type MemberRole, type SessionClaims } from "./auth";
 import { club, COLLECTIONS } from "./firebase/collections";
-
-const ELEVATED: MemberRole[] = ["admin", "mentor"];
+import { can, canAccessAdminArea, type Capability } from "./permissions";
 
 export interface MemberRecord {
     usn: string;
@@ -64,17 +63,36 @@ export const getMember = cache(async (usn: string): Promise<MemberRecord | null>
 });
 
 /**
- * Authorizes against the member's *current* Firestore record, not the token's
- * claims. Tokens live 7 days, so a role encoded at sign-in would otherwise
- * outlive a demotion or a revoked account.
+ * Loads the current member and confirms the account is active. Authorizes
+ * against the *current* Firestore record, not the token's claims, tokens live
+ * 7 days, so anything encoded at sign-in would outlive a change.
  */
-export async function requireAdmin(): Promise<{ session: SessionClaims; member: MemberRecord }> {
+export async function requireActiveMember(): Promise<{ session: SessionClaims; member: MemberRecord }> {
     const session = await requireUser();
     const member = await getMember(session.usn);
-
     if (!member || member.status !== "approved") throw new AuthError(403, "Account is not active");
-    if (!ELEVATED.includes(member.role)) throw new AuthError(403, "Admin access required");
+    return { session, member };
+}
 
+/**
+ * Requires a specific governance capability (see lib/permissions). Powers come
+ * from the member's council position, not a blanket admin role.
+ */
+export async function requireCapability(
+    capability: Capability,
+): Promise<{ session: SessionClaims; member: MemberRecord }> {
+    const { session, member } = await requireActiveMember();
+    if (!can(member, capability)) throw new AuthError(403, "You don't have permission to do that");
+    return { session, member };
+}
+
+/**
+ * @deprecated Prefer requireCapability. Kept for the admin area gate: passes if
+ * the member has any capability the /admin surfaces expose.
+ */
+export async function requireAdmin(): Promise<{ session: SessionClaims; member: MemberRecord }> {
+    const { session, member } = await requireActiveMember();
+    if (!canAccessAdminArea(member)) throw new AuthError(403, "Admin access required");
     return { session, member };
 }
 

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { club, COLLECTIONS } from "@/lib/firebase/collections";
-import { authErrorResponse, requireAdmin, type MemberRecord } from "@/lib/session";
+import { authErrorResponse, requireCapability, type MemberRecord } from "@/lib/session";
 
 export const runtime = "nodejs";
 
@@ -20,7 +20,7 @@ export interface AdminMemberRow {
 /** Full roster including pending and rejected. Admins and mentors only. */
 export async function GET() {
     try {
-        await requireAdmin();
+        await requireCapability("members:manage");
 
         const snap = await club<MemberRecord & { note?: string; requestedAt?: string; joinedAt?: string; passwordChangedAt?: string }>(
             COLLECTIONS.members,

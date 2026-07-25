@@ -63,7 +63,7 @@ export default async function DashboardPage() {
                 <div className="grid grid-cols-3 gap-3 mb-8">
                     <Stat icon={<Star size={16} />} value={member.points ?? 0} label="Points" />
                     <Stat icon={<Award size={16} />} value={member.badges ?? 0} label="Badges" />
-                    <Stat icon={<CalendarCheck size={16} />} value={joinedYear ?? "—"} label="Member since" />
+                    <Stat icon={<CalendarCheck size={16} />} value={joinedYear ?? "-"} label="Member since" />
                 </div>
 
                 {/* Quick actions */}
@@ -73,7 +73,7 @@ export default async function DashboardPage() {
                         href="/dashboard/projects"
                         icon={<FolderGit2 size={20} />}
                         title="Your projects"
-                        body="Publish what you're building — pick a repo straight from GitHub."
+                        body="Publish what you're building, pick a repo straight from GitHub."
                     />
                     <Action
                         href="/dashboard/explore"

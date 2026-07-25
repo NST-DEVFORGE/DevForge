@@ -51,7 +51,7 @@ export default function ChangePasswordPage() {
     return (
         <div className="min-h-screen bg-transparent text-white pt-32 pb-16">
             <div className="max-w-md mx-auto px-4">
-                {/* See app/login/page.tsx — template.tsx already animates the route. */}
+                {/* See app/login/page.tsx, template.tsx already animates the route. */}
                 <div className="text-center mb-10">
                     <div className="inline-flex items-center justify-center p-4 bg-cyan-400/10 text-cyan-400 rounded-full mb-6 border border-cyan-400/20">
                         <KeyRound size={28} />

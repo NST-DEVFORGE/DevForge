@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { club, COLLECTIONS } from "@/lib/firebase/collections";
-import { getSession } from "@/lib/session";
+import { getMember, getSession } from "@/lib/session";
 import { canEditProject, type Project } from "@/lib/projects";
 import { ProjectForm } from "@/components/projects/project-form";
 
@@ -17,8 +17,9 @@ export default async function EditProjectPage({ params }: { params: Promise<{ id
     if (!snap.exists) notFound();
 
     const project = snap.data() as Project;
+    const member = await getMember(session.usn);
     // Same rule as the API: someone who can't edit it shouldn't learn it exists.
-    if (!canEditProject(project, session)) notFound();
+    if (!member || !canEditProject(project, member)) notFound();
 
     return (
         <div className="min-h-screen bg-transparent text-white pt-24 pb-16">
@@ -37,7 +38,7 @@ export default async function EditProjectPage({ params }: { params: Promise<{ id
                 <p className="text-neutral-400 mb-8">
                     {project.status === "published"
                         ? "This is live on the club's project list."
-                        : "This is a draft — only you can see it."}
+                        : "This is a draft, only you can see it."}
                 </p>
 
                 <ProjectForm project={project} />

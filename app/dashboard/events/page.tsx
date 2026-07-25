@@ -1,7 +1,8 @@
 import { redirect } from "next/navigation";
 import { CalendarCheck, MapPin, Users } from "lucide-react";
 import { club, COLLECTIONS } from "@/lib/firebase/collections";
-import { getSession } from "@/lib/session";
+import { getMember, getSession } from "@/lib/session";
+import { can } from "@/lib/permissions";
 import { isPast, rsvpId, type ClubEvent, type Rsvp } from "@/lib/events";
 import { RsvpButton } from "@/components/events/rsvp-button";
 import { CreateSession } from "@/components/events/create-session";
@@ -20,7 +21,8 @@ const when = new Intl.DateTimeFormat("en-IN", {
 export default async function EventsPage() {
     const session = await getSession();
     if (!session) redirect("/login?next=/dashboard/events");
-    const canCreate = session.role === "admin" || session.role === "mentor";
+    const me = await getMember(session.usn);
+    const canCreate = me ? can(me, "sessions:manage") : false;
 
     const [eventsSnap, rsvpsSnap] = await Promise.all([
         club<ClubEvent>(COLLECTIONS.events).get(),

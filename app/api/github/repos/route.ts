@@ -36,7 +36,7 @@ interface GithubApiRepo {
  *
  * The username is resolved from their student record rather than taken as a
  * parameter. Accepting one would turn this into an open GitHub proxy backed by
- * our token — anyone with an account could enumerate arbitrary users through
+ * our token, anyone with an account could enumerate arbitrary users through
  * it, and the rate limit would be ours to lose.
  */
 export async function GET() {
