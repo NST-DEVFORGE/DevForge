@@ -1,68 +1,175 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { Users2, Github, Linkedin } from "lucide-react";
-import { clubLeadership } from "../../data/club-info";
+import type { Metadata } from "next";
+import { Github, Mail, Users2, Target, Compass, ShieldCheck } from "lucide-react";
+import { council } from "@/data/council";
+import { Reveal } from "@/components/ui/reveal";
 import { Join } from "@/components/join";
 
-export default function DeveloperClub() {
+export const metadata: Metadata = {
+    title: "About & Governance",
+    description:
+        "DevForge is the official developer community of Newton School of Technology, Bengaluru, its vision, values, Executive Council, and how to join.",
+};
+
+const VALUES = [
+    "Community First",
+    "Learn by Building",
+    "Collaboration over Competition",
+    "Innovation",
+    "Inclusivity",
+    "Transparency",
+    "Professionalism",
+    "Accountability",
+];
+
+const MISSION = [
+    "Build a collaborative technical community.",
+    "Encourage project-based learning.",
+    "Promote open-source contributions.",
+    "Organize workshops, hackathons, and technical events.",
+    "Connect students with industry professionals.",
+    "Create leadership opportunities for members.",
+];
+
+const STEPS = [
+    { n: "01", t: "Attend the orientation", d: "Meet the council and learn how DevForge works." },
+    { n: "02", t: "Submit the membership form", d: "Just your USN, we pull the rest from the student portal." },
+    { n: "03", t: "A quick chat", d: "An informal conversation about your interests and goals." },
+    { n: "04", t: "Selection", d: "Reviewed on genuine interest and willingness to learn." },
+    { n: "05", t: "Onboarding", d: "Get your credentials, join the channels, start building." },
+];
+
+export default function AboutPage() {
     return (
-        <div className="min-h-screen bg-transparent text-white selection:bg-cyan-400 selection:text-black pt-24 pb-16">
-            <div className="max-w-7xl mx-auto px-4">
-                
-                {/* Hero Section */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-center mb-24"
-                >
-                    <div className="inline-flex items-center justify-center p-4 bg-purple-500/10 text-purple-500 rounded-full mb-8 border border-purple-500/20">
+        <div className="min-h-screen bg-transparent text-white pt-24 pb-16">
+            <div className="max-w-6xl mx-auto px-4">
+                {/* Hero */}
+                <Reveal className="text-center mb-24">
+                    <div className="inline-flex items-center justify-center p-4 bg-cyan-400/10 text-cyan-400 rounded-full mb-6 border border-cyan-400/20">
                         <Users2 size={32} />
                     </div>
                     <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
-                        Developer <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Club</span>
+                        About <span className="text-cyan-400">DevForge</span>
                     </h1>
                     <p className="text-xl text-neutral-400 max-w-2xl mx-auto">
-                        Meet the team driving the community forward.
+                        The official developer community of Newton School of Technology, Bengaluru -
+                        building the next generation of developers, builders, and open-source
+                        contributors.
                     </p>
-                </motion.div>
+                </Reveal>
 
-                {/* Leadership Team */}
-                <motion.section
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="mb-32"
-                >
-                    <h2 className="text-4xl font-bold mb-12 text-center">Current Leadership</h2>
-                    <div className="flex flex-wrap justify-center gap-8">
-                        {clubLeadership.map((leader, i) => (
-                            <div key={i} className="w-full md:w-80 group relative glass rounded-3xl p-6 text-center hover:border-purple-500/50 transition-colors">
-                                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl pointer-events-none" />
-                                
-                                <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-neutral-800 group-hover:border-purple-500/50 transition-colors">
-                                    <img src={leader.photo} alt={leader.name} className="w-full h-full object-cover bg-neutral-800" onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=400&h=400&fit=crop' }} />
-                                </div>
-                                
-                                <h3 className="text-2xl font-bold text-white mb-2">{leader.name}</h3>
-                                <p className="text-purple-400 font-medium mb-6">{leader.role}</p>
-                                
-                                <div className="flex justify-center gap-4 relative z-10">
-                                    <a href={leader.github} target="_blank" rel="noreferrer" className="text-neutral-500 hover:text-white transition-colors">
-                                        <Github size={20} />
+                {/* Vision / Mission */}
+                <div className="grid md:grid-cols-2 gap-4 mb-24">
+                    <Reveal className="glass-strong rounded-3xl p-8">
+                        <div className="inline-flex items-center gap-2 text-cyan-300 mb-4">
+                            <Compass size={18} />
+                            <h2 className="text-sm uppercase tracking-wider font-semibold">Vision</h2>
+                        </div>
+                        <p className="text-lg text-neutral-200 leading-relaxed">
+                            To build one of India&rsquo;s strongest student developer communities by
+                            empowering students to become exceptional engineers, open-source
+                            contributors, entrepreneurs, and technology leaders.
+                        </p>
+                    </Reveal>
+                    <Reveal className="glass-strong rounded-3xl p-8">
+                        <div className="inline-flex items-center gap-2 text-cyan-300 mb-4">
+                            <Target size={18} />
+                            <h2 className="text-sm uppercase tracking-wider font-semibold">Mission</h2>
+                        </div>
+                        <ul className="space-y-2">
+                            {MISSION.map((m) => (
+                                <li key={m} className="flex items-start gap-2 text-sm text-neutral-300">
+                                    <span className="text-cyan-400 mt-1">›</span>
+                                    {m}
+                                </li>
+                            ))}
+                        </ul>
+                    </Reveal>
+                </div>
+
+                {/* Values */}
+                <Reveal className="mb-24 text-center">
+                    <h2 className="text-xs uppercase tracking-wider text-neutral-500 mb-6">Core values</h2>
+                    <div className="flex flex-wrap justify-center gap-2.5">
+                        {VALUES.map((v) => (
+                            <span key={v} className="glass-subtle rounded-full px-4 py-2 text-sm text-neutral-200">
+                                {v}
+                            </span>
+                        ))}
+                    </div>
+                </Reveal>
+
+                {/* Executive Council */}
+                <Reveal className="mb-24">
+                    <div className="text-center mb-12">
+                        <div className="inline-flex items-center gap-2 text-cyan-300 mb-3">
+                            <ShieldCheck size={18} />
+                            <h2 className="text-sm uppercase tracking-wider font-semibold">Executive Council</h2>
+                        </div>
+                        <p className="text-neutral-400">The office bearers steering DevForge.</p>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                        {council.map((m) => (
+                            <div key={m.usn} className="glass glass-hover rounded-2xl p-5 text-center">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                    src={`https://github.com/${m.github}.png`}
+                                    alt={m.name}
+                                    loading="lazy"
+                                    className="rounded-full mx-auto mb-4 object-cover ring-2 ring-cyan-400/30 bg-white/5"
+                                    style={{ width: 72, height: 72 }}
+                                />
+                                <p className="text-[11px] uppercase tracking-wider font-semibold text-cyan-300 mb-1">
+                                    {m.position}
+                                </p>
+                                <h3 className="font-bold text-white">{m.name}</h3>
+                                <p className="text-xs text-neutral-500 mt-1 leading-relaxed">{m.remit}</p>
+                                <div className="flex items-center justify-center gap-3 mt-4 pt-4 border-t border-white/5">
+                                    <a
+                                        href={`https://github.com/${m.github}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label={`${m.name} on GitHub`}
+                                        className="text-neutral-500 hover:text-cyan-300 transition-colors"
+                                    >
+                                        <Github size={16} />
                                     </a>
-                                    <a href={leader.linkedin} target="_blank" rel="noreferrer" className="text-neutral-500 hover:text-blue-500 transition-colors">
-                                        <Linkedin size={20} />
+                                    <a
+                                        href={`mailto:${m.email}`}
+                                        aria-label={`Email ${m.name}`}
+                                        className="text-neutral-500 hover:text-cyan-300 transition-colors"
+                                    >
+                                        <Mail size={16} />
                                     </a>
                                 </div>
                             </div>
                         ))}
                     </div>
-                </motion.section>
+                </Reveal>
 
+                {/* Membership process */}
+                <Reveal className="mb-24">
+                    <div className="text-center mb-12">
+                        <h2 className="text-4xl font-bold tracking-tight mb-3">
+                            How to <span className="text-cyan-400">join</span>
+                        </h2>
+                        <p className="text-neutral-400">
+                            Open to every NST Bengaluru student, no experience required.
+                        </p>
+                    </div>
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3">
+                        {STEPS.map((s) => (
+                            <div key={s.n} className="glass rounded-2xl p-5">
+                                <div className="text-2xl font-black font-mono text-cyan-400/70 mb-3">{s.n}</div>
+                                <h3 className="font-bold text-white text-sm mb-1">{s.t}</h3>
+                                <p className="text-xs text-neutral-400 leading-relaxed">{s.d}</p>
+                            </div>
+                        ))}
+                    </div>
+                </Reveal>
+
+                <Join />
             </div>
-
-            <Join />
         </div>
     );
 }

@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { club, COLLECTIONS } from "@/lib/firebase/collections";
-import { authErrorResponse, requireAdmin, requireUser } from "@/lib/session";
+import { authErrorResponse, requireCapability, requireUser } from "@/lib/session";
 import { eventInputSchema, type ClubEvent } from "@/lib/events";
 import { notifyAllMembers } from "@/lib/push";
 
@@ -21,7 +21,7 @@ export async function GET() {
 /** Only admins and mentors schedule sessions. */
 export async function POST(request: NextRequest) {
     try {
-        const { member } = await requireAdmin();
+        const { member } = await requireCapability("sessions:manage");
 
         const parsed = eventInputSchema.safeParse(await request.json().catch(() => null));
         if (!parsed.success) {

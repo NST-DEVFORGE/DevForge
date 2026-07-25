@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { z } from "zod";
 import { club, COLLECTIONS } from "@/lib/firebase/collections";
-import { authErrorResponse, requireAdmin, type MemberRecord } from "@/lib/session";
+import { authErrorResponse, requireCapability, type MemberRecord } from "@/lib/session";
 import { sendToMembers } from "@/lib/push";
 import { checkRateLimit, RATE_LIMITS } from "@/lib/rate-limit";
 
@@ -16,17 +16,17 @@ const schema = z.object({
 });
 
 /**
- * Sends a push notification. Admins and mentors only — this reaches every
+ * Sends a push notification. Admins and mentors only, this reaches every
  * member's lock screen, so it is not something a regular account can trigger.
  */
 export async function POST(request: NextRequest) {
     try {
-        const { member } = await requireAdmin();
+        const { member } = await requireCapability("announcements:send");
 
         const limit = await checkRateLimit("push-send", member.usn, RATE_LIMITS.passwordChange);
         if (!limit.ok) {
             return NextResponse.json(
-                { ok: false, message: "Slow down — too many notifications sent recently." },
+                { ok: false, message: "Slow down, too many notifications sent recently." },
                 { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } },
             );
         }

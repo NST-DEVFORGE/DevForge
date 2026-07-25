@@ -19,7 +19,7 @@ type State =
 /**
  * Picks a repository from the member's own GitHub account instead of making
  * them paste a URL. Falls back to a plain text field whenever the list can't
- * be loaded — no GitHub username on file, a rate limit, GitHub being down —
+ * be loaded, no GitHub username on file, a rate limit, GitHub being down -
  * so the form is never blocked by this.
  */
 export function RepoPicker({ value, onChange, onDemoUrl }: RepoPickerProps) {
@@ -42,7 +42,7 @@ export function RepoPicker({ value, onChange, onDemoUrl }: RepoPickerProps) {
         }
     }
 
-    // State is already "loading", so nothing is set synchronously here — and the
+    // State is already "loading", so nothing is set synchronously here, and the
     // result is dropped if the form unmounts while the request is in flight.
     useEffect(() => {
         let active = true;

@@ -89,7 +89,7 @@ export function CreateSession() {
             <div>
                 <label htmlFor="s-summary" className={label}>What&rsquo;s it about?</label>
                 <div className={surface}>
-                    <textarea id="s-summary" name="summary" required minLength={10} maxLength={500} rows={2} placeholder="Hands-on build session — bring a laptop." className={`${input} resize-y`} />
+                    <textarea id="s-summary" name="summary" required minLength={10} maxLength={500} rows={2} placeholder="Hands-on build session, bring a laptop." className={`${input} resize-y`} />
                 </div>
             </div>
 

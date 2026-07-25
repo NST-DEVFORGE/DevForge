@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { can } from "./permissions";
 
 export type ProjectStatus = "draft" | "published";
 
@@ -30,7 +31,7 @@ export interface Project {
 export type CollabStatus = "pending" | "accepted" | "rejected";
 
 export interface CollabRequest {
-    /** `${projectId}:${usn}` — one standing request per member per project. */
+    /** `${projectId}:${usn}`, one standing request per member per project. */
     id: string;
     projectId: string;
     projectTitle: string;
@@ -52,7 +53,7 @@ export function collaboratorsFull(project: Pick<Project, "collaborators" | "coll
     return project.collaboratorLimit !== null && project.collaborators.length >= project.collaboratorLimit;
 }
 
-/** http(s) only — a javascript: or data: URL here would end up in an href. */
+/** http(s) only, a javascript: or data: URL here would end up in an href. */
 const externalUrl = z
     .string()
     .trim()
@@ -101,7 +102,7 @@ export function slugify(title: string): string {
 
 export function canEditProject(
     project: Pick<Project, "ownerUsn">,
-    actor: { usn: string; role: string },
+    actor: { usn: string; role: string; councilPosition?: string },
 ): boolean {
-    return project.ownerUsn === actor.usn || actor.role === "admin" || actor.role === "mentor";
+    return project.ownerUsn === actor.usn || can(actor, "projects:manageAny");
 }

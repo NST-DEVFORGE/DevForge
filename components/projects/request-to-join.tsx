@@ -73,7 +73,7 @@ export function RequestToJoin({
                 disabled={busy}
                 className="inline-flex items-center gap-1.5 glass-subtle hover:border-red-500/40 text-neutral-400 hover:text-red-400 text-xs rounded-full px-3.5 py-2 transition-colors disabled:opacity-50"
             >
-                <Clock size={13} /> Requested — withdraw
+                <Clock size={13} /> Requested, withdraw
             </button>
         );
     }

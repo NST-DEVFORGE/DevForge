@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { ShieldCheck } from "lucide-react";
 import { club, COLLECTIONS } from "@/lib/firebase/collections";
 import { getSession, getMember, type MemberRecord } from "@/lib/session";
+import { can, canAccessAdminArea } from "@/lib/permissions";
 import type { AdminMemberRow } from "@/app/api/admin/members/route";
 import { MemberRow } from "@/components/admin/member-row";
 import { NotifyComposer } from "@/components/admin/notify-composer";
@@ -19,34 +20,41 @@ export default async function AdminPage() {
     const session = await getSession();
     if (!session) redirect("/login?next=/admin");
 
-    // proxy.ts redirects non-admins, but this page reads the live record rather
-    // than trusting the token's role claim.
+    // Powers come from the council position, read live. Only people who can
+    // manage members or send announcements have anything to do here.
     const me = await getMember(session.usn);
-    if (!me || me.status !== "approved" || (me.role !== "admin" && me.role !== "mentor")) {
+    if (!me || me.status !== "approved" || !canAccessAdminArea(me)) {
         redirect("/dashboard");
     }
 
-    const snap = await club<StoredMember>(COLLECTIONS.members).get();
-    const rows: AdminMemberRow[] = snap.docs.map((d) => {
-        const m = d.data();
-        return {
-            usn: m.usn,
-            name: m.name,
-            email: m.email,
-            role: m.role,
-            status: m.status,
-            note: m.note,
-            requestedAt: m.requestedAt,
-            joinedAt: m.joinedAt,
-            hasSignedIn: Boolean(m.passwordChangedAt),
-        };
-    });
+    const canManageMembers = can(me, "members:manage");
+    const canManageRoles = can(me, "roles:manage");
+    const canAnnounce = can(me, "announcements:send");
 
-    const pending = rows.filter((r) => r.status === "pending");
-    const approved = rows
-        .filter((r) => r.status === "approved")
-        .sort((a, b) => a.name.localeCompare(b.name));
-    const rejected = rows.filter((r) => r.status === "rejected");
+    // Only read the roster if this person actually manages members.
+    let pending: AdminMemberRow[] = [];
+    let approved: AdminMemberRow[] = [];
+    let rejected: AdminMemberRow[] = [];
+    if (canManageMembers) {
+        const snap = await club<StoredMember>(COLLECTIONS.members).get();
+        const rows: AdminMemberRow[] = snap.docs.map((d) => {
+            const m = d.data();
+            return {
+                usn: m.usn,
+                name: m.name,
+                email: m.email,
+                role: m.role,
+                status: m.status,
+                note: m.note,
+                requestedAt: m.requestedAt,
+                joinedAt: m.joinedAt,
+                hasSignedIn: Boolean(m.passwordChangedAt),
+            };
+        });
+        pending = rows.filter((r) => r.status === "pending");
+        approved = rows.filter((r) => r.status === "approved").sort((a, b) => a.name.localeCompare(b.name));
+        rejected = rows.filter((r) => r.status === "rejected");
+    }
 
     return (
         <div className="min-h-screen bg-transparent text-white pt-24 pb-16">
@@ -59,15 +67,22 @@ export default async function AdminPage() {
                         Club <span className="text-cyan-400">admin</span>
                     </h1>
                     <p className="text-neutral-400">
-                        {pending.length > 0
-                            ? `${pending.length} request${pending.length === 1 ? "" : "s"} waiting.`
-                            : "No requests waiting."}
+                        {me.councilPosition ?? "Elevated access"}, you can{" "}
+                        {[canManageMembers && "manage members", canAnnounce && "send announcements"]
+                            .filter(Boolean)
+                            .join(" and ")}
+                        .
                     </p>
                 </div>
 
-                <section className="mb-10">
-                    <NotifyComposer />
-                </section>
+                {canAnnounce && (
+                    <section className="mb-10">
+                        <NotifyComposer />
+                    </section>
+                )}
+
+                {canManageMembers && (
+                <>
 
                 {pending.length > 0 && (
                     <section className="mb-10">
@@ -76,7 +91,7 @@ export default async function AdminPage() {
                         </h2>
                         <div className="space-y-2">
                             {pending.map((member) => (
-                                <MemberRow key={member.usn} member={member} isSelf={member.usn === me.usn} />
+                                <MemberRow key={member.usn} member={member} isSelf={member.usn === me.usn} canManageRoles={canManageRoles} />
                             ))}
                         </div>
                         <p className="text-xs text-neutral-600 mt-3">
@@ -104,10 +119,12 @@ export default async function AdminPage() {
                         </h2>
                         <div className="space-y-2">
                             {rejected.map((member) => (
-                                <MemberRow key={member.usn} member={member} isSelf={false} />
+                                <MemberRow key={member.usn} member={member} isSelf={false} canManageRoles={canManageRoles} />
                             ))}
                         </div>
                     </section>
+                )}
+                </>
                 )}
             </div>
         </div>

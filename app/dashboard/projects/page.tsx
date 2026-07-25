@@ -46,7 +46,7 @@ export default async function ProjectsPage() {
                     <div className="glass rounded-2xl p-10 text-center">
                         <p className="text-neutral-400 mb-1">Publish something you&rsquo;re building.</p>
                         <p className="text-sm text-neutral-600">
-                            Pick a repo straight from your GitHub — no copying links.
+                            Pick a repo straight from your GitHub, no copying links.
                         </p>
                     </div>
                 ) : (

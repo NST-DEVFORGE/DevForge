@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 
 /**
  * Email clients don't support CSS variables, so templates can't use the site's
- * theme engine — they lock to the default Aurora palette, matching the
+ * theme engine, they lock to the default Aurora palette, matching the
  * orientation invite in app/api/orientation-rsvp.
  */
 const BRAND = {

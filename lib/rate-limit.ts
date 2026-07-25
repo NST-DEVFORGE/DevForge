@@ -75,7 +75,7 @@ export async function checkRateLimit(
     });
 }
 
-/** Clears a bucket — call after a successful login so one bad day doesn't lock someone out. */
+/** Clears a bucket, call after a successful login so one bad day doesn't lock someone out. */
 export async function resetRateLimit(bucket: string, identifier: string): Promise<void> {
     await club(COLLECTIONS.rateLimits).doc(`${bucket}:${encodeURIComponent(identifier)}`).delete();
 }

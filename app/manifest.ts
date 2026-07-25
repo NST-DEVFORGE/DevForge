@@ -3,13 +3,13 @@ import type { MetadataRoute } from "next";
 /**
  * Served at /manifest.webmanifest by Next's metadata route.
  *
- * start_url points at /dashboard because installing is a member action — the
+ * start_url points at /dashboard because installing is a member action, the
  * marketing site is what you get in a normal browser tab. Anyone not signed in
  * is redirected to /login by proxy.ts, so this is safe for a fresh install.
  */
 export default function manifest(): MetadataRoute.Manifest {
     return {
-        name: "DevForge — Newton School of Technology",
+        name: "DevForge, Newton School of Technology",
         short_name: "DevForge",
         description:
             "The DevForge member app: publish projects, RSVP to sessions, and track your contributions.",

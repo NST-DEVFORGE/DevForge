@@ -55,7 +55,7 @@ function LoginForm() {
                 autoFocus
                 autoComplete="username"
                 placeholder="2102508XXX"
-                hint="Your university seat number — the one in your welcome email."
+                hint="Your university seat number, the one in your welcome email."
             />
             <AuthField
                 label="Password"
@@ -76,7 +76,7 @@ export default function LoginPage() {
         <div className="min-h-screen bg-transparent text-white pt-32 pb-16">
             {/* No per-element entrance animation here: app/template.tsx already
                 fade-rises every route, and stacking a second delayed fade on top
-                left the form invisible for the better part of a second — on a
+                left the form invisible for the better part of a second, on a
                 sign-in page, the fastest thing to a usable field wins. It also
                 ignored prefers-reduced-motion, which template.tsx honours. */}
             <div className="max-w-md mx-auto px-4">

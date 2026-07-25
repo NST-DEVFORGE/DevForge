@@ -7,7 +7,7 @@ type Status = "unsupported" | "denied" | "off" | "on" | "working";
 
 /**
  * VAPID keys travel as base64url; PushManager wants raw bytes. Returns an
- * ArrayBuffer rather than a Uint8Array — TypeScript's typed-array generic
+ * ArrayBuffer rather than a Uint8Array, TypeScript's typed-array generic
  * doesn't satisfy BufferSource, which is what applicationServerKey expects.
  */
 function urlBase64ToBuffer(base64: string): ArrayBuffer {

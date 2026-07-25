@@ -1,9 +1,9 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { z } from "zod";
 import { club, unguardedDb, COLLECTIONS } from "@/lib/firebase/collections";
-import { authErrorResponse, requireUser } from "@/lib/session";
+import { authErrorResponse, requireActiveMember } from "@/lib/session";
 import { notifyMember } from "@/lib/push";
-import { collabId, collaboratorsFull, type CollabRequest, type Project } from "@/lib/projects";
+import { canEditProject, collabId, collaboratorsFull, type CollabRequest, type Project } from "@/lib/projects";
 
 export const runtime = "nodejs";
 
@@ -18,7 +18,7 @@ const schema = z.object({ action: z.enum(["accept", "reject"]) });
  */
 export async function PATCH(request: NextRequest, { params }: Params) {
     try {
-        const session = await requireUser();
+        const { member: actor } = await requireActiveMember();
         const { id, usn } = await params;
 
         const parsed = schema.safeParse(await request.json().catch(() => null));
@@ -35,8 +35,8 @@ export async function PATCH(request: NextRequest, { params }: Params) {
             const project = projectSnap.data() as Project;
             const req = requestSnap.data() as CollabRequest;
 
-            // Only the owner (or an admin) decides.
-            if (project.ownerUsn !== session.usn && session.role !== "admin") {
+            // Only the owner, or someone who can manage any project, decides.
+            if (!canEditProject(project, actor)) {
                 return { status: 403 as const, message: "Not your project." };
             }
             if (req.status !== "pending") {

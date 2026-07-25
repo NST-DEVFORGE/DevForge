@@ -1,9 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutGrid, FolderGit2, Compass, CalendarCheck, Users, Trophy, ShieldCheck } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+    LayoutGrid,
+    FolderGit2,
+    Compass,
+    CalendarCheck,
+    Users,
+    Trophy,
+    ShieldCheck,
+    Menu,
+    X,
+} from "lucide-react";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { SignOutButton } from "@/components/auth/sign-out-button";
 
@@ -11,56 +22,38 @@ interface NavLink {
     name: string;
     href: string;
     icon: React.ReactNode;
-    /** Elevated-only links are hidden until the session role is known. */
     elevated?: boolean;
 }
 
 const LINKS: NavLink[] = [
-    { name: "Overview", href: "/dashboard", icon: <LayoutGrid size={16} /> },
-    { name: "Projects", href: "/dashboard/projects", icon: <FolderGit2 size={16} /> },
-    { name: "Explore", href: "/dashboard/explore", icon: <Compass size={16} /> },
-    { name: "Sessions", href: "/dashboard/events", icon: <CalendarCheck size={16} /> },
-    { name: "Members", href: "/dashboard/members", icon: <Users size={16} /> },
-    { name: "Leaderboard", href: "/dashboard/leaderboard", icon: <Trophy size={16} /> },
-    { name: "Admin", href: "/admin", icon: <ShieldCheck size={16} />, elevated: true },
+    { name: "Overview", href: "/dashboard", icon: <LayoutGrid size={18} /> },
+    { name: "Projects", href: "/dashboard/projects", icon: <FolderGit2 size={18} /> },
+    { name: "Explore", href: "/dashboard/explore", icon: <Compass size={18} /> },
+    { name: "Sessions", href: "/dashboard/events", icon: <CalendarCheck size={18} /> },
+    { name: "Members", href: "/dashboard/members", icon: <Users size={18} /> },
+    { name: "Leaderboard", href: "/dashboard/leaderboard", icon: <Trophy size={18} /> },
+    { name: "Admin", href: "/admin", icon: <ShieldCheck size={18} />, elevated: true },
 ];
 
 /**
  * The member app's own top bar. Replaces the public marketing navbar once
- * signed in (that one hides itself on /dashboard and /admin), so members get
- * app navigation — Projects, Sessions, Members… — instead of Programs and a
- * "Join Us" button that makes no sense when you're already in.
+ * signed in. `elevated` comes from the server layout (which already reads the
+ * member) rather than a client fetch, one fewer round-trip per navigation.
  *
- * Role comes from /api/auth/me so this can drop into any member-app page
- * without threading props through server components; the Admin link simply
- * doesn't appear until the role is confirmed elevated.
+ * Desktop shows a pill row; below `lg` it collapses to a hamburger, since seven
+ * links scrolling sideways on a phone read as clutter.
  */
-export function DashboardNav() {
+export function DashboardNav({ elevated = false }: { elevated?: boolean }) {
     const pathname = usePathname();
-    const [elevated, setElevated] = useState(false);
-
-    useEffect(() => {
-        let active = true;
-        fetch("/api/auth/me")
-            .then((r) => (r.ok ? r.json() : null))
-            .then((body) => {
-                if (active && body?.user) setElevated(["admin", "mentor"].includes(body.user.role));
-            })
-            .catch(() => {});
-        return () => {
-            active = false;
-        };
-    }, []);
+    const [open, setOpen] = useState(false);
 
     const links = LINKS.filter((link) => !link.elevated || elevated);
 
-    function isActive(href: string) {
-        // Exact match for Overview so every sub-route doesn't also light it up.
-        return href === "/dashboard" ? pathname === href : pathname.startsWith(href);
-    }
+    const isActive = (href: string) =>
+        href === "/dashboard" ? pathname === href : pathname.startsWith(href);
 
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 py-4">
+        <header className="fixed top-0 left-0 right-0 z-50 py-3 sm:py-4">
             <div className="max-w-6xl mx-auto px-4">
                 <div className="glass !rounded-2xl border border-white/10 px-3 py-2 flex items-center gap-2">
                     <Link href="/dashboard" className="flex items-center gap-2 group shrink-0 pl-1 pr-2">
@@ -70,16 +63,13 @@ export function DashboardNav() {
                             alt=""
                             className="w-8 h-8 object-contain [filter:hue-rotate(160deg)_saturate(1.2)]"
                         />
-                        <span className="text-lg font-bold tracking-tight text-white hidden sm:inline">
+                        <span className="text-lg font-bold tracking-tight text-white">
                             Dev<span className="text-cyan-400">Forge</span>
                         </span>
                     </Link>
 
-                    {/* Scrolls sideways on narrow screens rather than wrapping or hiding links. */}
-                    <nav
-                        aria-label="Member app"
-                        className="flex items-center gap-1 overflow-x-auto no-scrollbar flex-1 min-w-0"
-                    >
+                    {/* Desktop pill row */}
+                    <nav aria-label="Member app" className="hidden lg:flex items-center gap-1 flex-1 min-w-0">
                         {links.map((link) => {
                             const active = isActive(link.href);
                             return (
@@ -100,11 +90,79 @@ export function DashboardNav() {
                         })}
                     </nav>
 
-                    <div className="flex items-center gap-2 shrink-0 pl-1">
+                    <div className="flex items-center gap-2 shrink-0 ml-auto lg:ml-0">
                         <ThemeSwitcher />
-                        <SignOutButton />
+                        <div className="hidden lg:block">
+                            <SignOutButton />
+                        </div>
+                        <button
+                            onClick={() => setOpen((v) => !v)}
+                            className="lg:hidden glass-subtle hover:border-cyan-400/40 text-neutral-200 rounded-full p-2 transition-colors"
+                            aria-label={open ? "Close menu" : "Open menu"}
+                            aria-expanded={open}
+                        >
+                            {open ? <X size={18} /> : <Menu size={18} />}
+                        </button>
                     </div>
                 </div>
+
+                {/* Mobile menu, opaque (var background, not translucent glass) so
+                    the page content behind it doesn't bleed through. */}
+                <AnimatePresence>
+                    {open && (
+                            <>
+                                {/* Scrim (fixed, above page content) dims + closes on tap. */}
+                                <motion.button
+                                    aria-label="Close menu"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    onClick={() => setOpen(false)}
+                                    className="lg:hidden fixed inset-0 z-40 bg-black/70 cursor-default"
+                                />
+                                {/* Fixed + high z so it clears the page's stacking contexts.
+                                    Only the slide is animated, never opacity, a throttled
+                                    animation frame could otherwise freeze the panel
+                                    half-transparent and let the page bleed through. */}
+                                <motion.nav
+                                    aria-label="Member app"
+                                    initial={{ y: -8 }}
+                                    animate={{ y: 0 }}
+                                    exit={{ y: -8 }}
+                                    transition={{ duration: 0.18 }}
+                                    className="lg:hidden fixed left-4 right-4 top-[68px] z-50"
+                                >
+                                    <div
+                                        style={{ background: "var(--bg-secondary)" }}
+                                        className="max-w-6xl mx-auto rounded-2xl border border-white/10 shadow-2xl p-2"
+                                    >
+                                        {links.map((link) => {
+                                            const active = isActive(link.href);
+                                            return (
+                                                <Link
+                                                    key={link.href}
+                                                    href={link.href}
+                                                    onClick={() => setOpen(false)}
+                                                    aria-current={active ? "page" : undefined}
+                                                    className={`flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition-colors ${
+                                                        active
+                                                            ? "bg-cyan-400/15 text-cyan-300"
+                                                            : "text-neutral-300 hover:text-white hover:bg-white/5"
+                                                    }`}
+                                                >
+                                                    {link.icon}
+                                                    <span>{link.name}</span>
+                                                </Link>
+                                            );
+                                        })}
+                                        <div className="border-t border-white/10 mt-2 pt-2 px-1">
+                                            <SignOutButton />
+                                        </div>
+                                    </div>
+                                </motion.nav>
+                            </>
+                    )}
+                </AnimatePresence>
             </div>
         </header>
     );

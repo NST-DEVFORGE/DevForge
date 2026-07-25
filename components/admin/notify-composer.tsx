@@ -5,7 +5,7 @@ import { Send, Bell } from "lucide-react";
 
 /**
  * Admin control for pushing a notification to every member who has enabled
- * them. Posts to /api/push/send, which is itself admin-gated — this is just
+ * them. Posts to /api/push/send, which is itself admin-gated, this is just
  * the compose surface.
  */
 export function NotifyComposer() {
@@ -76,7 +76,7 @@ export function NotifyComposer() {
                         required
                         maxLength={300}
                         rows={2}
-                        placeholder="RSVP is open — 30 seats. Doors 5pm in Lab 2."
+                        placeholder="RSVP is open, 30 seats. Doors 5pm in Lab 2."
                         className={`${input} resize-y`}
                     />
                 </div>

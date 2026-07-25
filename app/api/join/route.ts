@@ -11,7 +11,7 @@ const schema = z.object({
 });
 
 /**
- * Public join request. Identity comes from the student portal, not the form —
+ * Public join request. Identity comes from the student portal, not the form -
  * an applicant supplies only their USN, and name/email are read from the
  * `students` record. That keeps anyone from registering under someone else's
  * details, and means there is nothing to verify by hand at approval time.

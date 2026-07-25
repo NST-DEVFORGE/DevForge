@@ -16,7 +16,7 @@ export interface ClubEvent {
 }
 
 export interface Rsvp {
-    /** `${eventId}:${usn}` — one RSVP per member per event, enforced by the id. */
+    /** `${eventId}:${usn}`, one RSVP per member per event, enforced by the id. */
     id: string;
     eventId: string;
     usn: string;
