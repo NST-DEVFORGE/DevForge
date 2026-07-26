@@ -63,7 +63,7 @@ function LoginForm() {
                 type="password"
                 required
                 autoComplete="current-password"
-                placeholder="••••••••••"
+                placeholder="Your password"
             />
             <AuthError message={error} />
             <AuthSubmit pending={pending}>Sign in</AuthSubmit>
