@@ -26,6 +26,7 @@ export const COLLECTIONS = {
     notifications: "devforge_notifications",
     pushSubscriptions: "devforge_push_subscriptions",
     rateLimits: "devforge_rate_limits",
+    collabRequests: "devforge_collab_requests",
 } as const;
 
 export type ClubCollection = (typeof COLLECTIONS)[keyof typeof COLLECTIONS];

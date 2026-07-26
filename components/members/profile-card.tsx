@@ -1,6 +1,6 @@
 "use client";
 
-import { Github, Linkedin, Trophy, Award } from "lucide-react";
+import { Github, Linkedin, Trophy, Award, Star } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import type { MemberCard } from "@/lib/members";
 
@@ -24,13 +24,20 @@ export function ProfileCard({ member }: { member: MemberCard }) {
                 <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2 flex-wrap">
                         <h3 className="font-bold text-white truncate">{member.name}</h3>
-                        <span
-                            className={`text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-full border ${
-                                ROLE_STYLES[member.role] ?? ROLE_STYLES.member
-                            }`}
-                        >
-                            {member.role}
-                        </span>
+                        {member.councilPosition ? (
+                            <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-full border bg-cyan-400/10 text-cyan-300 border-cyan-400/25">
+                                <Star size={9} />
+                                {member.councilPosition}
+                            </span>
+                        ) : (
+                            <span
+                                className={`text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-full border ${
+                                    ROLE_STYLES[member.role] ?? ROLE_STYLES.member
+                                }`}
+                            >
+                                {member.role}
+                            </span>
+                        )}
                     </div>
                     <p className="text-xs text-neutral-500 font-mono mt-0.5">{member.usn}</p>
 

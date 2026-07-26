@@ -60,7 +60,7 @@ export default function JoinPage() {
                     <p className="text-neutral-400">
                         {submitted
                             ? "An admin will review it. You'll get an email with your sign-in details once you're approved."
-                            : "For Newton School students. We'll pull your details from the student portal — just your USN is enough."}
+                            : "For Newton School students. We'll pull your details from the student portal, just your USN is enough."}
                     </p>
                 </motion.div>
 

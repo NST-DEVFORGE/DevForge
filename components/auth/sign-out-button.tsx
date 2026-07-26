@@ -13,7 +13,7 @@ export function SignOutButton() {
         setPending(true);
         try {
             await fetch("/api/auth/logout", { method: "POST" });
-            // Shared laptops are the norm here — leave nothing of this member
+            // Shared laptops are the norm here, leave nothing of this member
             // behind for whoever opens the app next.
             clearServiceWorkerCaches();
             router.replace("/");

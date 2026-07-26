@@ -24,7 +24,7 @@ export default async function LeaderboardPage() {
                     </h1>
                     <p className="text-neutral-400">
                         {ranked.length === 0
-                            ? "Nobody has points yet — the season is wide open."
+                            ? "Nobody has points yet, the season is wide open."
                             : `${ranked.length} member${ranked.length === 1 ? "" : "s"} on the board.`}
                     </p>
                 </div>

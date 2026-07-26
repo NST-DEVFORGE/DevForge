@@ -1,7 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { z } from "zod";
 import { club, COLLECTIONS } from "@/lib/firebase/collections";
-import { authErrorResponse, requireAdmin, type MemberRecord } from "@/lib/session";
+import { authErrorResponse, requireActiveMember, type MemberRecord } from "@/lib/session";
+import { can } from "@/lib/permissions";
 import { generatePassword, hashPassword } from "@/lib/auth";
 import { sendCredentialsEmail } from "@/lib/email";
 
@@ -16,7 +17,7 @@ const schema = z.object({
 
 export async function PATCH(request: NextRequest, { params }: Params) {
     try {
-        const { member: actor } = await requireAdmin();
+        const { member: actor } = await requireActiveMember();
         const { usn } = await params;
 
         const parsed = schema.safeParse(await request.json().catch(() => null));
@@ -24,6 +25,16 @@ export async function PATCH(request: NextRequest, { params }: Params) {
             return NextResponse.json({ ok: false, message: "Invalid request" }, { status: 400 });
         }
         const { action, role } = parsed.data;
+
+        // Approving/rejecting needs members:manage; changing a role is the higher
+        // roles:manage. Powers come from the actor's council position.
+        const needed = action === "set-role" ? "roles:manage" : "members:manage";
+        if (!can(actor, needed)) {
+            return NextResponse.json(
+                { ok: false, message: "You don't have permission to do that" },
+                { status: 403 },
+            );
+        }
 
         const ref = club<MemberRecord>(COLLECTIONS.members).doc(usn);
         const snap = await ref.get();
@@ -57,7 +68,7 @@ export async function PATCH(request: NextRequest, { params }: Params) {
         }
         if (!target.email) {
             return NextResponse.json(
-                { ok: false, message: `No email on ${target.name}'s student record — can't send credentials.` },
+                { ok: false, message: `No email on ${target.name}'s student record, can't send credentials.` },
                 { status: 409 },
             );
         }

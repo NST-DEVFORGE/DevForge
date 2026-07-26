@@ -1,11 +1,12 @@
 import type { ReactNode } from "react";
 import { redirect } from "next/navigation";
 import { getMember, getSession } from "@/lib/session";
+import { canAccessAdminArea } from "@/lib/permissions";
 import { DashboardNav } from "@/components/dashboard/dashboard-nav";
 
 /**
  * Server-side gate for the whole member app. proxy.ts already redirects
- * anonymous visitors, but it is only a redirect — this is the authorization
+ * anonymous visitors, but it is only a redirect, this is the authorization
  * that actually holds, and it runs before any dashboard page renders.
  */
 export default async function DashboardLayout({ children }: { children: ReactNode }) {
@@ -20,7 +21,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
 
     return (
         <>
-            <DashboardNav />
+            <DashboardNav elevated={canAccessAdminArea(member)} />
             {children}
         </>
     );

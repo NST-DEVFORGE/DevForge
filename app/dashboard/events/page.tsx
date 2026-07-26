@@ -1,9 +1,11 @@
 import { redirect } from "next/navigation";
 import { CalendarCheck, MapPin, Users } from "lucide-react";
 import { club, COLLECTIONS } from "@/lib/firebase/collections";
-import { getSession } from "@/lib/session";
+import { getMember, getSession } from "@/lib/session";
+import { can } from "@/lib/permissions";
 import { isPast, rsvpId, type ClubEvent, type Rsvp } from "@/lib/events";
 import { RsvpButton } from "@/components/events/rsvp-button";
+import { CreateSession } from "@/components/events/create-session";
 
 export const metadata = { title: "Sessions" };
 
@@ -19,6 +21,8 @@ const when = new Intl.DateTimeFormat("en-IN", {
 export default async function EventsPage() {
     const session = await getSession();
     if (!session) redirect("/login?next=/dashboard/events");
+    const me = await getMember(session.usn);
+    const canCreate = me ? can(me, "sessions:manage") : false;
 
     const [eventsSnap, rsvpsSnap] = await Promise.all([
         club<ClubEvent>(COLLECTIONS.events).get(),
@@ -53,6 +57,12 @@ export default async function EventsPage() {
                             : `${upcoming.length} coming up.`}
                     </p>
                 </div>
+
+                {canCreate && (
+                    <div className="mb-6">
+                        <CreateSession />
+                    </div>
+                )}
 
                 {upcoming.length === 0 && past.length === 0 && (
                     <div className="glass rounded-2xl p-10 text-center">

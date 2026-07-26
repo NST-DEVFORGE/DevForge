@@ -7,7 +7,7 @@ export const metadata = { title: "Members" };
 /**
  * Rendered on the server so the roster arrives with the page. The dashboard
  * layout has already established the session, so no extra auth check is needed
- * here — but the data still comes through the guarded accessors.
+ * here, but the data still comes through the guarded accessors.
  */
 export default async function MembersPage() {
     const members = await loadRoster();
