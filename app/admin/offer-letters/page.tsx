@@ -5,6 +5,7 @@ import { getSession, getMember } from "@/lib/session";
 import { can, canAccessAdminArea } from "@/lib/permissions";
 import { council } from "@/data/council";
 import { OfferLetterForm } from "@/components/admin/offer-letter-form";
+import { OfferLetterBulk } from "@/components/admin/offer-letter-bulk";
 
 export const metadata = { title: "Offer letters" };
 
@@ -50,6 +51,10 @@ export default async function OfferLettersPage() {
                 </div>
 
                 <OfferLetterForm defaults={defaults} />
+
+                <div className="mt-6">
+                    <OfferLetterBulk defaults={defaults} />
+                </div>
             </div>
         </div>
     );
