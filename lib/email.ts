@@ -105,3 +105,76 @@ export async function sendCredentialsEmail(payload: CredentialsEmail) {
     });
     return { messageId: info.messageId };
 }
+
+export interface OfferLetterEmail {
+    to: string;
+    name: string;
+    /** The rendered offer-letter PDF. */
+    pdf: Uint8Array;
+    /** Attachment filename, e.g. DevForge-Offer-Letter-Aditi-Sharma.pdf. */
+    filename: string;
+}
+
+/**
+ * A deliberately classic, formal notice — a white page with a typographic
+ * letterhead and serif body — rather than the dark marketing shell the other
+ * emails use. It should read like an official letter, matching the attached PDF.
+ */
+export function renderOfferLetterEmail({ name }: { name: string }) {
+    const first = name.trim().split(/\s+/)[0] || name;
+    const serif = "Georgia, 'Times New Roman', Times, serif";
+    const sans = "Arial, Helvetica, sans-serif";
+    const p = `font-size:15px;line-height:1.7;color:#26282c;margin:0 0 18px;`;
+    return `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background-color:#f2f2f4;font-family:${serif};color:#26282c;">
+<div style="max-width:600px;margin:0 auto;padding:32px 16px;">
+<div style="background-color:#ffffff;border:1px solid #e2e2e6;padding:44px 46px;">
+
+<div style="text-align:center;padding-bottom:18px;border-bottom:2px solid #1a1c20;margin-bottom:30px;">
+<div style="font-family:${sans};font-size:25px;font-weight:bold;letter-spacing:1px;color:#1a1c20;">DEVFORGE</div>
+<div style="font-family:${sans};font-size:10px;letter-spacing:1.5px;color:#71717a;text-transform:uppercase;margin-top:6px;">Newton School of Technology, SVYASA, Bengaluru</div>
+</div>
+
+<p style="${p}">Dear ${first},</p>
+<p style="${p}">We are pleased to inform you that, following your application and interview, you have been selected for membership of <strong>DevForge</strong>, the developer community at Newton School of Technology, SVYASA, Bengaluru.</p>
+<p style="${p}">Your official offer letter is enclosed with this email as a PDF. You are welcome to keep it and to share it, including on LinkedIn.</p>
+<p style="${p}">Details regarding your member account and next steps will follow separately. We look forward to welcoming you to the community.</p>
+
+<p style="font-size:15px;line-height:1.7;color:#26282c;margin:30px 0 4px;">Warm regards,</p>
+<p style="font-size:15px;line-height:1.5;color:#1a1c20;margin:0;font-weight:bold;">The DevForge Executive Council</p>
+
+</div>
+<div style="text-align:center;font-family:${sans};font-size:11px;color:#9b9ba3;margin-top:22px;line-height:1.7;">
+DevForge · www.devforge.club<br>Newton School of Technology, SVYASA, Bengaluru
+</div>
+</div>
+</body></html>`;
+}
+
+export async function sendOfferLetterEmail(payload: OfferLetterEmail) {
+    const first = payload.name.trim().split(/\s+/)[0] || payload.name;
+    const info = await getTransporter().sendMail({
+        from: process.env.SMTP_FROM || process.env.SMTP_USER,
+        to: payload.to,
+        subject: "Your DevForge membership offer",
+        html: renderOfferLetterEmail({ name: payload.name }),
+        text:
+            `Dear ${first},\n\n` +
+            `We are pleased to inform you that, following your application and interview, you have ` +
+            `been selected for membership of DevForge, the developer community at Newton School of ` +
+            `Technology, SVYASA, Bengaluru.\n\n` +
+            `Your official offer letter is enclosed with this email as a PDF. You are welcome to keep ` +
+            `it and to share it, including on LinkedIn.\n\n` +
+            `Details regarding your member account and next steps will follow separately. We look ` +
+            `forward to welcoming you to the community.\n\n` +
+            `Warm regards,\nThe DevForge Executive Council\n`,
+        attachments: [
+            {
+                filename: payload.filename,
+                content: Buffer.from(payload.pdf),
+                contentType: "application/pdf",
+            },
+        ],
+    });
+    return { messageId: info.messageId };
+}

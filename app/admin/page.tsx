@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
-import { ShieldCheck } from "lucide-react";
+import Link from "next/link";
+import { ShieldCheck, FileText, ArrowRight } from "lucide-react";
 import { club, COLLECTIONS } from "@/lib/firebase/collections";
 import { getSession, getMember, type MemberRecord } from "@/lib/session";
 import { can, canAccessAdminArea } from "@/lib/permissions";
@@ -74,6 +75,29 @@ export default async function AdminPage() {
                         .
                     </p>
                 </div>
+
+                {canManageMembers && (
+                    <Link
+                        href="/admin/offer-letters"
+                        className="group flex items-center justify-between gap-4 glass glass-hover rounded-2xl p-5 mb-10"
+                    >
+                        <div className="flex items-center gap-3">
+                            <div className="inline-flex items-center justify-center p-2.5 bg-cyan-400/10 text-cyan-400 rounded-xl border border-cyan-400/20">
+                                <FileText size={18} />
+                            </div>
+                            <div>
+                                <h2 className="text-sm font-bold text-white">Send offer letters</h2>
+                                <p className="text-xs text-neutral-400">
+                                    Issue an official membership offer PDF to a selected candidate.
+                                </p>
+                            </div>
+                        </div>
+                        <ArrowRight
+                            size={18}
+                            className="text-neutral-600 group-hover:text-cyan-300 group-hover:translate-x-0.5 transition-all"
+                        />
+                    </Link>
+                )}
 
                 {canAnnounce && (
                     <section className="mb-10">

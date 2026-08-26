@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Check, X, Shield } from "lucide-react";
+import { Check, X, Shield, FileText } from "lucide-react";
 import type { AdminMemberRow } from "@/app/api/admin/members/route";
 
 const STATUS_STYLES: Record<string, string> = {
@@ -79,6 +80,16 @@ export function MemberRow({
                 </div>
 
                 <div className="flex items-center gap-2 flex-shrink-0">
+                    {member.status !== "rejected" && (
+                        <Link
+                            href={`/admin/offer-letters?usn=${encodeURIComponent(member.usn)}&name=${encodeURIComponent(member.name)}&email=${encodeURIComponent(member.email)}`}
+                            title="Send offer letter"
+                            className="inline-flex items-center gap-1.5 glass-subtle hover:border-cyan-400/40 text-neutral-400 hover:text-cyan-300 text-xs rounded-full px-3.5 py-2 transition-colors"
+                        >
+                            <FileText size={13} />
+                            Offer letter
+                        </Link>
+                    )}
                     {member.status === "pending" && (
                         <>
                             <button
