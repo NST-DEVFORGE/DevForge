@@ -9,8 +9,8 @@ export const clubLeadership = [
   {
     name: "Sahitya Singh",
     role: "President",
-    photo: "https://github.com/Sahitya0805.png",
-    github: "https://github.com/Sahitya0805",
+    photo: "https://github.com/sahitya0xsingh.png",
+    github: "https://github.com/sahitya0xsingh",
     linkedin: "https://www.linkedin.com/in/sahitya-singh-7012b137b/"
   },
   {

@@ -52,9 +52,21 @@ const TEAM_MEMBERS = [
     },
     {
         name: 'Sahitya Singh',
-        github: 'Sahitya0805',
+        github: 'sahitya0xsingh',
         role: 'Designer',
         avatar: '/sahitya.png'
+    },
+    {
+        name: 'Dushyant Acharya',
+        github: 'Dotify71',
+        role: 'Member',
+        avatar: 'https://github.com/Dotify71.png'
+    },
+    {
+        name: 'Pranav Choudhary',
+        github: 'pranavchoudhary-tech',
+        role: 'Member',
+        avatar: 'https://github.com/pranavchoudhary-tech.png'
     },
     {
         name: 'Saurabh',
@@ -141,7 +153,9 @@ const MEMBER_DATA = [
     { name: 'Aryan Patel', github: 'AryanPatel-ui', role: 'Member', avatar: '/aryan.png', merged: 8, quality: 1 },
     { name: 'Nithyaraj', github: 'nithyarajmudhaliyar', role: 'Member', avatar: '/nithyaraj.png', merged: 10, quality: 8 },
     { name: 'Prateek', github: 'prateek6789-ai', role: 'Member', avatar: '/prateek.jpg', merged: 5, quality: 0 },
-    { name: 'Sahitya Singh', github: 'Sahitya0805', role: 'Designer', avatar: '/sahitya.png', merged: 27, quality: 8 },
+    { name: 'Sahitya Singh', github: 'sahitya0xsingh', role: 'Designer', avatar: '/sahitya.png', merged: 35, quality: 16 },
+    { name: 'Dushyant Acharya', github: 'Dotify71', role: 'Member', avatar: 'https://github.com/Dotify71.png', merged: 45, quality: 18 },
+    { name: 'Pranav Choudhary', github: 'pranavchoudhary-tech', role: 'Member', avatar: 'https://github.com/pranavchoudhary-tech.png', merged: 5, quality: 1 },
     { name: 'Saurabh', github: 'saurabhyuvi14-ai', role: 'Member', avatar: '/saurabh.jpg', merged: 6, quality: 1 },
     { name: 'Sidharth', github: 'SidharthxNST', role: 'Member', avatar: '/sidharth.png', merged: 4, quality: 2 },
     { name: 'Bhavesh Sharma', github: 'bhavesh-210', role: 'Member', avatar: '/bhavesh.jpg', merged: 13, quality: 0 },
@@ -208,7 +222,7 @@ export async function GET() {
                 }
 
                 // If Sahitya, ensure it is at least 28 as requested
-                if (member.github === 'Sahitya0805') {
+                if (member.github === 'sahitya0xsingh' || member.github === 'Sahitya0805') {
                     mergedCount = Math.max(mergedCount, 28);
                 }
 

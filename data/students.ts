@@ -24,7 +24,7 @@ export const studentsData: StudentProfile[] = [
     role: "Google Summer of Code (GSoC)",
     organizations: ["Google", "GirlScript Foundation"],
     photo: "/sahitya-placeholder.jpg",
-    githubUrl: "https://github.com/Sahitya0805",
+    githubUrl: "https://github.com/sahitya0xsingh",
     linkedinUrl: "https://www.linkedin.com/in/sahitya-singh-7012b137b/",
     journey: "My journey into open source began with small contributions, leading to my acceptance into the prestigious Google Summer of Code program. I spent the summer diving deep into complex codebases and collaborating with some of the best minds in the industry.",
     learnings: [
