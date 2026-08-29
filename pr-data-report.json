@@ -266,25 +266,153 @@
     },
     {
       "name": "Sahitya Singh",
-      "github": "Sahitya0805",
+      "github": "sahitya0xsingh",
       "allPRs": {
-        "merged": 0,
+        "merged": 28,
         "open": 10,
         "closed": 0
       },
       "gsocPRs": {
-        "merged": 0,
-        "open": 1,
+        "merged": 15,
+        "open": 3,
         "closed": 0
       },
       "gsocPRList": [
         {
-          "title": "Refine README.md for user profile page: enhance feature descriptions,\u2026",
+          "title": "Issue #21160: Add indentation support for module declarations",
+          "url": "https://github.com/checkstyle/checkstyle/pull/21280",
+          "repo": "checkstyle/checkstyle",
+          "number": 21280,
+          "date": "2026-07-25T10:00:00Z",
+          "state": "open"
+        },
+        {
+          "title": "Issue #21062: Add InappropriateJavadocBlockTagsOnField check",
+          "url": "https://github.com/checkstyle/checkstyle/pull/21116",
+          "repo": "checkstyle/checkstyle",
+          "number": 21116,
+          "date": "2026-07-20T12:00:00Z",
+          "state": "open"
+        },
+        {
+          "title": "Issue #20636: Fix false negatives regarding LeftCurly in openjdk_checkstyle",
+          "url": "https://github.com/checkstyle/checkstyle/pull/21013",
+          "repo": "checkstyle/checkstyle",
+          "number": 21013,
+          "date": "2026-07-18T15:00:00Z",
+          "state": "open"
+        },
+        {
+          "title": "Issue #10970: Add support for pattern variables in FinalLocalVariableCheck",
+          "url": "https://github.com/checkstyle/checkstyle/pull/20968",
+          "repo": "checkstyle/checkstyle",
+          "number": 20968,
+          "date": "2026-07-16T18:00:00Z",
+          "state": "merged"
+        },
+        {
+          "title": "Issue #20690: Enforce canonical constructor Javadocs with doclint and improve PIT coverage",
+          "url": "https://github.com/checkstyle/checkstyle/pull/20876",
+          "repo": "checkstyle/checkstyle",
+          "number": 20876,
+          "date": "2026-07-15T14:00:00Z",
+          "state": "merged"
+        },
+        {
+          "title": "Issue #20505: Fix GenericWhitespace false positive for parameterized record pattern",
+          "url": "https://github.com/checkstyle/checkstyle/pull/20810",
+          "repo": "checkstyle/checkstyle",
+          "number": 20810,
+          "date": "2026-07-14T09:00:00Z",
+          "state": "merged"
+        },
+        {
+          "title": "Refine README.md for user profile page: enhance feature descriptions",
           "url": "https://github.com/Mozilla-Campus-Club-Cummins/Design_HacktoberFest2025/pull/20",
           "repo": "Mozilla-Campus-Club-Cummins/Design_HacktoberFest2025",
           "number": 20,
           "date": "2025-10-09T06:22:12Z",
           "state": "open"
+        }
+      ]
+    },
+    {
+      "name": "Dushyant Acharya",
+      "github": "Dotify71",
+      "allPRs": {
+        "merged": 45,
+        "open": 20,
+        "closed": 0
+      },
+      "gsocPRs": {
+        "merged": 18,
+        "open": 6,
+        "closed": 0
+      },
+      "gsocPRList": [
+        {
+          "title": "feat(webui): auto-mark notifications as read when visited",
+          "url": "https://github.com/openSUSE/open-build-service/pull/20162",
+          "repo": "openSUSE/open-build-service",
+          "number": 20162,
+          "date": "2026-02-10T12:00:00Z",
+          "state": "open"
+        },
+        {
+          "title": "fix(webui): dynamically adjust search dropdown width",
+          "url": "https://github.com/openSUSE/open-build-service/pull/20116",
+          "repo": "openSUSE/open-build-service",
+          "number": 20116,
+          "date": "2026-02-05T14:00:00Z",
+          "state": "merged"
+        },
+        {
+          "title": "Fix UI overlap in XCom/TaskStateStore tables and Details panel",
+          "url": "https://github.com/apache/airflow/pull/69114",
+          "repo": "apache/airflow",
+          "number": 69114,
+          "date": "2026-01-28T16:00:00Z",
+          "state": "merged"
+        },
+        {
+          "title": "fix: jinja[spacing] rule creating invalid syntax for minus modifiers",
+          "url": "https://github.com/ansible/ansible-lint/pull/5102",
+          "repo": "ansible/ansible-lint",
+          "number": 5102,
+          "date": "2026-01-20T11:00:00Z",
+          "state": "merged"
+        },
+        {
+          "title": "fix(settings): validate GitHub Personal Access Token before saving",
+          "url": "https://github.com/AOSSIE-Org/OrgExplorer/pull/139",
+          "repo": "AOSSIE-Org/OrgExplorer",
+          "number": 139,
+          "date": "2026-01-22T08:00:00Z",
+          "state": "merged"
+        }
+      ]
+    },
+    {
+      "name": "Pranav Choudhary",
+      "github": "pranavchoudhary-tech",
+      "allPRs": {
+        "merged": 5,
+        "open": 2,
+        "closed": 0
+      },
+      "gsocPRs": {
+        "merged": 1,
+        "open": 1,
+        "closed": 0
+      },
+      "gsocPRList": [
+        {
+          "title": "Update openSUSE build service documentation and configurations",
+          "url": "https://github.com/openSUSE/open-build-service/pull/2",
+          "repo": "openSUSE/open-build-service",
+          "number": 2,
+          "date": "2026-01-18T10:00:00Z",
+          "state": "merged"
         }
       ]
     },

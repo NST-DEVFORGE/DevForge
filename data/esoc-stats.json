@@ -73,12 +73,17 @@
       }
     },
     {
-      "name": "Sahitya0805",
-      "github": "Sahitya0805",
+      "name": "sahitya0xsingh",
+      "github": "sahitya0xsingh",
       "esocPRs": {
-        "merged": 0,
-        "open": 4,
+        "merged": 15,
+        "open": 7,
         "orgs": [
+          {
+            "name": "checkstyle",
+            "merged": 15,
+            "open": 3
+          },
           {
             "name": "shap",
             "merged": 0,
@@ -88,6 +93,56 @@
             "name": "sktime",
             "merged": 0,
             "open": 2
+          }
+        ]
+      }
+    },
+    {
+      "name": "Dotify71",
+      "github": "Dotify71",
+      "esocPRs": {
+        "merged": 18,
+        "open": 6,
+        "orgs": [
+          {
+            "name": "openSUSE",
+            "merged": 10,
+            "open": 4
+          },
+          {
+            "name": "airflow",
+            "merged": 3,
+            "open": 1
+          },
+          {
+            "name": "ansible",
+            "merged": 3,
+            "open": 1
+          },
+          {
+            "name": "shap",
+            "merged": 2,
+            "open": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "pranavchoudhary-tech",
+      "github": "pranavchoudhary-tech",
+      "esocPRs": {
+        "merged": 1,
+        "open": 1,
+        "orgs": [
+          {
+            "name": "openSUSE",
+            "merged": 1,
+            "open": 0
+          },
+          {
+            "name": "pandas",
+            "merged": 0,
+            "open": 1
           }
         ]
       }

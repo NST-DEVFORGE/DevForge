@@ -11,7 +11,7 @@ const MEMBERS = [
     { name: "Dhruv Mehta",       id: "",                                       github: "zenowinged" },
     { name: "Mahaveer Jain",     id: "d3079ef9-79e4-4887-82eb-e19c6af2fc67", github: "Mahaveerjain-18" },
     { name: "Lay Shah",          id: "06b49d9c-675c-4561-a811-47377baadf15", github: "Layyzyyy" },
-    { name: "Sahitya Singh",     id: "05ba7e81-1388-4c3b-9711-6815a70fa5be", github: "Sahitya0805" },
+    { name: "Sahitya Singh",     id: "05ba7e81-1388-4c3b-9711-6815a70fa5be", github: "sahitya0xsingh" },
     { name: "Rachana Adhikary",  id: "b7e82800-0328-4d3b-a0b4-ad0304422f35", github: "adhikaryrachana00428-hash" },
     { name: "Shreya Agrawal",    id: "43062cc4-7298-4ece-911e-3763d51f7ec3", github: "Shreyaagrawal29" },
     { name: "Ravi Sharma",       id: "",                                       github: "ravisharma-09" },
