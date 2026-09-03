@@ -51,8 +51,8 @@ export default function AboutPage() {
                         About <span className="text-cyan-400">DevForge</span>
                     </h1>
                     <p className="text-xl text-neutral-400 max-w-2xl mx-auto">
-                        The official developer community of Newton School of Technology, Bengaluru -
-                        building the next generation of developers, builders, and open-source
+                        The official developer community of Newton School of Technology, Bengaluru.
+                        Building the next generation of developers, builders, and open-source
                         contributors.
                     </p>
                 </Reveal>

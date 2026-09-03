@@ -53,7 +53,7 @@ export default function LearnPage() {
                 {/* GSoC Playbook banner */}
                 <Link
                     href="/learn/gsoc"
-                    className="flex items-center gap-4 bg-gradient-to-r from-cyan-400/15 to-transparent border border-cyan-400/30 hover:border-cyan-400/60 rounded-2xl p-5 mb-12 transition-colors group"
+                    className="flex items-center gap-4 bg-gradient-to-r from-cyan-400/15 to-transparent border border-cyan-400/30 hover:border-cyan-400/60 rounded-2xl p-5 mb-4 transition-colors group"
                 >
                     <div className="w-12 h-12 rounded-xl bg-cyan-400/15 flex items-center justify-center flex-shrink-0">
                         <Sun className="text-cyan-400" size={24} />
@@ -63,6 +63,21 @@ export default function LearnPage() {
                         <div className="text-sm text-neutral-400">Timeline, tools, copy-paste prompts, and the 5-step formula — from students who got selected.</div>
                     </div>
                     <ArrowUpRight className="text-neutral-500 group-hover:text-cyan-400 transition-colors flex-shrink-0" size={20} />
+                </Link>
+
+                {/* 10 PR Journey banner */}
+                <Link
+                    href="/learn/open-source"
+                    className="flex items-center gap-4 bg-gradient-to-r from-blue-500/15 to-transparent border border-blue-500/30 hover:border-blue-500/60 rounded-2xl p-5 mb-12 transition-colors group"
+                >
+                    <div className="w-12 h-12 rounded-xl bg-blue-500/15 flex items-center justify-center flex-shrink-0">
+                        <GitPullRequest className="text-blue-400" size={24} />
+                    </div>
+                    <div className="flex-1">
+                        <div className="font-bold text-white group-hover:text-blue-300 transition-colors">The 10 PR Journey</div>
+                        <div className="text-sm text-neutral-400">Ten pull requests, in order — from one we review ourselves to one a real project keeps.</div>
+                    </div>
+                    <ArrowUpRight className="text-neutral-500 group-hover:text-blue-400 transition-colors flex-shrink-0" size={20} />
                 </Link>
 
                 {/* Track picker */}
