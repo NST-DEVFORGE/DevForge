@@ -1,270 +1,125 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
+import { ossRoster, type Contributor } from "@/lib/oss-roster";
+import { GithubError, allPRsFor, isQualityRepo, prState, repoFacts } from "@/lib/github-prs";
 
-// Team member configuration
-const TEAM_MEMBERS = [
-    {
-        name: 'Geetansh Goyal',
-        github: 'geetxnshgoyal',
-        role: 'Club President',
-        avatar: '/geetansh.jpg'
-    },
-    {
-        name: 'Ravi Sharma',
-        github: 'ravisharma-09',
-        role: 'Member',
-        avatar: '/ravi.jpg'
-    },
-    {
-        name: 'Lay Shah',
-        github: 'Layyzyy',
-        role: 'Event Coordinator',
-        avatar: '/lay.png'
-    },
-    {
-        name: 'Luvya Rana',
-        github: 'luvyarana',
-        role: 'Tech Lead',
-        avatar: '/luvya.jpg'
-    },
-    {
-        name: 'Vikas Sharma',
-        github: 'sharmavikas18',
-        role: 'Member',
-        avatar: '/vikas.png'
-    },
-    {
-        name: 'Aryan Patel',
-        github: 'AryanPatel-ui',
-        role: 'Member',
-        avatar: '/aryan.png'
-    },
-    {
-        name: 'Nithyaraj',
-        github: 'nithyarajmudhaliyar',
-        role: 'Member',
-        avatar: '/nithyaraj.png'
-    },
-    {
-        name: 'Prateek',
-        github: 'prateek6789-ai',
-        role: 'Member',
-        avatar: '/prateek.jpg'
-    },
-    {
-        name: 'Sahitya Singh',
-        github: 'sahitya0xsingh',
-        role: 'Designer',
-        avatar: '/sahitya.png'
-    },
-    {
-        name: 'Dushyant Acharya',
-        github: 'Dotify71',
-        role: 'Member',
-        avatar: 'https://github.com/Dotify71.png'
-    },
-    {
-        name: 'Pranav Choudhary',
-        github: 'pranavchoudhary-tech',
-        role: 'Member',
-        avatar: 'https://github.com/pranavchoudhary-tech.png'
-    },
-    {
-        name: 'Saurabh',
-        github: 'saurabhyuvi14-ai',
-        role: 'Member',
-        avatar: '/saurabh.jpg'
-    },
-    {
-        name: 'Sidharth',
-        github: 'SidharthxNST',
-        role: 'Member',
-        avatar: '/sidharth.png'
-    },
-    {
-        name: 'Bhavesh Sharma',
-        github: 'bhavesh-210',
-        role: 'Member',
-        avatar: '/bhavesh.jpg'
-    },
-    {
-        name: 'Unnati Jaiswal',
-        github: 'unnati-jaiswal24',
-        role: 'Member',
-        avatar: '/unnati.png'
-    },
-    {
-        name: 'Shristi Kumari',
-        github: 'Shristibot',
-        role: 'Member',
-        avatar: 'https://github.com/Shristibot.png'
-    },
-    {
-        name: 'Dhiraj Rathod',
-        github: 'dhiraj-143r',
-        role: 'Member',
-        avatar: 'https://github.com/dhiraj-143r.png'
-    }
-];
+export const runtime = "nodejs";
 
-// Milestone definitions
 const TEAM_MILESTONES = [
-    { name: 'Bronze', count: 50, emoji: '🥉' },
-    { name: 'Silver', count: 100, emoji: '🥈' },
-    { name: 'Gold', count: 250, emoji: '🥇' },
-    { name: 'Platinum', count: 500, emoji: '💎' },
-    { name: 'Diamond', count: 1000, emoji: '🏆' }
+    { name: "Bronze", count: 50, emoji: "🥉" },
+    { name: "Silver", count: 100, emoji: "🥈" },
+    { name: "Gold", count: 250, emoji: "🥇" },
+    { name: "Platinum", count: 500, emoji: "💎" },
+    { name: "Diamond", count: 1000, emoji: "🏆" },
 ];
 
 const INDIVIDUAL_MILESTONES = [
-    { name: 'Beginner', count: 5, emoji: '🌱' },
-    { name: 'Contributor', count: 15, emoji: '🪪' }, // Club ID card with lanyard!
-    { name: 'Active', count: 25, emoji: '👕' }, // Club T-shirt reward!
-    { name: 'Champion', count: 50, emoji: '🏅' },
-    { name: 'Legend', count: 100, emoji: '👑' },
-    { name: 'Master', count: 200, emoji: '🚀' }
+    { name: "Beginner", count: 5, emoji: "🌱" },
+    { name: "Contributor", count: 15, emoji: "🪪" },
+    { name: "Active", count: 25, emoji: "👕" },
+    { name: "Champion", count: 50, emoji: "🏅" },
+    { name: "Legend", count: 100, emoji: "👑" },
+    { name: "Master", count: 200, emoji: "🚀" },
 ];
 
-interface PRStats {
-    name: string;
-    github: string;
-    role: string;
-    avatar: string;
-    prCount: number; // Quality PRs only
-    totalPRs: number; // All merged PRs
-    milestones: Array<{ name: string; count: number; emoji: string }>;
-    nextMilestone: { name: string; count: number; emoji: string; progress: number } | null;
+type Milestone = (typeof INDIVIDUAL_MILESTONES)[number];
+
+interface PRStats extends Contributor {
+    /** Merged PRs into repositories with real adoption. Counted, never typed in. */
+    prCount: number;
+    /** Every merged PR, anywhere. */
+    totalPRs: number;
+    milestones: Milestone[];
+    nextMilestone: (Milestone & { progress: number }) | null;
+    /** False when GitHub could not be reached for this member. */
+    live: boolean;
 }
 
-interface TeamStats {
-    totalPRs: number; // Total quality PRs across team
-    totalAllPRs: number; // All merged PRs across team
-    members: PRStats[];
-    teamMilestones: Array<{ name: string; count: number; emoji: string }>;
-    nextTeamMilestone: { name: string; count: number; emoji: string; progress: number } | null;
-    lastUpdated: string;
+function calculateMilestones(count: number, milestones: Milestone[]) {
+    const achieved = milestones.filter((m) => count >= m.count);
+    const next = milestones.find((m) => count < m.count);
+
+    if (!next) return { achieved, nextMilestone: null };
+
+    const previousCount = achieved[achieved.length - 1]?.count ?? 0;
+    const progress = ((count - previousCount) / (next.count - previousCount)) * 100;
+    return { achieved, nextMilestone: { ...next, progress } };
 }
 
-const MEMBER_DATA = [
-    { name: 'Geetansh Goyal', github: 'geetxnshgoyal', role: 'Club President', avatar: '/geetansh.jpg', merged: 40, quality: 7 },
-    { name: 'Ravi Sharma', github: 'ravisharma-09', role: 'Member', avatar: '/ravi.jpg', merged: 8, quality: 3 },
-    { name: 'Lay Shah', github: 'Layyzyy', role: 'Event Coordinator', avatar: '/lay.png', merged: 8, quality: 1 },
-    { name: 'Luvya Rana', github: 'luvyarana', role: 'Tech Lead', avatar: '/luvya.jpg', merged: 10, quality: 5 },
-    { name: 'Vikas Sharma', github: 'sharmavikas18', role: 'Member', avatar: '/vikas.png', merged: 5, quality: 0 },
-    { name: 'Aryan Patel', github: 'AryanPatel-ui', role: 'Member', avatar: '/aryan.png', merged: 8, quality: 1 },
-    { name: 'Nithyaraj', github: 'nithyarajmudhaliyar', role: 'Member', avatar: '/nithyaraj.png', merged: 10, quality: 8 },
-    { name: 'Prateek', github: 'prateek6789-ai', role: 'Member', avatar: '/prateek.jpg', merged: 5, quality: 0 },
-    { name: 'Sahitya Singh', github: 'sahitya0xsingh', role: 'Designer', avatar: '/sahitya.png', merged: 35, quality: 16 },
-    { name: 'Dushyant Acharya', github: 'Dotify71', role: 'Member', avatar: 'https://github.com/Dotify71.png', merged: 45, quality: 18 },
-    { name: 'Pranav Choudhary', github: 'pranavchoudhary-tech', role: 'Member', avatar: 'https://github.com/pranavchoudhary-tech.png', merged: 5, quality: 1 },
-    { name: 'Saurabh', github: 'saurabhyuvi14-ai', role: 'Member', avatar: '/saurabh.jpg', merged: 6, quality: 1 },
-    { name: 'Sidharth', github: 'SidharthxNST', role: 'Member', avatar: '/sidharth.png', merged: 4, quality: 2 },
-    { name: 'Bhavesh Sharma', github: 'bhavesh-210', role: 'Member', avatar: '/bhavesh.jpg', merged: 13, quality: 0 },
-    { name: 'Unnati Jaiswal', github: 'unnati-jaiswal24', role: 'Member', avatar: '/unnati.png', merged: 13, quality: 3 },
-    { name: 'Shristi Kumari', github: 'Shristibot', role: 'Member', avatar: 'https://github.com/Shristibot.png', merged: 4, quality: 3 },
-    { name: 'Dhiraj Rathod', github: 'dhiraj-143r', role: 'Member', avatar: 'https://github.com/dhiraj-143r.png', merged: 28, quality: 18 }
-];
-
-async function fetchUserMergedPRsCount(username: string): Promise<number> {
+/**
+ * Both counts for one member, from GitHub.
+ *
+ * Quality PRs used to be a number somebody typed into this file and edited by
+ * hand when it drifted, which meant this route and /api/quality-prs — which
+ * computed the same thing live — regularly disagreed on the same page. Both now
+ * apply the same rule to the same data.
+ */
+async function statsFor(person: Contributor): Promise<PRStats> {
     try {
-        const headers: HeadersInit = {
-            'Accept': 'application/vnd.github.v3+json',
-            'User-Agent': 'DevForge-PR-Stats'
+        const merged = (await allPRsFor(person.github)).filter((pr) => prState(pr) === "merged");
+
+        // Sequential on purpose: repoFacts caches per repository, and a parallel
+        // burst would fire duplicate lookups for the same repo before the first
+        // one lands. Popular repositories repeat constantly here.
+        let quality = 0;
+        for (const pr of merged) {
+            if (isQualityRepo(await repoFacts(pr.repository_url))) quality++;
+        }
+
+        const { achieved, nextMilestone } = calculateMilestones(quality, INDIVIDUAL_MILESTONES);
+        return {
+            ...person,
+            prCount: quality,
+            totalPRs: merged.length,
+            milestones: achieved,
+            nextMilestone,
+            live: true,
         };
-
-        if (process.env.GITHUB_TOKEN) {
-            headers['Authorization'] = `token ${process.env.GITHUB_TOKEN}`;
-        }
-
-        const query = `author:${username} type:pr is:merged`;
-        const url = `https://api.github.com/search/issues?q=${encodeURIComponent(query)}&per_page=1`;
-
-        const response = await fetch(url, {
-            headers,
-            next: { revalidate: 300 } // Cache for 5 minutes
-        });
-
-        if (!response.ok) {
-            return 0;
-        }
-
-        const data = await response.json();
-        return data.total_count || 0;
     } catch (error) {
-        console.error(`Error fetching PR count for ${username}:`, error);
-        return 0;
+        // Reported as zero and flagged, not silently replaced with a stale
+        // hand-written number that looks exactly like a real one.
+        console.error(`[pr-stats] ${person.github}:`, error);
+        return {
+            ...person,
+            prCount: 0,
+            totalPRs: 0,
+            milestones: [],
+            nextMilestone: null,
+            live: false,
+        };
     }
-}
-
-function calculateMilestones(count: number, milestones: typeof INDIVIDUAL_MILESTONES) {
-    const achieved = milestones.filter(m => count >= m.count);
-    const next = milestones.find(m => count < m.count);
-
-    let nextMilestone = null;
-    if (next) {
-        const previous = achieved[achieved.length - 1];
-        const previousCount = previous ? previous.count : 0;
-        const progress = ((count - previousCount) / (next.count - previousCount)) * 100;
-        nextMilestone = { ...next, progress };
-    }
-
-    return { achieved, nextMilestone };
 }
 
 export async function GET() {
     try {
-        const memberStats = await Promise.all(
-            MEMBER_DATA.map(async (member) => {
-                let mergedCount = await fetchUserMergedPRsCount(member.github);
-                
-                // Fallback to static data if API call returns 0
-                if (mergedCount === 0) {
-                    mergedCount = member.merged;
-                }
+        const roster = await ossRoster();
 
-                // If Sahitya, ensure it is at least 28 as requested
-                if (member.github === 'sahitya0xsingh' || member.github === 'Sahitya0805') {
-                    mergedCount = Math.max(mergedCount, 28);
-                }
+        const members: PRStats[] = [];
+        for (const person of roster) {
+            members.push(await statsFor(person));
+        }
 
-                const { achieved, nextMilestone } = calculateMilestones(member.quality, INDIVIDUAL_MILESTONES);
+        const totalPRs = members.reduce((sum, m) => sum + m.prCount, 0);
+        const totalAllPRs = members.reduce((sum, m) => sum + m.totalPRs, 0);
+        const { achieved, nextMilestone } = calculateMilestones(totalPRs, TEAM_MILESTONES);
+        const stale = members.filter((m) => !m.live).map((m) => m.github);
 
-                return {
-                    name: member.name,
-                    github: member.github,
-                    role: member.role,
-                    avatar: member.avatar,
-                    prCount: member.quality, // Quality PRs for milestones
-                    totalPRs: mergedCount,   // All merged PRs
-                    milestones: achieved,
-                    nextMilestone
-                };
-            })
-        );
-
-        // Sum quality PRs
-        const totalQualityPRs = 60; // Hardcoded quality PRs total as requested
-        // Dynamically sum all fetched merged PRs (ensuring at least 188)
-        const totalAllPRs = Math.max(memberStats.reduce((sum, member) => sum + member.totalPRs, 0), 188);
-
-        // Calculate team milestones based on quality PRs
-        const { achieved: teamMilestonesAchieved, nextMilestone: nextTeamMilestone } =
-            calculateMilestones(totalQualityPRs, TEAM_MILESTONES);
-
-        const stats: TeamStats = {
-            totalPRs: totalQualityPRs,
+        return NextResponse.json({
+            totalPRs,
             totalAllPRs,
-            members: memberStats,
-            teamMilestones: teamMilestonesAchieved,
-            nextTeamMilestone,
-            lastUpdated: new Date().toISOString()
-        };
-
-        return NextResponse.json(stats);
+            members: members.sort((a, b) => b.prCount - a.prCount || b.totalPRs - a.totalPRs),
+            teamMilestones: achieved,
+            nextTeamMilestone: nextMilestone,
+            lastUpdated: new Date().toISOString(),
+            // Named so a page can say "some figures could not be refreshed"
+            // instead of quietly rendering zeroes as though they were counts.
+            unavailable: stale,
+        });
     } catch (error) {
-        console.error('Error fetching PR stats:', error);
+        const status = error instanceof GithubError ? 503 : 500;
+        console.error("[pr-stats] failed:", error);
         return NextResponse.json(
-            { error: 'Failed to fetch PR statistics' },
-            { status: 500 }
+            { message: error instanceof GithubError ? error.message : "Could not load PR stats." },
+            { status },
         );
     }
 }
