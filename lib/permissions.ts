@@ -11,13 +11,15 @@ type CapabilityInput = { role: string; councilPosition?: string };
  *   sessions:manage     create and manage club sessions
  *   announcements:send  push a notification to all members
  *   projects:manageAny  edit or delete any member's project
+ *   journey:review      sign off 10 PR Journey milestones
  */
 export type Capability =
     | "members:manage"
     | "roles:manage"
     | "sessions:manage"
     | "announcements:send"
-    | "projects:manageAny";
+    | "projects:manageAny"
+    | "journey:review";
 
 export const ALL_CAPABILITIES: Capability[] = [
     "members:manage",
@@ -25,6 +27,7 @@ export const ALL_CAPABILITIES: Capability[] = [
     "sessions:manage",
     "announcements:send",
     "projects:manageAny",
+    "journey:review",
 ];
 
 /**
@@ -39,13 +42,13 @@ const POSITION_CAPABILITIES: Record<string, Capability[]> = {
     "General Secretary": ["announcements:send"],
     Treasurer: [],
     "Membership Lead": ["members:manage", "roles:manage"],
-    "Technical Lead": ["sessions:manage", "projects:manageAny"],
+    "Technical Lead": ["sessions:manage", "projects:manageAny", "journey:review"],
     "Community Lead": ["sessions:manage", "announcements:send"],
     "Marketing Lead": ["announcements:send"],
 };
 
 /** Baseline for a plain mentor (e.g. an off-roster mentor with no council seat). */
-const MENTOR_CAPABILITIES: Capability[] = ["sessions:manage", "projects:manageAny"];
+const MENTOR_CAPABILITIES: Capability[] = ["sessions:manage", "projects:manageAny", "journey:review"];
 
 export function capabilitiesFor(member: CapabilityInput): Set<Capability> {
     // The admin role remains the all-powers safety net (the President holds it).
