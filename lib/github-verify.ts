@@ -56,8 +56,26 @@ export async function verifyEvidence(url: string): Promise<Evidence> {
         );
     }
     if (response.status === 403 || response.status === 429) {
+        // 403 covers more than rate limiting, and blaming the limit for all of
+        // it sends whoever debugs this down the wrong path — as it did once
+        // already. Report what GitHub said, and whether we were even
+        // authenticated, because an unauthenticated deployment on a shared
+        // egress IP sits permanently over the 60-an-hour anonymous ceiling and
+        // looks exactly like a rate limit that never clears.
+        const detail = await response
+            .json()
+            .then((body: { message?: string }) => body?.message)
+            .catch(() => undefined);
+        const authenticated = Boolean(process.env.GITHUB_TOKEN);
+
+        console.error(
+            `[github-verify] ${response.status} for ${path} (token configured: ${authenticated}): ${detail ?? "no message"}`,
+        );
+
         throw new EvidenceError(
-            "GitHub is rate-limiting us right now, so the link could not be checked. Try again in a few minutes.",
+            authenticated
+                ? `GitHub refused the check (${response.status}). Try again in a few minutes. ${detail ?? ""}`.trim()
+                : "This deployment has no GITHUB_TOKEN, so links cannot be checked — anonymous requests share one small quota per server. Set GITHUB_TOKEN and redeploy.",
         );
     }
     if (!response.ok) {
