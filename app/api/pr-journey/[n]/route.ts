@@ -73,6 +73,19 @@ export async function PUT(request: NextRequest, { params }: Params) {
             ? (snap.data() as JourneyRecord)
             : emptyJourney(session.usn, member.name, github);
 
+        // The ladder is the product, so it is enforced here and not only in the
+        // page that draws the padlocks. A client can post to any milestone it
+        // likes; skipping to 10 in week one has to fail on the server.
+        if (n > 1 && record.entries[String(n - 1)]?.state !== "signed-off") {
+            return NextResponse.json(
+                {
+                    ok: false,
+                    message: `Milestone ${n - 1} has to be signed off before you can submit ${n}. The order is the point.`,
+                },
+                { status: 409 },
+            );
+        }
+
         const previous = record.entries[String(n)];
         if (previous?.state === "signed-off") {
             return NextResponse.json(
