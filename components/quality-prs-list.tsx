@@ -64,12 +64,7 @@ export function QualityPRsList() {
         fetchPRs();
     }, [cohort.id]);
 
-    // Derived, not cleared in the effect: while the next year group loads, the
-    // previous one's pull requests are still in state and must not render under
-    // the new heading.
-    const stale = data !== null && data.year !== cohort.id;
-
-    if (loading || error || !data || stale) {
+    if (loading || error || !data) {
         return (
             <div className="min-h-screen bg-gradient-to-b from-black via-neutral-950 to-black">
                 <div className="flex justify-center pt-24">
@@ -87,9 +82,7 @@ export function QualityPRsList() {
 
     // Get unique authors for filter
     const authors = Array.from(new Set(data.prs.map(pr => pr.author.github)));
-    // A filter left over from the other year group names somebody who is not in
-    // this list, which would silently render zero results. Fall back to "all".
-    const activeAuthor = authors.includes(filterAuthor) ? filterAuthor : 'all';
+    const activeAuthor = filterAuthor;
 
     // Filter and sort PRs
     let filteredPRs = activeAuthor === 'all'

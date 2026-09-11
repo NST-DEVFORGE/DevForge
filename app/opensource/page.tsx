@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { CohortScope } from "@/components/ui/cohort-scope";
 import { OpenSourceImpact } from "@/components/open-source-impact";
 
 export const metadata = {
@@ -11,7 +12,9 @@ export default function OpenSourcePage() {
     // boundary; without it the whole route would opt out of prerendering.
     return (
         <Suspense fallback={null}>
-            <OpenSourceImpact />
+            <CohortScope>
+                    <OpenSourceImpact />
+                </CohortScope>
         </Suspense>
     );
 }

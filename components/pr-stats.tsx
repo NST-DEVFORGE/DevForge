@@ -79,13 +79,7 @@ export function PRStats() {
         return () => clearInterval(refreshInterval);
     }, [cohort.id]);
 
-    // While the next year group is still loading, `stats` still holds the last
-    // one. Derived rather than cleared in the effect: clearing would mean a
-    // setState during render-effect, and the question "is this data for the year
-    // the URL asks for?" is answerable from what we already have.
-    const stale = stats !== null && stats.year !== cohort.id;
-
-    if (loading || error || !stats || stale) {
+    if (loading || error || !stats) {
         return (
             <div className="min-h-screen bg-gradient-to-b from-black via-neutral-950 to-black">
                 {/* The switcher stays on screen while loading. Counting the second

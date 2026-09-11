@@ -85,11 +85,7 @@ export function GsocStats() {
         fetchData();
     }, [cohort.id]);
 
-    // Derived rather than cleared in the effect, so the previous year group's
-    // breakdown never renders under the new heading while the fetch is in flight.
-    const stale = data !== null && data.year !== cohort.id;
-
-    if (loading || error || !data || stale) {
+    if (loading || error || !data) {
         return (
             <div className="min-h-screen bg-gradient-to-b from-black via-neutral-950 to-black">
                 <div className="flex justify-center pt-24">
@@ -105,9 +101,7 @@ export function GsocStats() {
         );
     }
 
-    // A member picked in the other year group is not in this list; falling back
-    // to "all" beats rendering an empty breakdown that looks like real data.
-    const activeMember = data.members.some(m => m.github === selectedMember) ? selectedMember : 'all';
+    const activeMember = selectedMember;
     const filteredGsocPRs = activeMember === 'all'
         ? data.members.flatMap(m => m.gsocPRs)
         : data.members.find(m => m.github === activeMember)?.gsocPRs || [];

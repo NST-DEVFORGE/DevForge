@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { CohortScope } from "@/components/ui/cohort-scope";
 import { PRStats } from "@/components/pr-stats";
 
 export const metadata = {
@@ -12,7 +13,9 @@ export default function PRStatsPage() {
             {/* The year lives in the query string, and reading it needs a boundary
                 so the rest of the page can still be prerendered. */}
             <Suspense fallback={null}>
-                <PRStats />
+                <CohortScope>
+                    <PRStats />
+                </CohortScope>
             </Suspense>
         </div>
     );

@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { CohortScope } from "@/components/ui/cohort-scope";
 import { EsocRecord } from "@/components/esoc-record";
 
 export const metadata = {
@@ -9,7 +10,9 @@ export const metadata = {
 export default function ESocPage() {
     return (
         <Suspense fallback={null}>
-            <EsocRecord />
+            <CohortScope>
+                    <EsocRecord />
+                </CohortScope>
         </Suspense>
     );
 }

@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { CohortScope } from "@/components/ui/cohort-scope";
 import { GSSoCHallOfFame } from "@/components/gssoc-hall-of-fame";
 
 export const metadata = {
@@ -9,7 +10,9 @@ export const metadata = {
 export default function GSSoCPage() {
     return (
         <Suspense fallback={null}>
-            <GSSoCHallOfFame />
+            <CohortScope>
+                    <GSSoCHallOfFame />
+                </CohortScope>
         </Suspense>
     );
 }

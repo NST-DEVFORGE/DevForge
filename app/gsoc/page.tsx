@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { CohortScope } from "@/components/ui/cohort-scope";
 import { GsocStats } from "@/components/gsoc-stats";
 
 export const metadata = {
@@ -11,7 +12,9 @@ export default function GsocPage() {
         <div className="bg-transparent text-white selection:bg-cyan-400 selection:text-black">
             {/* The year lives in the query string; reading it needs a boundary. */}
             <Suspense fallback={null}>
-                <GsocStats />
+                <CohortScope>
+                    <GsocStats />
+                </CohortScope>
             </Suspense>
         </div>
     );
