@@ -388,6 +388,12 @@ export async function generateOfferLetterPdf(input: OfferLetterInput): Promise<U
 
 /** Safe ASCII filename for the attachment/download. */
 export function offerLetterFilename(name: string): string {
-    const slug = name.trim().replace(/[^a-zA-Z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "member";
+    const slug =
+        name
+            .trim()
+            .normalize("NFKD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/[^a-zA-Z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "") || "member";
     return `DevForge-Offer-Letter-${slug}.pdf`;
 }
