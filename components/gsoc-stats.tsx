@@ -341,6 +341,7 @@ export function GsocStats() {
                                             <a
                                                 href={`https://github.com/${member.github}`}
                                                 target="_blank"
+                                                rel="noopener noreferrer"
                                                 className="text-cyan-300 hover:text-cyan-200 flex items-center gap-1"
                                             >
                                                 <Github className="w-4 h-4" />
@@ -387,6 +388,7 @@ export function GsocStats() {
                                                 <a
                                                     href={`https://github.com/${org.org}`}
                                                     target="_blank"
+                                                    rel="noopener noreferrer"
                                                     className="text-xl font-semibold text-white hover:text-cyan-400 flex items-center gap-2"
                                                 >
                                                     <img
@@ -411,6 +413,7 @@ export function GsocStats() {
                                                         key={pr.url}
                                                         href={pr.url}
                                                         target="_blank"
+                                                        rel="noopener noreferrer"
                                                         className="flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors"
                                                     >
                                                         {pr.state === 'merged' && <GitMerge className="w-4 h-4 text-purple-500 flex-shrink-0" />}
@@ -456,6 +459,7 @@ export function GsocStats() {
                                 key={pr.url}
                                 href={pr.url}
                                 target="_blank"
+                                rel="noopener noreferrer"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.4 + i * 0.03 }}
