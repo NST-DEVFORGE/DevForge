@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { checkArena, checkAuthor, checkKind, EvidenceError, isMilestoneUnlocked, validateReflection, type EvidenceRule } from "./pr-journey";
+import { checkArena, checkAuthor, checkKind, EvidenceError, isMilestoneUnlocked, signedOffCount, emptyJourney, validateReflection, type EvidenceRule, JourneyRecord, JourneyEntry, Evidence, Reflection, EntryState } from "./pr-journey";
 
 function words(n: number): string {
     return Array.from({ length: n }, (_, i) => `w${i}`).join(" ");
 }
 
-function reflection(over: Partial<Record<"tried" | "broke" | "differently", number>> = {}) {
+function getReflection(over: Partial<Record<"tried" | "broke" | "differently", number>> = {}): Reflection {
     return {
         tried: words(over.tried ?? 5),
         broke: words(over.broke ?? 5),
@@ -14,6 +14,16 @@ function reflection(over: Partial<Record<"tried" | "broke" | "differently", numb
         hours: 2,
         rounds: 1,
         status: "open" as const,
+    };
+}
+
+function getJourneyEntry(reflection: Reflection, evidence: Evidence, state: EntryState): JourneyEntry {
+    return {
+        n: 100,
+        evidence,
+        reflection,
+        state,
+        submittedAt: new Date().toISOString(),
     };
 }
 
@@ -26,7 +36,7 @@ describe("validateReflection", () => {
         ];
 
         for (const { field, count, label, cap } of cases) {
-            expect(() => validateReflection(reflection({ [field]: count }))).toThrow(
+            expect(() => validateReflection(getReflection({ [field]: count }))).toThrow(
                 new EvidenceError(`"${label}" is capped at ${cap} words — yours is ${count}. Cut it down.`),
             );
         }
@@ -49,6 +59,7 @@ describe("isMilestoneUnlocked", () => {
         expect(isMilestoneUnlocked({ "1": { state: "submitted" } }, 3)).toBe(false);
     });
 });
+
 describe("checkArena", () => {
     it.each(["workbook", "club"] as const)(
         "allows the DevForge organization for the %s arena, regardless of case",
@@ -101,7 +112,7 @@ describe("checkAuthor", () => {
         const me = { login: "member", id: 123 };
         const author = { login: "MEMBER", id: 123 };
         const other = { login: "other", id: 456 };
-        
+
         expect(() => checkAuthor(author, { author: "self" } as EvidenceRule, me)).not.toThrow();
         expect(() => checkAuthor(other, { author: "self" } as EvidenceRule, me)).toThrow(EvidenceError);
     });
@@ -116,3 +127,54 @@ describe("checkAuthor", () => {
     });
 });
 
+describe("signedOffCount", () => {
+    it('returns 0 for a falsy journey', () => {
+        expect(signedOffCount(null)).toBe(0);
+    });
+
+    it('returns 0 for journey with no entries', () => {
+        const journey: JourneyRecord = {
+            githubId: 1234,
+            github: 'c0d3r',
+            name: 'George Jetson',
+            avatar: '',
+            entries: { },
+            startedAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+        };
+
+        expect(signedOffCount(journey)).toBe(0);
+    });
+
+    it("returns correct count by entry state for populated journey", () => {
+        const reflectionVal: Reflection = getReflection({ tried: 5 });
+        const evidenceVal: Evidence = {
+            url: "https://github.com/",
+            kind: "pr",
+            repo: "DevForge",
+            number: 1,
+            title: "Add Unit Tests",
+            author: "c0d3r",
+            authorId: 1234,
+            state: "open",
+            reviewRounds: 1,
+            openedAt: new Date().toISOString(),
+            verifiedAt: new Date().toISOString(),
+        };
+        const journey: JourneyRecord = {
+            githubId: 1234,
+            github: "c0d3r",
+            name: "George Jetson",
+            avatar: '',
+            entries: {
+                'ent1': getJourneyEntry(reflectionVal, evidenceVal, "signed-off"),
+                'ent2': getJourneyEntry(reflectionVal, evidenceVal, "signed-off"),
+                'ent3': getJourneyEntry(reflectionVal, evidenceVal, "submitted"),
+            },
+            startedAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+        };
+
+        expect(signedOffCount(journey)).toBe(2);
+    });
+});
