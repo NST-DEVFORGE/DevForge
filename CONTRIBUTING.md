@@ -51,6 +51,7 @@ npm run build    # type-check + production build
 
 - Title: what changed, e.g. `Navbar logo: use next/image`.
 - Fill in the PR template. Include **`Fixes #<issue>`**, how you tested it, and a screenshot for anything visible.
+- **A bot checks this.** If the description is empty, has `Fixes #` with no number, or says nothing about testing, it comments with what's missing and labels the PR `needs-description`. **A PR left that way for 2 days is closed automatically** — your branch survives, and reopening it after you fix the description carries on as normal.
 - **CI must be green**: the Lint, Test and Type-check & build checks. If one fails, open the log, fix it and push again. Don't ask someone else to re-run it.
 
 ### "Pull request creation failed: must be a collaborator"
