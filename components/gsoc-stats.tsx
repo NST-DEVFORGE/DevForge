@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Github, ExternalLink, GitMerge, GitPullRequest, XCircle, Star, TrendingUp, PieChart as PieChartIcon, BarChart3 } from "lucide-react";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import { useSearchParams } from "next/navigation";
 import { DataState } from "@/components/ui/empty-state";
