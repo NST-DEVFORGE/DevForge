@@ -1,5 +1,21 @@
 import { describe, expect, it } from "vitest";
-import { checkArena, checkAuthor, checkKind, EvidenceError, isMilestoneUnlocked, signedOffCount, emptyJourney, validateReflection, type EvidenceRule, JourneyRecord, JourneyEntry, Evidence, Reflection, EntryState } from "./pr-journey";
+import {
+    checkArena,
+    checkAuthor,
+    checkKind,
+    EvidenceError,
+    isMilestoneUnlocked,
+    signedOffCount,
+    emptyJourney,
+    validateReflection,
+    JourneyRecord,
+    JourneyEntry,
+    Evidence,
+    Reflection,
+    EntryState,
+    type EvidenceRule,
+} from "./pr-journey";
+import { GithubIdentity } from "./github-auth";
 
 function words(n: number): string {
     return Array.from({ length: n }, (_, i) => `w${i}`).join(" ");
@@ -128,20 +144,17 @@ describe("checkAuthor", () => {
 });
 
 describe("signedOffCount", () => {
-    it('returns 0 for a falsy journey', () => {
+    it("returns 0 for a falsy journey", () => {
         expect(signedOffCount(null)).toBe(0);
     });
 
-    it('returns 0 for journey with no entries', () => {
-        const journey: JourneyRecord = {
-            githubId: 1234,
-            github: 'c0d3r',
-            name: 'George Jetson',
-            avatar: '',
-            entries: { },
-            startedAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-        };
+    it("returns 0 for an empty journey", () => {
+        const journey: JourneyRecord = emptyJourney({
+            id: 1234,
+            login: "c0d3r",
+            name: "George Jetson",
+            avatar: ""
+        });
 
         expect(signedOffCount(journey)).toBe(0);
     });
@@ -177,4 +190,24 @@ describe("signedOffCount", () => {
 
         expect(signedOffCount(journey)).toBe(2);
     });
+});
+
+describe("emptyJourney", () => {
+    it("maps identity into journey detail", () => {
+        const identity: GithubIdentity = {
+            id: 1234,
+            login: "c0d3r",
+            name: "George Jetson",
+            avatar: "",
+        };
+        const empty = emptyJourney(identity);
+
+        expect(empty.githubId).toEqual(identity.id);
+        expect(empty.github).toEqual(identity.login);
+        expect(empty.name).toEqual(identity.name);
+        expect(empty.avatar).toEqual(identity.avatar);
+        expect(Object.keys(empty.entries)).toStrictEqual([]);
+        expect(empty.startedAt).toBeTruthy();
+        expect(empty.updatedAt).toBeTruthy();
+    })
 });
