@@ -40,8 +40,6 @@ export const metadata: Metadata = {
     creator: "DevForge",
     publisher: "DevForge",
     metadataBase: new URL("https://www.devforge.club"),
-
-    
     openGraph: {
         title: "DevForge - NST x SVYASA",
         description: "Join the premier developer community at Newton School of Technology. Learn, build, and forge amazing projects together.",
