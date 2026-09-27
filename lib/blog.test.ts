@@ -4,7 +4,7 @@ import { getRelatedPosts, getAllPostsMeta } from "./blog";
 describe("getRelatedPosts", () => {
     it("never returns the current post", () => {
         const posts = getAllPostsMeta();
-        const current = posts.find((p) => p.slug === "making-your-first-pull-request")!;
+        const current = posts[0];
         const related = getRelatedPosts(current);
 
         expect(related.find((p) => p.slug === current.slug)).toBeUndefined();
@@ -31,10 +31,15 @@ describe("getRelatedPosts", () => {
 
     it("posts with no category or tag in common are excluded", () => {
         const posts = getAllPostsMeta();
-        const current = posts.find((p) => p.slug === "making-your-first-pull-request")!;
+        const current = {
+            ...posts[0],
+            slug: "test-zero-overlap-post",
+            category: "NonExistentCategory12345",
+            tags: ["NonExistentTag12345"],
+        };
         const related = getRelatedPosts(current);
 
-        expect(related.find((p) => p.slug === "gsoc-vs-gssoc-vs-esoc")).toBeUndefined();
+        expect(related.length).toBe(0);
     });
 
     it("limit is respected", () => {
@@ -49,6 +54,6 @@ describe("getRelatedPosts", () => {
         const limit = 1;
         const related = getRelatedPosts(current, limit);
 
-        expect(related.length).toBeLessThanOrEqual(limit);
+        expect(related.length).toBe(limit);
     });
 });
