@@ -1,5 +1,4 @@
-// Copy the import style from lib/github-auth.test.ts (vitest / jest / node:test).
-  import { describe, it, expect } from "vitest";
+import { describe, it, expect } from "vitest";
 import { parseGithubRef } from "./pr-journey";
 
 describe("parseGithubRef", () => {
