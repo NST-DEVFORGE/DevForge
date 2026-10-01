@@ -259,7 +259,7 @@ async function main() {
     };
 
     // Save to file
-    const fs = require('fs');
+    const fs = await import('node:fs');
     fs.writeFileSync('pr-data-report.json', JSON.stringify(outputData, null, 2));
     console.log('\n\n📁 Full data saved to: pr-data-report.json');
 }
