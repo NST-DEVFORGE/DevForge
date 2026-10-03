@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Globe2, GitBranch, GitMerge, Users, Activity, ExternalLink } from "lucide-react";
 import prData from "@/pr-data-report.json";
@@ -106,12 +106,14 @@ export function EsocRecord() {
                                 
                                 <div className="flex items-center gap-4 mb-6 relative z-10">
                                     <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-neutral-800 group-hover:border-blue-500 transition-colors">
-                                        <img 
-                                            src={member.avatar || `https://github.com/${member.github}.png`} 
-                                            alt={member.name} 
-                                            className="w-full h-full object-cover" 
+                                        <Image
+                                            src={member.avatar || `https://github.com/${member.github}.png`}
+                                            alt={member.name}
+                                            className="w-full h-full object-cover"
+                                            width={48}
+                                            height={48}
                                         />
-                                    </div>
+                                                                            </div>
                                     <div>
                                         <h4 className="text-lg font-bold text-white leading-tight">{member.name}</h4>
                                         <a href={`https://github.com/${member.github}`} target="_blank" rel="noreferrer" className="text-neutral-500 text-sm hover:text-blue-400 transition-colors flex items-center gap-1">
