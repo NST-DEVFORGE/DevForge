@@ -439,6 +439,7 @@ export function GsocStats() {
                     <div className="flex justify-between items-center mb-6">
                         <h2 className="text-3xl font-bold text-white">All GSoC PRs</h2>
                         <select
+                            aria-label="Show PRs by member"
                             value={activeMember}
                             onChange={(e) => setSelectedMember(e.target.value)}
                             className="bg-neutral-900 border border-neutral-700 text-white px-4 py-2 rounded-lg"
