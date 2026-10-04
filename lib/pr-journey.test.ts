@@ -2,7 +2,9 @@ import { describe, expect, it } from "vitest";
 import {
     checkArena,
     checkAuthor,
+    checkHardReview,
     checkKind,
+    checkMilestone10,
     EvidenceError,
     isMilestoneUnlocked,
     signedOffCount,
@@ -40,6 +42,23 @@ function getJourneyEntry(reflection: Reflection, evidence: Evidence, state: Entr
         reflection,
         state,
         submittedAt: new Date().toISOString(),
+    };
+}
+
+function getEvidence(overrides: Partial<Evidence> = {}): Evidence {
+    return {
+        url: "https://github.com/someone/repo/pull/1",
+        kind: "pr",
+        repo: "someone/repo",
+        number: 1,
+        title: "Test PR",
+        author: "c0d3r",
+        authorId: 1234,
+        state: "open",
+        reviewRounds: 0,
+        openedAt: new Date().toISOString(),
+        verifiedAt: new Date().toISOString(),
+        ...overrides,
     };
 }
 
@@ -279,5 +298,45 @@ describe("emptyJourney", () => {
         expect(Object.keys(empty.entries)).toStrictEqual([]);
         expect(empty.startedAt).toBeTruthy();
         expect(empty.updatedAt).toBeTruthy();
-    })
+    });
 });
+
+describe("checkHardReview", () => {
+    it("passes when the PR is closed even with 0 review rounds", () => {
+        const evidence = getEvidence({ state: "closed", reviewRounds: 0 });
+        expect(() => checkHardReview(evidence)).not.toThrow();
+    });
+
+    it("passes when the PR is open with 3 or more review rounds", () => {
+        const evidence = getEvidence({ state: "open", reviewRounds: 3 });
+        expect(() => checkHardReview(evidence)).not.toThrow();
+    });
+
+    it("throws EvidenceError when merged with fewer than 3 rounds", () => {
+        const evidence = getEvidence({ state: "merged", reviewRounds: 2 });
+        expect(() => checkHardReview(evidence)).toThrow(EvidenceError);
+    });
+
+    it("includes the actual round count in the error message", () => {
+        const evidence = getEvidence({ state: "open", reviewRounds: 2 });
+        expect(() => checkHardReview(evidence)).toThrow(/This one has 2\./);
+    });
+});
+
+describe("checkMilestone10", () => {
+    it("passes when the PR is merged", () => {
+        const evidence = getEvidence({ state: "merged" });
+        expect(() => checkMilestone10(evidence)).not.toThrow();
+    });
+
+    it("throws EvidenceError when the PR is open", () => {
+        const evidence = getEvidence({ state: "open" });
+        expect(() => checkMilestone10(evidence)).toThrow(EvidenceError);
+    });
+
+    it("throws EvidenceError when the PR is closed", () => {
+        const evidence = getEvidence({ state: "closed" });
+        expect(() => checkMilestone10(evidence)).toThrow(EvidenceError);
+    });
+});
+
