@@ -1,8 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
-import { Trophy, Star, ExternalLink, GitMerge, Users, GitBranch, Globe2, Activity, Medal, Award, Github } from "lucide-react";
+import { Trophy, ExternalLink, Users, GitBranch, Globe2, Activity, Medal, Award, Github } from "lucide-react";
 import prData from "@/pr-data-report.json";
 import gssocSnapshot from "@/data/gssoc-snapshot.json";
 import { useEffect, useState } from "react";
@@ -86,12 +85,6 @@ export function OpenSourceImpact() {
         fetchStats();
         fetchGraphStats();
     }, [cohort.id]);
-
-
-    // Build top GSSoC achievers sorted by rank (from real snapshot)
-    const topGSSoC = [...gssocSnapshot.members]
-        .sort((a, b) => a.rank - b.rank)
-        .slice(0, 4);
 
     // Build top contributors by merging pr-data-report and gssoc-snapshot
     const allMembersMap = new Map();
