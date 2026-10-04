@@ -38,8 +38,9 @@ describe("normalizeLinkedin", () => {
 
 describe('normalizeGithub', () => {
   it('passes bare usernames through', () => {
-    expect(normalizeGithub('octocat')).toBe('octocat');
-  });
+  expect(normalizeGithub('octocat')).toBe('octocat');
+  expect(normalizeGithub('a'.repeat(39))).toBe('a'.repeat(39));
+});
 
   it('extracts username from GitHub URLs', () => {
     expect(normalizeGithub('https://github.com/user')).toBe('user');
@@ -53,14 +54,16 @@ describe('normalizeGithub', () => {
 
   it('returns undefined for invalid usernames', () => {
     expect(normalizeGithub('-invalid')).toBeUndefined();
+    expect(normalizeGithub('trailing-')).toBeUndefined();
     expect(normalizeGithub('double--hyphen')).toBeUndefined();
     expect(normalizeGithub('a'.repeat(40))).toBeUndefined();
     expect(normalizeGithub('user_with_underscore')).toBeUndefined();
+  
   });
 
   it('returns undefined for empty, null, or undefined inputs', () => {
     expect(normalizeGithub('')).toBeUndefined();
-    expect(normalizeGithub(null as any)).toBeUndefined();
-    expect(normalizeGithub(undefined as any)).toBeUndefined();
+    expect(normalizeGithub(null)).toBeUndefined();
+    expect(normalizeGithub(undefined)).toBeUndefined();
   });
 });
