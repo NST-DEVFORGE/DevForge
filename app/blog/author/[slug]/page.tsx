@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Clock } from "lucide-react";
 import { getAllPostsMeta } from "@/lib/blog";
@@ -6,6 +7,20 @@ import { blogAuthors } from "@/data/blog-authors";
 
 export function generateStaticParams() {
     return blogAuthors.map((a) => ({ slug: a.slug }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+    const { slug } = await params;
+    const author = blogAuthors.find((a) => a.slug === slug);
+    if (!author) notFound();
+
+    return {
+        title: { absolute: `${author.name} | DevForge Blog` },
+        description: author.bio,
+        alternates: {
+            canonical: `/blog/author/${author.slug}`,
+        },
+    };
 }
 
 export default async function AuthorPage({ params }: { params: Promise<{ slug: string }> }) {
