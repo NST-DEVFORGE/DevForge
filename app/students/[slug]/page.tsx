@@ -3,7 +3,7 @@
 import { use } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, Play, Github, Linkedin, Twitter, ExternalLink, Code2, BookOpen, GitMerge, GitPullRequest, GitPullRequestDraft, Trophy, Quote } from "lucide-react";
+import { ArrowLeft, Play, Github, Linkedin, Code2, BookOpen, GitMerge, GitPullRequest, GitPullRequestDraft, Trophy, Quote } from "lucide-react";
 import { studentsData } from "../../../data/students";
 import prData from "../../../pr-data-report.json";
 import { notFound } from "next/navigation";
