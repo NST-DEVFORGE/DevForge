@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Clock } from "lucide-react";
@@ -34,7 +35,7 @@ export default async function AuthorPage({ params }: { params: Promise<{ slug: s
         <div className="min-h-screen bg-transparent text-white pt-24 pb-16">
             <div className="max-w-3xl mx-auto px-4">
                 <div className="flex items-center gap-4 mb-12">
-                    <img src={author.avatar} alt={author.name} className="w-16 h-16 rounded-full object-contain bg-neutral-900 p-2 border border-neutral-800" />
+                    <Image src={author.avatar} alt={author.name} width={64} height={64} className="w-16 h-16 rounded-full object-contain bg-neutral-900 p-2 border border-neutral-800" />
                     <div>
                         <h1 className="text-3xl font-bold text-white">{author.name}</h1>
                         <p className="text-neutral-500 text-sm">{author.bio}</p>
