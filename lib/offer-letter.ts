@@ -2,6 +2,7 @@ import "server-only";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import sharp from "sharp";
+import { sanitizeFilenameSlug } from "./filename";
 import {
     PDFDocument,
     StandardFonts,
@@ -388,6 +389,6 @@ export async function generateOfferLetterPdf(input: OfferLetterInput): Promise<U
 
 /** Safe ASCII filename for the attachment/download. */
 export function offerLetterFilename(name: string): string {
-    const slug = name.trim().replace(/[^a-zA-Z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "member";
+    const slug = sanitizeFilenameSlug(name);
     return `DevForge-Offer-Letter-${slug}.pdf`;
 }
