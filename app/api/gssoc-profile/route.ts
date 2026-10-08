@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
         return NextResponse.json(data, {
             headers: { 'Cache-Control': 'public, s-maxage=1800, stale-while-revalidate=3600' }
         });
-    } catch (e) {
+    } catch {
         return NextResponse.json({ error: 'Failed to fetch GSSoC data' }, { status: 500 });
     }
 }
