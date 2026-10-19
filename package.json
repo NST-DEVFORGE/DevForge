@@ -35,6 +35,7 @@
         "react-dom": "^19.2.1",
         "reading-time": "^1.5.0",
         "recharts": "^3.7.0",
+        "server-only": "^0.0.1",
         "sharp": "^0.34.5",
         "three": "^0.185.1",
         "validator": "^13.15.35",
