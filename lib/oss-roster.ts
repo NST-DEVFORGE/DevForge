@@ -80,9 +80,7 @@ async function secondYear(): Promise<Contributor[]> {
                 name: member.name,
                 github: member.github,
                 role: member.councilPosition ?? "Member",
-                avatar: member.hasPhoto
-                    ? `/api/members/${member.usn}/avatar`
-                    : `https://github.com/${member.github}.png`,
+                avatar: `https://github.com/${member.github}.png`,
                 year: "second-year",
             });
         }
