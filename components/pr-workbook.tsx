@@ -611,6 +611,9 @@ function SubmitForm({
 
             <div className="grid grid-cols-3 gap-2">
                 <input
+                    type="number"
+                    min="0"
+                    aria-label="Hours"
                     value={form.hours}
                     onChange={(e) => set({ hours: e.target.value })}
                     placeholder="Hours"
@@ -618,6 +621,9 @@ function SubmitForm({
                     className={FIELD_CLASS}
                 />
                 <input
+                    type="number"
+                    min="0"
+                    aria-label="Rounds"
                     value={form.rounds}
                     onChange={(e) => set({ rounds: e.target.value })}
                     placeholder="Rounds"
@@ -625,6 +631,7 @@ function SubmitForm({
                     className={FIELD_CLASS}
                 />
                 <select
+                    aria-label="Status"
                     value={form.status}
                     onChange={(e) => set({ status: e.target.value as PRState })}
                     className={FIELD_CLASS}
