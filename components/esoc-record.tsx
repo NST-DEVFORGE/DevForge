@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Globe2, GitBranch, GitMerge, Users, Activity, ExternalLink } from "lucide-react";
 import prData from "@/pr-data-report.json";
 import esocStats from "@/data/esoc-stats.json";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { CohortUnavailable, YearSwitcher } from "@/components/ui/year-switcher";
 import { cohortFromParam } from "@/lib/cohorts";
