@@ -671,16 +671,20 @@ function Field({
     value: string;
     onChange: (v: string) => void;
 }) {
+    const fieldId = useId();
+    const countId = `${fieldId}-count`;
     const count = value.trim() ? value.trim().split(/\s+/).length : 0;
     return (
         <div>
             <div className="flex items-baseline justify-between mb-1.5">
-                <label className="text-xs uppercase tracking-wider text-neutral-500">{label}</label>
-                <span className="text-[11px] font-mono text-neutral-600">
+                <label htmlFor={fieldId} className="text-xs uppercase tracking-wider text-neutral-500">{label}</label>
+                <span id={countId} className="text-[11px] font-mono text-neutral-600">
                     {count} · {limit}
                 </span>
             </div>
             <textarea
+                id={fieldId}
+                aria-describedby={countId}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
                 rows={3}
