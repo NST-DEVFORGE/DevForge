@@ -10,7 +10,7 @@
  */
 export const GSOC_ORGS = new Set([
     // Major Organizations
-    'opensuse', 'mozilla', 'kubernetes', 'apache', 'google', 'tensorflow',
+    'opensuse', 'geeko-foundation', 'mozilla', 'kubernetes', 'apache', 'google', 'tensorflow',
     'gnome', 'kde', 'fedora', 'python', 'numpy', 'django', 'zulip',
     'cncf', 'hashicorp', 'grafana', 'prometheus', 'jenkins', 'gitlab',
     // Cloud Native & DevOps
