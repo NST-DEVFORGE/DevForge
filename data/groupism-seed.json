@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-21T13:16:44.820Z",
+  "lastUpdated": "2026-11-13T06:02:06.335Z",
   "geetansh": {
     "username": "geetxnshgoyal",
     "name": "Geetansh Goyal",
@@ -8,6 +8,34 @@
       "uyuni-project"
     ],
     "prs": [
+      {
+        "id": 4732888988,
+        "number": 30,
+        "title": "Add openSUSE India badge",
+        "repo": "openSUSE/kudos-badges",
+        "org": "openSUSE",
+        "url": "https://github.com/openSUSE/kudos-badges/pull/30",
+        "created_at": "2026-10-04T08:12:07Z",
+        "merged_at": "2026-11-07T02:40:27Z",
+        "additions": 13,
+        "deletions": 0,
+        "total_lines": 13,
+        "changed_files": 6
+      },
+      {
+        "id": 4609881139,
+        "number": 12641,
+        "title": "Update woodstox-core to 7.2.1",
+        "repo": "uyuni-project/uyuni",
+        "org": "uyuni-project",
+        "url": "https://github.com/uyuni-project/uyuni/pull/12641",
+        "created_at": "2026-09-23T04:53:51Z",
+        "merged_at": "2026-09-23T05:46:47Z",
+        "additions": 4,
+        "deletions": 2,
+        "total_lines": 6,
+        "changed_files": 3
+      },
       {
         "id": 4424204609,
         "number": 635,
@@ -91,20 +119,6 @@
         "deletions": 6,
         "total_lines": 12,
         "changed_files": 1
-      },
-      {
-        "id": 4609881139,
-        "number": 12641,
-        "title": "Update woodstox-core to 7.2.1",
-        "repo": "uyuni-project/uyuni",
-        "org": "uyuni-project",
-        "url": "https://github.com/uyuni-project/uyuni/pull/12641",
-        "created_at": "2026-09-23T04:53:51Z",
-        "merged_at": "2026-09-23T05:46:47Z",
-        "additions": 4,
-        "deletions": 2,
-        "total_lines": 6,
-        "changed_files": 3
       }
     ]
   },
@@ -115,6 +129,34 @@
       "checkstyle"
     ],
     "prs": [
+      {
+        "id": 4440437296,
+        "number": 1134,
+        "title": "add FinalPatternVariable",
+        "repo": "checkstyle/contribution",
+        "org": "checkstyle",
+        "url": "https://github.com/checkstyle/contribution/pull/1134",
+        "created_at": "2026-09-04T07:54:56Z",
+        "merged_at": "2026-10-23T03:07:37Z",
+        "additions": 1,
+        "deletions": 0,
+        "total_lines": 1,
+        "changed_files": 1
+      },
+      {
+        "id": 4440332685,
+        "number": 21466,
+        "title": "Issue #21359: Add FinalPatternVariableCheck",
+        "repo": "checkstyle/checkstyle",
+        "org": "checkstyle",
+        "url": "https://github.com/checkstyle/checkstyle/pull/21466",
+        "created_at": "2026-09-04T07:40:07Z",
+        "merged_at": "2026-10-23T03:07:01Z",
+        "additions": 1209,
+        "deletions": 7,
+        "total_lines": 1216,
+        "changed_files": 34
+      },
       {
         "id": 4740058710,
         "number": 460,
@@ -186,6 +228,20 @@
         "changed_files": 10
       },
       {
+        "id": 4218604966,
+        "number": 21116,
+        "title": "Issue #21062: Add InappropriateJavadocBlockTagsOnField check",
+        "repo": "checkstyle/checkstyle",
+        "org": "checkstyle",
+        "url": "https://github.com/checkstyle/checkstyle/pull/21116",
+        "created_at": "2026-08-06T06:52:39Z",
+        "merged_at": "2026-08-30T13:21:58Z",
+        "additions": 1293,
+        "deletions": 0,
+        "total_lines": 1293,
+        "changed_files": 25
+      },
+      {
         "id": 4374044340,
         "number": 21365,
         "title": "Issue #21164: MissingDeprecated: no support for module declarations",
@@ -214,18 +270,18 @@
         "changed_files": 2
       },
       {
-        "id": 4218604966,
-        "number": 21116,
-        "title": "Issue #21062: Add InappropriateJavadocBlockTagsOnField check",
+        "id": 4086639056,
+        "number": 20847,
+        "title": "Issue #20837: Improve Java AST access documentation in writingjavadocchecks",
         "repo": "checkstyle/checkstyle",
         "org": "checkstyle",
-        "url": "https://github.com/checkstyle/checkstyle/pull/21116",
-        "created_at": "2026-08-06T06:52:39Z",
-        "merged_at": "2026-08-30T13:21:58Z",
-        "additions": 1293,
-        "deletions": 0,
-        "total_lines": 1293,
-        "changed_files": 25
+        "url": "https://github.com/checkstyle/checkstyle/pull/20847",
+        "created_at": "2026-07-19T17:36:04Z",
+        "merged_at": "2026-08-07T12:43:04Z",
+        "additions": 103,
+        "deletions": 24,
+        "total_lines": 127,
+        "changed_files": 2
       },
       {
         "id": 4087396493,
@@ -242,20 +298,6 @@
         "changed_files": 7
       },
       {
-        "id": 4086639056,
-        "number": 20847,
-        "title": "Issue #20837: Improve Java AST access documentation in writingjavadocchecks",
-        "repo": "checkstyle/checkstyle",
-        "org": "checkstyle",
-        "url": "https://github.com/checkstyle/checkstyle/pull/20847",
-        "created_at": "2026-07-19T17:36:04Z",
-        "merged_at": "2026-08-07T12:43:04Z",
-        "additions": 103,
-        "deletions": 24,
-        "total_lines": 127,
-        "changed_files": 2
-      },
-      {
         "id": 4085505182,
         "number": 20840,
         "title": "Issue #20690: register custom javadoc tags to fix warnings",
@@ -268,6 +310,20 @@
         "deletions": 0,
         "total_lines": 3,
         "changed_files": 1
+      },
+      {
+        "id": 4077935209,
+        "number": 20813,
+        "title": "Issue #20690: Fix Javadoc generation warnings",
+        "repo": "checkstyle/checkstyle",
+        "org": "checkstyle",
+        "url": "https://github.com/checkstyle/checkstyle/pull/20813",
+        "created_at": "2026-07-17T16:23:53Z",
+        "merged_at": "2026-07-18T22:10:52Z",
+        "additions": 1995,
+        "deletions": 675,
+        "total_lines": 2670,
+        "changed_files": 239
       },
       {
         "id": 4083437320,
@@ -296,20 +352,6 @@
         "deletions": 0,
         "total_lines": 2,
         "changed_files": 1
-      },
-      {
-        "id": 4077935209,
-        "number": 20813,
-        "title": "Issue #20690: Fix Javadoc generation warnings",
-        "repo": "checkstyle/checkstyle",
-        "org": "checkstyle",
-        "url": "https://github.com/checkstyle/checkstyle/pull/20813",
-        "created_at": "2026-07-17T16:23:53Z",
-        "merged_at": "2026-07-18T22:10:52Z",
-        "additions": 1995,
-        "deletions": 675,
-        "total_lines": 2670,
-        "changed_files": 239
       },
       {
         "id": 4076691830,

@@ -206,6 +206,7 @@ export async function repoFacts(repositoryUrl: string): Promise<RepoFacts | null
     const cached = repoCache.get(repositoryUrl);
     if (cached && Date.now() - cached.at < REPO_TTL_MS) return cached.facts;
 
+    const fallbackName = repoNameFromUrl(repositoryUrl);
     let facts: RepoFacts | null = null;
     try {
         const response = await fetch(repositoryUrl, { headers: headers(), next: { revalidate: 3600 } });
@@ -216,13 +217,26 @@ export async function repoFacts(repositoryUrl: string): Promise<RepoFacts | null
                 forks_count?: number;
             };
             facts = {
-                name: data.full_name ?? repoNameFromUrl(repositoryUrl),
+                name: data.full_name ?? fallbackName,
                 stars: data.stargazers_count ?? 0,
                 forks: data.forks_count ?? 0,
+            };
+        } else if (isRecognizedQualityOrg(fallbackName)) {
+            facts = {
+                name: fallbackName,
+                stars: 0,
+                forks: 0,
             };
         }
     } catch (error) {
         console.error(`[github] repo lookup failed for ${repositoryUrl}:`, error);
+        if (isRecognizedQualityOrg(fallbackName)) {
+            facts = {
+                name: fallbackName,
+                stars: 0,
+                forks: 0,
+            };
+        }
     }
 
     repoCache.set(repositoryUrl, { facts, at: Date.now() });
@@ -238,6 +252,22 @@ export function repoNameFromUrl(repositoryUrl: string): string {
 export const QUALITY_STARS = 100;
 export const QUALITY_FORKS = 100;
 
+/**
+ * Recognized organizations whose repositories are considered quality projects
+ * regardless of star/fork thresholds (e.g., official foundation / community infrastructure).
+ */
+export const QUALITY_ORGANIZATIONS = [
+    "geeko-foundation",
+    "uyuni-project",
+];
+
+export function isRecognizedQualityOrg(repoFullName: string): boolean {
+    const org = repoFullName.split("/")[0]?.toLowerCase();
+    return Boolean(org && QUALITY_ORGANIZATIONS.includes(org));
+}
+
 export function isQualityRepo(facts: RepoFacts | null): boolean {
-    return Boolean(facts && facts.stars >= QUALITY_STARS && facts.forks >= QUALITY_FORKS);
+    if (!facts) return false;
+    if (isRecognizedQualityOrg(facts.name)) return true;
+    return Boolean(facts.stars >= QUALITY_STARS && facts.forks >= QUALITY_FORKS);
 }

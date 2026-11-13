@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import seedDataJson from "@/data/groupism-seed.json";
 
 export interface GroupismPR {
     id: number;
@@ -86,16 +87,23 @@ function calculateProfileStats(prs: GroupismPR[]) {
 
 export function getSeedGroupismData(): GroupismResponse {
     try {
-        const seedPath = path.join(process.cwd(), "data", "groupism-seed.json");
-        const raw = fs.readFileSync(seedPath, "utf-8");
-        const seed = JSON.parse(raw);
+        let seed: any = seedDataJson;
+        try {
+            const seedPath = path.join(process.cwd(), "data", "groupism-seed.json");
+            if (fs.existsSync(seedPath)) {
+                const raw = fs.readFileSync(seedPath, "utf-8");
+                seed = JSON.parse(raw);
+            }
+        } catch {
+            seed = seedDataJson;
+        }
 
-        const geetanshPrs: GroupismPR[] = (seed.geetansh.prs || []).map((pr: any) => ({
+        const geetanshPrs: GroupismPR[] = (seed.geetansh?.prs || []).map((pr: any) => ({
             ...pr,
             author: "geetansh",
         }));
 
-        const sahityaPrs: GroupismPR[] = (seed.sahitya.prs || []).map((pr: any) => ({
+        const sahityaPrs: GroupismPR[] = (seed.sahitya?.prs || []).map((pr: any) => ({
             ...pr,
             author: "sahitya",
         }));
@@ -180,7 +188,7 @@ export async function fetchLiveGroupismData(): Promise<GroupismResponse> {
             const sData = await sRes.json();
             const items = sData.items || [];
 
-            for (const item of items) {
+            const pullPromises = items.map(async (item: any) => {
                 const repoUrl = item.repository_url;
                 const [owner, repo] = repoUrl.split("/").slice(-2);
                 try {
@@ -190,7 +198,7 @@ export async function fetchLiveGroupismData(): Promise<GroupismResponse> {
                     });
                     if (prRes.ok) {
                         const p = await prRes.json();
-                        results.push({
+                        return {
                             id: p.id,
                             number: p.number,
                             title: p.title,
@@ -199,17 +207,20 @@ export async function fetchLiveGroupismData(): Promise<GroupismResponse> {
                             url: p.html_url,
                             created_at: p.created_at,
                             merged_at: p.merged_at || item.closed_at,
-                            additions: p.additions,
-                            deletions: p.deletions,
-                            total_lines: p.additions + p.deletions,
-                            changed_files: p.changed_files,
+                            additions: p.additions || 0,
+                            deletions: p.deletions || 0,
+                            total_lines: (p.additions || 0) + (p.deletions || 0),
+                            changed_files: p.changed_files || 0,
                             author: authorKey,
-                        });
+                        } as GroupismPR;
                     }
                 } catch {
                     // fall back
                 }
-            }
+                return null;
+            });
+            const pulled = (await Promise.all(pullPromises)).filter((p): p is GroupismPR => p !== null);
+            results.push(...pulled);
         }
 
         return results;

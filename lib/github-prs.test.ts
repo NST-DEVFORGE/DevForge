@@ -47,4 +47,9 @@ describe("isQualityRepo", () => {
     it("returns false for 100 stars and 99 forks", () => {
         expect(isQualityRepo({ name: "vercel/next.js", stars: 100, forks: 99 } satisfies RepoFacts)).toBe(false);
     });
+
+    it("returns true for recognized quality organizations regardless of star/fork counts", () => {
+        expect(isQualityRepo({ name: "Geeko-Foundation/marvin", stars: 0, forks: 0 } satisfies RepoFacts)).toBe(true);
+        expect(isQualityRepo({ name: "uyuni-project/uyuni", stars: 10, forks: 5 } satisfies RepoFacts)).toBe(true);
+    });
 });

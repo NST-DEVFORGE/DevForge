@@ -47,6 +47,7 @@ const menus: { label: string; sections: NavGroupSection[] }[] = [
                     { name: "About", href: "/club" },
                     { name: "Journey", href: "/journey" },
                     { name: "Memory Lane", href: "/memory-lane" },
+                    { name: "Groupism ⚔️", href: "/groupism" },
                 ],
             },
             {
